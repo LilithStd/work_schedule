@@ -1,10 +1,10 @@
-import { clientsCell, timer, week } from "@/consts/template";
+import { timer, week } from "@/consts/template";
 import { setCells } from "@/utils/helpersFunctions";
 import Cell from "./cell";
 import React from "react";
 
-const cells = new Array(7).fill(<Cell />);
-const clientsPerDay = new Array(3).fill(<Cell />);
+const cells = setCells(7, <Cell />)
+const clientsPerDay = setCells(3, <Cell />)
 
 export default function TableCell() {
 
@@ -41,10 +41,10 @@ export default function TableCell() {
                         {cells.map((cell, cellIndex) => (
                             <div
                                 key={`${rowIndex}-${cellIndex}`}
-                                className="border border-black bg-white text-black  items-center justify-center"
+                                className="border border-black bg-white text-black  items-center justify-center text-center"
                             >
-                                {clientsPerDay.map((client) => (
-                                    <div key={client} className="">
+                                {clientsPerDay.map((client, index) => (
+                                    <div key={index} className="">
                                         {client}
                                     </div>
                                 ))}
