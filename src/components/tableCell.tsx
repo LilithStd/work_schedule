@@ -2,9 +2,19 @@ import { timer, week } from "@/consts/template";
 import { setCells } from "@/utils/helpersFunctions";
 import Cell from "./cell";
 import React from "react";
+import { nanoid } from "nanoid";
 
-const cells = setCells(7, <Cell />)
-const clientsPerDay = setCells(3, <Cell />)
+const cells = new Array(7).fill(0)
+    .map(() => {
+        const id = nanoid();
+        return <Cell id={id} key={id} />;
+    });
+const clientsPerDay = new Array(3)
+    .fill(0)
+    .map(() => {
+        const id = nanoid();
+        return <Cell id={id} key={id} />;
+    });
 
 export default function TableCell() {
 
@@ -12,10 +22,8 @@ export default function TableCell() {
         <div className="bg-sky-700 w-full p-4 text-white">
             <h2 className="text-center mb-4">table_cell</h2>
 
-
             <div className="grid grid-cols-8 border border-black">
-
-
+                {/* Заголовки дней недели */}
                 <div className="border border-black bg-sky-600 flex items-center justify-center">
                     days of week
                 </div>
@@ -29,25 +37,24 @@ export default function TableCell() {
                     </div>
                 ))}
 
-
+                {/* Временные ряды */}
                 {timer.map((time, rowIndex) => (
                     <React.Fragment key={time}>
-
                         <div className="border border-black bg-sky-600 flex items-center justify-center">
                             {time}
                         </div>
 
-
-                        {cells.map((cell, cellIndex) => (
+                        {/* Ячейки на каждый день недели */}
+                        {week.map((day, colIndex) => (
                             <div
-                                key={`${rowIndex}-${cellIndex}`}
-                                className="border border-black bg-white text-black  items-center justify-center text-center"
+                                key={`${day}-${time}`}
+                                className="border border-black bg-white text-black text-center"
                             >
-                                {clientsPerDay.map((client, index) => (
-                                    <div key={index} className="">
-                                        {client}
-                                    </div>
-                                ))}
+                                {/* Например, три клиента в каждой ячейке */}
+                                {Array.from({ length: 3 }).map(() => {
+                                    const id = nanoid();
+                                    return <Cell key={id} id={id} />;
+                                })}
                             </div>
                         ))}
                     </React.Fragment>
