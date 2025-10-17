@@ -3,14 +3,13 @@ import Cell from "./cell";
 import React from "react";
 import { nanoid } from "nanoid";
 import Worker from "./worker";
+import WorkersList from "./workersList";
 
 export default function TableCell() {
 
     return (
         <div className="bg-sky-700 w-full p-4 text-white">
             <h2 className="text-center mb-4">table_cell</h2>
-
-
             <div className="grid grid-cols-8 border border-black">
                 {/* Заголовки дней недели */}
                 <div className="border border-black bg-sky-600 flex items-center justify-center">
@@ -25,8 +24,9 @@ export default function TableCell() {
                         {day}
                     </div>
                 ))}
-                {/* Пустая ячейка в левом верхнем углу */}
-                <div className="border border-black grid grid-cols-1 bg-sky-600  text-center justify-center">
+
+                {/* block 1 */}
+                {/* <div className="border border-black bg-sky-600 text-center justify-center">
                     <h2 className="text-center">workers</h2>
                     {Array.from({ length: 4 }).map(() => {
                         const id = nanoid();
@@ -34,18 +34,16 @@ export default function TableCell() {
                     })}
 
                 </div>
-
                 {Array.from({ length: 7 }).map((_, index) => (
                     <div
                         key={index}
-                        className="border border-black bg-sky-600 min-h-40"
+                        className="border border-black bg-sky-600"
                     >
 
                     </div>
-                ))}
-
-
-                {/* Временные ряды */}
+                ))} */}
+                <WorkersList />
+                {/* end block 1 */}
                 {timer.map((time, rowIndex) => (
                     <React.Fragment key={time}>
                         <div className="border border-black bg-sky-600 flex items-center justify-center">
