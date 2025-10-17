@@ -3,6 +3,7 @@
 import { useGlobalStore } from "@/store/globalStore"
 import ModalWindow from "./modalWindow"
 import { useState } from "react"
+import Client from "./client"
 
 type CellProps = {
     id: string
@@ -36,7 +37,7 @@ export default function Cell({ id }: CellProps) {
                 className={` w-full h-10  rounded-sm ${isOpen ? 'bg-fuchsia-600' : tempClientName.length > 0 ? 'bg-emerald-500 hover:bg-emerald-200' : 'bg-sky-500 hover:bg-sky-700'}`}
                 onClick={handleOpenModal}
             >
-                {tempClientName.length > 0 ? tempClientName : "edit"}
+                <Client name={tempClientName} />
             </button>
             <ModalWindow
                 isOpen={isOpen}

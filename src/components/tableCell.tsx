@@ -1,20 +1,7 @@
 import { timer, week } from "@/consts/template";
-import { setCells } from "@/utils/helpersFunctions";
 import Cell from "./cell";
 import React from "react";
 import { nanoid } from "nanoid";
-
-// const cells = new Array(7).fill(0)
-//     .map(() => {
-//         const id = nanoid();
-//         return <Cell id={id} key={id} />;
-//     });
-// const clientsPerDay = new Array(3)
-//     .fill(0)
-//     .map(() => {
-//         const id = nanoid();
-//         return <Cell id={id} key={id} />;
-//     });
 
 export default function TableCell() {
 
