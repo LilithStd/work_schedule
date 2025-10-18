@@ -1,7 +1,9 @@
+import { WorkerTypes } from "@/consts/template";
+
 interface WorkerProps {
-    name?: string;
+    name: string;
     id: string;
-    callBack?: (id: string) => void;
+    callBack?: ({ name, id }: WorkerTypes) => void;
 }
 
 export default function Worker({ name, id, callBack }: WorkerProps) {
@@ -10,11 +12,7 @@ export default function Worker({ name, id, callBack }: WorkerProps) {
             className="cursor-pointer bg-violet-600 m-1 rounded text-white"
             draggable="true"
             onDragStart={(e) => {
-                console.log('drag start', id);
-                e.dataTransfer.setData("text/plain", id);
-                // if (callBack) {
-                //     callBack(id);
-                // }
+                e.dataTransfer.setData("application/json", JSON.stringify({ name, id }));
             }}
         >
             <p>

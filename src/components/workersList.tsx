@@ -2,40 +2,46 @@
 import { nanoid } from 'nanoid';
 import React, { useState } from 'react'
 import Worker from './worker';
-import { week } from '@/consts/template';
+import { week, workerListByDayTemplate, workersTest, WorkerTypes } from '@/consts/template';
 
 type WorkersListProps = {
     day: string;
-    workers?: string[];
+    workers: WorkerTypes[];
 }
 
 export default function WorkersList() {
-    const [workerDragged, setWorkerDragged] = useState('');
-    const [workerListByDay, setWorkerListByDay] = useState<WorkersListProps[]>([]);
+    const [workerDragged, setWorkerDragged] = useState<WorkerTypes>();
+    const [workerListByDay, setWorkerListByDay] = useState<WorkersListProps[]>(workerListByDayTemplate);
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
-        console.log('drag over');
     }
     const handleDrop = (e: React.DragEvent<HTMLDivElement>, day: string) => {
         e.preventDefault();
-        setWorkerListByDay({ ...workerListByDay, [day]: [...(workerListByDay.find(item => item.day === day)?.workers || []), workerDragged] });
-        console.log('drop end', day, workerDragged);
+        const data = e.dataTransfer.getData("application/json");
+        const worker: WorkerTypes = JSON.parse(data) as WorkerTypes;
+        setWorkerListByDay((prev) => prev.map((item) => {
+            if (item.day === day) {
+                if (item.workers.find(workers => workers.id === worker.id)) {
+                    return item;
+                }
+                return { day: item.day, workers: [...item.workers, worker] };
+            }
+            return item;
+        }));
     }
     return (
         <>
             <div className="border border-black bg-sky-600 text-center justify-center">
                 <h2 className="text-center">workers</h2>
-                {Array.from({ length: 4 }).map(() => {
+                {workersTest.map((item) => {
                     const id = nanoid();
-                    return <Worker key={id} id={id} callBack={setWorkerDragged} />;
+                    return <Worker key={id} id={item.id} callBack={setWorkerDragged} name={item.name} />;
                 })}
 
             </div>
             {week.map((_, index) => (
                 <div
-                    onDrop={() => {
-                        console.log('drop end +');
-                    }}
+                    onDrop={(e) => handleDrop(e, week[index])}
                     onDragEnd={() => {
                         console.log('drag end');
                     }}
@@ -43,8 +49,9 @@ export default function WorkersList() {
                     key={index}
                     className="border border-black bg-sky-600"
                 >
-                    {workerListByDay.find(item => item.day === week[index])?.workers?.map((workerId) => (
-                        <p key={workerId}>{workerId}</p>
+
+                    {workerListByDay[index].workers?.map((workerId) => (
+                        <p key={workerId.id}>{workerId.id}</p>
                     ))}
                 </div>
             ))}
