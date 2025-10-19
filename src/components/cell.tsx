@@ -33,12 +33,22 @@ export default function Cell({ id }: CellProps) {
 
     return (
         <div className="m-2">
-            <button
-                className={` w-full h-10  rounded-sm ${isOpen ? 'bg-fuchsia-600' : tempClientName.length > 0 ? 'bg-emerald-500 hover:bg-emerald-200' : 'bg-sky-500 hover:bg-sky-700'}`}
-                onClick={handleOpenModal}
-            >
-                <Client name={tempClientName} />
-            </button>
+            <div className="flex gap-2">
+                <button
+                    className={`w-1/2 row-start-1 row-end-2  rounded-sm ${isOpen ? 'bg-fuchsia-600' : tempClientName.length > 0 ? 'bg-emerald-500 hover:bg-emerald-200' : 'bg-sky-500 hover:bg-sky-700'}`}
+                    onClick={handleOpenModal}
+                >
+                    <Client name={tempClientName} />
+                </button>
+                <div className="w-1/2 flex flex-col gap-2">
+                    {Array.from({ length: 2 }).map((_, idx) => (
+                        <div key={idx} className="flex items-center justify-center border border-black bg-sky-300">
+                            <p>workers client</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
             <ModalWindow
                 isOpen={isOpen}
                 clientName={tempClientName}

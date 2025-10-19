@@ -51,7 +51,7 @@ export default function WorkersList() {
                 >
 
                     {workerListByDay[index].workers?.map((workerId) => (
-                        <p key={workerId.id}>{workerId.id}</p>
+                        <p key={workerId.id}>{workerId.name}</p>
                     ))}
                 </div>
             ))}

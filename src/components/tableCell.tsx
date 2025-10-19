@@ -2,7 +2,6 @@ import { timer, week } from "@/consts/template";
 import Cell from "./cell";
 import React from "react";
 import { nanoid } from "nanoid";
-import Worker from "./worker";
 import WorkersList from "./workersList";
 
 export default function TableCell() {
@@ -24,26 +23,7 @@ export default function TableCell() {
                         {day}
                     </div>
                 ))}
-
-                {/* block 1 */}
-                {/* <div className="border border-black bg-sky-600 text-center justify-center">
-                    <h2 className="text-center">workers</h2>
-                    {Array.from({ length: 4 }).map(() => {
-                        const id = nanoid();
-                        return <Worker key={id} id={id} />;
-                    })}
-
-                </div>
-                {Array.from({ length: 7 }).map((_, index) => (
-                    <div
-                        key={index}
-                        className="border border-black bg-sky-600"
-                    >
-
-                    </div>
-                ))} */}
                 <WorkersList />
-                {/* end block 1 */}
                 {timer.map((time, rowIndex) => (
                     <React.Fragment key={time}>
                         <div className="border border-black bg-sky-600 flex items-center justify-center">
