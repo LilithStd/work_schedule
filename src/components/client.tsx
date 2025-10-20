@@ -6,8 +6,8 @@ interface ClientProps {
 
 export default function Client({ name }: ClientProps) {
     return (
-        <div>
-            <p>
+        <div className=''>
+            <p className=''>
                 {name ? name : 'edit'}
             </p>
         </div>

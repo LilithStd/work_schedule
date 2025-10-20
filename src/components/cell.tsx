@@ -5,6 +5,8 @@ import ModalWindow from "./modalWindow"
 import { useState } from "react"
 import Client from "./client"
 
+import AddWorkerIcon from "../../public/icons/user-plus.svg"
+
 type CellProps = {
     id: string
 }
@@ -12,9 +14,6 @@ type CellProps = {
 export default function Cell({ id }: CellProps) {
     const [isOpen, setIsOpen] = useState(false)
     const [tempClientName, setTempClientName] = useState("")
-    // const handleEditClientName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     setTempClientName(e.target.value)
-    // }
     const modalStatus = useGlobalStore((state) => state.modalOpenStatus)
     const setModalStatus = useGlobalStore((state) => state.setModalOpenStatus)
     const resetModalStatus = useGlobalStore((state) => state.resetSetOpenStatus)
@@ -33,22 +32,23 @@ export default function Cell({ id }: CellProps) {
 
     return (
         <div className="m-2">
-            <div className="flex gap-2">
+            <div className="flex flex-col xl:flex-row gap-2">
                 <button
-                    className={`w-1/2 row-start-1 row-end-2  rounded-sm ${isOpen ? 'bg-fuchsia-600' : tempClientName.length > 0 ? 'bg-emerald-500 hover:bg-emerald-200' : 'bg-sky-500 hover:bg-sky-700'}`}
+                    className={`xl:w-1/2 row-start-1 row-end-2  min-h-10 rounded-xl ${isOpen ? 'bg-fuchsia-600' : tempClientName.length > 0 ? 'bg-emerald-500 hover:bg-emerald-200' : 'bg-sky-500 hover:bg-sky-700'}`}
                     onClick={handleOpenModal}
                 >
                     <Client name={tempClientName} />
                 </button>
-                <div className="w-1/2 flex flex-col gap-2">
+                <div className="xl:w-1/2 flex flex-col gap-2">
                     {Array.from({ length: 2 }).map((_, idx) => (
-                        <div key={idx} className="flex items-center justify-center border border-black bg-sky-300">
-                            <p>workers client</p>
+                        <div key={idx} className="flex items-center justify-center  bg-sky-100 min-h-10 rounded-xl ">
+                            <p className="tranparent text-center text-gray-400">
+                                <AddWorkerIcon />
+                            </p>
                         </div>
                     ))}
                 </div>
             </div>
-
             <ModalWindow
                 isOpen={isOpen}
                 clientName={tempClientName}
