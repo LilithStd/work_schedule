@@ -8,6 +8,12 @@ export enum DAYS {
 	SATURDAY = 'Saturday',
 	SUNDAY = 'Sunday',
 }
+
+export enum MODAL_TYPE {
+	ADD_CLIENT = 'ADD_CLIENT',
+	ADD_WORKER = 'ADD_WORKER',
+}
+
 export const week = [
 	DAYS.MONDAY,
 	DAYS.TUESDAY,

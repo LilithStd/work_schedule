@@ -24,13 +24,6 @@ export const useGlobalStore = create<GlobalStoreTypes>()((set, get) => ({
 				modalOpenStatus: {status: true, id: status.id},
 			}));
 		}
-
-		// set((state) => {
-		// 			if (status.id !== state.modalOpenStatus.id) {
-		// 				return {modalOpenStatus: {status: true, id: status.id}};
-		// 			}
-		// 			return state;
-		// 		});
 	},
 	resetSetOpenStatus: () =>
 		set(() => ({modalOpenStatus: {status: false, id: ''}})),

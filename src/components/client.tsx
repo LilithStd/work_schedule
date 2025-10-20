@@ -8,7 +8,7 @@ export default function Client({ name }: ClientProps) {
     return (
         <div className=''>
             <p className=''>
-                {name ? name : 'edit'}
+                {name ? name : 'client'}
             </p>
         </div>
     )

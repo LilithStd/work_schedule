@@ -6,6 +6,9 @@ import { useState } from "react"
 import Client from "./client"
 
 import AddWorkerIcon from "../../public/icons/user-plus.svg"
+import ClientModalTemplate from "./clientModalTemplate"
+import { MODAL_TYPE } from "@/consts/template"
+import WorkerModalTemplate from "./workerModalTemplate"
 
 type CellProps = {
     id: string
@@ -13,6 +16,7 @@ type CellProps = {
 
 export default function Cell({ id }: CellProps) {
     const [isOpen, setIsOpen] = useState(false)
+    const [typeModalWindow, setTypeModalWindow] = useState<MODAL_TYPE>(MODAL_TYPE.ADD_CLIENT)
     const [tempClientName, setTempClientName] = useState("")
     const modalStatus = useGlobalStore((state) => state.modalOpenStatus)
     const setModalStatus = useGlobalStore((state) => state.setModalOpenStatus)
@@ -34,31 +38,38 @@ export default function Cell({ id }: CellProps) {
         <div className="m-2">
             <div className="flex flex-col xl:flex-row gap-2">
                 <button
-                    className={`xl:w-1/2 row-start-1 row-end-2  min-h-10 rounded-xl ${isOpen ? 'bg-fuchsia-600' : tempClientName.length > 0 ? 'bg-emerald-500 hover:bg-emerald-200' : 'bg-sky-500 hover:bg-sky-700'}`}
-                    onClick={handleOpenModal}
+                    className={`xl:w-1/2 row-start-1 row-end-2  min-h-10 rounded-xl ${isOpen && typeModalWindow === MODAL_TYPE.ADD_CLIENT ? 'bg-fuchsia-600' : tempClientName.length > 0 ? 'bg-emerald-500 hover:bg-emerald-200' : 'bg-sky-500 hover:bg-sky-700'}`}
+                    onClick={() => (
+                        handleOpenModal(),
+                        setTypeModalWindow(MODAL_TYPE.ADD_CLIENT)
+                    )}
                 >
                     <Client name={tempClientName} />
                 </button>
                 <div className="xl:w-1/2 flex flex-col gap-2">
                     {Array.from({ length: 2 }).map((_, idx) => (
-                        <div key={idx} className="flex items-center justify-center  bg-sky-100 min-h-10 rounded-xl ">
-                            <p className="tranparent text-center text-gray-400">
-                                <AddWorkerIcon />
-                            </p>
-                        </div>
+                        <button key={idx} className={`flex items-center justify-center ${isOpen && typeModalWindow === MODAL_TYPE.ADD_WORKER ? 'bg-fuchsia-600' : 'bg-emerald-500 hover:bg-emerald-200'}  bg-sky-100 min-h-10 rounded-xl`}
+                            onClick={() => (
+                                handleOpenModal(),
+                                setTypeModalWindow(MODAL_TYPE.ADD_WORKER)
+                            )}
+                        >
+                            <AddWorkerIcon className="tranparent text-center text-gray-400" />
+                        </button>
                     ))}
                 </div>
             </div>
             <ModalWindow
                 isOpen={isOpen}
-                clientName={tempClientName}
                 onClose={handleCloseModal}
-                onSaveClientName={setTempClientName}>
-                <h2 className="text-xl font-semibold text-center mb-2">modal window</h2>
-                <p className="text-center text-gray-600">
-                    {`Это модальное окно для ячейки с ID: ${id}`}
-                </p>
+            >
+                {typeModalWindow === MODAL_TYPE.ADD_CLIENT && <ClientModalTemplate
+                    onSaveClientName={setTempClientName}
+                    clientName={tempClientName}
+                    onClose={handleCloseModal}
+                    id={id} />}
+                {typeModalWindow === MODAL_TYPE.ADD_WORKER && <WorkerModalTemplate />}
             </ModalWindow>
-        </div>
+        </div >
     )
 }
