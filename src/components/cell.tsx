@@ -11,10 +11,11 @@ import { MODAL_TYPE } from "@/consts/template"
 import WorkerModalTemplate from "./workerModalTemplate"
 
 type CellProps = {
-    id: string
+    id: string,
+    day: string
 }
 
-export default function Cell({ id }: CellProps) {
+export default function Cell({ id, day }: CellProps) {
     const [isOpen, setIsOpen] = useState(false)
     const [typeModalWindow, setTypeModalWindow] = useState<MODAL_TYPE>(MODAL_TYPE.ADD_CLIENT)
     const [tempClientName, setTempClientName] = useState("")
@@ -68,7 +69,7 @@ export default function Cell({ id }: CellProps) {
                     clientName={tempClientName}
                     onClose={handleCloseModal}
                     id={id} />}
-                {typeModalWindow === MODAL_TYPE.ADD_WORKER && <WorkerModalTemplate />}
+                {typeModalWindow === MODAL_TYPE.ADD_WORKER && <WorkerModalTemplate day={day} />}
             </ModalWindow>
         </div >
     )

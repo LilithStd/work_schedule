@@ -29,8 +29,6 @@ export default function TableCell() {
                         <div className="border border-black bg-sky-600 flex items-center justify-center">
                             {time}
                         </div>
-
-                        {/* Ячейки на каждый день недели */}
                         {week.map((day, colIndex) => (
                             <div
                                 key={`${day}-${time}`}
@@ -39,7 +37,7 @@ export default function TableCell() {
                                 {/* Например, три клиента в каждой ячейке */}
                                 {Array.from({ length: 3 }).map(() => {
                                     const id = nanoid();
-                                    return <Cell key={id} id={id} />;
+                                    return <Cell key={id} id={id} day={day} />;
                                 })}
                             </div>
                         ))}

@@ -19,7 +19,7 @@ export default function ModalWindow({ isOpen, onClose, children }: ModalWindowPr
                 flex-col"
                 onClick={(e) => e.stopPropagation()}
             >
-                <CrossCLoseIcons className="flex ml-auto" onClick={onClose} />
+                <CrossCLoseIcons className="flex ml-auto hover:bg-amber-900" onClick={onClose} />
                 {children}
 
             </div>

@@ -1,10 +1,11 @@
 'use client';
 import { nanoid } from 'nanoid';
-import React, { useState } from 'react'
+import React, { use, useState } from 'react'
 import Worker from './worker';
 import { week, workerListByDayTemplate, workersTest, WorkerTypes } from '@/consts/template';
+import { useWorkersStore } from '@/store/workersStore';
 
-type WorkersListProps = {
+export type WorkersListProps = {
     day: string;
     workers: WorkerTypes[];
 }
@@ -12,6 +13,11 @@ type WorkersListProps = {
 export default function WorkersList() {
     const [workerDragged, setWorkerDragged] = useState<WorkerTypes>();
     const [workerListByDay, setWorkerListByDay] = useState<WorkersListProps[]>(workerListByDayTemplate);
+
+    const setWorkersListbyDay = useWorkersStore((state) => state.setWorkerListByDay);
+
+    const workerListByDayStore = useWorkersStore((state) => state.workerListByDay);
+
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
     }
@@ -19,15 +25,16 @@ export default function WorkersList() {
         e.preventDefault();
         const data = e.dataTransfer.getData("application/json");
         const worker: WorkerTypes = JSON.parse(data) as WorkerTypes;
-        setWorkerListByDay((prev) => prev.map((item) => {
-            if (item.day === day) {
-                if (item.workers.find(workers => workers.id === worker.id)) {
-                    return item;
-                }
-                return { day: item.day, workers: [...item.workers, worker] };
-            }
-            return item;
-        }));
+        setWorkersListbyDay({ workers: worker, day: day });
+        // setWorkerListByDay((prev) => prev.map((item) => {
+        //     if (item.day === day) {
+        //         if (item.workers.find(workers => workers.id === worker.id)) {
+        //             return item;
+        //         }
+        //         return { day: item.day, workers: [...item.workers, worker] };
+        //     }
+        //     return item;
+        // }));
     }
     return (
         <>
@@ -50,8 +57,11 @@ export default function WorkersList() {
                     className="border border-black bg-sky-600"
                 >
 
-                    {workerListByDay[index].workers?.map((workerId) => (
+                    {/* {workerListByDay[index].workers.map((workerId) => (
                         <p key={workerId.id}>{workerId.name}</p>
+                    ))} */}
+                    {workerListByDayStore[index].workers.map((worker) => (
+                        <p key={worker.id}>{worker.name}</p>
                     ))}
                 </div>
             ))}
