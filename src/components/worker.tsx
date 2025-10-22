@@ -9,7 +9,7 @@ interface WorkerProps {
 export default function Worker({ name, id, callBack }: WorkerProps) {
     return (
         <div
-            className="cursor-pointer bg-violet-600 m-1 rounded text-white"
+            className="cursor-pointer bg-violet-600 m-1 rounded text-white justify-center items-center flex p-2 "
             draggable="true"
             onDragStart={(e) => {
                 e.dataTransfer.setData("application/json", JSON.stringify({ name, id }));

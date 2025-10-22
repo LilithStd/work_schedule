@@ -1,4 +1,13 @@
-export const timer = ['10:00', '11:00', '12:00', '14:00'];
+import {nanoid} from 'nanoid';
+
+export enum TIME {
+	FIRST = '10:00',
+	SECOND = '11:00',
+	THIRD = '12:00',
+	FOUR = '14:00',
+}
+export const timer = [TIME.FIRST, TIME.SECOND, TIME.THIRD, TIME.FOUR];
+
 export enum DAYS {
 	MONDAY = 'Monday',
 	TUESDAY = 'Tuesday',
@@ -13,6 +22,189 @@ export enum MODAL_TYPE {
 	ADD_CLIENT = 'ADD_CLIENT',
 	ADD_WORKER = 'ADD_WORKER',
 }
+
+export enum GET_REGISTRATION_TYPE {
+	GET_CLIENT = 'GET_CLIENT',
+	GET_WORKER = 'GET_WORKER',
+}
+
+export const registartionDataTemplate = [
+	{
+		day: DAYS.MONDAY,
+		registrationTime: [
+			{
+				time: TIME.FIRST,
+				client: '',
+				workers: [],
+			},
+			{
+				time: TIME.SECOND,
+				client: '',
+				workers: [],
+			},
+			{
+				time: TIME.THIRD,
+				client: '',
+				workers: [],
+			},
+			{
+				time: TIME.FOUR,
+				client: '',
+				workers: [],
+			},
+		],
+	},
+	{
+		day: DAYS.TUESDAY,
+		registrationTime: [
+			{
+				time: TIME.FIRST,
+				client: '',
+				workers: [],
+			},
+			{
+				time: TIME.SECOND,
+				client: '',
+				workers: [],
+			},
+			{
+				time: TIME.THIRD,
+				client: '',
+				workers: [],
+			},
+			{
+				time: TIME.FOUR,
+				client: '',
+				workers: [],
+			},
+		],
+	},
+	{
+		day: DAYS.WEDNESDAY,
+		registrationTime: [
+			{
+				time: TIME.FIRST,
+				client: '',
+				workers: [],
+			},
+			{
+				time: TIME.SECOND,
+				client: '',
+				workers: [],
+			},
+			{
+				time: TIME.THIRD,
+				client: '',
+				workers: [],
+			},
+			{
+				time: TIME.FOUR,
+				client: '',
+				workers: [],
+			},
+		],
+	},
+	{
+		day: DAYS.THURSDAY,
+		registrationTime: [
+			{
+				time: TIME.FIRST,
+				client: '',
+				workers: [],
+			},
+			{
+				time: TIME.SECOND,
+				client: '',
+				workers: [],
+			},
+			{
+				time: TIME.THIRD,
+				client: '',
+				workers: [],
+			},
+			{
+				time: TIME.FOUR,
+				client: '',
+				workers: [],
+			},
+		],
+	},
+	{
+		day: DAYS.FRIDAY,
+		registrationTime: [
+			{
+				time: TIME.FIRST,
+				client: '',
+				workers: [],
+			},
+			{
+				time: TIME.SECOND,
+				client: '',
+				workers: [],
+			},
+			{
+				time: TIME.THIRD,
+				client: '',
+				workers: [],
+			},
+			{
+				time: TIME.FOUR,
+				client: '',
+				workers: [],
+			},
+		],
+	},
+	{
+		day: DAYS.SATURDAY,
+		registrationTime: [
+			{
+				time: TIME.FIRST,
+				client: '',
+				workers: [],
+			},
+			{
+				time: TIME.SECOND,
+				client: '',
+				workers: [],
+			},
+			{
+				time: TIME.THIRD,
+				client: '',
+				workers: [],
+			},
+			{
+				time: TIME.FOUR,
+				client: '',
+				workers: [],
+			},
+		],
+	},
+	{
+		day: DAYS.SUNDAY,
+		registrationTime: [
+			{
+				time: TIME.FIRST,
+				client: '',
+				workers: [],
+			},
+			{
+				time: TIME.SECOND,
+				client: '',
+				workers: [],
+			},
+			{
+				time: TIME.THIRD,
+				client: '',
+				workers: [],
+			},
+			{
+				time: TIME.FOUR,
+				client: '',
+				workers: [],
+			},
+		],
+	},
+];
 
 export const week = [
 	DAYS.MONDAY,

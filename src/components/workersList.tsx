@@ -56,12 +56,10 @@ export default function WorkersList() {
                     key={index}
                     className="border border-black bg-sky-600"
                 >
-
-                    {/* {workerListByDay[index].workers.map((workerId) => (
-                        <p key={workerId.id}>{workerId.name}</p>
-                    ))} */}
                     {workerListByDayStore[index].workers.map((worker) => (
-                        <p key={worker.id}>{worker.name}</p>
+                        <div key={worker.id} >
+                            <Worker id={worker.id} name={worker.name} />
+                        </div>
                     ))}
                 </div>
             ))}

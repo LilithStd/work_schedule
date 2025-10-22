@@ -37,7 +37,7 @@ export default function TableCell() {
                                 {/* Например, три клиента в каждой ячейке */}
                                 {Array.from({ length: 3 }).map(() => {
                                     const id = nanoid();
-                                    return <Cell key={id} id={id} day={day} />;
+                                    return <Cell key={id} id={id} day={day} time={time} />;
                                 })}
                             </div>
                         ))}

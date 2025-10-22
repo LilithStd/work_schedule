@@ -9,19 +9,22 @@ import AddWorkerIcon from "../../public/icons/user-plus.svg"
 import ClientModalTemplate from "./clientModalTemplate"
 import { MODAL_TYPE } from "@/consts/template"
 import WorkerModalTemplate from "./workerModalTemplate"
+import { useRegistationStore } from "@/store/registrationStore"
 
 type CellProps = {
     id: string,
-    day: string
+    day: string,
+    time: string
 }
 
-export default function Cell({ id, day }: CellProps) {
+export default function Cell({ id, day, time }: CellProps) {
     const [isOpen, setIsOpen] = useState(false)
     const [typeModalWindow, setTypeModalWindow] = useState<MODAL_TYPE>(MODAL_TYPE.ADD_CLIENT)
     const [tempClientName, setTempClientName] = useState("")
     const modalStatus = useGlobalStore((state) => state.modalOpenStatus)
     const setModalStatus = useGlobalStore((state) => state.setModalOpenStatus)
     const resetModalStatus = useGlobalStore((state) => state.resetSetOpenStatus)
+    const getRegistrationData = useRegistationStore((state) => state.getRegistrationWorkerData)
 
     const handleOpenModal = () => {
         if (modalStatus.status) return
@@ -33,7 +36,6 @@ export default function Cell({ id, day }: CellProps) {
         resetModalStatus()
 
     }
-
 
     return (
         <div className="m-2">
@@ -55,7 +57,7 @@ export default function Cell({ id, day }: CellProps) {
                                 setTypeModalWindow(MODAL_TYPE.ADD_WORKER)
                             )}
                         >
-                            <AddWorkerIcon className="tranparent text-center text-gray-400" />
+                            {getRegistrationData({ time: time, day: day }).length > 0 ? getRegistrationData({ time: time, day: day }).map((worker) => (<p key={worker.id}>{worker.name}</p>)) : <AddWorkerIcon className="tranparent text-center text-gray-400" />}
                         </button>
                     ))}
                 </div>
@@ -64,12 +66,20 @@ export default function Cell({ id, day }: CellProps) {
                 isOpen={isOpen}
                 onClose={handleCloseModal}
             >
-                {typeModalWindow === MODAL_TYPE.ADD_CLIENT && <ClientModalTemplate
-                    onSaveClientName={setTempClientName}
-                    clientName={tempClientName}
-                    onClose={handleCloseModal}
-                    id={id} />}
-                {typeModalWindow === MODAL_TYPE.ADD_WORKER && <WorkerModalTemplate day={day} />}
+                {typeModalWindow === MODAL_TYPE.ADD_CLIENT &&
+                    <ClientModalTemplate
+                        onSaveClientName={setTempClientName}
+                        clientName={tempClientName}
+                        onClose={handleCloseModal}
+                        id={id} />
+                }
+                {typeModalWindow === MODAL_TYPE.ADD_WORKER &&
+                    <WorkerModalTemplate
+                        day={day}
+                        time={time}
+                        onClose={handleCloseModal}
+                    />
+                }
             </ModalWindow>
         </div >
     )
