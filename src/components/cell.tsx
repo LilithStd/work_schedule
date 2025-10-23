@@ -36,7 +36,6 @@ export default function Cell({ id, day, time }: CellProps) {
         resetModalStatus()
 
     }
-
     return (
         <div className="m-2">
             <div className="flex flex-col xl:flex-row gap-2">
@@ -57,7 +56,7 @@ export default function Cell({ id, day, time }: CellProps) {
                                 setTypeModalWindow(MODAL_TYPE.ADD_WORKER)
                             )}
                         >
-                            {getRegistrationData({ time: time, day: day }).length > 0 ? getRegistrationData({ time: time, day: day }).map((worker) => (<p key={worker.id}>{worker.name}</p>)) : <AddWorkerIcon className="tranparent text-center text-gray-400" />}
+                            {<AddWorkerIcon className="tranparent text-center text-gray-400" />}
                         </button>
                     ))}
                 </div>
@@ -75,6 +74,7 @@ export default function Cell({ id, day, time }: CellProps) {
                 }
                 {typeModalWindow === MODAL_TYPE.ADD_WORKER &&
                     <WorkerModalTemplate
+                        id={id}
                         day={day}
                         time={time}
                         onClose={handleCloseModal}
