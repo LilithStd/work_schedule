@@ -11,12 +11,12 @@ type workerType = {
 	name: string;
 };
 
-type cellsTypes = {
+export type cellsTypes = {
 	cell: string;
 	worker: workerType;
 };
 
-type dataTypes = {
+export type dataTypes = {
 	id: string;
 	client: string;
 	cells: cellsTypes[];
@@ -43,9 +43,7 @@ type getRegistrationDataTypes = {
 
 interface RegistrationStoreTypes {
 	registartionData: registartionDataTypes[];
-	getRegistrationWorkerData: (
-		getRegistrationData: getRegistrationDataTypes,
-	) => workerType;
+	getRegistrationWorkerData: (getRegistrationData: string) => workerType;
 	updateRegistrationData: (updateData: updateDataTypes) => void;
 }
 
@@ -53,9 +51,32 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 	(set, get) => ({
 		registartionData: registartionDataTemplate,
 		getRegistrationWorkerData: (getRegistrationData) => {
-			const allRegistartionData = get().registartionData;
-			return {id: '', name: ''};
+			const allRegistrationData = get().registartionData;
+			const cell = allRegistrationData
+				.flatMap((day) => day.registrationTime)
+				.flatMap((timeSlot) => timeSlot.data)
+				.flatMap((entry) => entry.cells)
+				.find((cell) => cell.cell === getRegistrationData);
+			// console.log(cell);
+			return cell?.worker ?? {id: '', name: ''};
 		},
-		updateRegistrationData: (updateData) => {},
+		updateRegistrationData: (updateData) => {
+			set(() => ({
+				registartionData: get().registartionData.map((dayItem) => ({
+					...dayItem,
+					registrationTime: dayItem.registrationTime.map((timeSlot) => ({
+						...timeSlot,
+						data: timeSlot.data.map((dataEntry) => ({
+							...dataEntry,
+							cells: dataEntry.cells.map((cell) =>
+								cell.cell === updateData.id
+									? {...cell, worker: updateData.worker}
+									: cell,
+							),
+						})),
+					})),
+				})),
+			}));
+		},
 	}),
 );

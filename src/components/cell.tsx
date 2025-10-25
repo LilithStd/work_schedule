@@ -2,29 +2,41 @@
 
 import { useGlobalStore } from "@/store/globalStore"
 import ModalWindow from "./modalWindow"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Client from "./client"
 
 import AddWorkerIcon from "../../public/icons/user-plus.svg"
 import ClientModalTemplate from "./clientModalTemplate"
 import { MODAL_TYPE } from "@/consts/template"
 import WorkerModalTemplate from "./workerModalTemplate"
-import { useRegistationStore } from "@/store/registrationStore"
+import { cellsTypes, dataTypes, useRegistationStore } from "@/store/registrationStore"
 
 type CellProps = {
     id: string,
     day: string,
     time: string
+    data: dataTypes[]
 }
 
-export default function Cell({ id, day, time }: CellProps) {
+export default function Cell({ id, day, time, data }: CellProps) {
     const [isOpen, setIsOpen] = useState(false)
+    const [currentCellId, setCurrentId] = useState('')
+    const [currentWorker, setCurrentWorker] = useState({ cellId: '', id: '', name: '' })
     const [typeModalWindow, setTypeModalWindow] = useState<MODAL_TYPE>(MODAL_TYPE.ADD_CLIENT)
     const [tempClientName, setTempClientName] = useState("")
     const modalStatus = useGlobalStore((state) => state.modalOpenStatus)
     const setModalStatus = useGlobalStore((state) => state.setModalOpenStatus)
     const resetModalStatus = useGlobalStore((state) => state.resetSetOpenStatus)
     const getRegistrationData = useRegistationStore((state) => state.getRegistrationWorkerData)
+
+
+
+    const cells = data.find((item) => item.cells)?.cells || []
+    // console.log(data.flatMap((element) => element.cells.map((item) => item.cell)))
+    // console.log(currentWorker)
+    // const foundWorker = getRegistrationData(id).name;
+    // console.log(getRegistrationData(id))
+
 
     const handleOpenModal = () => {
         if (modalStatus.status) return
@@ -36,6 +48,7 @@ export default function Cell({ id, day, time }: CellProps) {
         resetModalStatus()
 
     }
+
     return (
         <div className="m-2">
             <div className="flex flex-col xl:flex-row gap-2">
@@ -49,14 +62,15 @@ export default function Cell({ id, day, time }: CellProps) {
                     <Client name={tempClientName} />
                 </button>
                 <div className="xl:w-1/2 flex flex-col gap-2">
-                    {Array.from({ length: 2 }).map((_, idx) => (
+                    {cells.map((item, idx) => (
                         <button key={idx} className={`flex items-center justify-center ${isOpen && typeModalWindow === MODAL_TYPE.ADD_WORKER ? 'bg-fuchsia-600' : 'bg-emerald-500 hover:bg-emerald-200'}  bg-sky-100 min-h-10 rounded-xl`}
                             onClick={() => (
                                 handleOpenModal(),
-                                setTypeModalWindow(MODAL_TYPE.ADD_WORKER)
+                                setTypeModalWindow(MODAL_TYPE.ADD_WORKER),
+                                setCurrentId(item.cell)
                             )}
                         >
-                            {<AddWorkerIcon className="tranparent text-center text-gray-400" />}
+                            {currentWorker.cellId === item.cell && currentWorker.name !== '' ? <p>{currentWorker.name}</p> : < AddWorkerIcon className="tranparent text-center text-gray-400" />}
                         </button>
                     ))}
                 </div>
@@ -74,9 +88,10 @@ export default function Cell({ id, day, time }: CellProps) {
                 }
                 {typeModalWindow === MODAL_TYPE.ADD_WORKER &&
                     <WorkerModalTemplate
-                        id={id}
+                        id={currentCellId}
                         day={day}
                         time={time}
+                        setCurrentWork={setCurrentWorker}
                         onClose={handleCloseModal}
                     />
                 }

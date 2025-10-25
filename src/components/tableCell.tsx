@@ -65,6 +65,8 @@ export default function TableCell() {
                             const timeSlot = element.registrationTime.find(
                                 (cellData) => cellData.time === time
                             );
+                            const cells = element.registrationTime.find((cellsData) => cellsData.time === time)?.data
+                            // console.log(timeSlot, cells)
 
                             return (
                                 <div
@@ -73,7 +75,7 @@ export default function TableCell() {
                                 >
                                     {timeSlot?.data?.length ? (
                                         timeSlot.data.map((item) => (
-                                            <Cell key={item.id} id={item.id} day={element.day} time={time} />
+                                            <Cell key={item.id} id={item.id} day={element.day} time={time} data={cells ?? []} />
                                         ))
                                     ) : (
                                         <span className="text-gray-400 italic text-sm">empty</span>
