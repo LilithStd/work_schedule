@@ -57,7 +57,6 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 				.flatMap((timeSlot) => timeSlot.data)
 				.flatMap((entry) => entry.cells)
 				.find((cell) => cell.cell === getRegistrationData);
-			// console.log(cell);
 			return cell?.worker ?? {id: '', name: ''};
 		},
 		updateRegistrationData: (updateData) => {

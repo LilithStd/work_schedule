@@ -29,9 +29,7 @@ export default function WorkerModalTemplate({ id, day, time, onClose, setCurrent
                 <div key={worker.id} onClick={() => {
                     const updateData = { id: id, day: day, time: time, client: '', worker }
                     setRegistrationData(updateData)
-                    // console.log(getRegistrationData(id))
-                    // console.log(getRegistrationData({ id, time, day }))
-                    console.log({ cellId: id, ...worker })
+                    console.log(registrationData)
                     setCurrentWork({ cellId: id, ...worker })
                     onClose()
                 }}>

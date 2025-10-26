@@ -2,7 +2,7 @@
 
 import { useGlobalStore } from "@/store/globalStore"
 import ModalWindow from "./modalWindow"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import Client from "./client"
 
 import AddWorkerIcon from "../../public/icons/user-plus.svg"
@@ -32,10 +32,15 @@ export default function Cell({ id, day, time, data }: CellProps) {
 
 
     const cells = data.find((item) => item.cells)?.cells || []
-    // console.log(data.flatMap((element) => element.cells.map((item) => item.cell)))
-    // console.log(currentWorker)
-    // const foundWorker = getRegistrationData(id).name;
-    // console.log(getRegistrationData(id))
+    const foundWorker = getRegistrationData(id);
+    const worker = getRegistrationData(id);
+    // console.log(foundWorker)
+
+    useEffect(() => {
+        if (foundWorker.name !== '' && foundWorker.id !== '') {
+            setCurrentWorker({ cellId: currentCellId, ...foundWorker })
+        }
+    }, [id])
 
 
     const handleOpenModal = () => {
@@ -70,7 +75,9 @@ export default function Cell({ id, day, time, data }: CellProps) {
                                 setCurrentId(item.cell)
                             )}
                         >
-                            {currentWorker.cellId === item.cell && currentWorker.name !== '' ? <p>{currentWorker.name}</p> : < AddWorkerIcon className="tranparent text-center text-gray-400" />}
+                            {currentWorker.name !== '' && currentWorker.id !== '' && currentWorker.cellId === item.cell
+                                ? <p>{currentWorker.name}</p>
+                                : <AddWorkerIcon />}
                         </button>
                     ))}
                 </div>
