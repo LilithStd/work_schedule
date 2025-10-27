@@ -18,10 +18,16 @@ type CellProps = {
     data: dataTypes[]
 }
 
+type CellWorker = {
+    cellId: string,
+    id: string,
+    name: string
+}
+
 export default function Cell({ id, day, time, data }: CellProps) {
     const [isOpen, setIsOpen] = useState(false)
     const [currentCellId, setCurrentId] = useState('')
-    const [currentWorker, setCurrentWorker] = useState({ cellId: '', id: '', name: '' })
+    const [currentWorker, setCurrentWorker] = useState<CellWorker[]>([])
     const [typeModalWindow, setTypeModalWindow] = useState<MODAL_TYPE>(MODAL_TYPE.ADD_CLIENT)
     const [tempClientName, setTempClientName] = useState("")
     const modalStatus = useGlobalStore((state) => state.modalOpenStatus)
@@ -37,10 +43,18 @@ export default function Cell({ id, day, time, data }: CellProps) {
     // console.log(foundWorker)
 
     useEffect(() => {
-        if (foundWorker.name !== '' && foundWorker.id !== '') {
-            setCurrentWorker({ cellId: currentCellId, ...foundWorker })
+        if (foundWorker?.name && foundWorker?.id) {
+            const addWorker = { cellId: currentCellId, ...foundWorker };
+            setCurrentWorker((prev) => [...prev, addWorker]);
         }
-    }, [id])
+    }, [foundWorker, currentCellId]);
+
+    const findWorkerById = (array: CellWorker[], id: string) => {
+        console.log(array, id)
+        const tempResult = array.find((element) => element.cellId === id)?.name
+        // console.log(tempResult)
+        return tempResult
+    }
 
 
     const handleOpenModal = () => {
@@ -75,9 +89,9 @@ export default function Cell({ id, day, time, data }: CellProps) {
                                 setCurrentId(item.cell)
                             )}
                         >
-                            {currentWorker.name !== '' && currentWorker.id !== '' && currentWorker.cellId === item.cell
-                                ? <p>{currentWorker.name}</p>
-                                : <AddWorkerIcon />}
+                            {
+                                findWorkerById(currentWorker, currentCellId)
+                            }
                         </button>
                     ))}
                 </div>
@@ -98,7 +112,7 @@ export default function Cell({ id, day, time, data }: CellProps) {
                         id={currentCellId}
                         day={day}
                         time={time}
-                        setCurrentWork={setCurrentWorker}
+                        // setCurrentWork={setCurrentWorker}
                         onClose={handleCloseModal}
                     />
                 }

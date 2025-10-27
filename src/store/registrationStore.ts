@@ -60,21 +60,29 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 			return cell?.worker ?? {id: '', name: ''};
 		},
 		updateRegistrationData: (updateData) => {
-			set(() => ({
-				registartionData: get().registartionData.map((dayItem) => ({
-					...dayItem,
-					registrationTime: dayItem.registrationTime.map((timeSlot) => ({
-						...timeSlot,
-						data: timeSlot.data.map((dataEntry) => ({
-							...dataEntry,
-							cells: dataEntry.cells.map((cell) =>
-								cell.cell === updateData.id
-									? {...cell, worker: updateData.worker}
-									: cell,
-							),
-						})),
-					})),
-				})),
+			set((state) => ({
+				registartionData: state.registartionData.map((dayItem) =>
+					dayItem.day === updateData.day
+						? {
+								...dayItem,
+								registrationTime: dayItem.registrationTime.map((timeSlot) =>
+									timeSlot.time === updateData.time
+										? {
+												...timeSlot,
+												data: timeSlot.data.map((dataEntry) => ({
+													...dataEntry,
+													cells: dataEntry.cells.map((cell) =>
+														cell.cell === updateData.id
+															? {...cell, worker: updateData.worker}
+															: cell,
+													),
+												})),
+										  }
+										: timeSlot,
+								),
+						  }
+						: dayItem,
+				),
 			}));
 		},
 	}),

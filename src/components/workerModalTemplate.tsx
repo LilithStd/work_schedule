@@ -12,7 +12,7 @@ interface WorkerModalTemplateProps {
     id: string;
     day: string;
     time: string;
-    setCurrentWork: (currentWorker: currenWork) => void
+    setCurrentWork?: (currentWorker: currenWork) => void
     onClose: () => void
 }
 
@@ -29,8 +29,8 @@ export default function WorkerModalTemplate({ id, day, time, onClose, setCurrent
                 <div key={worker.id} onClick={() => {
                     const updateData = { id: id, day: day, time: time, client: '', worker }
                     setRegistrationData(updateData)
-                    console.log(registrationData)
-                    setCurrentWork({ cellId: id, ...worker })
+                    // console.log(registrationData)
+                    // setCurrentWork({ cellId: id, ...worker })
                     onClose()
                 }}>
                     <Worker id={worker.id} name={worker.name} />
