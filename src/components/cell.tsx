@@ -38,24 +38,28 @@ export default function Cell({ id, day, time, data }: CellProps) {
 
 
     const cells = data.find((item) => item.cells)?.cells || []
-    const foundWorker = getRegistrationData(id);
+
     const worker = getRegistrationData(id);
+    const foundWorker = getRegistrationData(currentCellId);
     // console.log(foundWorker)
 
+    // console.log(foundWorker)
     useEffect(() => {
         if (foundWorker?.name && foundWorker?.id) {
-            const addWorker = { cellId: currentCellId, ...foundWorker };
-            setCurrentWorker((prev) => [...prev, addWorker]);
+            setCurrentWorker((prev) => {
+                const addWorker = { cellId: currentCellId, ...foundWorker };
+
+                if (prev.some((element) => element.cellId === currentCellId)) {
+                    return prev.map((element) =>
+                        element.cellId === currentCellId ? addWorker : element
+                    );
+                }
+
+                return [...prev, addWorker];
+            });
         }
-    }, [foundWorker, currentCellId]);
-
-    const findWorkerById = (array: CellWorker[], id: string) => {
-        console.log(array, id)
-        const tempResult = array.find((element) => element.cellId === id)?.name
-        // console.log(tempResult)
-        return tempResult
-    }
-
+    }, [currentCellId, foundWorker.id, foundWorker.name]);
+    // console.log(currentWorker)
 
     const handleOpenModal = () => {
         if (modalStatus.status) return
@@ -90,7 +94,8 @@ export default function Cell({ id, day, time, data }: CellProps) {
                             )}
                         >
                             {
-                                findWorkerById(currentWorker, currentCellId)
+                                currentWorker.find((cell) => cell.cellId === item.cell) ? currentWorker.find((cell) => cell.cellId === item.cell)?.name :
+                                    <AddWorkerIcon />
                             }
                         </button>
                     ))}
