@@ -10,6 +10,7 @@ import ClientModalTemplate from "./clientModalTemplate"
 import { MODAL_TYPE } from "@/consts/template"
 import WorkerModalTemplate from "./workerModalTemplate"
 import { cellsTypes, dataTypes, useRegistationStore } from "@/store/registrationStore"
+import WorkerCell from "./workerCell"
 
 type CellProps = {
     id: string,
@@ -38,33 +39,35 @@ export default function Cell({ id, day, time, data }: CellProps) {
 
 
     const cells = data.find((item) => item.cells)?.cells || []
-
-    const worker = getRegistrationData(id);
     const foundWorker = getRegistrationData(currentCellId);
-    // console.log(foundWorker)
 
-    // console.log(foundWorker)
     useEffect(() => {
         if (foundWorker?.name && foundWorker?.id) {
             setCurrentWorker((prev) => {
-                const addWorker = { cellId: currentCellId, ...foundWorker };
+                const existing = prev.find((el) => el.cellId === currentCellId);
+                if (existing?.id === foundWorker.id && existing?.name === foundWorker.name) {
+                    return prev;
+                }
 
-                if (prev.some((element) => element.cellId === currentCellId)) {
-                    return prev.map((element) =>
-                        element.cellId === currentCellId ? addWorker : element
+                const updatedWorker = { cellId: currentCellId, ...foundWorker };
+
+                if (existing) {
+                    return prev.map((el) =>
+                        el.cellId === currentCellId ? updatedWorker : el
                     );
                 }
 
-                return [...prev, addWorker];
+                return [...prev, updatedWorker];
             });
         }
-    }, [currentCellId, foundWorker.id, foundWorker.name]);
+    }, [currentCellId, foundWorker?.id, foundWorker?.name]);
     // console.log(currentWorker)
 
     const handleOpenModal = () => {
         if (modalStatus.status) return
         setIsOpen(true)
         setModalStatus({ status: true, id: id })
+
     }
     const handleCloseModal = () => {
         setIsOpen(false)
@@ -79,6 +82,7 @@ export default function Cell({ id, day, time, data }: CellProps) {
                     className={`xl:w-1/2 row-start-1 row-end-2  min-h-10 rounded-xl ${isOpen && typeModalWindow === MODAL_TYPE.ADD_CLIENT ? 'bg-fuchsia-600' : tempClientName.length > 0 ? 'bg-emerald-500 hover:bg-emerald-200' : 'bg-sky-500 hover:bg-sky-700'}`}
                     onClick={() => (
                         handleOpenModal(),
+                        console.log(currentWorker),
                         setTypeModalWindow(MODAL_TYPE.ADD_CLIENT)
                     )}
                 >
@@ -93,10 +97,11 @@ export default function Cell({ id, day, time, data }: CellProps) {
                                 setCurrentId(item.cell)
                             )}
                         >
-                            {
+                            {<WorkerCell id={item.cell} />}
+                            {/* {
                                 currentWorker.find((cell) => cell.cellId === item.cell) ? currentWorker.find((cell) => cell.cellId === item.cell)?.name :
                                     <AddWorkerIcon />
-                            }
+                            } */}
                         </button>
                     ))}
                 </div>
