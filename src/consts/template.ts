@@ -18,6 +18,11 @@ export enum DAYS {
 	SUNDAY = 'Sunday',
 }
 
+export enum UPDATE_REGISTRATION_DATA_STATUS {
+	UPDATE = 'UPDATE',
+	STATIC = 'STATIC',
+}
+
 export enum MODAL_TYPE {
 	ADD_CLIENT = 'ADD_CLIENT',
 	ADD_WORKER = 'ADD_WORKER',

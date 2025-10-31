@@ -1,4 +1,7 @@
-import {registartionDataTemplate} from '@/consts/template';
+import {
+	registartionDataTemplate,
+	UPDATE_REGISTRATION_DATA_STATUS,
+} from '@/consts/template';
 import {create} from 'zustand';
 
 type registartionDataTypes = {
@@ -42,6 +45,8 @@ type getRegistrationDataTypes = {
 };
 
 interface RegistrationStoreTypes {
+	updateStoreStatus: boolean;
+	setUpdateStoreStatus: (status: boolean) => void;
 	registartionData: registartionDataTypes[];
 	getRegistrationWorkerData: (getRegistrationData: string) => workerType;
 	updateRegistrationData: (updateData: updateDataTypes) => void;
@@ -49,6 +54,11 @@ interface RegistrationStoreTypes {
 
 export const useRegistationStore = create<RegistrationStoreTypes>(
 	(set, get) => ({
+		updateStoreStatus: false,
+		setUpdateStoreStatus: (status) => {
+			if (get().updateStoreStatus === status) return;
+			set({updateStoreStatus: true});
+		},
 		registartionData: registartionDataTemplate,
 		getRegistrationWorkerData: (getRegistrationData) => {
 			const allRegistrationData = get().registartionData;
@@ -84,6 +94,7 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 						: dayItem,
 				),
 			}));
+			set({updateStoreStatus: false});
 		},
 	}),
 );

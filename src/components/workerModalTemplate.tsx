@@ -18,21 +18,26 @@ interface WorkerModalTemplateProps {
 
 export default function WorkerModalTemplate({ id, day, time, onClose, setCurrentWork }: WorkerModalTemplateProps) {
     const getListOfAvailableWorkers = useWorkersStore((state) => state.getWorkerListByDay);
-    const setRegistrationData = useRegistationStore(state => state.updateRegistrationData)
-    const getRegistrationData = useRegistationStore(state => state.getRegistrationWorkerData)
-    const registrationData = useRegistationStore(state => state.registartionData)
+    const setRegistrationData = useRegistationStore(state => state.updateRegistrationData);
+    const setUpdateStatusStore = useRegistationStore(state => state.setUpdateStoreStatus);
+    const getRegistrationData = useRegistationStore(state => state.getRegistrationWorkerData);
+    const registrationData = useRegistationStore(state => state.registartionData);
+    console.log(id)
 
     return (
         <div className='w-full'>
             <p>List availible workers</p>
+            <p>{id}</p>
             {getListOfAvailableWorkers(day).map((worker) => (
                 <div key={worker.id} onClick={() => {
                     const updateData = { id: id, day: day, time: time, client: '', worker }
                     setRegistrationData(updateData)
+                    setUpdateStatusStore(true)
                     // console.log(registrationData)
                     // setCurrentWork({ cellId: id, ...worker })
                     onClose()
                 }}>
+
                     <Worker id={worker.id} name={worker.name} />
                 </div>
             ))}

@@ -16,7 +16,7 @@ type CellProps = {
     id: string,
     day: string,
     time: string
-    data: dataTypes[]
+    cells: cellsTypes[]
 }
 
 type CellWorker = {
@@ -25,7 +25,7 @@ type CellWorker = {
     name: string
 }
 
-export default function Cell({ id, day, time, data }: CellProps) {
+export default function Cell({ id, day, time, cells }: CellProps) {
     const [isOpen, setIsOpen] = useState(false)
     const [currentCellId, setCurrentId] = useState('')
     const [currentWorker, setCurrentWorker] = useState<CellWorker[]>([])
@@ -38,7 +38,7 @@ export default function Cell({ id, day, time, data }: CellProps) {
 
 
 
-    const cells = data.find((item) => item.cells)?.cells || []
+    // const data = cells.find((item) => item.cells)?.cells || []
     const foundWorker = getRegistrationData(currentCellId);
 
     useEffect(() => {
