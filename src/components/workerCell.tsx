@@ -7,22 +7,13 @@ interface WorkerCellTypes {
 }
 
 export default function WorkerCell({ id }: WorkerCellTypes) {
-    const [activeWorker, setActiveWorker] = useState({ id: '', name: '' })
-    const getRegistrationData = useRegistationStore(state => state.getRegistrationWorkerData)
-    const updateStatus = useRegistationStore(state => state.updateStoreStatus)
-    // console.log(id)
-
-
-    useEffect(() => {
-        if (getRegistrationData(id)) {
-            setActiveWorker(getRegistrationData(id))
-        }
-    }, [updateStatus])
+    const getRegistrationData = useRegistationStore((state) => state.getRegistrationWorkerData);
+    const worker = getRegistrationData(id);
 
     return (
         <div>
-
-            {activeWorker.name !== '' ? activeWorker.name : <AddWorkerIcon />}
+            {worker?.name ? worker.name : <AddWorkerIcon />}
         </div>
-    )
+    );
 }
+

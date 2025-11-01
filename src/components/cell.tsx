@@ -16,7 +16,6 @@ type CellProps = {
     id: string,
     day: string,
     time: string
-    cells: cellsTypes[]
 }
 
 type CellWorker = {
@@ -25,7 +24,7 @@ type CellWorker = {
     name: string
 }
 
-export default function Cell({ id, day, time, cells }: CellProps) {
+export default function Cell({ id, day, time }: CellProps) {
     const [isOpen, setIsOpen] = useState(false)
     const [currentCellId, setCurrentId] = useState('')
     const [currentWorker, setCurrentWorker] = useState<CellWorker[]>([])
@@ -35,10 +34,14 @@ export default function Cell({ id, day, time, cells }: CellProps) {
     const setModalStatus = useGlobalStore((state) => state.setModalOpenStatus)
     const resetModalStatus = useGlobalStore((state) => state.resetSetOpenStatus)
     const getRegistrationData = useRegistationStore((state) => state.getRegistrationWorkerData)
+    const registrationData = useRegistationStore(state => state.registartionData);
 
+    const cellData = useMemo(() => {
+        const dayData = registrationData.find(d => d.day === day);
+        const timeData = dayData?.registrationTime.find(t => t.time === time);
+        return timeData?.data.find(c => c.id === id);
+    }, [registrationData, day, time, id]);
 
-
-    // const data = cells.find((item) => item.cells)?.cells || []
     const foundWorker = getRegistrationData(currentCellId);
 
     useEffect(() => {
@@ -89,7 +92,7 @@ export default function Cell({ id, day, time, cells }: CellProps) {
                     <Client name={tempClientName} />
                 </button>
                 <div className="xl:w-1/2 flex flex-col gap-2">
-                    {cells.map((item, idx) => (
+                    {cellData?.cells.map((item, idx) => (
                         <button key={idx} className={`flex items-center justify-center ${isOpen && typeModalWindow === MODAL_TYPE.ADD_WORKER ? 'bg-fuchsia-600' : 'bg-emerald-500 hover:bg-emerald-200'}  bg-sky-100 min-h-10 rounded-xl`}
                             onClick={() => (
                                 handleOpenModal(),
@@ -98,10 +101,6 @@ export default function Cell({ id, day, time, cells }: CellProps) {
                             )}
                         >
                             {<WorkerCell id={item.cell} />}
-                            {/* {
-                                currentWorker.find((cell) => cell.cellId === item.cell) ? currentWorker.find((cell) => cell.cellId === item.cell)?.name :
-                                    <AddWorkerIcon />
-                            } */}
                         </button>
                     ))}
                 </div>

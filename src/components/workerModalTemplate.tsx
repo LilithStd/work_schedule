@@ -22,7 +22,7 @@ export default function WorkerModalTemplate({ id, day, time, onClose, setCurrent
     const setUpdateStatusStore = useRegistationStore(state => state.setUpdateStoreStatus);
     const getRegistrationData = useRegistationStore(state => state.getRegistrationWorkerData);
     const registrationData = useRegistationStore(state => state.registartionData);
-    console.log(id)
+    // console.log(id)
 
     return (
         <div className='w-full'>
@@ -33,8 +33,7 @@ export default function WorkerModalTemplate({ id, day, time, onClose, setCurrent
                     const updateData = { id: id, day: day, time: time, client: '', worker }
                     setRegistrationData(updateData)
                     setUpdateStatusStore(true)
-                    // console.log(registrationData)
-                    // setCurrentWork({ cellId: id, ...worker })
+                    console.log(registrationData)
                     onClose()
                 }}>
 

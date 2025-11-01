@@ -81,11 +81,27 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 												...timeSlot,
 												data: timeSlot.data.map((dataEntry) => ({
 													...dataEntry,
-													cells: dataEntry.cells.map((cell) =>
-														cell.cell === updateData.id
-															? {...cell, worker: updateData.worker}
-															: cell,
-													),
+													cells: dataEntry.cells.map((cell) => {
+														if (cell.cell !== updateData.id) return cell;
+
+														// Проверяем: есть ли уже worker и отличается ли он
+														const currentWorker = cell.worker;
+														const newWorker = updateData.worker;
+
+														// Если новый worker идентичен старому — не перезаписываем
+														if (
+															currentWorker?.id === newWorker?.id &&
+															currentWorker?.name === newWorker?.name
+														) {
+															return cell;
+														}
+
+														// Иначе — возвращаем обновлённый объект
+														return {
+															...cell,
+															worker: {...newWorker},
+														};
+													}),
 												})),
 										  }
 										: timeSlot,

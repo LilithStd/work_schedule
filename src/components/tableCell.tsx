@@ -1,23 +1,59 @@
 'use client'
+import React, { useMemo } from "react";
+import { useRegistationStore } from "@/store/registrationStore";
 import { timer, week } from "@/consts/template";
 import Cell from "./cell";
-import React from "react";
 import WorkersList from "./workersList";
-import { useRegistationStore } from "@/store/registrationStore";
+
 
 export default function TableCell() {
-    const registrationData = useRegistationStore((state) => state.registartionData);
+    const registrationData = useRegistationStore(
+        (state) => state.registartionData
+    );
+
+    const tableContent = useMemo(() => {
+        return timer.map((time) => (
+            <React.Fragment key={time}>
+                {/* Левая колонка со временем */}
+                <div className="border border-black bg-sky-600 flex items-center justify-center">
+                    {time}
+                </div>
+
+                {/* Основная сетка по дням */}
+                {registrationData.map((day) => {
+                    const slot = day.registrationTime.find((t) => t.time === time);
+
+                    return (
+                        <div
+                            key={`${day.day}-${time}`}
+                            className="border border-black bg-white text-black text-center"
+                        >
+                            {slot?.data?.length ? (
+                                slot.data.map((item) => (
+                                    <Cell
+                                        key={item.id}
+                                        id={item.id}
+                                        day={day.day}
+                                        time={time}
+                                    />
+                                ))
+                            ) : (
+                                <span className="text-gray-400 italic text-sm">empty</span>
+                            )}
+                        </div>
+                    );
+                })}
+            </React.Fragment>
+        ));
+    }, [registrationData, timer]); // 👈 мемоизация по данным и времени
 
     return (
-
         <div className="bg-sky-700 w-full p-4 text-white">
             <h2 className="text-center mb-4">table_cell</h2>
-
             <div className="grid grid-cols-8 border border-black">
                 <div className="border border-black bg-sky-600 flex items-center justify-center">
                     Time / Day
                 </div>
-
                 {week.map((day) => (
                     <div
                         key={day}
@@ -27,67 +63,11 @@ export default function TableCell() {
                     </div>
                 ))}
 
-
                 <WorkersList />
-                {timer.map((time) => (
-                    <React.Fragment key={time}>
-
-                        <div className="border border-black bg-sky-600 flex items-center justify-center">
-                            {time}
-                        </div>
-
-
-                        {/* {registrationData.map((dayItem) => {
-                            const timeSlot = dayItem.registrationTime.find(
-                                (slot) => slot.time === time
-                            );
-
-                            return (
-                                <div
-                                    key={`${dayItem.day}-${time}`}
-                                    className="border border-black bg-white text-black text-center"
-                                >
-                                    {timeSlot?.data?.length ? (
-                                        timeSlot.data.map((item) => (
-                                            <Cell
-                                                key={item.id}
-                                                id={item.id}
-                                                day={dayItem.day}
-                                                time={time}
-                                                cells={timeSlot.data}
-                                            />
-                                        ))
-                                    ) : (
-                                        <span className="text-gray-400 italic text-sm">
-                                            empty
-                                        </span>
-                                    )}
-                                </div>
-                            );
-                        })} */}
-                        {registrationData.map((day) => {
-                            const slot = day.registrationTime.find((t) => t.time === time);
-                            return (
-                                <div
-                                    key={`${day.day}-${time}`}
-                                    className="border border-black bg-white text-black text-center"
-                                >
-                                    {slot?.data.map((item) => (
-                                        <Cell
-                                            key={item.id}
-                                            id={item.id}
-                                            day={day.day}
-                                            time={time}
-                                            cells={item.cells}
-                                        />
-                                    ))}
-                                </div>
-                            );
-                        })}
-                    </React.Fragment>
-                ))}
+                {tableContent}
             </div>
         </div>
     );
 }
+
 
