@@ -26,15 +26,6 @@ export default function WorkersList() {
         const data = e.dataTransfer.getData("application/json");
         const worker: WorkerTypes = JSON.parse(data) as WorkerTypes;
         setWorkersListbyDay({ workers: worker, day: day });
-        // setWorkerListByDay((prev) => prev.map((item) => {
-        //     if (item.day === day) {
-        //         if (item.workers.find(workers => workers.id === worker.id)) {
-        //             return item;
-        //         }
-        //         return { day: item.day, workers: [...item.workers, worker] };
-        //     }
-        //     return item;
-        // }));
     }
     return (
         <>
@@ -49,9 +40,6 @@ export default function WorkersList() {
             {week.map((_, index) => (
                 <div
                     onDrop={(e) => handleDrop(e, week[index])}
-                    onDragEnd={() => {
-                        console.log('drag end');
-                    }}
                     onDragOver={handleDragOver}
                     key={index}
                     className="border border-black bg-sky-600"

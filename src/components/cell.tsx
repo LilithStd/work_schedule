@@ -16,12 +16,6 @@ type CellProps = {
     time: string
 }
 
-type CellWorker = {
-    cellId: string,
-    id: string,
-    name: string
-}
-
 export default function Cell({ id, day, time }: CellProps) {
     const [isOpen, setIsOpen] = useState(false)
     const [currentCellId, setCurrentId] = useState('')
@@ -74,7 +68,7 @@ export default function Cell({ id, day, time }: CellProps) {
                                 setCurrentId(item.cell)
                             )}
                         >
-                            {<WorkerCell id={item.cell} />}
+                            {<WorkerCell id={item.cell} day={day} time={time} />}
                         </button>
                     ))}
                 </div>

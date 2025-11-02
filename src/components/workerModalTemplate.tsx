@@ -33,7 +33,6 @@ export default function WorkerModalTemplate({ id, day, time, onClose, setCurrent
                     const updateData = { id: id, day: day, time: time, client: '', worker }
                     setRegistrationData(updateData)
                     setUpdateStatusStore(true)
-                    console.log(registrationData)
                     onClose()
                 }}>
 

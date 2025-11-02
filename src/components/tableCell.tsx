@@ -14,12 +14,10 @@ export default function TableCell() {
     const tableContent = useMemo(() => {
         return timer.map((time) => (
             <React.Fragment key={time}>
-                {/* Левая колонка со временем */}
                 <div className="border border-black bg-sky-600 flex items-center justify-center">
                     {time}
                 </div>
 
-                {/* Основная сетка по дням */}
                 {registrationData.map((day) => {
                     const slot = day.registrationTime.find((t) => t.time === time);
 
@@ -45,7 +43,7 @@ export default function TableCell() {
                 })}
             </React.Fragment>
         ));
-    }, [registrationData, timer]); // 👈 мемоизация по данным и времени
+    }, [registrationData, timer]);
 
     return (
         <div className="bg-sky-700 w-full p-4 text-white">

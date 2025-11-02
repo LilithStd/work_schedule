@@ -84,11 +84,8 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 													cells: dataEntry.cells.map((cell) => {
 														if (cell.cell !== updateData.id) return cell;
 
-														// Проверяем: есть ли уже worker и отличается ли он
 														const currentWorker = cell.worker;
 														const newWorker = updateData.worker;
-
-														// Если новый worker идентичен старому — не перезаписываем
 														if (
 															currentWorker?.id === newWorker?.id &&
 															currentWorker?.name === newWorker?.name
@@ -96,7 +93,6 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 															return cell;
 														}
 
-														// Иначе — возвращаем обновлённый объект
 														return {
 															...cell,
 															worker: {...newWorker},
