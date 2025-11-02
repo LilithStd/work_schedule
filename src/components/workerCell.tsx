@@ -28,10 +28,8 @@ export default function WorkerCell({ id, day, time }: WorkerCellTypes) {
         <div
             onDragOver={handleDragOver}
             onDrop={handleDrop}
-            onDragEnd={() => {
-                console.log('drag end worker')
-            }}>
-            {worker?.name ? worker.name : <AddWorkerIcon />}
+        >
+            {worker?.name ? <p>{worker.name}</p> : <AddWorkerIcon />}
         </div>
     );
 }
