@@ -1,7 +1,6 @@
 'use client'
 import { useRegistationStore } from '@/store/registrationStore'
 import AddWorkerIcon from '../../public/icons/user-plus.svg'
-import { useEffect, useState } from 'react'
 interface WorkerCellTypes {
     id: string
 }

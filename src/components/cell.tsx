@@ -2,14 +2,12 @@
 
 import { useGlobalStore } from "@/store/globalStore"
 import ModalWindow from "./modalWindow"
-import { useEffect, useMemo, useState } from "react"
+import { useMemo, useState } from "react"
 import Client from "./client"
-
-import AddWorkerIcon from "../../public/icons/user-plus.svg"
 import ClientModalTemplate from "./clientModalTemplate"
 import { MODAL_TYPE } from "@/consts/template"
 import WorkerModalTemplate from "./workerModalTemplate"
-import { cellsTypes, dataTypes, useRegistationStore } from "@/store/registrationStore"
+import { useRegistationStore } from "@/store/registrationStore"
 import WorkerCell from "./workerCell"
 
 type CellProps = {
@@ -27,13 +25,11 @@ type CellWorker = {
 export default function Cell({ id, day, time }: CellProps) {
     const [isOpen, setIsOpen] = useState(false)
     const [currentCellId, setCurrentId] = useState('')
-    const [currentWorker, setCurrentWorker] = useState<CellWorker[]>([])
     const [typeModalWindow, setTypeModalWindow] = useState<MODAL_TYPE>(MODAL_TYPE.ADD_CLIENT)
     const [tempClientName, setTempClientName] = useState("")
     const modalStatus = useGlobalStore((state) => state.modalOpenStatus)
     const setModalStatus = useGlobalStore((state) => state.setModalOpenStatus)
     const resetModalStatus = useGlobalStore((state) => state.resetSetOpenStatus)
-    const getRegistrationData = useRegistationStore((state) => state.getRegistrationWorkerData)
     const registrationData = useRegistationStore(state => state.registartionData);
 
     const cellData = useMemo(() => {
@@ -42,29 +38,8 @@ export default function Cell({ id, day, time }: CellProps) {
         return timeData?.data.find(c => c.id === id);
     }, [registrationData, day, time, id]);
 
-    const foundWorker = getRegistrationData(currentCellId);
 
-    useEffect(() => {
-        if (foundWorker?.name && foundWorker?.id) {
-            setCurrentWorker((prev) => {
-                const existing = prev.find((el) => el.cellId === currentCellId);
-                if (existing?.id === foundWorker.id && existing?.name === foundWorker.name) {
-                    return prev;
-                }
 
-                const updatedWorker = { cellId: currentCellId, ...foundWorker };
-
-                if (existing) {
-                    return prev.map((el) =>
-                        el.cellId === currentCellId ? updatedWorker : el
-                    );
-                }
-
-                return [...prev, updatedWorker];
-            });
-        }
-    }, [currentCellId, foundWorker?.id, foundWorker?.name]);
-    // console.log(currentWorker)
 
     const handleOpenModal = () => {
         if (modalStatus.status) return
@@ -85,7 +60,6 @@ export default function Cell({ id, day, time }: CellProps) {
                     className={`xl:w-1/2 row-start-1 row-end-2  min-h-10 rounded-xl ${isOpen && typeModalWindow === MODAL_TYPE.ADD_CLIENT ? 'bg-fuchsia-600' : tempClientName.length > 0 ? 'bg-emerald-500 hover:bg-emerald-200' : 'bg-sky-500 hover:bg-sky-700'}`}
                     onClick={() => (
                         handleOpenModal(),
-                        console.log(currentWorker),
                         setTypeModalWindow(MODAL_TYPE.ADD_CLIENT)
                     )}
                 >
@@ -121,7 +95,6 @@ export default function Cell({ id, day, time }: CellProps) {
                         id={currentCellId}
                         day={day}
                         time={time}
-                        // setCurrentWork={setCurrentWorker}
                         onClose={handleCloseModal}
                     />
                 }
