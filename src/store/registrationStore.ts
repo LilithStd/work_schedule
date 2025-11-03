@@ -1,7 +1,5 @@
-import {
-	registartionDataTemplate,
-	UPDATE_REGISTRATION_DATA_STATUS,
-} from '@/consts/template';
+import {registartionDataTemplate} from '@/consts/template';
+import {WorkerDataTypes} from '@/utils/types';
 import {create} from 'zustand';
 
 type registartionDataTypes = {
@@ -16,7 +14,7 @@ type workerType = {
 
 export type cellsTypes = {
 	cell: string;
-	worker: workerType;
+	worker: WorkerDataTypes;
 };
 
 export type dataTypes = {
@@ -35,20 +33,20 @@ interface updateDataTypes {
 	day: string;
 	time: string;
 	client: string;
-	worker: workerType;
+	worker: WorkerDataTypes;
 }
 
-type getRegistrationDataTypes = {
-	id: string;
-	day: string;
-	time: string;
-};
+// type getRegistrationDataTypes = {
+// 	id: string;
+// 	day: string;
+// 	time: string;
+// };
 
 interface RegistrationStoreTypes {
 	updateStoreStatus: boolean;
 	setUpdateStoreStatus: (status: boolean) => void;
 	registartionData: registartionDataTypes[];
-	getRegistrationWorkerData: (getRegistrationData: string) => workerType;
+	getRegistrationWorkerData: (getRegistrationData: string) => WorkerDataTypes;
 	updateRegistrationData: (updateData: updateDataTypes) => void;
 }
 
@@ -67,6 +65,7 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 				.flatMap((timeSlot) => timeSlot.data)
 				.flatMap((entry) => entry.cells)
 				.find((cell) => cell.cell === getRegistrationData);
+			// console.log(cell?.worker);
 			return cell?.worker ?? {id: '', name: ''};
 		},
 		updateRegistrationData: (updateData) => {

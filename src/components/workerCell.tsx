@@ -1,7 +1,7 @@
 'use client'
 import { useRegistationStore } from '@/store/registrationStore'
 import AddWorkerIcon from '../../public/icons/user-plus.svg'
-import { WorkerTypes } from '@/consts/template';
+import { WorkerDataTypes } from '@/utils/types';
 interface WorkerCellTypes {
     id: string,
     day: string,
@@ -20,14 +20,19 @@ export default function WorkerCell({ id, day, time }: WorkerCellTypes) {
     const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
         const data = e.dataTransfer.getData("application/json");
-        const selectedWorker: WorkerTypes = JSON.parse(data) as WorkerTypes;
+        const selectedWorker: WorkerDataTypes = JSON.parse(data) as WorkerDataTypes;
+        // console.log(selectedWorker)
+        console.log(worker)
         const updateData = { id: id, day: day, time: time, client: '', worker: selectedWorker }
         setRegistrationData(updateData)
     };
+
+
     return (
         <div
             onDragOver={handleDragOver}
             onDrop={handleDrop}
+            className={`${worker.additionalProperties?.color}`}
         >
             {worker?.name ? <p>{worker.name}</p> : <AddWorkerIcon />}
         </div>

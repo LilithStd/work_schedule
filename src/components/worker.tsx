@@ -1,22 +1,23 @@
 import { WorkerTypes } from "@/consts/template";
+import { WorkerDataTypes } from "@/utils/types";
 
 interface WorkerProps {
-    name: string;
-    id: string;
+    worker: WorkerDataTypes,
     callBack?: ({ name, id }: WorkerTypes) => void;
 }
 
-export default function Worker({ name, id, callBack }: WorkerProps) {
+export default function Worker({ worker, callBack }: WorkerProps) {
+    console.log(worker)
     return (
         <div
-            className="cursor-pointer bg-violet-600 m-1 rounded text-white justify-center items-center flex p-2 "
+            className={`cursor-pointer ${worker.additionalProperties?.color ?? 'bg-violet-600'}  m-1 rounded text-white justify-center items-center flex p-2 `}
             draggable="true"
             onDragStart={(e) => {
-                e.dataTransfer.setData("application/json", JSON.stringify({ name, id }));
+                e.dataTransfer.setData("application/json", JSON.stringify(worker));
             }}
         >
             <p>
-                {name ? name : 'worker'}
+                {worker.name ? worker.name : 'worker'}
             </p>
 
         </div>

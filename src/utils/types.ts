@@ -2,8 +2,9 @@ export type additionalProperties = {
 	color: string;
 };
 
-export type WorkerTypes = {
+export type WorkerDataTypes = {
 	id: string;
 	name: string;
-	additionalProperties: additionalProperties;
+	surname?: string;
+	additionalProperties?: additionalProperties;
 };
