@@ -21,8 +21,6 @@ export default function WorkerCell({ id, day, time }: WorkerCellTypes) {
         e.preventDefault();
         const data = e.dataTransfer.getData("application/json");
         const selectedWorker: WorkerDataTypes = JSON.parse(data) as WorkerDataTypes;
-        // console.log(selectedWorker)
-        console.log(worker)
         const updateData = { id: id, day: day, time: time, client: '', worker: selectedWorker }
         setRegistrationData(updateData)
     };
@@ -32,7 +30,7 @@ export default function WorkerCell({ id, day, time }: WorkerCellTypes) {
         <div
             onDragOver={handleDragOver}
             onDrop={handleDrop}
-            className={`${worker.additionalProperties?.color}`}
+            className={`${worker.additionalProperties?.color} w-full justify-center flex min-h-10 rounded-xl items-center`}
         >
             {worker?.name ? <p>{worker.name}</p> : <AddWorkerIcon />}
         </div>
