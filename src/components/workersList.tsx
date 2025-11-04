@@ -48,15 +48,14 @@ export default function WorkersList() {
 
     }
 
-    // console.log(workerListByDayStore)
 
     return (
         <>
-            <div className="border border-black bg-sky-600 text-center justify-center min-h-50  text-black">
+            <div className="border border-black bg-sky-600 text-center flex flex-col min-h-50  text-black">
                 <h2 className="text-center">workers</h2>
                 {workerData.map((worker) => <Worker key={worker.id} worker={worker} />)}
                 <button
-                    className="min-h-10 rounded-xl border w-full border-black flex items-center justify-center"
+                    className="m-1 rounded-xl bg-blue-400 p-2 flex items-center justify-center"
                     onClick={handleOpenModal}
                 >
                     <AddWorkerIcons />
@@ -69,7 +68,7 @@ export default function WorkersList() {
                     onDrop={(e) => handleDrop(e, week[index])}
                     onDragOver={handleDragOver}
                     key={index}
-                    className="border border-black bg-sky-600"
+                    className="border border-black bg-sky-600 rounded-xl"
                 >
                     {workerListByDayStore[index].workers.map((worker) => (
                         <div key={worker.id}>

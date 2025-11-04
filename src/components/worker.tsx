@@ -10,7 +10,7 @@ export default function Worker({ worker, callBack }: WorkerProps) {
     console.log(worker)
     return (
         <div
-            className={`cursor-pointer ${worker.additionalProperties?.color ?? 'bg-violet-600'}  m-1 rounded text-white justify-center items-center flex p-2 `}
+            className={`cursor-pointer ${worker.additionalProperties?.color ?? 'bg-violet-600'}  m-1 rounded-xl  justify-center items-center flex p-2 text-black`}
             draggable="true"
             onDragStart={(e) => {
                 e.dataTransfer.setData("application/json", JSON.stringify(worker));
