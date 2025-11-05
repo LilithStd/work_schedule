@@ -8,15 +8,23 @@ export enum TIME {
 }
 export const timer = [TIME.FIRST, TIME.SECOND, TIME.THIRD, TIME.FOUR];
 
-export enum DAYS {
-	MONDAY = 'Monday',
-	TUESDAY = 'Tuesday',
-	WEDNESDAY = 'Wednesday',
-	THURSDAY = 'Thursday',
-	FRIDAY = 'Friday',
-	SATURDAY = 'Saturday',
-	SUNDAY = 'Sunday',
+export const DAYS = {
+	MONDAY: 'Monday',
+	TUESDAY: 'Tuesday',
+	WEDNESDAY: 'Wednesday',
+	THURSDAY: 'Thursday',
+	FRIDAY: 'Friday',
+	SATURDAY: 'Saturday',
+	SUNDAY: 'Sunday',
+};
+
+export enum LANGUAGE {
+	EN = 'EN',
+	LV = 'LV',
+	RU = 'RU',
 }
+
+export const LANGUAGE_APP = [LANGUAGE.EN, LANGUAGE.LV, LANGUAGE.RU];
 
 export enum UPDATE_REGISTRATION_DATA_STATUS {
 	UPDATE = 'UPDATE',
@@ -32,184 +40,6 @@ export enum GET_REGISTRATION_TYPE {
 	GET_CLIENT = 'GET_CLIENT',
 	GET_WORKER = 'GET_WORKER',
 }
-
-// export const registartionDataTemplate = [
-// 	{
-// 		day: DAYS.MONDAY,
-// 		registrationTime: [
-// 			{
-// 				time: TIME.FIRST,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 			{
-// 				time: TIME.SECOND,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 			{
-// 				time: TIME.THIRD,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 			{
-// 				time: TIME.FOUR,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 		],
-// 	},
-// 	{
-// 		day: DAYS.TUESDAY,
-// 		registrationTime: [
-// 			{
-// 				time: TIME.FIRST,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 			{
-// 				time: TIME.SECOND,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 			{
-// 				time: TIME.THIRD,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 			{
-// 				time: TIME.FOUR,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 		],
-// 	},
-// 	{
-// 		day: DAYS.WEDNESDAY,
-// 		registrationTime: [
-// 			{
-// 				time: TIME.FIRST,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 			{
-// 				time: TIME.SECOND,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 			{
-// 				time: TIME.THIRD,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 			{
-// 				time: TIME.FOUR,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 		],
-// 	},
-// 	{
-// 		day: DAYS.THURSDAY,
-// 		registrationTime: [
-// 			{
-// 				time: TIME.FIRST,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 			{
-// 				time: TIME.SECOND,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 			{
-// 				time: TIME.THIRD,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 			{
-// 				time: TIME.FOUR,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 		],
-// 	},
-// 	{
-// 		day: DAYS.FRIDAY,
-// 		registrationTime: [
-// 			{
-// 				time: TIME.FIRST,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 			{
-// 				time: TIME.SECOND,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 			{
-// 				time: TIME.THIRD,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 			{
-// 				time: TIME.FOUR,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 		],
-// 	},
-// 	{
-// 		day: DAYS.SATURDAY,
-// 		registrationTime: [
-// 			{
-// 				time: TIME.FIRST,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 			{
-// 				time: TIME.SECOND,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 			{
-// 				time: TIME.THIRD,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 			{
-// 				time: TIME.FOUR,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 		],
-// 	},
-// 	{
-// 		day: DAYS.SUNDAY,
-// 		registrationTime: [
-// 			{
-// 				time: TIME.FIRST,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 			{
-// 				time: TIME.SECOND,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 			{
-// 				time: TIME.THIRD,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 			{
-// 				time: TIME.FOUR,
-// 				client: '',
-// 				workers: [],
-// 			},
-// 		],
-// 	},
-// ];
 
 export const registartionDataTemplate = [
 	{

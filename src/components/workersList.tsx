@@ -32,7 +32,6 @@ export default function WorkersList() {
         e.preventDefault();
         const data = e.dataTransfer.getData("application/json");
         const worker: WorkerDataTypes = JSON.parse(data) as WorkerDataTypes;
-        // console.log(worker)
         setWorkersListbyDay({ workers: worker, day: day });
     }
     const handleCloseModal = () => {
@@ -50,10 +49,13 @@ export default function WorkersList() {
 
 
     return (
-        <>
-            <div className="border border-black bg-sky-600 text-center flex flex-col min-h-50  text-black">
+        <React.Fragment>
+            <div className=" bg-sky-600 text-center flex flex-col min-h-50  m-1 rounded-xl">
                 <h2 className="text-center">workers</h2>
-                {workerData.map((worker) => <Worker key={worker.id} worker={worker} />)}
+                <div className="m-1 flex flex-col gap-2">
+                    {workerData.map((worker) => <Worker key={worker.id} worker={worker} />)}
+                </div>
+
                 <button
                     className="m-1 rounded-xl bg-blue-400 p-2 flex items-center justify-center"
                     onClick={handleOpenModal}
@@ -68,7 +70,7 @@ export default function WorkersList() {
                     onDrop={(e) => handleDrop(e, week[index])}
                     onDragOver={handleDragOver}
                     key={index}
-                    className="border border-black bg-sky-600 rounded-xl"
+                    className=" bg-sky-600 rounded-xl m-1"
                 >
                     {workerListByDayStore[index].workers.map((worker) => (
                         <div key={worker.id}>
@@ -83,6 +85,6 @@ export default function WorkersList() {
             >
                 <CreateWorkerDataModalTemplate onClose={handleCloseModal} />
             </ModalWindow>
-        </>
+        </React.Fragment>
     )
 }

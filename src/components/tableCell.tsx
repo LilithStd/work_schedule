@@ -14,7 +14,7 @@ export default function TableCell() {
     const tableContent = useMemo(() => {
         return timer.map((time) => (
             <React.Fragment key={time}>
-                <div className="border border-black bg-sky-600 flex items-center justify-center">
+                <div className="rounded-xl min-h-10 justify-center flex items-center m-1 text-center bg-sky-500">
                     {time}
                 </div>
 
@@ -24,7 +24,7 @@ export default function TableCell() {
                     return (
                         <div
                             key={`${day.day}-${time}`}
-                            className="border border-black bg-white text-black text-center"
+                            className="rounded-xl bg-white text-black text-center m-1"
                         >
                             {slot?.data?.length ? (
                                 slot.data.map((item) => (
@@ -46,16 +46,15 @@ export default function TableCell() {
     }, [registrationData, timer]);
 
     return (
-        <div className="bg-sky-700 w-full p-4 text-white">
-            <h2 className="text-center mb-4">table_cell</h2>
+        <div className="bg-sky-700 w-full text-white">
             <div className="grid grid-cols-8 border border-black">
-                <div className="border border-black bg-sky-600 flex items-center justify-center">
+                <div className="m-1 rounded-xl bg-sky-600 flex items-center justify-center">
                     Time / Day
                 </div>
                 {week.map((day) => (
                     <div
                         key={day}
-                        className="border border-black text-center bg-sky-500"
+                        className="rounded-xl min-h-10 justify-center flex items-center m-1 text-center bg-sky-500"
                     >
                         {day}
                     </div>

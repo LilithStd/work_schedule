@@ -1,3 +1,4 @@
+import {LANGUAGE} from '@/consts/template';
 import {create} from 'zustand';
 type modalOpenStatusType = {
 	status: boolean;
@@ -9,8 +10,10 @@ interface GlobalStoreTypes {
 		status: boolean;
 		id: string;
 	};
+	currentLanguageApp: LANGUAGE;
 	setModalOpenStatus: (status: modalOpenStatusType) => void;
 	resetSetOpenStatus: () => void;
+	setCurrentLanguageApp: (language: LANGUAGE) => void;
 }
 
 export const useGlobalStore = create<GlobalStoreTypes>()((set, get) => ({
@@ -18,6 +21,7 @@ export const useGlobalStore = create<GlobalStoreTypes>()((set, get) => ({
 		status: false,
 		id: '',
 	},
+	currentLanguageApp: LANGUAGE.EN,
 	setModalOpenStatus: (status) => {
 		if (!get().modalOpenStatus.status) {
 			set(() => ({
@@ -27,4 +31,8 @@ export const useGlobalStore = create<GlobalStoreTypes>()((set, get) => ({
 	},
 	resetSetOpenStatus: () =>
 		set(() => ({modalOpenStatus: {status: false, id: ''}})),
+	setCurrentLanguageApp: (language) => {
+		if (get().currentLanguageApp === language) return;
+		set({currentLanguageApp: language});
+	},
 }));

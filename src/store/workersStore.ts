@@ -73,7 +73,6 @@ export const useWorkersStore = create<WorkersStoreTypes>((set, get) => ({
 		return workerList ? workerList.workers : [];
 	},
 	setWorkerListByDay: (worker) => {
-		// console.log(worker);
 		set((state) => ({
 			workerListByDay: state.workerListByDay.map((item) => {
 				if (item.day === worker.day) {

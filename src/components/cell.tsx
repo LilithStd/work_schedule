@@ -9,6 +9,7 @@ import { MODAL_TYPE } from "@/consts/template"
 import WorkerModalTemplate from "./workerModalTemplate"
 import { useRegistationStore } from "@/store/registrationStore"
 import WorkerCell from "./workerCell"
+import Button from "./button"
 
 type CellProps = {
     id: string,
@@ -46,6 +47,11 @@ export default function Cell({ id, day, time }: CellProps) {
         resetModalStatus()
 
     }
+    const onClickCallBack = (id: string) => {
+        handleOpenModal()
+        setTypeModalWindow(MODAL_TYPE.ADD_WORKER)
+        setCurrentId(id)
+    }
 
     return (
         <div className="m-2">
@@ -61,11 +67,9 @@ export default function Cell({ id, day, time }: CellProps) {
                 </button>
                 <div className="xl:w-1/2 flex flex-col gap-2">
                     {cellData?.cells.map((item, idx) => (
-                        <button key={idx} className={`flex items-center justify-center ${isOpen && typeModalWindow === MODAL_TYPE.ADD_WORKER ? 'bg-fuchsia-600' : 'bg-emerald-500 hover:bg-emerald-200'} bg-sky-100  rounded-xl`}
+                        <button key={idx} className={`rounded-xl flex items-center justify-center ${isOpen && item.cell === currentCellId && typeModalWindow === MODAL_TYPE.ADD_WORKER ? 'bg-fuchsia-600' : 'bg-sky-100  hover:bg-emerald-200'} `}
                             onClick={() => (
-                                handleOpenModal(),
-                                setTypeModalWindow(MODAL_TYPE.ADD_WORKER),
-                                setCurrentId(item.cell)
+                                onClickCallBack(item.cell)
                             )}
                         >
                             {<WorkerCell id={item.cell} day={day} time={time} />}
