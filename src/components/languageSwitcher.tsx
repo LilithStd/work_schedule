@@ -1,5 +1,5 @@
 'use client'
-import { LANGUAGE, LANGUAGE_APP } from '@/consts/template'
+import { LANGUAGE_APP } from '@/consts/template'
 import { useGlobalStore } from '@/store/globalStore'
 
 export default function LanguageSwitcher() {

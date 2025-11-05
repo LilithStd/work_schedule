@@ -1,11 +1,14 @@
 'use client'
 import React, { useMemo } from "react";
 import { useRegistationStore } from "@/store/registrationStore";
-import { timer, week } from "@/consts/template";
+import { THEME, timer, week } from "@/consts/template";
 import Cell from "./cell";
 import WorkersList from "./workersList";
 import LanguageSwitcher from "./languageSwitcher";
 import ThemeSwitcher from "./themeSwitcher";
+import { useGlobalStore } from "@/store/globalStore";
+import dayjs from "dayjs";
+import CurrentData from "./currentData";
 
 
 export default function TableCell() {
@@ -13,15 +16,20 @@ export default function TableCell() {
         (state) => state.registartionData
     );
 
+    const currentThemeApp = useGlobalStore((state) => state.currentThemeApp)
+    const dark = 'bg-slate-300'
     const additionalAppFunctional = useMemo(() => {
         return (
             <div className="flex justify-between">
-                <h2 className="flex items-center">Workers Table</h2>
+                <h2 className="flex items-center justify-center rounded-xl bg-sky-600 w-60 text-center m-1">
+                    Workers Table
+                </h2 >
+                <CurrentData />
                 <div className="flex justify-end">
                     <ThemeSwitcher />
                     <LanguageSwitcher />
                 </div>
-            </div>)
+            </div >)
     }, [])
     const tableContent = useMemo(() => {
         return timer.map((time) => (
@@ -58,9 +66,9 @@ export default function TableCell() {
     }, [registrationData, timer]);
 
     return (
-        <div className="bg-sky-700 w-full text-white">
+        <div className={` ${currentThemeApp === THEME.LIGHT ? dark : 'bg-stone-800'} p-6`}>
             {additionalAppFunctional}
-            <div className="grid grid-cols-8 border border-black">
+            <div className="grid grid-cols-8">
                 <div className="m-1 rounded-xl bg-sky-600 flex items-center justify-center">
                     Time / Day
                 </div>
