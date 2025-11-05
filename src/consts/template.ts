@@ -24,6 +24,11 @@ export enum LANGUAGE {
 	RU = 'RU',
 }
 
+export enum THEME {
+	LIGHT = 'LIGHT',
+	DARK = 'DARK',
+}
+
 export const LANGUAGE_APP = [LANGUAGE.EN, LANGUAGE.LV, LANGUAGE.RU];
 
 export enum UPDATE_REGISTRATION_DATA_STATUS {

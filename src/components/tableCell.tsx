@@ -4,6 +4,8 @@ import { useRegistationStore } from "@/store/registrationStore";
 import { timer, week } from "@/consts/template";
 import Cell from "./cell";
 import WorkersList from "./workersList";
+import LanguageSwitcher from "./languageSwitcher";
+import ThemeSwitcher from "./themeSwitcher";
 
 
 export default function TableCell() {
@@ -11,6 +13,16 @@ export default function TableCell() {
         (state) => state.registartionData
     );
 
+    const additionalAppFunctional = useMemo(() => {
+        return (
+            <div className="flex justify-between">
+                <h2 className="flex items-center">Workers Table</h2>
+                <div className="flex justify-end">
+                    <ThemeSwitcher />
+                    <LanguageSwitcher />
+                </div>
+            </div>)
+    }, [])
     const tableContent = useMemo(() => {
         return timer.map((time) => (
             <React.Fragment key={time}>
@@ -47,6 +59,7 @@ export default function TableCell() {
 
     return (
         <div className="bg-sky-700 w-full text-white">
+            {additionalAppFunctional}
             <div className="grid grid-cols-8 border border-black">
                 <div className="m-1 rounded-xl bg-sky-600 flex items-center justify-center">
                     Time / Day
