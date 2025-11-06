@@ -52,12 +52,12 @@ export default function WorkersList() {
         <React.Fragment>
             <div className=" bg-sky-600 text-center flex flex-col min-h-50  m-1 rounded-xl">
                 <h2 className="text-center">workers</h2>
-                <div className="m-1 flex flex-col gap-2">
+                <div className="m-2 flex flex-col gap-2">
                     {workerData.map((worker) => <Worker key={worker.id} worker={worker} />)}
                 </div>
 
                 <button
-                    className="m-1 rounded-xl bg-blue-400 p-2 flex items-center justify-center"
+                    className="m-2 rounded-xl bg-blue-400 p-2 flex items-center justify-center shadow-lg"
                     onClick={handleOpenModal}
                 >
                     <AddWorkerIcons />

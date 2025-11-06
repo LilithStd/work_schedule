@@ -65,9 +65,9 @@ export default function Cell({ id, day, time }: CellProps) {
                 >
                     <Client name={tempClientName} />
                 </button>
-                <div className="xl:w-1/2 flex flex-col gap-2">
+                <div className="xl:w-1/2 flex flex-col gap-2 shadow-lg">
                     {cellData?.cells.map((item, idx) => (
-                        <button key={idx} className={`rounded-xl flex items-center justify-center ${isOpen && item.cell === currentCellId && typeModalWindow === MODAL_TYPE.ADD_WORKER ? 'bg-fuchsia-600' : 'bg-sky-100  hover:bg-emerald-200'} `}
+                        <button key={idx} className={`rounded-xl shadow-lg flex items-center justify-center ${isOpen && item.cell === currentCellId && typeModalWindow === MODAL_TYPE.ADD_WORKER ? 'bg-fuchsia-600' : 'bg-sky-100  hover:bg-emerald-200'} `}
                             onClick={() => (
                                 onClickCallBack(item.cell)
                             )}

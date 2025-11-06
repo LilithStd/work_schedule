@@ -13,7 +13,7 @@ export default function ThemeSwitcher() {
     const setCurrentTheme = useGlobalStore((state) => state.setCurrentTheme)
     const currentTheme = useGlobalStore((state) => state.currentThemeApp)
     return (
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center p-2 shadow-lg">
             {currentTheme === THEME.LIGHT ? <MoonIcons onClick={() => { setCurrentTheme(THEME.DARK) }} /> : <SunIcons onClick={() => { setCurrentTheme(THEME.LIGHT) }} />}
         </div>
     )

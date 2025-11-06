@@ -7,7 +7,6 @@ import WorkersList from "./workersList";
 import LanguageSwitcher from "./languageSwitcher";
 import ThemeSwitcher from "./themeSwitcher";
 import { useGlobalStore } from "@/store/globalStore";
-import dayjs from "dayjs";
 import CurrentData from "./currentData";
 
 
@@ -20,8 +19,9 @@ export default function TableCell() {
     const dark = 'bg-slate-300'
     const additionalAppFunctional = useMemo(() => {
         return (
-            <div className="flex justify-between">
-                <h2 className="flex items-center justify-center rounded-xl bg-sky-600 w-60 text-center m-1">
+            <div className="flex justify-between bg-sky-600 p-2 m-2 rounded-xl">
+
+                <h2 className="flex items-center justify-center rounded-xl bg-sky-500 p-2 w-60 text-center">
                     Workers Table
                 </h2 >
                 <CurrentData />
@@ -44,7 +44,7 @@ export default function TableCell() {
                     return (
                         <div
                             key={`${day.day}-${time}`}
-                            className="rounded-xl bg-white text-black text-center m-1"
+                            className="rounded-xl bg-white text-black text-center m-1 shadow-lg"
                         >
                             {slot?.data?.length ? (
                                 slot.data.map((item) => (
@@ -68,7 +68,7 @@ export default function TableCell() {
     return (
         <div className={` ${currentThemeApp === THEME.LIGHT ? dark : 'bg-stone-800'} p-6`}>
             {additionalAppFunctional}
-            <div className="grid grid-cols-8">
+            <div className="grid grid-cols-8 m-1">
                 <div className="m-1 rounded-xl bg-sky-600 flex items-center justify-center">
                     Time / Day
                 </div>
