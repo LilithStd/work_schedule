@@ -8,51 +8,72 @@ export enum TIME {
 }
 export const timer = [TIME.FIRST, TIME.SECOND, TIME.THIRD, TIME.FOUR];
 
-// export const DAYS = {
-// 	MONDAY: 'Monday',
-// 	TUESDAY: 'Tuesday',
-// 	WEDNESDAY: 'Wednesday',
-// 	THURSDAY: 'Thursday',
-// 	FRIDAY: 'Friday',
-// 	SATURDAY: 'Saturday',
-// 	SUNDAY: 'Sunday',
-// };
-
 export const DAYS = {
+	MONDAY: 'Monday',
+	TUESDAY: 'Tuesday',
+	WEDNESDAY: 'Wednesday',
+	THURSDAY: 'Thursday',
+	FRIDAY: 'Friday',
+	SATURDAY: 'Saturday',
+	SUNDAY: 'Sunday',
+};
+
+export const DAYS_TRANSLATED = {
 	MONDAY: {
-		EN: 'Monday',
-		LV: 'Pirmdiena',
-		RU: 'Понедельник',
+		label: DAYS.MONDAY,
+		translate: {
+			EN: 'Monday',
+			LV: 'Pirmdiena',
+			RU: 'Понедельник',
+		},
 	},
 	TUESDAY: {
-		EN: 'Tuesday',
-		LV: 'Otrdiena',
-		RU: 'Вторник',
+		label: DAYS.TUESDAY,
+		translate: {
+			EN: 'Tuesday',
+			LV: 'Otrdiena',
+			RU: 'Вторник',
+		},
 	},
 	WEDNESDAY: {
-		EN: 'Wednesday',
-		LV: 'Trešdiena',
-		RU: 'Среда',
+		label: DAYS.WEDNESDAY,
+		translate: {
+			EN: 'Wednesday',
+			LV: 'Trešdiena',
+			RU: 'Среда',
+		},
 	},
 	THURSDAY: {
-		EN: 'Thursday',
-		LV: 'Сetrdiena',
-		RU: 'Четверг',
+		label: DAYS.THURSDAY,
+		translate: {
+			EN: 'Thursday',
+			LV: 'Сetrdiena',
+			RU: 'Четверг',
+		},
 	},
 	FRIDAY: {
-		EN: 'Friday',
-		LV: 'Piektdiena',
-		RU: 'Пятница',
+		label: DAYS.FRIDAY,
+		translate: {
+			EN: 'Friday',
+			LV: 'Piektdiena',
+			RU: 'Пятница',
+		},
 	},
 	SATURDAY: {
-		EN: 'Saturday',
-		LV: 'Sestdiena',
-		RU: 'Суббота',
+		label: DAYS.SATURDAY,
+		translate: {
+			EN: 'Saturday',
+			LV: 'Sestdiena',
+			RU: 'Суббота',
+		},
 	},
 	SUNDAY: {
-		EN: 'Sunday',
-		LV: 'Svētdiena',
-		RU: 'Воскресенье',
+		label: DAYS.SUNDAY,
+		translate: {
+			EN: 'Sunday',
+			LV: 'Svētdiena',
+			RU: 'Воскресенье',
+		},
 	},
 };
 
@@ -86,7 +107,7 @@ export enum GET_REGISTRATION_TYPE {
 
 export const registartionDataTemplate = [
 	{
-		day: DAYS.MONDAY.EN,
+		day: DAYS.MONDAY,
 		registrationTime: [
 			{
 				time: TIME.FIRST,
@@ -351,7 +372,7 @@ export const registartionDataTemplate = [
 		],
 	},
 	{
-		day: DAYS.TUESDAY.EN,
+		day: DAYS.TUESDAY,
 		registrationTime: [
 			{
 				time: TIME.FIRST,
@@ -616,7 +637,7 @@ export const registartionDataTemplate = [
 		],
 	},
 	{
-		day: DAYS.WEDNESDAY.EN,
+		day: DAYS.WEDNESDAY,
 		registrationTime: [
 			{
 				time: TIME.FIRST,
@@ -881,7 +902,7 @@ export const registartionDataTemplate = [
 		],
 	},
 	{
-		day: DAYS.THURSDAY.EN,
+		day: DAYS.THURSDAY,
 		registrationTime: [
 			{
 				time: TIME.FIRST,
@@ -1146,7 +1167,7 @@ export const registartionDataTemplate = [
 		],
 	},
 	{
-		day: DAYS.FRIDAY.EN,
+		day: DAYS.FRIDAY,
 		registrationTime: [
 			{
 				time: TIME.FIRST,
@@ -1411,7 +1432,7 @@ export const registartionDataTemplate = [
 		],
 	},
 	{
-		day: DAYS.SATURDAY.EN,
+		day: DAYS.SATURDAY,
 		registrationTime: [
 			{
 				time: TIME.FIRST,
@@ -1676,7 +1697,7 @@ export const registartionDataTemplate = [
 		],
 	},
 	{
-		day: DAYS.SUNDAY.EN,
+		day: DAYS.SUNDAY,
 		registrationTime: [
 			{
 				time: TIME.FIRST,
@@ -3802,14 +3823,24 @@ export const registartionDataTemplate = [
 // 	];
 // };
 
-export const week = (currentLanguage: LANGUAGE) => [
-	DAYS.MONDAY[currentLanguage],
-	DAYS.TUESDAY[currentLanguage],
-	DAYS.WEDNESDAY[currentLanguage],
-	DAYS.THURSDAY[currentLanguage],
-	DAYS.FRIDAY[currentLanguage],
-	DAYS.SATURDAY[currentLanguage],
-	DAYS.SUNDAY[currentLanguage],
+export const week = [
+	DAYS.MONDAY,
+	DAYS.TUESDAY,
+	DAYS.WEDNESDAY,
+	DAYS.THURSDAY,
+	DAYS.FRIDAY,
+	DAYS.SATURDAY,
+	DAYS.SUNDAY,
+];
+
+export const weekTranslated = [
+	DAYS_TRANSLATED.MONDAY,
+	DAYS_TRANSLATED.TUESDAY,
+	DAYS_TRANSLATED.WEDNESDAY,
+	DAYS_TRANSLATED.THURSDAY,
+	DAYS_TRANSLATED.FRIDAY,
+	DAYS_TRANSLATED.SATURDAY,
+	DAYS_TRANSLATED.SUNDAY,
 ];
 
 export const workersTest = [
@@ -3824,11 +3855,11 @@ export type WorkerTypes = {
 };
 
 export const workerListByDayTemplate = [
-	{day: DAYS.MONDAY.EN, workers: []},
-	{day: DAYS.TUESDAY.EN, workers: []},
-	{day: DAYS.WEDNESDAY.EN, workers: []},
-	{day: DAYS.THURSDAY.EN, workers: []},
-	{day: DAYS.FRIDAY.EN, workers: []},
-	{day: DAYS.SATURDAY.EN, workers: []},
-	{day: DAYS.SUNDAY.EN, workers: []},
+	{day: DAYS.MONDAY, workers: []},
+	{day: DAYS.TUESDAY, workers: []},
+	{day: DAYS.WEDNESDAY, workers: []},
+	{day: DAYS.THURSDAY, workers: []},
+	{day: DAYS.FRIDAY, workers: []},
+	{day: DAYS.SATURDAY, workers: []},
+	{day: DAYS.SUNDAY, workers: []},
 ];

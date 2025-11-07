@@ -1,7 +1,7 @@
 'use client'
 import React, { useMemo } from "react";
 import { useRegistationStore } from "@/store/registrationStore";
-import { THEME, timer, week } from "@/consts/template";
+import { THEME, timer, week, weekTranslated } from "@/consts/template";
 import Cell from "./cell";
 import WorkersList from "./workersList";
 import LanguageSwitcher from "./languageSwitcher";
@@ -9,6 +9,8 @@ import ThemeSwitcher from "./themeSwitcher";
 import { useGlobalStore } from "@/store/globalStore";
 import CurrentData from "./currentData";
 import { indents, shadow } from "@/consts/globalStyles";
+import { translateObjectValues } from "@/utils/helpersFunctions";
+
 
 
 export default function TableCell() {
@@ -18,6 +20,7 @@ export default function TableCell() {
 
     const currentThemeApp = useGlobalStore((state) => state.currentThemeApp)
     const currentLanguageApp = useGlobalStore((state) => state.currentLanguageApp)
+
     const dark = 'bg-slate-300'
     const additionalAppFunctional = useMemo(() => {
         return (
@@ -74,13 +77,13 @@ export default function TableCell() {
                 <div className="m-1 rounded-xl bg-sky-600 flex items-center justify-center">
                     Time / Day
                 </div>
-                {week(currentLanguageApp).map((day) => (
+                {weekTranslated.map((day) => (
                     <div
-                        key={day}
+                        key={day.label}
                         className={`rounded-xl min-h-10 justify-center flex items-center ${indents.container.margin} text-center bg-sky-500`}
                     >
                         <p className={``}>
-                            {day}
+                            {day.translate[currentLanguageApp]}
                         </p>
 
                     </div>

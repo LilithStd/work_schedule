@@ -1,4 +1,5 @@
 import {LANGUAGE} from '@/consts/template';
+import {ObjectTypes} from './types';
 
 export const setCells = (
 	numberCells: number,
@@ -10,4 +11,11 @@ export const setCells = (
 
 export const setColors = (color: string, valueColorStrength: string) => {
 	return `bg-${color}-${valueColorStrength}`;
+};
+
+export const translateObjectValues = (
+	currentLanguage: LANGUAGE,
+	objectItems: ObjectTypes,
+): string[] => {
+	return Object.values(objectItems).map((item) => item[currentLanguage]);
 };

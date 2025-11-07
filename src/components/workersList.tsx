@@ -26,7 +26,7 @@ export default function WorkersList() {
     const setModalStatus = useGlobalStore((state) => state.setModalOpenStatus)
     const currentLanguageApp = useGlobalStore((state) => state.currentLanguageApp)
 
-    const weekWithCurrentLanguage = week(currentLanguageApp)
+
 
 
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -69,7 +69,7 @@ export default function WorkersList() {
 
 
             </div>
-            {weekWithCurrentLanguage.map((day, index) => (
+            {week.map((day, index) => (
                 <div
                     key={day}
                     onDrop={(e) => handleDrop(e, day)} // <-- day из текущей итерации
