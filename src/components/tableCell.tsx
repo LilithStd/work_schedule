@@ -8,6 +8,7 @@ import LanguageSwitcher from "./languageSwitcher";
 import ThemeSwitcher from "./themeSwitcher";
 import { useGlobalStore } from "@/store/globalStore";
 import CurrentData from "./currentData";
+import { indents, shadow } from "@/consts/globalStyles";
 
 
 export default function TableCell() {
@@ -19,7 +20,7 @@ export default function TableCell() {
     const dark = 'bg-slate-300'
     const additionalAppFunctional = useMemo(() => {
         return (
-            <div className="flex justify-between bg-sky-600 p-2 m-2 rounded-xl">
+            <div className={`flex justify-between bg-sky-600  rounded-xl ${indents.subContainer.margin} ${indents.subContainer.padding}`}>
 
                 <h2 className="flex items-center justify-center rounded-xl bg-sky-500 p-2 w-60 text-center">
                     Workers Table
@@ -34,7 +35,7 @@ export default function TableCell() {
     const tableContent = useMemo(() => {
         return timer.map((time) => (
             <React.Fragment key={time}>
-                <div className="rounded-xl min-h-10 justify-center flex items-center m-1 text-center bg-sky-500">
+                <div className={`rounded-xl min-h-10 justify-center flex items-center ${indents.container.margin} text-center bg-sky-500`}>
                     {time}
                 </div>
 
@@ -44,7 +45,7 @@ export default function TableCell() {
                     return (
                         <div
                             key={`${day.day}-${time}`}
-                            className="rounded-xl bg-white text-black text-center m-1 shadow-lg"
+                            className={`rounded-xl bg-white text-black text-center ${indents.container.margin} ${shadow.container}`}
                         >
                             {slot?.data?.length ? (
                                 slot.data.map((item) => (
@@ -75,9 +76,12 @@ export default function TableCell() {
                 {week.map((day) => (
                     <div
                         key={day}
-                        className="rounded-xl min-h-10 justify-center flex items-center m-1 text-center bg-sky-500"
+                        className={`rounded-xl min-h-10 justify-center flex items-center ${indents.container.margin} ${shadow.container} text-center bg-sky-500`}
                     >
-                        {day}
+                        <p className={``}>
+                            {day}
+                        </p>
+
                     </div>
                 ))}
 
