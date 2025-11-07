@@ -1,4 +1,4 @@
-import {registartionDataTemplate} from '@/consts/template';
+import {LANGUAGE, registartionDataTemplate} from '@/consts/template';
 import {WorkerDataTypes} from '@/utils/types';
 import {create} from 'zustand';
 

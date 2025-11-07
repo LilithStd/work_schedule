@@ -1,3 +1,5 @@
+import {LANGUAGE} from '@/consts/template';
+
 export const setCells = (
 	numberCells: number,
 	fillComponent?: React.JSX.Element,

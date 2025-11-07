@@ -24,6 +24,10 @@ export default function WorkersList() {
     const resetModalStatus = useGlobalStore((state) => state.resetSetOpenStatus)
     const modalStatus = useGlobalStore((state) => state.modalOpenStatus)
     const setModalStatus = useGlobalStore((state) => state.setModalOpenStatus)
+    const currentLanguageApp = useGlobalStore((state) => state.currentLanguageApp)
+
+    const weekWithCurrentLanguage = week(currentLanguageApp)
+
 
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
@@ -65,14 +69,14 @@ export default function WorkersList() {
 
 
             </div>
-            {week.map((_, index) => (
+            {weekWithCurrentLanguage.map((day, index) => (
                 <div
-                    onDrop={(e) => handleDrop(e, week[index])}
-                    onDragOver={handleDragOver}
-                    key={index}
-                    className=" bg-sky-600 rounded-xl m-1"
+                    key={day}
+                    onDrop={(e) => handleDrop(e, day)} // <-- day из текущей итерации
+                    onDragOver={(e) => e.preventDefault()}
+                    className="bg-sky-600 rounded-xl m-1"
                 >
-                    {workerListByDayStore[index].workers.map((worker) => (
+                    {workerListByDayStore[index]?.workers.map((worker) => (
                         <div key={worker.id}>
                             <Worker worker={worker} />
                         </div>

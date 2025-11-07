@@ -17,6 +17,7 @@ export default function TableCell() {
     );
 
     const currentThemeApp = useGlobalStore((state) => state.currentThemeApp)
+    const currentLanguageApp = useGlobalStore((state) => state.currentLanguageApp)
     const dark = 'bg-slate-300'
     const additionalAppFunctional = useMemo(() => {
         return (
@@ -45,7 +46,7 @@ export default function TableCell() {
                     return (
                         <div
                             key={`${day.day}-${time}`}
-                            className={`rounded-xl bg-white text-black text-center ${indents.container.margin} ${shadow.container}`}
+                            className={`rounded-xl bg-white text-black text-center ${indents.container.margin}`}
                         >
                             {slot?.data?.length ? (
                                 slot.data.map((item) => (
@@ -73,10 +74,10 @@ export default function TableCell() {
                 <div className="m-1 rounded-xl bg-sky-600 flex items-center justify-center">
                     Time / Day
                 </div>
-                {week.map((day) => (
+                {week(currentLanguageApp).map((day) => (
                     <div
                         key={day}
-                        className={`rounded-xl min-h-10 justify-center flex items-center ${indents.container.margin} ${shadow.container} text-center bg-sky-500`}
+                        className={`rounded-xl min-h-10 justify-center flex items-center ${indents.container.margin} text-center bg-sky-500`}
                     >
                         <p className={``}>
                             {day}

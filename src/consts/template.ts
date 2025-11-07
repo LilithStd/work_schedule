@@ -8,14 +8,52 @@ export enum TIME {
 }
 export const timer = [TIME.FIRST, TIME.SECOND, TIME.THIRD, TIME.FOUR];
 
+// export const DAYS = {
+// 	MONDAY: 'Monday',
+// 	TUESDAY: 'Tuesday',
+// 	WEDNESDAY: 'Wednesday',
+// 	THURSDAY: 'Thursday',
+// 	FRIDAY: 'Friday',
+// 	SATURDAY: 'Saturday',
+// 	SUNDAY: 'Sunday',
+// };
+
 export const DAYS = {
-	MONDAY: 'Monday',
-	TUESDAY: 'Tuesday',
-	WEDNESDAY: 'Wednesday',
-	THURSDAY: 'Thursday',
-	FRIDAY: 'Friday',
-	SATURDAY: 'Saturday',
-	SUNDAY: 'Sunday',
+	MONDAY: {
+		EN: 'Monday',
+		LV: 'Pirmdiena',
+		RU: 'Понедельник',
+	},
+	TUESDAY: {
+		EN: 'Tuesday',
+		LV: 'Otrdiena',
+		RU: 'Вторник',
+	},
+	WEDNESDAY: {
+		EN: 'Wednesday',
+		LV: 'Trešdiena',
+		RU: 'Среда',
+	},
+	THURSDAY: {
+		EN: 'Thursday',
+		LV: 'Сetrdiena',
+		RU: 'Четверг',
+	},
+	FRIDAY: {
+		EN: 'Friday',
+		LV: 'Piektdiena',
+		RU: 'Пятница',
+	},
+	SATURDAY: {
+		EN: 'Saturday',
+		LV: 'Sestdiena',
+		RU: 'Суббота',
+	},
+	SUNDAY: {
+		EN: 'Sunday',
+		LV: 'Svētdiena',
+		RU: 'Воскресенье',
+	},
 };
 
 export enum LANGUAGE {
@@ -48,7 +86,7 @@ export enum GET_REGISTRATION_TYPE {
 
 export const registartionDataTemplate = [
 	{
-		day: DAYS.MONDAY,
+		day: DAYS.MONDAY.EN,
 		registrationTime: [
 			{
 				time: TIME.FIRST,
@@ -313,7 +351,7 @@ export const registartionDataTemplate = [
 		],
 	},
 	{
-		day: DAYS.TUESDAY,
+		day: DAYS.TUESDAY.EN,
 		registrationTime: [
 			{
 				time: TIME.FIRST,
@@ -578,7 +616,7 @@ export const registartionDataTemplate = [
 		],
 	},
 	{
-		day: DAYS.WEDNESDAY,
+		day: DAYS.WEDNESDAY.EN,
 		registrationTime: [
 			{
 				time: TIME.FIRST,
@@ -843,7 +881,7 @@ export const registartionDataTemplate = [
 		],
 	},
 	{
-		day: DAYS.THURSDAY,
+		day: DAYS.THURSDAY.EN,
 		registrationTime: [
 			{
 				time: TIME.FIRST,
@@ -1108,7 +1146,7 @@ export const registartionDataTemplate = [
 		],
 	},
 	{
-		day: DAYS.FRIDAY,
+		day: DAYS.FRIDAY.EN,
 		registrationTime: [
 			{
 				time: TIME.FIRST,
@@ -1373,7 +1411,7 @@ export const registartionDataTemplate = [
 		],
 	},
 	{
-		day: DAYS.SATURDAY,
+		day: DAYS.SATURDAY.EN,
 		registrationTime: [
 			{
 				time: TIME.FIRST,
@@ -1638,7 +1676,7 @@ export const registartionDataTemplate = [
 		],
 	},
 	{
-		day: DAYS.SUNDAY,
+		day: DAYS.SUNDAY.EN,
 		registrationTime: [
 			{
 				time: TIME.FIRST,
@@ -1904,14 +1942,1874 @@ export const registartionDataTemplate = [
 	},
 ];
 
-export const week = [
-	DAYS.MONDAY,
-	DAYS.TUESDAY,
-	DAYS.WEDNESDAY,
-	DAYS.THURSDAY,
-	DAYS.FRIDAY,
-	DAYS.SATURDAY,
-	DAYS.SUNDAY,
+// export const registartionDataTemplate2 = (currentLanguage: LANGUAGE) => {
+// 	return [
+// 		{
+// 			day: DAYS.MONDAY[currentLanguage],
+// 			registrationTime: [
+// 				{
+// 					time: TIME.FIRST,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 				{
+// 					time: TIME.SECOND,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 				{
+// 					time: TIME.THIRD,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 				{
+// 					time: TIME.FOUR,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 			],
+// 		},
+// 		{
+// 			day: DAYS.TUESDAY[currentLanguage],
+// 			registrationTime: [
+// 				{
+// 					time: TIME.FIRST,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 				{
+// 					time: TIME.SECOND,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 				{
+// 					time: TIME.THIRD,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 				{
+// 					time: TIME.FOUR,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 			],
+// 		},
+// 		{
+// 			day: DAYS.WEDNESDAY[currentLanguage],
+// 			registrationTime: [
+// 				{
+// 					time: TIME.FIRST,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 				{
+// 					time: TIME.SECOND,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 				{
+// 					time: TIME.THIRD,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 				{
+// 					time: TIME.FOUR,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 			],
+// 		},
+// 		{
+// 			day: DAYS.THURSDAY[currentLanguage],
+// 			registrationTime: [
+// 				{
+// 					time: TIME.FIRST,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 				{
+// 					time: TIME.SECOND,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 				{
+// 					time: TIME.THIRD,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 				{
+// 					time: TIME.FOUR,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 			],
+// 		},
+// 		{
+// 			day: DAYS.FRIDAY[currentLanguage],
+// 			registrationTime: [
+// 				{
+// 					time: TIME.FIRST,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 				{
+// 					time: TIME.SECOND,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 				{
+// 					time: TIME.THIRD,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 				{
+// 					time: TIME.FOUR,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 			],
+// 		},
+// 		{
+// 			day: DAYS.SATURDAY[currentLanguage],
+// 			registrationTime: [
+// 				{
+// 					time: TIME.FIRST,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 				{
+// 					time: TIME.SECOND,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 				{
+// 					time: TIME.THIRD,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 				{
+// 					time: TIME.FOUR,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 			],
+// 		},
+// 		{
+// 			day: DAYS.SUNDAY[currentLanguage],
+// 			registrationTime: [
+// 				{
+// 					time: TIME.FIRST,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 				{
+// 					time: TIME.SECOND,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 				{
+// 					time: TIME.THIRD,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 				{
+// 					time: TIME.FOUR,
+// 					data: [
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 						{
+// 							id: nanoid(),
+// 							client: '',
+// 							cells: [
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 								{
+// 									cell: nanoid(),
+// 									worker: {
+// 										id: '',
+// 										name: '',
+// 									},
+// 								},
+// 							],
+// 						},
+// 					],
+// 				},
+// 			],
+// 		},
+// 	];
+// };
+
+export const week = (currentLanguage: LANGUAGE) => [
+	DAYS.MONDAY[currentLanguage],
+	DAYS.TUESDAY[currentLanguage],
+	DAYS.WEDNESDAY[currentLanguage],
+	DAYS.THURSDAY[currentLanguage],
+	DAYS.FRIDAY[currentLanguage],
+	DAYS.SATURDAY[currentLanguage],
+	DAYS.SUNDAY[currentLanguage],
 ];
 
 export const workersTest = [
@@ -1926,11 +3824,11 @@ export type WorkerTypes = {
 };
 
 export const workerListByDayTemplate = [
-	{day: DAYS.MONDAY, workers: []},
-	{day: DAYS.TUESDAY, workers: []},
-	{day: DAYS.WEDNESDAY, workers: []},
-	{day: DAYS.THURSDAY, workers: []},
-	{day: DAYS.FRIDAY, workers: []},
-	{day: DAYS.SATURDAY, workers: []},
-	{day: DAYS.SUNDAY, workers: []},
+	{day: DAYS.MONDAY.EN, workers: []},
+	{day: DAYS.TUESDAY.EN, workers: []},
+	{day: DAYS.WEDNESDAY.EN, workers: []},
+	{day: DAYS.THURSDAY.EN, workers: []},
+	{day: DAYS.FRIDAY.EN, workers: []},
+	{day: DAYS.SATURDAY.EN, workers: []},
+	{day: DAYS.SUNDAY.EN, workers: []},
 ];
