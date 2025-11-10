@@ -16,7 +16,6 @@ export default function WorkerCell({ id, day, time }: WorkerCellTypes) {
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
     }
-    console.log(worker.id)
     const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
         const data = e.dataTransfer.getData("application/json");
@@ -33,7 +32,7 @@ export default function WorkerCell({ id, day, time }: WorkerCellTypes) {
             className={`${worker.additionalProperties?.color} w-full justify-center flex min-h-10 rounded-xl items-center`}
         >
 
-            {worker.id ? <Worker worker={worker} /> : <AddWorkerIcon />}
+            {worker && worker.name ? <Worker worker={worker} /> : <AddWorkerIcon />}
         </div>
     );
 }
