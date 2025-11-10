@@ -36,12 +36,6 @@ interface updateDataTypes {
 	worker: WorkerDataTypes;
 }
 
-// type getRegistrationDataTypes = {
-// 	id: string;
-// 	day: string;
-// 	time: string;
-// };
-
 interface RegistrationStoreTypes {
 	updateStoreStatus: boolean;
 	setUpdateStoreStatus: (status: boolean) => void;
