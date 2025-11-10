@@ -1,5 +1,6 @@
-import {LANGUAGE} from '@/consts/template';
+import {LANGUAGE, timer, week} from '@/consts/template';
 import {ObjectTypes} from './types';
+import {nanoid} from 'nanoid';
 
 export const setCells = (
 	numberCells: number,
@@ -20,4 +21,36 @@ export const translateObjectValues = (
 	return Object.values(objectItems).map((item) => item[currentLanguage]);
 };
 
-const createRegistrationDataTemplate = () => {};
+export const createRegistrationDataTemplate = () => {
+	const cell = {
+		cell: nanoid(),
+		worker: {
+			id: '',
+			name: '',
+			surname: '',
+			additionalProperties: {
+				color: '',
+			},
+		},
+	};
+	const registartionBlock = {
+		id: nanoid(),
+		client: '',
+		cells: [cell],
+	};
+
+	const registartionDataTime = timer.map((time) => {
+		return {
+			time,
+			data: [registartionBlock],
+		};
+	});
+
+	const registartionData = week.map((day) => {
+		return {
+			day,
+			registrationTime: registartionDataTime,
+		};
+	});
+	return registartionData;
+};

@@ -5,6 +5,7 @@ import {
 	timer,
 	week,
 } from '@/consts/template';
+import {createRegistrationDataTemplate} from '@/utils/helpersFunctions';
 import {WorkerDataTypes} from '@/utils/types';
 import {nanoid} from 'nanoid';
 import {create} from 'zustand';
@@ -67,7 +68,8 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 			if (get().updateStoreStatus === status) return;
 			set({updateStoreStatus: true});
 		},
-		registartionData: registartionDataTemplate,
+		// registartionData: registartionDataTemplate,
+		registartionData: createRegistrationDataTemplate(),
 		createRegistrationData: () => {
 			const cell = {
 				cell: nanoid(),
