@@ -19,3 +19,5 @@ export const translateObjectValues = (
 ): string[] => {
 	return Object.values(objectItems).map((item) => item[currentLanguage]);
 };
+
+const createRegistrationDataTemplate = () => {};

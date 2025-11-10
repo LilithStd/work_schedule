@@ -1,4 +1,10 @@
-import {LANGUAGE, registartionDataTemplate} from '@/consts/template';
+import {
+	DAYS,
+	LANGUAGE,
+	registartionDataTemplate,
+	timer,
+	week,
+} from '@/consts/template';
 import {WorkerDataTypes} from '@/utils/types';
 import {nanoid} from 'nanoid';
 import {create} from 'zustand';
@@ -46,6 +52,7 @@ interface RegistrationStoreTypes {
 	updateStoreStatus: boolean;
 	setUpdateStoreStatus: (status: boolean) => void;
 	registartionData: registartionDataTypes[];
+	createRegistrationData: () => registartionDataTypes[];
 	createRegistrationDataCell: (
 		creatingData: createRegistrationDataCellProps,
 	) => void;
@@ -61,6 +68,39 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 			set({updateStoreStatus: true});
 		},
 		registartionData: registartionDataTemplate,
+		createRegistrationData: () => {
+			const cell = {
+				cell: nanoid(),
+				worker: {
+					id: '',
+					name: '',
+					surname: '',
+					additionalProperties: {
+						color: '',
+					},
+				},
+			};
+			const registartionBlock = {
+				id: nanoid(),
+				client: '',
+				cells: [cell],
+			};
+
+			const registartionDataTime = timer.map((time) => {
+				return {
+					time,
+					data: [registartionBlock],
+				};
+			});
+
+			const registartionData = week.map((day) => {
+				return {
+					day,
+					registrationTime: registartionDataTime,
+				};
+			});
+			return registartionData;
+		},
 		createRegistrationDataCell: (creatingData) => {
 			set((state) => ({
 				registartionData: state.registartionData.map((dayItem) => {

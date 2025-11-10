@@ -19,10 +19,9 @@ export default function TableCell() {
         (state) => state.registartionData
     );
     const addRegistrationData = useRegistationStore((state) => state.createRegistrationDataCell)
-
+    const regData = useRegistationStore((state) => state.createRegistrationData)
     const currentThemeApp = useGlobalStore((state) => state.currentThemeApp)
     const currentLanguageApp = useGlobalStore((state) => state.currentLanguageApp)
-
     const dark = 'bg-slate-300'
     const additionalAppFunctional = useMemo(() => {
         return (
