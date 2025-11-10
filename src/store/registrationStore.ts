@@ -1,5 +1,6 @@
 import {LANGUAGE, registartionDataTemplate} from '@/consts/template';
 import {WorkerDataTypes} from '@/utils/types';
+import {nanoid} from 'nanoid';
 import {create} from 'zustand';
 
 type registartionDataTypes = {
@@ -36,10 +37,18 @@ interface updateDataTypes {
 	worker: WorkerDataTypes;
 }
 
+export type createRegistrationDataCellProps = {
+	day: string;
+	time: string;
+};
+
 interface RegistrationStoreTypes {
 	updateStoreStatus: boolean;
 	setUpdateStoreStatus: (status: boolean) => void;
 	registartionData: registartionDataTypes[];
+	createRegistrationDataCell: (
+		creatingData: createRegistrationDataCellProps,
+	) => void;
 	getRegistrationWorkerData: (getRegistrationData: string) => WorkerDataTypes;
 	updateRegistrationData: (updateData: updateDataTypes) => void;
 }
@@ -52,6 +61,46 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 			set({updateStoreStatus: true});
 		},
 		registartionData: registartionDataTemplate,
+		createRegistrationDataCell: (creatingData) => {
+			set((state) => ({
+				registartionData: state.registartionData.map((dayItem) => {
+					if (dayItem.day === creatingData.day) {
+						return {
+							...dayItem,
+							registrationTime: dayItem.registrationTime.map((timeSlot) => {
+								if (timeSlot.time === creatingData.time) {
+									const newCell = {
+										id: nanoid(),
+										client: '',
+										cells: [
+											{
+												cell: nanoid(),
+												worker: {
+													id: nanoid(),
+													name: '',
+													surname: '',
+													additionalProperties: {
+														color: '',
+													},
+												},
+											},
+										],
+									};
+
+									return {
+										...timeSlot,
+										data: [...timeSlot.data, newCell],
+									};
+								}
+								return timeSlot;
+							}),
+						};
+					}
+					return dayItem;
+				}),
+			}));
+		},
+
 		getRegistrationWorkerData: (getRegistrationData) => {
 			const allRegistrationData = get().registartionData;
 			const cell = allRegistrationData
@@ -59,7 +108,6 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 				.flatMap((timeSlot) => timeSlot.data)
 				.flatMap((entry) => entry.cells)
 				.find((cell) => cell.cell === getRegistrationData);
-			// console.log(cell?.worker);
 			return cell?.worker ?? {id: '', name: ''};
 		},
 		updateRegistrationData: (updateData) => {
@@ -99,7 +147,6 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 						: dayItem,
 				),
 			}));
-			set({updateStoreStatus: false});
 		},
 	}),
 );

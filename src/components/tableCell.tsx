@@ -10,13 +10,15 @@ import { useGlobalStore } from "@/store/globalStore";
 import CurrentData from "./currentData";
 import { indents, shadow } from "@/consts/globalStyles";
 import { translateObjectValues } from "@/utils/helpersFunctions";
-
+import AddCellIcon from '../../public/icons/SquaresPlus.svg'
 
 
 export default function TableCell() {
+    //store
     const registrationData = useRegistationStore(
         (state) => state.registartionData
     );
+    const addRegistrationData = useRegistationStore((state) => state.createRegistrationDataCell)
 
     const currentThemeApp = useGlobalStore((state) => state.currentThemeApp)
     const currentLanguageApp = useGlobalStore((state) => state.currentLanguageApp)
@@ -63,9 +65,16 @@ export default function TableCell() {
                             ) : (
                                 <span className="text-gray-400 italic text-sm">empty</span>
                             )}
+                            <button className={`p-2 m-2 rounded-xl bg-indigo-300 w-fit hover:bg-violet-300`} onClick={() => addRegistrationData({ day: day.day, time })}>
+
+                                <AddCellIcon width={30} height={30} />
+                            </button>
+
+
                         </div>
                     );
                 })}
+
             </React.Fragment>
         ));
     }, [registrationData, timer]);

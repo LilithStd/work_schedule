@@ -16,7 +16,7 @@ export default function WorkerCell({ id, day, time }: WorkerCellTypes) {
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
     }
-
+    console.log(worker.id)
     const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
         const data = e.dataTransfer.getData("application/json");
