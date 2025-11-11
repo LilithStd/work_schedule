@@ -74,7 +74,7 @@ export default function WorkersList() {
                     key={day}
                     onDrop={(e) => handleDrop(e, day)} // <-- day из текущей итерации
                     onDragOver={(e) => e.preventDefault()}
-                    className="bg-sky-600 rounded-xl m-1"
+                    className="bg-sky-600 rounded-xl m-1 p-2 flex flex-col gap-2"
                 >
                     {workerListByDayStore[index]?.workers.map((worker) => (
                         <div key={worker.id}>

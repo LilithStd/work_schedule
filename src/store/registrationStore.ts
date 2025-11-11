@@ -68,7 +68,6 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 			if (get().updateStoreStatus === status) return;
 			set({updateStoreStatus: true});
 		},
-		// registartionData: registartionDataTemplate,
 		registartionData: createRegistrationDataTemplate(),
 		createRegistrationData: () => {
 			const cell = {
