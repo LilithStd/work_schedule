@@ -22,35 +22,35 @@ export const translateObjectValues = (
 };
 
 export const createRegistrationDataTemplate = () => {
-	const cell = {
-		cell: nanoid(),
-		worker: {
-			id: '',
-			name: '',
-			surname: '',
-			additionalProperties: {
-				color: '',
-			},
-		},
-	};
-	const registartionBlock = {
-		id: nanoid(),
-		client: '',
-		cells: [cell],
-	};
-
-	const registartionDataTime = timer.map((time) => {
-		return {
-			time,
-			data: [registartionBlock],
-		};
-	});
-
 	const registartionData = week.map((day) => {
+		const registrationTime = timer.map((time) => {
+			const cell = {
+				cell: nanoid(),
+				worker: {
+					id: '',
+					name: '',
+					surname: '',
+					additionalProperties: {color: ''},
+				},
+			};
+
+			const registartionBlock = {
+				id: nanoid(),
+				client: '',
+				cells: [cell],
+			};
+
+			return {
+				time,
+				data: [registartionBlock],
+			};
+		});
+
 		return {
 			day,
-			registrationTime: registartionDataTime,
+			registrationTime,
 		};
 	});
+
 	return registartionData;
 };

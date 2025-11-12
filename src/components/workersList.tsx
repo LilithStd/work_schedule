@@ -72,8 +72,8 @@ export default function WorkersList() {
             {week.map((day, index) => (
                 <div
                     key={day}
-                    onDrop={(e) => handleDrop(e, day)} // <-- day из текущей итерации
-                    onDragOver={(e) => e.preventDefault()}
+                    onDrop={(e) => handleDrop(e, day)}
+                    onDragOver={handleDragOver}
                     className="bg-sky-600 rounded-xl m-1 p-2 flex flex-col gap-2"
                 >
                     {workerListByDayStore[index]?.workers.map((worker) => (

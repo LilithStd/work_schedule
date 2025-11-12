@@ -24,7 +24,6 @@ export default function WorkerCell({ id, day, time }: WorkerCellTypes) {
         setRegistrationData(updateData)
     };
 
-
     return (
         <div
             onDragOver={handleDragOver}
