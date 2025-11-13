@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import Worker from './worker';
-import { week, workerListByDayTemplate, workersTest, WorkerTypes } from '@/consts/template';
+import { TYPE_WORKER_MODAL, week, workerListByDayTemplate, workersTest, WorkerTypes } from '@/consts/template';
 import { useWorkersStore } from '@/store/workersStore';
 import AddWorkerIcons from '../../public/icons/user-plus.svg'
 import ModalWindow from './modalWindow';
@@ -83,7 +83,6 @@ export default function WorkersList() {
 
                         <div key={worker.id}>
                             <WorkerCell worker={worker} />
-                            {/* <Worker worker={worker} /> */}
                         </div>
                     ))}
                 </div>
@@ -92,7 +91,7 @@ export default function WorkersList() {
                 isOpen={isOpen}
                 onClose={handleCloseModal}
             >
-                <WorkerDataModalTemplate onClose={handleCloseModal} />
+                <WorkerDataModalTemplate onClose={handleCloseModal} typeWorkerModal={TYPE_WORKER_MODAL.NEW} />
             </ModalWindow>
         </React.Fragment>
     )

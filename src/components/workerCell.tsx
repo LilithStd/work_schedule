@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import ModalWindow from './modalWindow';
 import WorkerDataModalTemplate from './workerDataModalTemplate';
 import { useGlobalStore } from '@/store/globalStore';
+import { TYPE_WORKER_MODAL } from '@/consts/template';
 
 interface WorkerCellTypes {
     cellId?: string,
@@ -18,6 +19,8 @@ interface WorkerCellTypes {
 
 export default function WorkerCell({ cellId, id, day, time, worker }: WorkerCellTypes) {
     const [isOpen, setIsOpen] = useState(false)
+    const [typeOfModalWindow, setTypeOfModalWindow] = useState<TYPE_WORKER_MODAL>(TYPE_WORKER_MODAL.EDIT);
+
     const getRegistrationData = useRegistationStore((state) => state.getRegistrationWorkerData);
     const setRegistrationData = useRegistationStore((state) => state.updateRegistrationData)
     const addNewWorkerCell = useRegistationStore((state) => state.addNewWorkerCell)
@@ -93,7 +96,7 @@ export default function WorkerCell({ cellId, id, day, time, worker }: WorkerCell
                 isOpen={isOpen}
                 onClose={handleCloseModal}
             >
-                <WorkerDataModalTemplate onClose={handleCloseModal} />
+                <WorkerDataModalTemplate onClose={handleCloseModal} typeWorkerModal={typeOfModalWindow} />
             </ModalWindow>
         </div>
     );

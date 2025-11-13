@@ -91,7 +91,6 @@ export default function Cell({ id, day, time }: CellProps) {
                         id={currentCellId}
                         day={day}
                         time={time}
-                        TYPE_WORKER_MODAL={TYPE_WORKER_MODAL.NEW}
                         onClose={handleCloseModal}
                     />
                 }

@@ -9,11 +9,10 @@ interface WorkerModalTemplateProps {
     id: string;
     day: string;
     time: string;
-    TYPE_WORKER_MODAL: TYPE_WORKER_MODAL;
     onClose: () => void
 }
 
-export default function WorkerModalTemplate({ id, day, time, onClose, TYPE_WORKER_MODAL }: WorkerModalTemplateProps) {
+export default function WorkerModalTemplate({ id, day, time, onClose }: WorkerModalTemplateProps) {
     const getListOfAvailableWorkers = useWorkersStore((state) => state.getWorkerListByDay);
     const setRegistrationData = useRegistationStore(state => state.updateRegistrationData);
     const setUpdateStatusStore = useRegistationStore(state => state.setUpdateStoreStatus);

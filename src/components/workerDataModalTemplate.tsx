@@ -1,14 +1,16 @@
 'use client'
 
+import { TYPE_WORKER_MODAL } from "@/consts/template";
 import { useWorkersStore } from "@/store/workersStore"
 import { WorkerDataTypes } from "@/utils/types"
 import { useState } from "react"
 
 interface WorkerDataModalTemplateInterfaceProps {
-    onClose: () => void
+    onClose: () => void,
+    typeWorkerModal: TYPE_WORKER_MODAL;
 }
 
-export default function WorkerDataModalTemplate({ onClose }: WorkerDataModalTemplateInterfaceProps) {
+export default function WorkerDataModalTemplate({ onClose, typeWorkerModal }: WorkerDataModalTemplateInterfaceProps) {
     const [statusChooseColor, setStatusChooseColor] = useState(false)
     const [workerNameTempData, setWorkerNameTempData] = useState('')
     const [workerSurnameTempData, setWorkerSurnameTempData] = useState('')
@@ -46,7 +48,6 @@ export default function WorkerDataModalTemplate({ onClose }: WorkerDataModalTemp
 
 
     const handleEditWorkerName = (e: React.ChangeEvent<HTMLInputElement>) => {
-        // setStatusChooseColor(())
         setWorkerNameTempData(e.target.value)
     }
     const handleEditWorkerSurname = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,38 +81,42 @@ export default function WorkerDataModalTemplate({ onClose }: WorkerDataModalTemp
     return (
         <div className='w-full  text-black'>
             <p>createWorkerDataModalTemplate</p>
-            <div className="flex gap-2">
-                <input
-                    type="text"
-                    className="border border-gray-300 rounded-md p-2 w-full"
-                    placeholder="Имя"
-                    value={workerNameTempData}
-                    onChange={handleEditWorkerName}
-                />
-                <input
-                    type="text" className="border border-gray-300 rounded-md p-2 w-full" placeholder="Фамилия"
-                    value={workerSurnameTempData}
-                    onChange={handleEditWorkerSurname}
-                />
-            </div>
+            {typeWorkerModal === TYPE_WORKER_MODAL.NEW ? <div>
+                <div className="flex gap-2">
+                    <input
+                        type="text"
+                        className="border border-gray-300 rounded-md p-2 w-full"
+                        placeholder="Имя"
+                        value={workerNameTempData}
+                        onChange={handleEditWorkerName}
+                    />
+                    <input
+                        type="text" className="border border-gray-300 rounded-md p-2 w-full" placeholder="Фамилия"
+                        value={workerSurnameTempData}
+                        onChange={handleEditWorkerSurname}
+                    />
+                </div>
 
-            <div className="flex justify-between m-6 ">
-                <button className={`${workerData?.additionalProperties?.color} border w-10 h-10 rounded`} onClick={handleChooseColor} ></button>
-                {statusChooseColor && chooseColorsData.map((color) => <div className={`${color} w-10 h-10 rounded hover:border-2`} key={color} onClick={() => {
-                    updateWorkerData({ id: '', name: '', additionalProperties: { color: color } })
-                    handleChooseColor()
-                }}></div>)}
-            </div>
-            <div className="flex gap-2">
-                <button
-                    className="mt-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 w-1/2"
-                    onClick={handleResetState}
-                >Reset</button>
-                <button
-                    className="mt-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 w-1/2"
-                    onClick={handleCreateWorker}
-                >Save</button>
-            </div>
+                <div className="flex justify-between m-6 ">
+                    <button className={`${workerData?.additionalProperties?.color} border w-10 h-10 rounded`} onClick={handleChooseColor} ></button>
+                    {statusChooseColor && chooseColorsData.map((color) => <div className={`${color} w-10 h-10 rounded hover:border-2`} key={color} onClick={() => {
+                        updateWorkerData({ id: '', name: '', additionalProperties: { color: color } })
+                        handleChooseColor()
+                    }}></div>)}
+                </div>
+                <div className="flex gap-2">
+                    <button
+                        className="mt-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 w-1/2"
+                        onClick={handleResetState}
+                    >Reset</button>
+                    <button
+                        className="mt-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 w-1/2"
+                        onClick={handleCreateWorker}
+                    >Save</button>
+                </div>
+            </div> : <h2 className="text-center text-lg font-bold mb-4">Edit Worker</h2>}
+
+
 
         </div>
     )
