@@ -4,11 +4,11 @@ import { useWorkersStore } from "@/store/workersStore"
 import { WorkerDataTypes } from "@/utils/types"
 import { useState } from "react"
 
-interface CreateWorkerDataModalTemplateInterfaceProps {
+interface WorkerDataModalTemplateInterfaceProps {
     onClose: () => void
 }
 
-export default function CreateWorkerDataModalTemplate({ onClose }: CreateWorkerDataModalTemplateInterfaceProps) {
+export default function WorkerDataModalTemplate({ onClose }: WorkerDataModalTemplateInterfaceProps) {
     const [statusChooseColor, setStatusChooseColor] = useState(false)
     const [workerNameTempData, setWorkerNameTempData] = useState('')
     const [workerSurnameTempData, setWorkerSurnameTempData] = useState('')

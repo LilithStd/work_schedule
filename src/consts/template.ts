@@ -88,6 +88,11 @@ export enum THEME {
 	DARK = 'DARK',
 }
 
+export enum TYPE_WORKER_MODAL {
+	NEW = 'NEW',
+	EDIT = 'EDIT',
+}
+
 export const LANGUAGE_APP = [LANGUAGE.EN, LANGUAGE.LV, LANGUAGE.RU];
 
 export enum UPDATE_REGISTRATION_DATA_STATUS {

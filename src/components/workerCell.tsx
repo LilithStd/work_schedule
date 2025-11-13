@@ -3,20 +3,42 @@ import { useRegistationStore } from '@/store/registrationStore'
 import AddWorkerIcon from '../../public/icons/user-plus.svg'
 import { WorkerDataTypes } from '@/utils/types';
 import Worker from './worker';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import ModalWindow from './modalWindow';
+import WorkerDataModalTemplate from './workerDataModalTemplate';
+import { useGlobalStore } from '@/store/globalStore';
+
 interface WorkerCellTypes {
     cellId?: string,
-    id: string,
-    day: string,
-    time: string
+    id?: string,
+    day?: string,
+    time?: string
+    worker?: WorkerDataTypes
 }
 
-export default function WorkerCell({ cellId, id, day, time }: WorkerCellTypes) {
+export default function WorkerCell({ cellId, id, day, time, worker }: WorkerCellTypes) {
+    const [isOpen, setIsOpen] = useState(false)
     const getRegistrationData = useRegistationStore((state) => state.getRegistrationWorkerData);
     const setRegistrationData = useRegistationStore((state) => state.updateRegistrationData)
     const addNewWorkerCell = useRegistationStore((state) => state.addNewWorkerCell)
+    const resetModalStatus = useGlobalStore((state) => state.resetSetOpenStatus)
+    const modalStatus = useGlobalStore((state) => state.modalOpenStatus)
+    const setModalStatus = useGlobalStore((state) => state.setModalOpenStatus)
     const containerRef = useRef<HTMLDivElement | null>(null);
-    const worker = getRegistrationData(id);
+    const workerData = worker ? worker : getRegistrationData(id || '');
+
+    const handleCloseModal = () => {
+        setIsOpen(false)
+        resetModalStatus()
+
+    }
+
+    const handleOpenModal = () => {
+        if (modalStatus.status && workerData.id !== '' && workerData.name !== '') return
+        setIsOpen(true)
+        setModalStatus({ status: true, id: '' })
+
+    }
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
         const container = containerRef.current;
@@ -40,26 +62,39 @@ export default function WorkerCell({ cellId, id, day, time }: WorkerCellTypes) {
         e.preventDefault();
         const data = e.dataTransfer.getData("application/json");
         const selectedWorker: WorkerDataTypes = JSON.parse(data) as WorkerDataTypes;
-        const updateData = { id: id, day: day, time: time, client: '', worker: selectedWorker }
+        const updateData = { id: id || '', day: day || '', time: time || '', client: '', worker: selectedWorker }
         setRegistrationData(updateData)
     };
 
     useEffect(() => {
-        if (worker && worker.name !== '') {
+        if (workerData && workerData.name !== '') {
             const cellIdToUse = cellId ? cellId : '';
-            addNewWorkerCell(day, time, cellIdToUse,)
+            addNewWorkerCell(day || '', time || '', cellIdToUse,)
         }
-    }, [worker])
+    }, [workerData])
 
     return (
         <div
             ref={containerRef}
             onDragOver={handleDragOver}
             onDrop={handleDrop}
-            className={`${worker.additionalProperties?.color} w-full justify-center flex min-h-10 rounded-xl items-center`}
+            className={`${workerData.additionalProperties?.color} w-full justify-center flex min-h-10 rounded-xl items-center`}
         >
 
-            {worker && worker.name ? <Worker worker={worker} /> : <AddWorkerIcon />}
+            {workerData && workerData.name ? <div
+                onClick={handleOpenModal}
+            >
+                <Worker worker={workerData} />
+
+            </div> : <AddWorkerIcon />}
+
+
+            <ModalWindow
+                isOpen={isOpen}
+                onClose={handleCloseModal}
+            >
+                <WorkerDataModalTemplate onClose={handleCloseModal} />
+            </ModalWindow>
         </div>
     );
 }

@@ -7,8 +7,9 @@ import { useWorkersStore } from '@/store/workersStore';
 import AddWorkerIcons from '../../public/icons/user-plus.svg'
 import ModalWindow from './modalWindow';
 import { useGlobalStore } from '@/store/globalStore';
-import CreateWorkerDataModalTemplate from './createWorkerDataModalTemplate';
+import WorkerDataModalTemplate from './workerDataModalTemplate';
 import { WorkerDataTypes } from '@/utils/types';
+import WorkerCell from './workerCell';
 
 export type WorkersListProps = {
     day: string;
@@ -57,7 +58,9 @@ export default function WorkersList() {
             <div className=" bg-sky-600 text-center flex flex-col min-h-50  m-1 rounded-xl">
                 <h2 className="text-center">workers</h2>
                 <div className="m-2 flex flex-col gap-2">
-                    {workerData.map((worker) => <Worker key={worker.id} worker={worker} />)}
+                    {workerData.map((worker) =>
+                        <WorkerCell key={worker.id} worker={worker} />
+                    )}
                 </div>
 
                 <button
@@ -77,8 +80,10 @@ export default function WorkersList() {
                     className="bg-sky-600 rounded-xl m-1 p-2 flex flex-col gap-2"
                 >
                     {workerListByDayStore[index]?.workers.map((worker) => (
+
                         <div key={worker.id}>
-                            <Worker worker={worker} />
+                            <WorkerCell worker={worker} />
+                            {/* <Worker worker={worker} /> */}
                         </div>
                     ))}
                 </div>
@@ -87,7 +92,7 @@ export default function WorkersList() {
                 isOpen={isOpen}
                 onClose={handleCloseModal}
             >
-                <CreateWorkerDataModalTemplate onClose={handleCloseModal} />
+                <WorkerDataModalTemplate onClose={handleCloseModal} />
             </ModalWindow>
         </React.Fragment>
     )

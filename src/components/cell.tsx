@@ -5,7 +5,7 @@ import ModalWindow from "./modalWindow"
 import { useMemo, useState } from "react"
 import Client from "./client"
 import ClientModalTemplate from "./clientModalTemplate"
-import { MODAL_TYPE } from "@/consts/template"
+import { MODAL_TYPE, TYPE_WORKER_MODAL } from "@/consts/template"
 import WorkerModalTemplate from "./workerModalTemplate"
 import { useRegistationStore } from "@/store/registrationStore"
 import WorkerCell from "./workerCell"
@@ -91,6 +91,7 @@ export default function Cell({ id, day, time }: CellProps) {
                         id={currentCellId}
                         day={day}
                         time={time}
+                        TYPE_WORKER_MODAL={TYPE_WORKER_MODAL.NEW}
                         onClose={handleCloseModal}
                     />
                 }

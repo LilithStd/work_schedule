@@ -3,15 +3,17 @@ import { useWorkersStore } from '@/store/workersStore';
 import React, { useEffect, useState } from 'react'
 import Worker from './worker';
 import { useRegistationStore } from '@/store/registrationStore';
+import { TYPE_WORKER_MODAL } from '@/consts/template';
 
 interface WorkerModalTemplateProps {
     id: string;
     day: string;
     time: string;
+    TYPE_WORKER_MODAL: TYPE_WORKER_MODAL;
     onClose: () => void
 }
 
-export default function WorkerModalTemplate({ id, day, time, onClose }: WorkerModalTemplateProps) {
+export default function WorkerModalTemplate({ id, day, time, onClose, TYPE_WORKER_MODAL }: WorkerModalTemplateProps) {
     const getListOfAvailableWorkers = useWorkersStore((state) => state.getWorkerListByDay);
     const setRegistrationData = useRegistationStore(state => state.updateRegistrationData);
     const setUpdateStatusStore = useRegistationStore(state => state.setUpdateStoreStatus);
