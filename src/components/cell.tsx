@@ -9,7 +9,7 @@ import { MODAL_TYPE } from "@/consts/template"
 import WorkerModalTemplate from "./workerModalTemplate"
 import { useRegistationStore } from "@/store/registrationStore"
 import WorkerCell from "./workerCell"
-import Button from "./button"
+
 
 type CellProps = {
     id: string,

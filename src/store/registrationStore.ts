@@ -53,6 +53,7 @@ interface RegistrationStoreTypes {
 	updateStoreStatus: boolean;
 	setUpdateStoreStatus: (status: boolean) => void;
 	registartionData: registartionDataTypes[];
+	addNewWorkerCell: (day: string, time: string) => void;
 	createRegistrationData: () => registartionDataTypes[];
 	createRegistrationDataCell: (
 		creatingData: createRegistrationDataCellProps,
@@ -139,6 +140,39 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 					}
 					return dayItem;
 				}),
+			}));
+		},
+		addNewWorkerCell: (day: string, time: string) => {
+			set((state) => ({
+				registartionData: state.registartionData.map((d) =>
+					d.day === day
+						? {
+								...d,
+								registrationTime: d.registrationTime.map((t) =>
+									t.time === time
+										? {
+												...t,
+												data: t.data.map((block) => ({
+													...block,
+													cells: [
+														...block.cells,
+														{
+															cell: nanoid(),
+															worker: {
+																id: '',
+																name: '',
+																surname: '',
+																additionalProperties: {color: ''},
+															},
+														},
+													],
+												})),
+										  }
+										: t,
+								),
+						  }
+						: d,
+				),
 			}));
 		},
 

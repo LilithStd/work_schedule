@@ -3,6 +3,7 @@ import { useRegistationStore } from '@/store/registrationStore'
 import AddWorkerIcon from '../../public/icons/user-plus.svg'
 import { WorkerDataTypes } from '@/utils/types';
 import Worker from './worker';
+import { useEffect } from 'react';
 interface WorkerCellTypes {
     id: string,
     day: string,
@@ -12,6 +13,7 @@ interface WorkerCellTypes {
 export default function WorkerCell({ id, day, time }: WorkerCellTypes) {
     const getRegistrationData = useRegistationStore((state) => state.getRegistrationWorkerData);
     const setRegistrationData = useRegistationStore((state) => state.updateRegistrationData)
+    const addNewWorkerCell = useRegistationStore((state) => state.addNewWorkerCell)
     const worker = getRegistrationData(id);
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
@@ -23,6 +25,12 @@ export default function WorkerCell({ id, day, time }: WorkerCellTypes) {
         const updateData = { id: id, day: day, time: time, client: '', worker: selectedWorker }
         setRegistrationData(updateData)
     };
+
+    useEffect(() => {
+        if (worker && worker.name !== '') {
+            addNewWorkerCell(day, time)
+        }
+    }, [worker])
 
     return (
         <div
