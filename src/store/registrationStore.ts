@@ -53,7 +53,7 @@ interface RegistrationStoreTypes {
 	updateStoreStatus: boolean;
 	setUpdateStoreStatus: (status: boolean) => void;
 	registartionData: registartionDataTypes[];
-	addNewWorkerCell: (day: string, time: string) => void;
+	addNewWorkerCell: (id: string, day: string, time: string) => void;
 	createRegistrationData: () => registartionDataTypes[];
 	createRegistrationDataCell: (
 		creatingData: createRegistrationDataCellProps,
@@ -142,40 +142,111 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 				}),
 			}));
 		},
-		addNewWorkerCell: (day: string, time: string) => {
-			set((state) => ({
-				registartionData: state.registartionData.map((d) =>
-					d.day === day
-						? {
-								...d,
-								registrationTime: d.registrationTime.map((t) =>
-									t.time === time
-										? {
-												...t,
-												data: t.data.map((block) => ({
-													...block,
-													cells: [
-														...block.cells,
-														{
-															cell: nanoid(),
-															worker: {
-																id: '',
-																name: '',
-																surname: '',
-																additionalProperties: {color: ''},
-															},
-														},
-													],
-												})),
-										  }
-										: t,
-								),
-						  }
-						: d,
-				),
-			}));
-		},
+		// 	set((state) => ({
+		// 		registartionData: state.registartionData.map((d) =>
+		// 			d.day === day
+		// 				? {
+		// 						...d,
+		// 						registrationTime: d.registrationTime.map((t) =>
+		// 							t.time === time
+		// 								? {
+		// 										...t,
+		// 										data: t.data.map((block) => ({
+		// 											...block,
+		// 											cells: [
+		// 												...block.cells,
+		// 												{
+		// 													cell: nanoid(),
+		// 													worker: {
+		// 														id: '',
+		// 														name: '',
+		// 														surname: '',
+		// 														additionalProperties: {color: ''},
+		// 													},
+		// 												},
+		// 											],
+		// 										})),
+		// 								  }
+		// 								: t,
+		// 						),
+		// 				  }
+		// 				: d,
+		// 		),
+		// 	}));
+		// },
+		addNewWorkerCell: (day: string, time: string, cellId: string) => {
+			console.log('Adding new worker cell for:', {day, time, cellId});
+			//
+			const newCell = {
+				cell: nanoid(),
+				worker: {
+					id: '',
+					name: '',
+					surname: '',
+					additionalProperties: {color: ''},
+				},
+			};
 
+			set((state) => ({
+				registartionData: state.registartionData.map((d) => {
+					if (d.day !== day) return d;
+
+					return {
+						...d,
+						registrationTime: d.registrationTime.map((t) => {
+							if (t.time !== time) return t;
+
+							return {
+								...t,
+								data: t.data.map((block) => {
+									if (block.id !== cellId) return block;
+
+									// 🟢 Добавляем новую ячейку
+									return {
+										...block,
+										cells: [...block.cells, newCell],
+									};
+								}),
+							};
+						}),
+					};
+				}),
+			}));
+			// 	registartionData: state.registartionData.map((d) =>
+			// 		d.day === day
+			// 			? {
+			// 					...d,
+			// 					registrationTime: d.registrationTime.map((t) =>
+			// 						t.time === time
+			// 							? {
+			// 									...t,
+			// 									data: t.data.map((block) =>
+			// 										block.id === cellId
+			// 											? {
+			// 													...block,
+			// 													cells: [
+			// 														...block.cells,
+			// 														{
+			// 															cell: nanoid(),
+			// 															worker: {
+			// 																id: '',
+			// 																name: '',
+			// 																surname: '',
+			// 																additionalProperties: {color: ''},
+			// 															},
+			// 														},
+			// 													],
+			// 											  }
+			// 											: block,
+			// 									),
+			// 							  }
+			// 							: t,
+			// 					),
+			// 			  }
+			// 			: d,
+			// 	),
+			// }));
+		},
 		getRegistrationWorkerData: (getRegistrationData) => {
 			const allRegistrationData = get().registartionData;
 			const cell = allRegistrationData
