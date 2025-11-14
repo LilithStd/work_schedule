@@ -175,7 +175,6 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 		// 	}));
 		// },
 		addNewWorkerCell: (day: string, time: string, cellId: string) => {
-			console.log('Adding new worker cell for:', {day, time, cellId});
 			//
 			const newCell = {
 				cell: nanoid(),

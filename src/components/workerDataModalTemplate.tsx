@@ -7,10 +7,11 @@ import { useState } from "react"
 
 interface WorkerDataModalTemplateInterfaceProps {
     onClose: () => void,
+    workerEditData?: WorkerDataTypes,
     typeWorkerModal: TYPE_WORKER_MODAL;
 }
 
-export default function WorkerDataModalTemplate({ onClose, typeWorkerModal }: WorkerDataModalTemplateInterfaceProps) {
+export default function WorkerDataModalTemplate({ onClose, typeWorkerModal, workerEditData }: WorkerDataModalTemplateInterfaceProps) {
     const [statusChooseColor, setStatusChooseColor] = useState(false)
     const [workerNameTempData, setWorkerNameTempData] = useState('')
     const [workerSurnameTempData, setWorkerSurnameTempData] = useState('')
@@ -114,7 +115,17 @@ export default function WorkerDataModalTemplate({ onClose, typeWorkerModal }: Wo
                         onClick={handleCreateWorker}
                     >Save</button>
                 </div>
-            </div> : <h2 className="text-center text-lg font-bold mb-4">Edit Worker</h2>}
+            </div> :
+                <div>
+                    <p>edit worker modal</p>
+                    {workerEditData &&
+                        <div>
+                            <p>{workerEditData.name}</p>
+                            <p>{workerEditData.surname}</p>
+                        </div>
+                    }
+                </div>
+            }
 
 
 

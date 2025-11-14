@@ -23,15 +23,25 @@ type updateWorkerData = {
 
 interface WorkersStoreTypes {
 	workersData: WorkerDataTypes[];
+	workerListByDay: WorkersListProps[];
 	updateWorkerData: (updateWorkerData: WorkerDataTypes) => void;
 	createWorkerData: (workerData: WorkerDataTypes) => void;
-	workerListByDay: WorkersListProps[];
+	getWorkerById: (id: string) => WorkerDataTypes;
 	getWorkerListByDay: (day: string) => WorkerDataTypes[];
 	setWorkerListByDay: (worker: WorkerListByDay) => void;
 }
 
 export const useWorkersStore = create<WorkersStoreTypes>((set, get) => ({
 	workersData: [],
+	getWorkerById: (id) => {
+		return (
+			get().workersData.find((worker) => worker.id === id) || {
+				id: '',
+				name: '',
+				additionalProperties: {color: ''},
+			}
+		);
+	},
 	updateWorkerData: (updateWorkerData) => {
 		set((state) => ({
 			workersData: state.workersData.map((worker) =>

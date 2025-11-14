@@ -96,7 +96,7 @@ export default function WorkerCell({ cellId, id, day, time, worker }: WorkerCell
                 isOpen={isOpen}
                 onClose={handleCloseModal}
             >
-                <WorkerDataModalTemplate onClose={handleCloseModal} typeWorkerModal={typeOfModalWindow} />
+                <WorkerDataModalTemplate onClose={handleCloseModal} typeWorkerModal={typeOfModalWindow} workerEditData={workerData} />
             </ModalWindow>
         </div>
     );

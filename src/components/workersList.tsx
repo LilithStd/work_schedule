@@ -19,6 +19,7 @@ export type WorkersListProps = {
 
 export default function WorkersList() {
     const [isOpen, setIsOpen] = useState(false)
+    const [currentEditWorker, setCurrentEditWorker] = useState<WorkerDataTypes | null>(null)
     const setWorkersListbyDay = useWorkersStore((state) => state.setWorkerListByDay);
     const workerData = useWorkersStore((state) => state.workersData)
     const workerListByDayStore = useWorkersStore((state) => state.workerListByDay);
@@ -26,6 +27,7 @@ export default function WorkersList() {
     const modalStatus = useGlobalStore((state) => state.modalOpenStatus)
     const setModalStatus = useGlobalStore((state) => state.setModalOpenStatus)
     const currentLanguageApp = useGlobalStore((state) => state.currentLanguageApp)
+    const currentWorker = useWorkersStore((state) => state.getWorkerListByDay)
 
 
 
