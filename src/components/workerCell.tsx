@@ -27,7 +27,7 @@ export default function WorkerCell({ cellId, id, day, time, worker }: WorkerCell
     const resetModalStatus = useGlobalStore((state) => state.resetSetOpenStatus)
     const modalStatus = useGlobalStore((state) => state.modalOpenStatus)
     const setModalStatus = useGlobalStore((state) => state.setModalOpenStatus)
-    const containerRef = useRef<HTMLDivElement | null>(null);
+    const anchorRef = useRef<HTMLButtonElement>(null);
     const workerData = worker ? worker : getRegistrationData(id || '');
 
     const handleCloseModal = () => {
@@ -44,22 +44,7 @@ export default function WorkerCell({ cellId, id, day, time, worker }: WorkerCell
     }
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
-        const container = containerRef.current;
-        if (!container) return;
 
-        const { top, bottom } = container.getBoundingClientRect();
-        const scrollSpeed = 15;
-        const edgeThreshold = 80;
-
-
-        if (e.clientY < top + edgeThreshold) {
-            container.scrollTop -= scrollSpeed;
-        }
-
-
-        if (e.clientY > bottom - edgeThreshold) {
-            container.scrollTop += scrollSpeed;
-        }
     }
     const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
@@ -78,23 +63,27 @@ export default function WorkerCell({ cellId, id, day, time, worker }: WorkerCell
 
     return (
         <div
-            ref={containerRef}
+
             onDragOver={handleDragOver}
             onDrop={handleDrop}
             className={`${workerData.additionalProperties?.color} w-full justify-center flex min-h-10 rounded-xl items-center`}
+
         >
 
-            {workerData && workerData.name ? <div
+            {workerData && workerData.name ? <button
                 onClick={handleOpenModal}
+                ref={anchorRef}
+
             >
                 <Worker worker={workerData} />
 
-            </div> : <AddWorkerIcon />}
+            </button> : <AddWorkerIcon />}
 
 
             <ModalWindow
                 isOpen={isOpen}
                 onClose={handleCloseModal}
+                anchorRef={anchorRef}
             >
                 <WorkerDataModalTemplate onClose={handleCloseModal} typeWorkerModal={typeOfModalWindow} workerEditData={workerData} />
             </ModalWindow>

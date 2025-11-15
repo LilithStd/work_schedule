@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Worker from './worker';
 import { TYPE_WORKER_MODAL, week, workerListByDayTemplate, workersTest, WorkerTypes } from '@/consts/template';
 import { useWorkersStore } from '@/store/workersStore';
@@ -10,6 +10,7 @@ import { useGlobalStore } from '@/store/globalStore';
 import WorkerDataModalTemplate from './workerDataModalTemplate';
 import { WorkerDataTypes } from '@/utils/types';
 import WorkerCell from './workerCell';
+import WorkerPopover from './popover';
 
 export type WorkersListProps = {
     day: string;
@@ -19,6 +20,7 @@ export type WorkersListProps = {
 
 export default function WorkersList() {
     const [isOpen, setIsOpen] = useState(false)
+    const anchorRef = useRef<HTMLButtonElement>(null);
     const [currentEditWorker, setCurrentEditWorker] = useState<WorkerDataTypes | null>(null)
     const setWorkersListbyDay = useWorkersStore((state) => state.setWorkerListByDay);
     const workerData = useWorkersStore((state) => state.workersData)
@@ -67,6 +69,7 @@ export default function WorkersList() {
 
                 <button
                     className="m-2 rounded-xl bg-blue-400 p-2 flex items-center justify-center shadow-lg"
+                    ref={anchorRef}
                     onClick={handleOpenModal}
                 >
                     <AddWorkerIcons />
@@ -89,11 +92,16 @@ export default function WorkersList() {
                     ))}
                 </div>
             ))}
+            {/* <WorkerPopover /> */}
             <ModalWindow
                 isOpen={isOpen}
                 onClose={handleCloseModal}
+                anchorRef={anchorRef}   // ✅ вот здесь
             >
-                <WorkerDataModalTemplate onClose={handleCloseModal} typeWorkerModal={TYPE_WORKER_MODAL.NEW} />
+                <WorkerDataModalTemplate
+                    onClose={handleCloseModal}
+                    typeWorkerModal={TYPE_WORKER_MODAL.NEW}
+                />
             </ModalWindow>
         </React.Fragment>
     )

@@ -2,7 +2,7 @@
 
 import { useGlobalStore } from "@/store/globalStore"
 import ModalWindow from "./modalWindow"
-import { useMemo, useState } from "react"
+import { useMemo, useRef, useState } from "react"
 import Client from "./client"
 import ClientModalTemplate from "./clientModalTemplate"
 import { MODAL_TYPE, TYPE_WORKER_MODAL } from "@/consts/template"
@@ -19,6 +19,10 @@ type CellProps = {
 
 export default function Cell({ id, day, time }: CellProps) {
     const [isOpen, setIsOpen] = useState(false)
+    const [activeAnchor, setActiveAnchor] =
+        useState<React.RefObject<HTMLElement | null> | undefined>(undefined);
+    const anchorRefWorker = useRef<HTMLButtonElement>(null);
+    const anchorRefClient = useRef<HTMLButtonElement>(null);
     const [currentCellId, setCurrentId] = useState('')
     const [typeModalWindow, setTypeModalWindow] = useState<MODAL_TYPE>(MODAL_TYPE.ADD_CLIENT)
     const [tempClientName, setTempClientName] = useState("")
@@ -58,8 +62,10 @@ export default function Cell({ id, day, time }: CellProps) {
                     className={`xl:w-1/2 row-start-1 row-end-2  min-h-10 rounded-xl ${isOpen && typeModalWindow === MODAL_TYPE.ADD_CLIENT ? 'bg-fuchsia-600' : tempClientName.length > 0 ? 'bg-emerald-500 hover:bg-emerald-200' : 'bg-sky-500 hover:bg-sky-700'}`}
                     onClick={() => (
                         handleOpenModal(),
-                        setTypeModalWindow(MODAL_TYPE.ADD_CLIENT)
+                        setTypeModalWindow(MODAL_TYPE.ADD_CLIENT),
+                        setActiveAnchor(anchorRefClient)
                     )}
+                    ref={anchorRefClient}
                 >
                     <Client name={tempClientName} />
                 </button>
@@ -67,8 +73,10 @@ export default function Cell({ id, day, time }: CellProps) {
                     {cellData?.cells.map((item) => (
                         <button key={item.cell} className={`rounded-xl shadow-lg flex items-center justify-center ${isOpen && item.cell === currentCellId && typeModalWindow === MODAL_TYPE.ADD_WORKER ? 'bg-fuchsia-600' : 'bg-sky-100  hover:bg-emerald-200'} `}
                             onClick={() => (
-                                onClickCallBack(item.cell)
+                                onClickCallBack(item.cell),
+                                setActiveAnchor(anchorRefWorker)
                             )}
+                            ref={anchorRefWorker}
                         >
                             {<WorkerCell cellId={id} id={item.cell} day={day} time={time} />}
                         </button>
@@ -78,6 +86,7 @@ export default function Cell({ id, day, time }: CellProps) {
             <ModalWindow
                 isOpen={isOpen}
                 onClose={handleCloseModal}
+                anchorRef={activeAnchor}
             >
                 {typeModalWindow === MODAL_TYPE.ADD_CLIENT &&
                     <ClientModalTemplate
