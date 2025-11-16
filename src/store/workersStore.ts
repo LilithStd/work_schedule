@@ -43,16 +43,19 @@ export const useWorkersStore = create<WorkersStoreTypes>((set, get) => ({
 		);
 	},
 	updateWorkerData: (updateWorkerData) => {
+		console.log('updateWorkerData', updateWorkerData);
 		set((state) => ({
 			workersData: state.workersData.map((worker) =>
 				worker.id === updateWorkerData.id
 					? {
 							...worker,
+							...updateWorkerData,
 							additionalProperties: {
 								...worker.additionalProperties,
+								...updateWorkerData.additionalProperties,
 								color:
 									updateWorkerData.additionalProperties?.color ??
-									'bg-neutral-600',
+									'bg-netral-300',
 							},
 					  }
 					: worker,

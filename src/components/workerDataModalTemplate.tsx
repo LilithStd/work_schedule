@@ -3,7 +3,7 @@
 import { TYPE_WORKER_MODAL } from "@/consts/template";
 import { useWorkersStore } from "@/store/workersStore"
 import { WorkerDataTypes } from "@/utils/types"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import EditWheelIcon from '../../public/icons/settingWheel.svg'
 
 interface WorkerDataModalTemplateInterfaceProps {
@@ -20,34 +20,53 @@ export default function WorkerDataModalTemplate({ onClose, typeWorkerModal, work
     const [workerData, setWorkerData] = useState<WorkerDataTypes>()
     //store
     const createWorkerData = useWorkersStore((state) => state.createWorkerData)
+    const updateWorkerData = useWorkersStore((state) => state.updateWorkerData)
     // 
     const handleEditWorkerData = (title: string) => {
         setEditStatus(true)
 
     }
+
     const handleEndChangeWorkerData = () => {
-        setEditStatus(false)
-    }
+        const updated = {
+            ...workerData!,
+            name: workerNameTempData,
+            surname: workerSurnameTempData,
+        };
+
+        setWorkerData(updated);
+        handleUpdateWorkerData(updated);
+        updateWorkerData(updated);
+        setEditStatus(false);
+    };
 
 
-    const inputElement = (title: string) => {
-        console.log(workerNameTempData)
-        return (
-            <input
-                type="text"
-                className="border border-gray-300 rounded-md p-2 w-full"
-                placeholder={title}
-                value={editStatus ? workerNameTempData : title === ListTitle.name ? workerNameTempData : workerSurnameTempData}
-                onChange={title === ListTitle.name ? handleEditWorkerName : handleEditWorkerSurname}
-            />)
-    }
+    const inputElement = (title: string) => (
+        <input
+            type="text"
+            className="border border-gray-300 rounded-md p-2 w-full"
+            placeholder={title}
+            value={title === ListTitle.name ? workerNameTempData : workerSurnameTempData}
+            onChange={title === ListTitle.name ? handleEditWorkerName : handleEditWorkerSurname}
+        />
+    );
 
     const ListTitle = {
         name: 'Имя',
         surname: 'Фамилия',
     }
 
-    const changeColorElement = () => { }
+    const changeColorElement = () => {
+        return (
+            <div className="flex justify-between m-6 ">
+                <button className={`${workerData?.additionalProperties?.color} border w-10 h-10 rounded`} onClick={handleChooseColor} ></button>
+                {statusChooseColor && chooseColorsData.map((color) => <div className={`${color} w-10 h-10 rounded hover:border-2`} key={color} onClick={() => {
+                    handleUpdateWorkerData({ id: '', name: '', additionalProperties: { color: color } })
+                    handleChooseColor()
+                }}></div>)}
+            </div>
+        )
+    }
 
     const chooseColorsData =
         ['bg-amber-300', 'bg-sky-300', 'bg-yellow-700', 'bg-teal-600', 'bg-rose-300']
@@ -63,7 +82,7 @@ export default function WorkerDataModalTemplate({ onClose, typeWorkerModal, work
             additionalProperties: { color: workerData?.additionalProperties?.color ?? '' },
         };
 
-        updateWorkerData(newWorker);
+        handleUpdateWorkerData(newWorker);
         createWorkerData(newWorker);
         onClose();
     };
@@ -83,7 +102,7 @@ export default function WorkerDataModalTemplate({ onClose, typeWorkerModal, work
         setWorkerSurnameTempData(e.target.value)
     }
 
-    const updateWorkerData = (workerUpdateData: WorkerDataTypes) => {
+    const handleUpdateWorkerData = (workerUpdateData: WorkerDataTypes) => {
         if (!workerData) {
             const worker = {
                 id: '',
@@ -105,40 +124,26 @@ export default function WorkerDataModalTemplate({ onClose, typeWorkerModal, work
     }
 
 
-
+    useEffect(() => {
+        if (workerEditData) {
+            setWorkerData(workerEditData);
+            setWorkerNameTempData(workerEditData.name);
+            setWorkerSurnameTempData(workerEditData.surname ?? '');
+        }
+    }, [workerEditData]);
 
     return (
         <div className='w-full  text-black'>
-            {/* <p>createWorkerDataModalTemplate</p> */}
             {typeWorkerModal === TYPE_WORKER_MODAL.NEW ? <div>
                 <div className="flex gap-2">
-                    {/* <input
-                        type="text"
-                        className="border border-gray-300 rounded-md p-2 w-full"
-                        placeholder="Имя"
-                        value={workerNameTempData}
-                        onChange={handleEditWorkerName}
-                    /> */}
                     {
                         inputElement(ListTitle.name)
                     }
                     {
                         inputElement(ListTitle.surname)
                     }
-                    {/* <input
-                        type="text" className="border border-gray-300 rounded-md p-2 w-full" placeholder="Фамилия"
-                        value={workerSurnameTempData}
-                        onChange={handleEditWorkerSurname}
-                    /> */}
                 </div>
-
-                <div className="flex justify-between m-6 ">
-                    <button className={`${workerData?.additionalProperties?.color} border w-10 h-10 rounded`} onClick={handleChooseColor} ></button>
-                    {statusChooseColor && chooseColorsData.map((color) => <div className={`${color} w-10 h-10 rounded hover:border-2`} key={color} onClick={() => {
-                        updateWorkerData({ id: '', name: '', additionalProperties: { color: color } })
-                        handleChooseColor()
-                    }}></div>)}
-                </div>
+                {changeColorElement()}
                 <div className="flex gap-2">
                     <button
                         className="mt-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 w-1/2"
@@ -155,10 +160,28 @@ export default function WorkerDataModalTemplate({ onClose, typeWorkerModal, work
                     {workerEditData &&
                         <div className={`flex justify-center items-center flex-col gap-4`}>
                             <div className={`flex gap-2 items-center`}>
-                                {editStatus ? inputElement(ListTitle.name) : <div>
-                                    <h2>{workerEditData.name}</h2>
-                                    <EditWheelIcon width={30} onClick={() => (handleEditWorkerData(ListTitle.name))} />
-                                </div>}
+                                {editStatus ?
+                                    <div>
+                                        {inputElement(ListTitle.name)}
+                                        <div className="flex gap-2">
+                                            <button
+                                                className="mt-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 w-1/2"
+                                                onClick={handleResetState}
+                                            >Reset</button>
+                                            <button
+                                                className="mt-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 w-1/2"
+                                                onClick={() => handleEndChangeWorkerData()}
+                                            >Save</button>
+                                        </div>
+                                    </div> : <div>
+                                        <h2>{workerEditData.name}</h2>
+                                        <EditWheelIcon width={30} onClick={() => (
+                                            handleEditWorkerData(ListTitle.name),
+                                            setWorkerNameTempData(workerEditData.name)
+
+                                        )
+                                        } />
+                                    </div>}
 
                             </div>
 
