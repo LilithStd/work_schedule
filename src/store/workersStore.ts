@@ -43,7 +43,6 @@ export const useWorkersStore = create<WorkersStoreTypes>((set, get) => ({
 		);
 	},
 	updateWorkerData: (updateWorkerData) => {
-		console.log('updateWorkerData', updateWorkerData);
 		set((state) => ({
 			workersData: state.workersData.map((worker) =>
 				worker.id === updateWorkerData.id
@@ -63,6 +62,7 @@ export const useWorkersStore = create<WorkersStoreTypes>((set, get) => ({
 		}));
 	},
 	createWorkerData: (workerData) => {
+		console.log('createWorkerData', workerData);
 		const exists = get().workersData.some(
 			(worker) => worker.id === workerData.id,
 		);
@@ -73,6 +73,7 @@ export const useWorkersStore = create<WorkersStoreTypes>((set, get) => ({
 				{
 					id: nanoid(),
 					name: workerData.name,
+					surname: workerData.surname,
 					additionalProperties: workerData.additionalProperties ?? {
 						color: 'bg-neutral-300',
 					},
