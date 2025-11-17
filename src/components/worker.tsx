@@ -1,7 +1,7 @@
 'use client'
 import { WorkerTypes } from "@/consts/template";
 import { WorkerDataTypes } from "@/utils/types";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 interface WorkerProps {
     worker: WorkerDataTypes,
     callBack?: ({ name, id }: WorkerTypes) => void;
@@ -17,10 +17,26 @@ export default function Worker({ worker, callBack }: WorkerProps) {
     // }
     console.log(worker)
 
+    useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+
+        // Проверка переполнения
+        if (el.scrollWidth > el.clientWidth) {
+            setShort(true);
+        } else {
+            setShort(false);
+        }
+    }, []);
+
+    const displayName = short ? changeWorkerData.name[0] + "." : changeWorkerData.name;
+
+
     return (
         <div
             className={`cursor-pointer sm:flex-col xl:flex-row ${worker.additionalProperties?.color ?? 'bg-violet-600'}   rounded-xl  justify-center items-center flex p-2 text-black gap-2 `}
             draggable="true"
+
             onDragStart={(e) => {
                 e.dataTransfer.setData("application/json", JSON.stringify(worker));
             }}
@@ -28,7 +44,7 @@ export default function Worker({ worker, callBack }: WorkerProps) {
             <p className={`flex-grow text-center justify-center items-center`}>
                 {worker.name ? worker.name : 'worker'}
             </p>
-            <p className={`flex-grow text-center justify-center items-center`} ref={ref}>
+            <p className={`flex-grow text-center justify-center items-center`}>
                 {worker.surname ? worker.surname : 'worker surname'}
             </p>
         </div >
