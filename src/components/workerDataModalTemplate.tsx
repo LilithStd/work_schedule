@@ -175,7 +175,7 @@ export default function WorkerDataModalTemplate({ onClose, typeWorkerModal, work
                                                 onClick={() => handleEndChangeWorkerData()}
                                             >Save</button>
                                         </div>
-                                    </div> : <div>
+                                    </div> : <div className="flex gap-2 items-center">
                                         <h2>{workerEditData.name}</h2>
                                         <EditWheelIcon width={30} onClick={() => (
                                             handleEditWorkerData(ListTitle.name, TYPE_EDIT_WORKER_DATA.NAME),
@@ -199,7 +199,7 @@ export default function WorkerDataModalTemplate({ onClose, typeWorkerModal, work
                                             onClick={() => handleEndChangeWorkerData()}
                                         >Save</button>
                                     </div>
-                                </div> : <div>
+                                </div> : <div className="flex gap-2 items-center">
                                     <h2>{workerEditData.surname}</h2>
                                     <EditWheelIcon width={30} onClick={() => (
                                         handleEditWorkerData(ListTitle.surname, TYPE_EDIT_WORKER_DATA.SURNAME),
@@ -208,7 +208,30 @@ export default function WorkerDataModalTemplate({ onClose, typeWorkerModal, work
                                     )
                                     } />
                                 </div>}
+                            {editStatus && editStatus.type === TYPE_EDIT_WORKER_DATA.COLOR ? <div>
+                                <div className="flex gap-2">
+                                    {changeColorElement()}
+                                </div>
+                                <div className="flex gap-2">
+                                    <button
+                                        className="mt-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 w-1/2"
+                                        onClick={handleResetState}
+                                    >Reset</button>
+                                    <button
+                                        className="mt-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 w-1/2"
+                                        onClick={() => handleEndChangeWorkerData()}
+                                    >Save</button>
+                                </div>
+                            </div> :
+                                <div className="flex flex-col items-center">
+                                    <h2>Color</h2>
+                                    <div className={`${workerData?.additionalProperties?.color} w-10 h-10 rounded hover:border-2`} onClick={() => handleEditWorkerData('color', TYPE_EDIT_WORKER_DATA.COLOR)}></div>
+                                    <EditWheelIcon width={30} onClick={() => handleEditWorkerData('color', TYPE_EDIT_WORKER_DATA.COLOR)} />
+                                </div>
+                            }
+
                         </div>
+
                     }
                 </div>
             }
