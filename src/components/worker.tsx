@@ -29,9 +29,6 @@ export default function Worker({ worker, callBack }: WorkerProps) {
         }
     }, []);
 
-    const displayName = short ? changeWorkerData.name[0] + "." : changeWorkerData.name;
-
-
     return (
         <div
             className={`cursor-pointer sm:flex-col xl:flex-row ${worker.additionalProperties?.color ?? 'bg-violet-600'}   rounded-xl  justify-center items-center flex p-2 text-black gap-2 `}
@@ -44,9 +41,12 @@ export default function Worker({ worker, callBack }: WorkerProps) {
             <p className={`flex-grow text-center justify-center items-center`}>
                 {worker.name ? worker.name : 'worker'}
             </p>
-            <p className={`flex-grow text-center justify-center items-center`}>
-                {worker.surname && worker.surname !== '' ? worker.surname : 'worker surname'}
-            </p>
+            {worker.surname && worker.surname !== '' &&
+                <p className={`flex-grow text-center justify-center items-center`}>
+                    {worker.surname && worker.surname !== '' ? worker.surname : ''}
+                </p>
+            }
+
         </div >
     )
 }

@@ -62,7 +62,7 @@ export const useWorkersStore = create<WorkersStoreTypes>((set, get) => ({
 		}));
 	},
 	createWorkerData: (workerData) => {
-		console.log('createWorkerData', workerData);
+		// console.log('createWorkerData', workerData);
 		const exists = get().workersData.some(
 			(worker) => worker.id === workerData.id,
 		);

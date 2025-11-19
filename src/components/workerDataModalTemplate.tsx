@@ -223,8 +223,7 @@ export default function WorkerDataModalTemplate({ onClose, typeWorkerModal, work
                                     >Save</button>
                                 </div>
                             </div> :
-                                <div className="flex flex-col items-center">
-                                    <h2>Color</h2>
+                                <div className="flex  items-center">
                                     <div className={`${workerData?.additionalProperties?.color} w-10 h-10 rounded hover:border-2`} onClick={() => handleEditWorkerData('color', TYPE_EDIT_WORKER_DATA.COLOR)}></div>
                                     <EditWheelIcon width={30} onClick={() => handleEditWorkerData('color', TYPE_EDIT_WORKER_DATA.COLOR)} />
                                 </div>
