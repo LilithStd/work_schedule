@@ -45,7 +45,7 @@ export default function Worker({ worker, callBack }: WorkerProps) {
                 {worker.name ? worker.name : 'worker'}
             </p>
             <p className={`flex-grow text-center justify-center items-center`}>
-                {worker.surname ? worker.surname : 'worker surname'}
+                {worker.surname && worker.surname !== '' ? worker.surname : 'worker surname'}
             </p>
         </div >
     )

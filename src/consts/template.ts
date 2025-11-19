@@ -110,6 +110,12 @@ export enum GET_REGISTRATION_TYPE {
 	GET_WORKER = 'GET_WORKER',
 }
 
+export enum TYPE_EDIT_WORKER_DATA {
+	NOTHING = 'NOTHING',
+	NAME = 'NAME',
+	SURNAME = 'SURNAME',
+}
+
 export const registartionDataTemplate = [
 	{
 		day: DAYS.MONDAY,

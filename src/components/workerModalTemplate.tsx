@@ -20,7 +20,6 @@ export default function WorkerModalTemplate({ id, day, time, onClose }: WorkerMo
     return (
         <div className='w-full'>
             <p>List availible workers</p>
-            {/* <p>{id}</p> */}
             {getListOfAvailableWorkers(day).map((worker) => (
                 <div key={worker.id} onClick={() => {
                     const updateData = { id: id, day: day, time: time, client: '', worker }

@@ -1,6 +1,6 @@
 'use client'
 
-import { TYPE_WORKER_MODAL } from "@/consts/template";
+import { TYPE_EDIT_WORKER_DATA, TYPE_WORKER_MODAL } from "@/consts/template";
 import { useWorkersStore } from "@/store/workersStore"
 import { WorkerDataTypes } from "@/utils/types"
 import { useEffect, useState } from "react"
@@ -14,7 +14,8 @@ interface WorkerDataModalTemplateInterfaceProps {
 
 export default function WorkerDataModalTemplate({ onClose, typeWorkerModal, workerEditData }: WorkerDataModalTemplateInterfaceProps) {
     const [statusChooseColor, setStatusChooseColor] = useState(false)
-    const [editStatus, setEditStatus] = useState(false)
+    const [editStatus, setEditStatus] = useState({ status: false, type: TYPE_EDIT_WORKER_DATA.NOTHING })
+
     const [workerNameTempData, setWorkerNameTempData] = useState('')
     const [workerSurnameTempData, setWorkerSurnameTempData] = useState('')
     const [workerData, setWorkerData] = useState<WorkerDataTypes>()
@@ -22,8 +23,9 @@ export default function WorkerDataModalTemplate({ onClose, typeWorkerModal, work
     const createWorkerData = useWorkersStore((state) => state.createWorkerData)
     const updateWorkerData = useWorkersStore((state) => state.updateWorkerData)
     // 
-    const handleEditWorkerData = (title: string) => {
-        setEditStatus(true)
+
+    const handleEditWorkerData = (title: string, type: TYPE_EDIT_WORKER_DATA) => {
+        setEditStatus((prev) => ({ ...prev, status: true, type: type }))
 
     }
 
@@ -37,7 +39,7 @@ export default function WorkerDataModalTemplate({ onClose, typeWorkerModal, work
         setWorkerData(updated);
         handleUpdateWorkerData(updated);
         updateWorkerData(updated);
-        setEditStatus(false);
+        setEditStatus((prev) => ({ ...prev, status: false, type: TYPE_EDIT_WORKER_DATA.NOTHING }));
     };
 
 
@@ -160,7 +162,7 @@ export default function WorkerDataModalTemplate({ onClose, typeWorkerModal, work
                     {workerEditData &&
                         <div className={`flex justify-center items-center flex-col gap-4`}>
                             <div className={`flex gap-2 items-center`}>
-                                {editStatus ?
+                                {editStatus && editStatus.type === TYPE_EDIT_WORKER_DATA.NAME ?
                                     <div>
                                         {inputElement(ListTitle.name)}
                                         <div className="flex gap-2">
@@ -176,7 +178,7 @@ export default function WorkerDataModalTemplate({ onClose, typeWorkerModal, work
                                     </div> : <div>
                                         <h2>{workerEditData.name}</h2>
                                         <EditWheelIcon width={30} onClick={() => (
-                                            handleEditWorkerData(ListTitle.name),
+                                            handleEditWorkerData(ListTitle.name, TYPE_EDIT_WORKER_DATA.NAME),
                                             setWorkerNameTempData(workerEditData.name)
 
                                         )
@@ -184,14 +186,28 @@ export default function WorkerDataModalTemplate({ onClose, typeWorkerModal, work
                                     </div>}
 
                             </div>
-
-                            {workerEditData.surname &&
-                                <div className={`flex gap-2 items-center`}>
+                            {editStatus && editStatus.type === TYPE_EDIT_WORKER_DATA.SURNAME ?
+                                <div>
+                                    {inputElement(ListTitle.surname)}
+                                    <div className="flex gap-2">
+                                        <button
+                                            className="mt-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 w-1/2"
+                                            onClick={handleResetState}
+                                        >Reset</button>
+                                        <button
+                                            className="mt-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 w-1/2"
+                                            onClick={() => handleEndChangeWorkerData()}
+                                        >Save</button>
+                                    </div>
+                                </div> : <div>
                                     <h2>{workerEditData.surname}</h2>
-                                    <EditWheelIcon width={30} onClick={handleEditWorkerSurname} />
-                                </div>
-                            }
+                                    <EditWheelIcon width={30} onClick={() => (
+                                        handleEditWorkerData(ListTitle.surname, TYPE_EDIT_WORKER_DATA.SURNAME),
+                                        setWorkerSurnameTempData(workerEditData.surname || '')
 
+                                    )
+                                    } />
+                                </div>}
                         </div>
                     }
                 </div>
