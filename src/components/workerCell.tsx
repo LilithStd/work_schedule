@@ -3,7 +3,7 @@ import { useRegistationStore } from '@/store/registrationStore'
 import AddWorkerIcon from '../../public/icons/user-plus.svg'
 import { WorkerDataTypes } from '@/utils/types';
 import Worker from './worker';
-import { useEffect, useRef, useState } from 'react';
+import { use, useEffect, useRef, useState } from 'react';
 import ModalWindow from './modalWindow';
 import WorkerDataModalTemplate from './workerDataModalTemplate';
 import { useGlobalStore } from '@/store/globalStore';
@@ -20,6 +20,7 @@ interface WorkerCellTypes {
 export default function WorkerCell({ cellId, id, day, time, worker }: WorkerCellTypes) {
     const [isOpen, setIsOpen] = useState(false)
     const [typeOfModalWindow, setTypeOfModalWindow] = useState<TYPE_WORKER_MODAL>(TYPE_WORKER_MODAL.EDIT);
+    const [currrentWorkerData, setCurrentWorkerData] = useState<WorkerDataTypes | null>(null);
 
     const getRegistrationData = useRegistationStore((state) => state.getRegistrationWorkerData);
     const setRegistrationData = useRegistationStore((state) => state.updateRegistrationData)
@@ -59,6 +60,11 @@ export default function WorkerCell({ cellId, id, day, time, worker }: WorkerCell
             const cellIdToUse = cellId ? cellId : '';
             addNewWorkerCell(day || '', time || '', cellIdToUse,)
         }
+    }, [workerData])
+    useEffect(() => {
+        if (worker && (worker.id === '' || worker.name === '')) {
+            setCurrentWorkerData(worker)
+        } else { setCurrentWorkerData(getRegistrationData(id || '')) }
     }, [workerData])
 
     return (

@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useRef, useState } from 'react'
-import Worker from './worker';
+import React, { useEffect, useRef, useState } from 'react'
 import { TYPE_WORKER_MODAL, week, workerListByDayTemplate, workersTest, WorkerTypes } from '@/consts/template';
 import { useWorkersStore } from '@/store/workersStore';
 import AddWorkerIcons from '../../public/icons/user-plus.svg'
@@ -10,7 +9,7 @@ import { useGlobalStore } from '@/store/globalStore';
 import WorkerDataModalTemplate from './workerDataModalTemplate';
 import { WorkerDataTypes } from '@/utils/types';
 import WorkerCell from './workerCell';
-import WorkerPopover from './popover';
+
 
 export type WorkersListProps = {
     day: string;
@@ -20,16 +19,17 @@ export type WorkersListProps = {
 
 export default function WorkersList() {
     const [isOpen, setIsOpen] = useState(false)
+
     const anchorRef = useRef<HTMLButtonElement>(null);
-    const [currentEditWorker, setCurrentEditWorker] = useState<WorkerDataTypes | null>(null)
     const setWorkersListbyDay = useWorkersStore((state) => state.setWorkerListByDay);
     const workerData = useWorkersStore((state) => state.workersData)
     const workerListByDayStore = useWorkersStore((state) => state.workerListByDay);
+    const workersListByDay = useWorkersStore((state) => state.getWorkerListByDay)
     const resetModalStatus = useGlobalStore((state) => state.resetSetOpenStatus)
     const modalStatus = useGlobalStore((state) => state.modalOpenStatus)
     const setModalStatus = useGlobalStore((state) => state.setModalOpenStatus)
     const currentLanguageApp = useGlobalStore((state) => state.currentLanguageApp)
-    const currentWorker = useWorkersStore((state) => state.getWorkerListByDay)
+
 
 
 
@@ -56,7 +56,7 @@ export default function WorkersList() {
 
     }
 
-
+    console.log(workersListByDay('Monday'))
     return (
         <React.Fragment>
             <div className=" bg-sky-600 text-center flex flex-col min-h-50  m-1 rounded-xl">
@@ -84,15 +84,17 @@ export default function WorkersList() {
                     onDragOver={handleDragOver}
                     className="bg-sky-600 rounded-xl m-1 p-2 flex flex-col gap-2"
                 >
-                    {workerListByDayStore[index]?.workers.map((worker) => (
+                    {workersListByDay(day).map((worker) => (<div key={worker.id}>
+                        <WorkerCell worker={worker} />
+                    </div>))}
+                    {/* {workerListByDayStore[index]?.workers.map((worker) => (
 
                         <div key={worker.id}>
                             <WorkerCell worker={worker} />
                         </div>
-                    ))}
+                    ))} */}
                 </div>
             ))}
-            {/* <WorkerPopover /> */}
             <ModalWindow
                 isOpen={isOpen}
                 onClose={handleCloseModal}

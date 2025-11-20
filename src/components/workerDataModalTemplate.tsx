@@ -22,6 +22,7 @@ export default function WorkerDataModalTemplate({ onClose, typeWorkerModal, work
     //store
     const createWorkerData = useWorkersStore((state) => state.createWorkerData)
     const updateWorkerData = useWorkersStore((state) => state.updateWorkerData)
+    const setUpdateWorkerStoreStatus = useWorkersStore((state) => state.setUpdateWorkerStoreStatus);
     // 
 
     const handleEditWorkerData = (title: string, type: TYPE_EDIT_WORKER_DATA) => {
@@ -40,6 +41,8 @@ export default function WorkerDataModalTemplate({ onClose, typeWorkerModal, work
         handleUpdateWorkerData(updated);
         updateWorkerData(updated);
         setEditStatus((prev) => ({ ...prev, status: false, type: TYPE_EDIT_WORKER_DATA.NOTHING }));
+        setUpdateWorkerStoreStatus(true);
+
     };
 
 

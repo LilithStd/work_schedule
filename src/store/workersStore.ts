@@ -22,6 +22,8 @@ type updateWorkerData = {
 };
 
 interface WorkersStoreTypes {
+	updateWorkerStoreStatus: boolean;
+	setUpdateWorkerStoreStatus: (status: boolean) => void;
 	workersData: WorkerDataTypes[];
 	workerListByDay: WorkersListProps[];
 	updateWorkerData: (updateWorkerData: WorkerDataTypes) => void;
@@ -32,6 +34,11 @@ interface WorkersStoreTypes {
 }
 
 export const useWorkersStore = create<WorkersStoreTypes>((set, get) => ({
+	updateWorkerStoreStatus: false,
+	setUpdateWorkerStoreStatus: (status) => {
+		if (status === get().updateWorkerStoreStatus) return;
+		set({updateWorkerStoreStatus: status});
+	},
 	workersData: [],
 	getWorkerById: (id) => {
 		return (
