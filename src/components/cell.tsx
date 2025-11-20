@@ -21,7 +21,7 @@ export default function Cell({ id, day, time }: CellProps) {
     const [isOpen, setIsOpen] = useState(false)
     const [activeAnchor, setActiveAnchor] =
         useState<React.RefObject<HTMLElement | null> | undefined>(undefined);
-    const anchorRefWorker = useRef<HTMLButtonElement>(null);
+    const anchorRefWorker = useRef<HTMLDivElement>(null);
     const anchorRefClient = useRef<HTMLButtonElement>(null);
     const [currentCellId, setCurrentId] = useState('')
     const [typeModalWindow, setTypeModalWindow] = useState<MODAL_TYPE>(MODAL_TYPE.ADD_CLIENT)
@@ -71,7 +71,7 @@ export default function Cell({ id, day, time }: CellProps) {
                 </button>
                 <div className="xl:w-1/2 flex flex-col gap-2 shadow-lg">
                     {cellData?.cells.map((item) => (
-                        <div key={item.cell} className={`rounded-xl shadow-lg flex items-center justify-center ${isOpen && item.cell === currentCellId && typeModalWindow === MODAL_TYPE.ADD_WORKER ? 'bg-fuchsia-600' : 'bg-sky-100  hover:bg-emerald-200'} `}
+                        <div role="button" key={item.cell} className={`rounded-xl shadow-lg flex items-center justify-center ${isOpen && item.cell === currentCellId && typeModalWindow === MODAL_TYPE.ADD_WORKER ? 'bg-fuchsia-600' : 'bg-sky-100  hover:bg-emerald-200'} `}
                             onClick={() => (
                                 onClickCallBack(item.cell),
                                 setActiveAnchor(anchorRefWorker)

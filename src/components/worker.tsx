@@ -15,7 +15,7 @@ export default function Worker({ worker, callBack }: WorkerProps) {
     // const handleOpenModal = () => {
     //     setIsModalOpen(true);
     // }
-    console.log(worker)
+    // console.log(worker)
 
     useEffect(() => {
         const el = ref.current;
