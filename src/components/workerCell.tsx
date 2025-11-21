@@ -55,7 +55,7 @@ export default function WorkerCell({ cellId, id, day, time, worker }: WorkerCell
         // const data = e.dataTransfer.getData("application/json");
         // const selectedWorker: WorkerDataTypes = JSON.parse(data) as WorkerDataTypes;
         const data = e.dataTransfer.getData("application/workerId");
-        const selectedWorker: string = JSON.parse(data) as string;
+        const selectedWorker = data;
         const updateData = { id: id || '', day: day || '', time: time || '', client: '', worker: selectedWorker }
         setRegistrationData(updateData)
     };
