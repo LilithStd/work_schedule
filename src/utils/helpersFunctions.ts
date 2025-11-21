@@ -26,12 +26,13 @@ export const createRegistrationDataTemplate = () => {
 		const registrationTime = timer.map((time) => {
 			const cell = {
 				cell: nanoid(),
-				worker: {
-					id: '',
-					name: '',
-					surname: '',
-					additionalProperties: {color: ''},
-				},
+				worker: '',
+				// worker: {
+				// 	id: '',
+				// 	name: '',
+				// 	surname: '',
+				// 	additionalProperties: {color: ''},
+				// },
 			};
 
 			const registartionBlock = {

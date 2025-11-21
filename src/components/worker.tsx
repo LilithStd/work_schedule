@@ -35,7 +35,7 @@ export default function Worker({ worker, callBack }: WorkerProps) {
             draggable="true"
 
             onDragStart={(e) => {
-                e.dataTransfer.setData("application/json", JSON.stringify(worker));
+                e.dataTransfer.setData("application/workerId", worker.id);
             }}
         >
             <p className={`flex-grow text-center justify-center items-center`}>

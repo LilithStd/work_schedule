@@ -3,18 +3,19 @@ import { useRegistationStore } from '@/store/registrationStore'
 import AddWorkerIcon from '../../public/icons/user-plus.svg'
 import { WorkerDataTypes } from '@/utils/types';
 import Worker from './worker';
-import { use, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ModalWindow from './modalWindow';
 import WorkerDataModalTemplate from './workerDataModalTemplate';
 import { useGlobalStore } from '@/store/globalStore';
 import { TYPE_WORKER_MODAL } from '@/consts/template';
+import { useWorkersStore } from '@/store/workersStore';
 
 interface WorkerCellTypes {
     cellId?: string,
     id?: string,
     day?: string,
     time?: string
-    worker?: WorkerDataTypes
+    worker?: string
 }
 
 export default function WorkerCell({ cellId, id, day, time, worker }: WorkerCellTypes) {
@@ -23,22 +24,24 @@ export default function WorkerCell({ cellId, id, day, time, worker }: WorkerCell
     const [currrentWorkerData, setCurrentWorkerData] = useState<WorkerDataTypes | null>(null);
 
     const getRegistrationData = useRegistationStore((state) => state.getRegistrationWorkerData);
+    const getWorkerData = useWorkersStore((state) => state.getWorkerDataById);
     const setRegistrationData = useRegistationStore((state) => state.updateRegistrationData)
     const addNewWorkerCell = useRegistationStore((state) => state.addNewWorkerCell)
     const resetModalStatus = useGlobalStore((state) => state.resetSetOpenStatus)
     const modalStatus = useGlobalStore((state) => state.modalOpenStatus)
     const setModalStatus = useGlobalStore((state) => state.setModalOpenStatus)
     const anchorRef = useRef<HTMLButtonElement>(null);
-    const workerData = worker ? worker : getRegistrationData(id || '');
+    const workerData = getWorkerData(worker ? worker : getRegistrationData(id || ''))
 
     const handleCloseModal = () => {
         setIsOpen(false)
         resetModalStatus()
 
     }
+    // console.log('workerData in workeCell:', workerData);
 
     const handleOpenModal = () => {
-        if (modalStatus.status && workerData.id !== '' && workerData.name !== '') return
+        if (modalStatus.status && workerData && workerData.name !== '') return
         setIsOpen(true)
         setModalStatus({ status: true, id: '' })
 
@@ -52,29 +55,29 @@ export default function WorkerCell({ cellId, id, day, time, worker }: WorkerCell
         // const data = e.dataTransfer.getData("application/json");
         // const selectedWorker: WorkerDataTypes = JSON.parse(data) as WorkerDataTypes;
         const data = e.dataTransfer.getData("application/workerId");
-        const selectedWorkerId: string = JSON.parse(data) as string;
+        const selectedWorker: string = JSON.parse(data) as string;
         const updateData = { id: id || '', day: day || '', time: time || '', client: '', worker: selectedWorker }
         setRegistrationData(updateData)
     };
 
-    useEffect(() => {
-        if (workerData && workerData.name !== '') {
-            const cellIdToUse = cellId ? cellId : '';
-            addNewWorkerCell(day || '', time || '', cellIdToUse,)
-        }
-    }, [workerData])
-    useEffect(() => {
-        if (worker && (worker.id === '' || worker.name === '')) {
-            setCurrentWorkerData(worker)
-        } else { setCurrentWorkerData(getRegistrationData(id || '')) }
-    }, [workerData])
+    // useEffect(() => {
+    //     if (workerData && workerData.name !== '') {
+    //         const cellIdToUse = cellId ? cellId : '';
+    //         addNewWorkerCell(day || '', time || '', cellIdToUse,)
+    //     }
+    // }, [workerData])
+    // useEffect(() => {
+    //     if (worker && (worker.id === '' || worker.name === '')) {
+    //         setCurrentWorkerData(worker)
+    //     } else { setCurrentWorkerData(getRegistrationData(id || '')) }
+    // }, [workerData])
 
     return (
         <div
 
             onDragOver={handleDragOver}
             onDrop={handleDrop}
-            className={`${workerData.additionalProperties?.color} w-full justify-center flex min-h-10 rounded-xl items-center`}
+            className={`${workerData?.additionalProperties?.color} w-full justify-center flex min-h-10 rounded-xl items-center`}
 
         >
 
@@ -93,7 +96,7 @@ export default function WorkerCell({ cellId, id, day, time, worker }: WorkerCell
                 onClose={handleCloseModal}
                 anchorRef={anchorRef}
             >
-                <WorkerDataModalTemplate onClose={handleCloseModal} typeWorkerModal={typeOfModalWindow} workerEditData={workerData} />
+                <WorkerDataModalTemplate onClose={handleCloseModal} typeWorkerModal={typeOfModalWindow} workerEditData={workerData ?? undefined} />
             </ModalWindow>
         </div>
     );

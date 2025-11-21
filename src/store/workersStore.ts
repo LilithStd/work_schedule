@@ -9,20 +9,19 @@ interface WorkersStoreTypes {
 
 	updateWorkerData: (updateWorkerData: WorkerDataTypes) => void;
 	createWorkerData: (workerData: WorkerDataTypes) => void;
-	getWorkerById: (id: string) => WorkerDataTypes | null;
+	getWorkerDataById: (id: string) => WorkerDataTypes | null;
 	getWorkerListByDay: (day: string) => WorkerDataTypes[];
 	setWorkerListByDay: (day: string, workerId: string) => void;
 }
 
 export const useWorkersStore = create<WorkersStoreTypes>((set, get) => ({
 	workersData: [],
-
 	workerListByDay: workerListByDayTemplate.map((item) => ({
 		day: item.day,
 		workers: [],
 	})),
 
-	getWorkerById: (id) => {
+	getWorkerDataById: (id) => {
 		return get().workersData.find((w) => w.id === id) || null;
 	},
 

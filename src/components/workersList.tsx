@@ -38,9 +38,9 @@ export default function WorkersList() {
     }
     const handleDrop = (e: React.DragEvent<HTMLDivElement>, day: string) => {
         e.preventDefault();
-        const data = e.dataTransfer.getData("application/json");
-        const worker: WorkerDataTypes = JSON.parse(data) as WorkerDataTypes;
-        setWorkersListbyDay(day, worker.id);
+        const data = e.dataTransfer.getData("application/workerId");
+        const worker = data;
+        setWorkersListbyDay(day, worker);
     }
     const handleCloseModal = () => {
         setIsOpen(false)
@@ -60,8 +60,8 @@ export default function WorkersList() {
             <div className=" bg-sky-600 text-center flex flex-col min-h-50  m-1 rounded-xl">
                 <h2 className="text-center">workers</h2>
                 <div className="m-2 flex flex-col gap-2">
-                    {workerData.map((worker) =>
-                        <WorkerCell key={worker.id} worker={worker} />
+                    {workerData.map((workerData) =>
+                        <WorkerCell key={workerData.id} worker={workerData.id} />
                     )}
                 </div>
 
@@ -83,7 +83,7 @@ export default function WorkersList() {
                     className="bg-sky-600 rounded-xl m-1 p-2 flex flex-col gap-2"
                 >
                     {getWorkerListByDay(day).map((worker) => (
-                        <WorkerCell key={worker.id} worker={worker} />
+                        <WorkerCell key={worker.id} worker={worker.id} />
                     ))}
                 </div>
             ))}

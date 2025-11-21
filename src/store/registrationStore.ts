@@ -22,7 +22,8 @@ type workerType = {
 
 export type cellsTypes = {
 	cell: string;
-	worker: WorkerDataTypes;
+	worker: string;
+	// worker: WorkerDataTypes;
 };
 
 export type dataTypes = {
@@ -41,7 +42,8 @@ interface updateDataTypes {
 	day: string;
 	time: string;
 	client: string;
-	worker: WorkerDataTypes;
+	// worker: WorkerDataTypes;
+	worker: string;
 }
 
 export type createRegistrationDataCellProps = {
@@ -58,7 +60,8 @@ interface RegistrationStoreTypes {
 	createRegistrationDataCell: (
 		creatingData: createRegistrationDataCellProps,
 	) => void;
-	getRegistrationWorkerData: (getRegistrationData: string) => WorkerDataTypes;
+	getRegistrationWorkerData: (getRegistrationData: string) => string;
+	// getRegistrationWorkerData: (getRegistrationData: string) => WorkerDataTypes;
 	updateRegistrationData: (updateData: updateDataTypes) => void;
 }
 
@@ -73,14 +76,16 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 		createRegistrationData: () => {
 			const cell = {
 				cell: nanoid(),
-				worker: {
-					id: '',
-					name: '',
-					surname: '',
-					additionalProperties: {
-						color: '',
-					},
-				},
+				worker: '',
+
+				// worker: {
+				// 	id: '',
+				// 	name: '',
+				// 	surname: '',
+				// 	additionalProperties: {
+				// 		color: '',
+				// 	},
+				// },
 			};
 			const registartionBlock = {
 				id: nanoid(),
@@ -117,14 +122,7 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 										cells: [
 											{
 												cell: nanoid(),
-												worker: {
-													id: nanoid(),
-													name: '',
-													surname: '',
-													additionalProperties: {
-														color: '',
-													},
-												},
+												worker: nanoid(),
 											},
 										],
 									};
@@ -142,48 +140,12 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 				}),
 			}));
 		},
-		// 	set((state) => ({
-		// 		registartionData: state.registartionData.map((d) =>
-		// 			d.day === day
-		// 				? {
-		// 						...d,
-		// 						registrationTime: d.registrationTime.map((t) =>
-		// 							t.time === time
-		// 								? {
-		// 										...t,
-		// 										data: t.data.map((block) => ({
-		// 											...block,
-		// 											cells: [
-		// 												...block.cells,
-		// 												{
-		// 													cell: nanoid(),
-		// 													worker: {
-		// 														id: '',
-		// 														name: '',
-		// 														surname: '',
-		// 														additionalProperties: {color: ''},
-		// 													},
-		// 												},
-		// 											],
-		// 										})),
-		// 								  }
-		// 								: t,
-		// 						),
-		// 				  }
-		// 				: d,
-		// 		),
-		// 	}));
-		// },
+
 		addNewWorkerCell: (day: string, time: string, cellId: string) => {
 			//
 			const newCell = {
 				cell: nanoid(),
-				worker: {
-					id: '',
-					name: '',
-					surname: '',
-					additionalProperties: {color: ''},
-				},
+				worker: '',
 			};
 
 			set((state) => ({
@@ -200,7 +162,6 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 								data: t.data.map((block) => {
 									if (block.id !== cellId) return block;
 
-									// 🟢 Добавляем новую ячейку
 									return {
 										...block,
 										cells: [...block.cells, newCell],
@@ -211,40 +172,6 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 					};
 				}),
 			}));
-			// 	registartionData: state.registartionData.map((d) =>
-			// 		d.day === day
-			// 			? {
-			// 					...d,
-			// 					registrationTime: d.registrationTime.map((t) =>
-			// 						t.time === time
-			// 							? {
-			// 									...t,
-			// 									data: t.data.map((block) =>
-			// 										block.id === cellId
-			// 											? {
-			// 													...block,
-			// 													cells: [
-			// 														...block.cells,
-			// 														{
-			// 															cell: nanoid(),
-			// 															worker: {
-			// 																id: '',
-			// 																name: '',
-			// 																surname: '',
-			// 																additionalProperties: {color: ''},
-			// 															},
-			// 														},
-			// 													],
-			// 											  }
-			// 											: block,
-			// 									),
-			// 							  }
-			// 							: t,
-			// 					),
-			// 			  }
-			// 			: d,
-			// 	),
-			// }));
 		},
 		getRegistrationWorkerData: (getRegistrationData) => {
 			const allRegistrationData = get().registartionData;
@@ -253,7 +180,7 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 				.flatMap((timeSlot) => timeSlot.data)
 				.flatMap((entry) => entry.cells)
 				.find((cell) => cell.cell === getRegistrationData);
-			return cell?.worker ?? {id: '', name: ''};
+			return cell?.worker ?? '';
 		},
 		updateRegistrationData: (updateData) => {
 			set((state) => ({
@@ -272,16 +199,13 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 
 														const currentWorker = cell.worker;
 														const newWorker = updateData.worker;
-														if (
-															currentWorker?.id === newWorker?.id &&
-															currentWorker?.name === newWorker?.name
-														) {
+														if (currentWorker === newWorker) {
 															return cell;
 														}
 
 														return {
 															...cell,
-															worker: {...newWorker},
+															worker: newWorker,
 														};
 													}),
 												})),
