@@ -23,15 +23,14 @@ export default function WorkersList() {
     const anchorRef = useRef<HTMLButtonElement>(null);
     const setWorkersListbyDay = useWorkersStore((state) => state.setWorkerListByDay);
     const workerData = useWorkersStore((state) => state.workersData)
-    const workerListByDayStore = useWorkersStore((state) => state.workerListByDay);
+    // const workerListByDayStore = useWorkersStore((state) => state.workerListByDay);
     const workersListByDay = useWorkersStore((state) => state.getWorkerListByDay)
     const resetModalStatus = useGlobalStore((state) => state.resetSetOpenStatus)
     const modalStatus = useGlobalStore((state) => state.modalOpenStatus)
     const setModalStatus = useGlobalStore((state) => state.setModalOpenStatus)
     const currentLanguageApp = useGlobalStore((state) => state.currentLanguageApp)
-
-
-
+    const workerListByDayStore = useWorkersStore((state) => state.workerListByDay);
+    const getWorkerListByDay = useWorkersStore((state) => state.getWorkerListByDay);
 
 
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -41,7 +40,7 @@ export default function WorkersList() {
         e.preventDefault();
         const data = e.dataTransfer.getData("application/json");
         const worker: WorkerDataTypes = JSON.parse(data) as WorkerDataTypes;
-        setWorkersListbyDay({ workers: worker, day: day });
+        setWorkersListbyDay(day, worker.id);
     }
     const handleCloseModal = () => {
         setIsOpen(false)
@@ -56,7 +55,6 @@ export default function WorkersList() {
 
     }
 
-    console.log(workersListByDay('Monday'))
     return (
         <React.Fragment>
             <div className=" bg-sky-600 text-center flex flex-col min-h-50  m-1 rounded-xl">
@@ -84,15 +82,9 @@ export default function WorkersList() {
                     onDragOver={handleDragOver}
                     className="bg-sky-600 rounded-xl m-1 p-2 flex flex-col gap-2"
                 >
-                    {workersListByDay(day).map((worker) => (<div key={worker.id}>
-                        <WorkerCell worker={worker} />
-                    </div>))}
-                    {/* {workerListByDayStore[index]?.workers.map((worker) => (
-
-                        <div key={worker.id}>
-                            <WorkerCell worker={worker} />
-                        </div>
-                    ))} */}
+                    {getWorkerListByDay(day).map((worker) => (
+                        <WorkerCell key={worker.id} worker={worker} />
+                    ))}
                 </div>
             ))}
             <ModalWindow

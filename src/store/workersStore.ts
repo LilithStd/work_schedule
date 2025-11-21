@@ -1,79 +1,50 @@
-import {WorkersListProps} from '@/components/workersList';
-import {COLORS, VALUE_COLORS_STRENGTH} from '@/consts/colors';
-import {workerListByDayTemplate, WorkerTypes} from '@/consts/template';
-import {setColors} from '@/utils/helpersFunctions';
-import {WorkerDataTypes} from '@/utils/types';
 import {nanoid} from 'nanoid';
 import {create} from 'zustand';
-
-type WorkerItem = {
-	id: string;
-	name: string;
-};
-
-type WorkerListByDay = {
-	day: string;
-	workers: WorkerDataTypes;
-};
-
-type updateWorkerData = {
-	id: string;
-	color: string;
-};
+import {workerListByDayTemplate} from '@/consts/template';
+import {WorkerDataTypes} from '@/utils/types';
 
 interface WorkersStoreTypes {
-	updateWorkerStoreStatus: boolean;
-	setUpdateWorkerStoreStatus: (status: boolean) => void;
 	workersData: WorkerDataTypes[];
-	workerListByDay: WorkersListProps[];
+	workerListByDay: {day: string; workers: string[]}[];
+
 	updateWorkerData: (updateWorkerData: WorkerDataTypes) => void;
 	createWorkerData: (workerData: WorkerDataTypes) => void;
-	getWorkerById: (id: string) => WorkerDataTypes;
+	getWorkerById: (id: string) => WorkerDataTypes | null;
 	getWorkerListByDay: (day: string) => WorkerDataTypes[];
-	setWorkerListByDay: (worker: WorkerListByDay) => void;
+	setWorkerListByDay: (day: string, workerId: string) => void;
 }
 
 export const useWorkersStore = create<WorkersStoreTypes>((set, get) => ({
-	updateWorkerStoreStatus: false,
-	setUpdateWorkerStoreStatus: (status) => {
-		if (status === get().updateWorkerStoreStatus) return;
-		set({updateWorkerStoreStatus: status});
-	},
 	workersData: [],
+
+	workerListByDay: workerListByDayTemplate.map((item) => ({
+		day: item.day,
+		workers: [],
+	})),
+
 	getWorkerById: (id) => {
-		return (
-			get().workersData.find((worker) => worker.id === id) || {
-				id: '',
-				name: '',
-				additionalProperties: {color: ''},
-			}
-		);
+		return get().workersData.find((w) => w.id === id) || null;
 	},
-	updateWorkerData: (updateWorkerData) => {
+
+	updateWorkerData: (updated) => {
 		set((state) => ({
 			workersData: state.workersData.map((worker) =>
-				worker.id === updateWorkerData.id
+				worker.id === updated.id
 					? {
 							...worker,
-							...updateWorkerData,
+							...updated,
 							additionalProperties: {
 								...worker.additionalProperties,
-								...updateWorkerData.additionalProperties,
-								color:
-									updateWorkerData.additionalProperties?.color ??
-									'bg-netral-300',
+								...(updated.additionalProperties || {}),
+								color: updated.additionalProperties?.color ?? 'bg-neutral-300',
 							},
 					  }
 					: worker,
 			),
 		}));
 	},
+
 	createWorkerData: (workerData) => {
-		// console.log('createWorkerData', workerData);
-		const exists = get().workersData.some(
-			(worker) => worker.id === workerData.id,
-		);
-		if (exists) return;
 		set((state) => ({
 			workersData: [
 				...state.workersData,
@@ -88,22 +59,25 @@ export const useWorkersStore = create<WorkersStoreTypes>((set, get) => ({
 			],
 		}));
 	},
-	workerListByDay: workerListByDayTemplate,
-	getWorkerListByDay: (day: string) => {
-		const workerList = get().workerListByDay.find((item) => item.day === day);
-		return workerList ? workerList.workers : [];
+
+	getWorkerListByDay: (day) => {
+		const entry = get().workerListByDay.find((d) => d.day === day);
+		if (!entry) return [];
+
+		return entry.workers
+			.map((id) => get().workersData.find((w) => w.id === id))
+			.filter(Boolean) as WorkerDataTypes[]; // возвращаем актуальные данные
 	},
-	setWorkerListByDay: (worker) => {
+
+	setWorkerListByDay: (day, workerId) => {
 		set((state) => ({
-			workerListByDay: state.workerListByDay.map((item) => {
-				if (item.day === worker.day) {
-					if (item.workers.find((w) => w.id === worker.workers.id)) {
-						return item;
-					}
-					return {day: item.day, workers: [...item.workers, worker.workers]};
-				}
-				return item;
-			}),
+			workerListByDay: state.workerListByDay.map((item) =>
+				item.day === day
+					? item.workers.includes(workerId)
+						? item
+						: {...item, workers: [...item.workers, workerId]}
+					: item,
+			),
 		}));
 	},
 }));

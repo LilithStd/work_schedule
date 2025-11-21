@@ -49,8 +49,10 @@ export default function WorkerCell({ cellId, id, day, time, worker }: WorkerCell
     }
     const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
-        const data = e.dataTransfer.getData("application/json");
-        const selectedWorker: WorkerDataTypes = JSON.parse(data) as WorkerDataTypes;
+        // const data = e.dataTransfer.getData("application/json");
+        // const selectedWorker: WorkerDataTypes = JSON.parse(data) as WorkerDataTypes;
+        const data = e.dataTransfer.getData("application/workerId");
+        const selectedWorkerId: string = JSON.parse(data) as string;
         const updateData = { id: id || '', day: day || '', time: time || '', client: '', worker: selectedWorker }
         setRegistrationData(updateData)
     };
