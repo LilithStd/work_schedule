@@ -42,6 +42,7 @@ interface updateDataTypes {
 	day: string;
 	time: string;
 	client: string;
+	cell: string;
 	// worker: WorkerDataTypes;
 	worker: string;
 }
@@ -183,39 +184,60 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 			return cell?.worker ?? '';
 		},
 		updateRegistrationData: (updateData) => {
-			set((state) => ({
-				registartionData: state.registartionData.map((dayItem) =>
-					dayItem.day === updateData.day
-						? {
-								...dayItem,
-								registrationTime: dayItem.registrationTime.map((timeSlot) =>
-									timeSlot.time === updateData.time
-										? {
-												...timeSlot,
-												data: timeSlot.data.map((dataEntry) => ({
-													...dataEntry,
-													cells: dataEntry.cells.map((cell) => {
-														if (cell.cell !== updateData.id) return cell;
+			set((state) => {
+				let shouldAddNewCell = false; // флаг, нужно ли добавить новую ячейку
 
-														const currentWorker = cell.worker;
-														const newWorker = updateData.worker;
-														if (currentWorker === newWorker) {
-															return cell;
-														}
+				const updatedData = state.registartionData.map((dayItem) => {
+					if (dayItem.day !== updateData.day) return dayItem;
 
-														return {
-															...cell,
-															worker: newWorker,
-														};
-													}),
-												})),
-										  }
-										: timeSlot,
-								),
-						  }
-						: dayItem,
-				),
-			}));
+					return {
+						...dayItem,
+						registrationTime: dayItem.registrationTime.map((timeSlot) => {
+							if (timeSlot.time !== updateData.time) return timeSlot;
+
+							return {
+								...timeSlot,
+								data: timeSlot.data.map((dataEntry) => {
+									let updatedCells = dataEntry.cells.map((cell) => {
+										if (cell.cell !== updateData.id) return cell;
+
+										const prevWorker = cell.worker;
+										const newWorker = updateData.worker;
+
+										// проверяем: если раньше worker был пустой, а теперь не пустой → нужно добавить новую ячейку
+										if (!prevWorker && newWorker) {
+											shouldAddNewCell = true;
+										}
+
+										return {
+											...cell,
+											worker: newWorker,
+										};
+									});
+
+									// если надо — добавляем новую пустую ячейку
+									if (shouldAddNewCell) {
+										updatedCells = [
+											...updatedCells,
+											{
+												cell: nanoid(),
+												worker: '',
+											},
+										];
+									}
+
+									return {
+										...dataEntry,
+										cells: updatedCells,
+									};
+								}),
+							};
+						}),
+					};
+				});
+
+				return {registartionData: updatedData};
+			});
 		},
 	}),
 );
