@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react'
-import { TYPE_WORKER_MODAL, week, workerListByDayTemplate, workersTest, WorkerTypes } from '@/consts/template';
+import { TYPE_WORKER_CELL, TYPE_WORKER_MODAL, week, workerListByDayTemplate, workersTest, WorkerTypes } from '@/consts/template';
 import { useWorkersStore } from '@/store/workersStore';
 import AddWorkerIcons from '../../public/icons/user-plus.svg'
 import ModalWindow from './modalWindow';
@@ -61,7 +61,7 @@ export default function WorkersList() {
                 <h2 className="text-center">workers</h2>
                 <div className="m-2 flex flex-col gap-2">
                     {workerData.map((workerData) =>
-                        <WorkerCell key={workerData.id} worker={workerData.id} />
+                        <WorkerCell key={workerData.id} worker={workerData.id} typeWorkerCell={TYPE_WORKER_CELL.CREATE} />
                     )}
                 </div>
 
@@ -83,7 +83,7 @@ export default function WorkersList() {
                     className="bg-sky-600 rounded-xl m-1 p-2 flex flex-col gap-2"
                 >
                     {getWorkerListByDay(day).map((worker) => (
-                        <WorkerCell key={worker.id} worker={worker.id} />
+                        <WorkerCell key={worker.id} worker={worker.id} typeWorkerCell={TYPE_WORKER_CELL.LIST} />
                     ))}
                 </div>
             ))}

@@ -110,6 +110,12 @@ export enum GET_REGISTRATION_TYPE {
 	GET_WORKER = 'GET_WORKER',
 }
 
+export enum TYPE_WORKER_CELL {
+	CREATE = 'CREATE',
+	LIST = 'LIST',
+	CELL = 'CELL',
+}
+
 export enum TYPE_EDIT_WORKER_DATA {
 	NOTHING = 'NOTHING',
 	COLOR = 'COLOR',

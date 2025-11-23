@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import ModalWindow from './modalWindow';
 import WorkerDataModalTemplate from './workerDataModalTemplate';
 import { useGlobalStore } from '@/store/globalStore';
-import { TYPE_WORKER_MODAL } from '@/consts/template';
+import { TYPE_WORKER_CELL, TYPE_WORKER_MODAL } from '@/consts/template';
 import { useWorkersStore } from '@/store/workersStore';
 
 interface WorkerCellTypes {
@@ -16,9 +16,10 @@ interface WorkerCellTypes {
     day?: string,
     time?: string
     worker?: string
+    typeWorkerCell: TYPE_WORKER_CELL
 }
 
-export default function WorkerCell({ cellId, id, day, time, worker }: WorkerCellTypes) {
+export default function WorkerCell({ cellId, id, day, time, worker, typeWorkerCell }: WorkerCellTypes) {
     const [isOpen, setIsOpen] = useState(false)
     const [typeOfModalWindow, setTypeOfModalWindow] = useState<TYPE_WORKER_MODAL>(TYPE_WORKER_MODAL.EDIT);
     const [currrentWorkerData, setCurrentWorkerData] = useState<WorkerDataTypes | null>(null);
@@ -41,7 +42,7 @@ export default function WorkerCell({ cellId, id, day, time, worker }: WorkerCell
     // console.log('workerData in workeCell:', workerData);
 
     const handleOpenModal = () => {
-        if (modalStatus.status && workerData && workerData.name !== '') return
+        if (modalStatus.status && workerData && workerData.name !== '' || typeWorkerCell !== TYPE_WORKER_CELL.CREATE) return
         setIsOpen(true)
         setModalStatus({ status: true, id: '' })
 
