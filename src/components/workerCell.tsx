@@ -1,6 +1,7 @@
 'use client'
 import { useRegistationStore } from '@/store/registrationStore'
 import AddWorkerIcon from '../../public/icons/user-plus.svg'
+import EditWorkerDataWheelIcon from '../../public/icons/settingWheel.svg'
 import { WorkerDataTypes } from '@/utils/types';
 import Worker from './worker';
 import { useEffect, useRef, useState } from 'react';
@@ -92,7 +93,7 @@ export default function WorkerCell({ cellId, id, day, time, worker, typeWorkerCe
                 <Worker worker={workerData} />
 
             </button> : <AddWorkerIcon />}
-
+            {typeWorkerCell === TYPE_WORKER_CELL.CREATE && <EditWorkerDataWheelIcon width={30} heigth={30} />}
 
             <ModalWindow
                 isOpen={isOpen}
