@@ -5,7 +5,7 @@ import ModalWindow from "./modalWindow"
 import { useMemo, useRef, useState } from "react"
 import Client from "./client"
 import ClientModalTemplate from "./clientModalTemplate"
-import { MODAL_TYPE, TYPE_WORKER_MODAL } from "@/consts/template"
+import { MODAL_TYPE, TYPE_WORKER_CELL, TYPE_WORKER_MODAL } from "@/consts/template"
 import WorkerModalTemplate from "./workerModalTemplate"
 import { useRegistationStore } from "@/store/registrationStore"
 import WorkerCell from "./workerCell"
@@ -78,7 +78,7 @@ export default function Cell({ id, day, time }: CellProps) {
                             )}
                             ref={anchorRefWorker}
                         >
-                            {<WorkerCell cellId={id} id={item.cell} day={day} time={time} />}
+                            {<WorkerCell cellId={id} id={item.cell} day={day} time={time} typeWorkerCell={TYPE_WORKER_CELL.LIST} />}
                         </div>
                     ))}
                 </div>
@@ -100,6 +100,7 @@ export default function Cell({ id, day, time }: CellProps) {
                         id={currentCellId}
                         day={day}
                         time={time}
+                        cell={id}
                         onClose={handleCloseModal}
                     />
                 }

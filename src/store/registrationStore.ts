@@ -43,7 +43,6 @@ interface updateDataTypes {
 	time: string;
 	client: string;
 	cell: string;
-	// worker: WorkerDataTypes;
 	worker: string;
 }
 

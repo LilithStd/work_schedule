@@ -18,6 +18,15 @@ export const DAYS = {
 	SUNDAY: 'Sunday',
 };
 
+export const THEME_COLORS = {
+	LIGHT: {
+		background: 'bg-stone-800',
+	},
+	DARK: {
+		background: 'bg-slate-300',
+	},
+};
+
 export const DAYS_TRANSLATED = {
 	MONDAY: {
 		label: DAYS.MONDAY,

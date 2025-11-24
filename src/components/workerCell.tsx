@@ -54,27 +54,12 @@ export default function WorkerCell({ cellId, id, day, time, worker, typeWorkerCe
     }
     const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
-        // const data = e.dataTransfer.getData("application/json");
-        // const selectedWorker: WorkerDataTypes = JSON.parse(data) as WorkerDataTypes;
         const data = e.dataTransfer.getData("application/workerId");
         const selectedWorker = data;
         const updateData = { id: id || '', day: day || '', time: time || '', client: '', cell: cellId || '', worker: selectedWorker }
         setRegistrationData(updateData)
-        // const cellIdToUse = cellId ? cellId : '';
-        // addNewWorkerCell(day || '', time || '', cellIdToUse,)
-    };
 
-    // useEffect(() => {
-    //     if (workerData && workerData.name !== '') {
-    //         const cellIdToUse = cellId ? cellId : '';
-    //         addNewWorkerCell(day || '', time || '', cellIdToUse,)
-    //     }
-    // }, [workerData])
-    // useEffect(() => {
-    //     if (worker && (worker.id === '' || worker.name === '')) {
-    //         setCurrentWorkerData(worker)
-    //     } else { setCurrentWorkerData(getRegistrationData(id || '')) }
-    // }, [workerData])
+    };
 
     return (
         <div
