@@ -1,7 +1,7 @@
 'use client'
 import React, { useMemo } from "react";
 import { useRegistationStore } from "@/store/registrationStore";
-import { THEME, timer, week, weekTranslated } from "@/consts/template";
+import { THEME, THEME_COLORS, timer, week, weekTranslated } from "@/consts/template";
 import Cell from "./cell";
 import WorkersList from "./workersList";
 import LanguageSwitcher from "./languageSwitcher";
@@ -19,10 +19,7 @@ export default function TableCell() {
         (state) => state.registartionData
     );
     const addRegistrationData = useRegistationStore((state) => state.createRegistrationDataCell)
-    const regData = useRegistationStore((state) => state.createRegistrationData)
-    const currentThemeApp = useGlobalStore((state) => state.currentThemeApp)
     const currentLanguageApp = useGlobalStore((state) => state.currentLanguageApp)
-    const dark = 'bg-slate-300'
     const additionalAppFunctional = useMemo(() => {
         return (
             <div className={`flex justify-between bg-sky-600  rounded-xl ${indents.subContainer.margin} ${indents.subContainer.padding}`}>
@@ -80,7 +77,7 @@ export default function TableCell() {
     }, [registrationData, timer]);
 
     return (
-        <div className={`p-6`}>
+        <div className={`p-6 `}>
             {additionalAppFunctional}
             <div className="grid grid-cols-8 m-1">
                 <div className="m-1 rounded-xl bg-sky-600 flex items-center justify-center">

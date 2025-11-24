@@ -1,4 +1,5 @@
 import {nanoid} from 'nanoid';
+import {text} from 'stream/consumers';
 
 export enum TIME {
 	FIRST = '10:00',
@@ -21,9 +22,11 @@ export const DAYS = {
 export const THEME_COLORS = {
 	LIGHT: {
 		background: 'bg-stone-800',
+		textColor: 'text-white',
 	},
 	DARK: {
 		background: 'bg-slate-300',
+		textColor: 'text-black',
 	},
 };
 
