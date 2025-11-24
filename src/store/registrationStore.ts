@@ -62,7 +62,6 @@ interface RegistrationStoreTypes {
 		creatingData: createRegistrationDataCellProps,
 	) => void;
 	getRegistrationWorkerData: (getRegistrationData: string) => string;
-	// getRegistrationWorkerData: (getRegistrationData: string) => WorkerDataTypes;
 	updateRegistrationData: (updateData: updateDataTypes) => void;
 }
 
@@ -78,15 +77,6 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 			const cell = {
 				cell: nanoid(),
 				worker: '',
-
-				// worker: {
-				// 	id: '',
-				// 	name: '',
-				// 	surname: '',
-				// 	additionalProperties: {
-				// 		color: '',
-				// 	},
-				// },
 			};
 			const registartionBlock = {
 				id: nanoid(),
@@ -123,7 +113,7 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 										cells: [
 											{
 												cell: nanoid(),
-												worker: nanoid(),
+												worker: '',
 											},
 										],
 									};
@@ -183,11 +173,64 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 				.find((cell) => cell.cell === getRegistrationData);
 			return cell?.worker ?? '';
 		},
-		updateRegistrationData: (updateData) => {
-			set((state) => {
-				let shouldAddNewCell = false; // флаг, нужно ли добавить новую ячейку
+		// updateRegistrationData: (updateData) => {
+		// 	set((state) => {
+		// 		let shouldAddNewCell = false;
 
-				const updatedData = state.registartionData.map((dayItem) => {
+		// 		const updatedData = state.registartionData.map((dayItem) => {
+		// 			if (dayItem.day !== updateData.day) return dayItem;
+
+		// 			return {
+		// 				...dayItem,
+		// 				registrationTime: dayItem.registrationTime.map((timeSlot) => {
+		// 					if (timeSlot.time !== updateData.time) return timeSlot;
+
+		// 					return {
+		// 						...timeSlot,
+		// 						data: timeSlot.data.map((dataEntry) => {
+		// 							let updatedCells = dataEntry.cells.map((cell) => {
+		// 								if (cell.cell !== updateData.id) return cell;
+
+		// 								const prevWorker = cell.worker;
+		// 								const newWorker = updateData.worker;
+		// 								if (!prevWorker && newWorker) {
+		// 									shouldAddNewCell = true;
+		// 								}
+
+		// 								return {
+		// 									...cell,
+		// 									worker: newWorker,
+		// 								};
+		// 							});
+
+		// 							if (shouldAddNewCell) {
+		// 								updatedCells = [
+		// 									...updatedCells,
+		// 									{
+		// 										cell: nanoid(),
+		// 										worker: '',
+		// 									},
+		// 								];
+		// 							}
+
+		// 							return {
+		// 								...dataEntry,
+		// 								cells: updatedCells,
+		// 							};
+		// 						}),
+		// 					};
+		// 				}),
+		// 			};
+		// 		});
+
+		// 		return {registartionData: updatedData};
+		// 	});
+		// },
+		updateRegistrationData: (updateData) => {
+			let blockIdToAdd: string | null = null;
+
+			set((state) => {
+				const updated = state.registartionData.map((dayItem) => {
 					if (dayItem.day !== updateData.day) return dayItem;
 
 					return {
@@ -198,15 +241,20 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 							return {
 								...timeSlot,
 								data: timeSlot.data.map((dataEntry) => {
-									let updatedCells = dataEntry.cells.map((cell) => {
+									let addedNewCellForThisBlock = false;
+
+									const newCells = dataEntry.cells.map((cell) => {
 										if (cell.cell !== updateData.id) return cell;
 
 										const prevWorker = cell.worker;
 										const newWorker = updateData.worker;
 
-										// проверяем: если раньше worker был пустой, а теперь не пустой → нужно добавить новую ячейку
-										if (!prevWorker && newWorker) {
-											shouldAddNewCell = true;
+										if (
+											(!prevWorker || prevWorker === '') &&
+											newWorker &&
+											newWorker !== ''
+										) {
+											addedNewCellForThisBlock = true;
 										}
 
 										return {
@@ -215,20 +263,13 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 										};
 									});
 
-									// если надо — добавляем новую пустую ячейку
-									if (shouldAddNewCell) {
-										updatedCells = [
-											...updatedCells,
-											{
-												cell: nanoid(),
-												worker: '',
-											},
-										];
+									if (addedNewCellForThisBlock && !blockIdToAdd) {
+										blockIdToAdd = dataEntry.id;
 									}
 
 									return {
 										...dataEntry,
-										cells: updatedCells,
+										cells: newCells,
 									};
 								}),
 							};
@@ -236,8 +277,12 @@ export const useRegistationStore = create<RegistrationStoreTypes>(
 					};
 				});
 
-				return {registartionData: updatedData};
+				return {registartionData: updated};
 			});
+
+			if (blockIdToAdd) {
+				get().addNewWorkerCell(updateData.day, updateData.time, blockIdToAdd);
+			}
 		},
 	}),
 );
