@@ -24,10 +24,6 @@ export default function ClientModalTemplate({ onSaveClientName, clientName, onCl
 
     return (
         <>
-            {/* <h2 className="text-xl font-semibold text-center mb-2">modal window</h2> */}
-            {/* <p className="text-center text-gray-600">
-                {`Это модальное окно для ячейки с ID: ${id}`}
-            </p> */}
             <input
                 type="text"
                 onChange={handleEditClientName}

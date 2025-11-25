@@ -48,7 +48,7 @@ export default function TableCell() {
                     return (
                         <div
                             key={`${day.day}-${time}`}
-                            className={`rounded-xl bg-white text-black text-center ${indents.container.margin}`}
+                            className={`rounded-xl bg-white text-center ${indents.container.margin}`}
                         >
                             {slot?.data?.length ? (
                                 slot.data.map((item) => (
@@ -60,7 +60,7 @@ export default function TableCell() {
                                     />
                                 ))
                             ) : (
-                                <span className="text-gray-400 italic text-sm">empty</span>
+                                <span className=" italic text-sm">empty</span>
                             )}
                             <button className={`p-2 m-2 rounded-xl bg-indigo-300 w-fit hover:bg-violet-300`} onClick={() => addRegistrationData({ day: day.day, time })}>
 
