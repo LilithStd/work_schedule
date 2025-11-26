@@ -43,7 +43,7 @@ export default function ModalWindow({ isOpen, onClose, children, anchorRef }: Mo
                 onClick={(e) => e.stopPropagation()}
             >
                 <CrossCLoseIcons
-                    className="flex ml-auto hover:bg-amber-900 cursor-pointer"
+                    className="flex bg-stone-600 ml-auto hover:bg-amber-900 cursor-pointer"
                     onClick={onClose}
                 />
 

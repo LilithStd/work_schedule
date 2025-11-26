@@ -5,7 +5,7 @@ import ModalWindow from './modalWindow'
 
 export default function CurrentData() {
     const [isOpen, setIsOpen] = useState(false)
-    const anchorRef = useRef<HTMLButtonElement>(null);
+    const anchorRef = useRef<HTMLDivElement>(null);
     const currentData = dayjs().format(('DD/MM/YYYY'))
 
     const handleCloseModal = () => {
@@ -22,14 +22,14 @@ export default function CurrentData() {
                 <h2>Current Data</h2>
                 <p>{currentData}</p>
                 <div>
-                    <button onClick={handleCloseModal}>close</button>
+                    <button onClick={handleCloseModal} className="mt-4 py-2 bg-blue-600  rounded hover:bg-blue-700 w-1/2">close</button>
                 </div>
             </div>
         )
     }
 
     return (
-        <button className="flex flex-col items-center justify-center rounded-xl bg-sky-500 w-60 text-center m-1" ref={anchorRef} onClick={handleOpenModal}>
+        <div role='button' className="flex flex-col items-center justify-center rounded-xl bg-sky-500 w-60 text-center m-1" ref={anchorRef} onClick={handleOpenModal}>
             <h2>Current data</h2>
             <h2 >
                 {currentData}
@@ -41,7 +41,7 @@ export default function CurrentData() {
                 {dataModalModalTemplate()}
                 {/* <p>test</p> */}
             </ModalWindow>
-        </button>
+        </div>
 
     )
 }
