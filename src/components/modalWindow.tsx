@@ -1,6 +1,9 @@
+'use client'
 import { useFloating, offset, flip, shift, autoUpdate } from "@floating-ui/react";
 import CrossCLoseIcons from "../../public/icons/cross.svg";
 import { useEffect } from "react";
+import { useGlobalStore } from "@/store/globalStore";
+import { THEME_COLORS } from "@/consts/template";
 
 interface ModalWindowProps {
     isOpen: boolean;
@@ -10,7 +13,9 @@ interface ModalWindowProps {
 }
 
 export default function ModalWindow({ isOpen, onClose, children, anchorRef }: ModalWindowProps) {
-    // Чтобы popup был привязан к anchorRef:
+    //stores
+    const currentThemeApp = useGlobalStore((state) => state.currentThemeApp);
+    // 
     const { refs, floatingStyles, update } = useFloating({
         placement: "bottom-start",
         middleware: [
@@ -33,13 +38,13 @@ export default function ModalWindow({ isOpen, onClose, children, anchorRef }: Mo
 
     return (
         <div
-            className="fixed inset-0 z-[999] bg-black/20"
+            className={`fixed inset-0 z-[999] bg-black/20  flex items-center justify-center p-4`}
             onClick={onClose}
         >
             <div
                 ref={refs.setFloating}
                 style={floatingStyles}
-                className="bg-white rounded-2xl p-6 shadow-lg max-w-sm w-full flex flex-col"
+                className={`${THEME_COLORS[currentThemeApp].container} rounded-2xl p-6 shadow-lg max-w-sm w-full flex flex-col `}
                 onClick={(e) => e.stopPropagation()}
             >
                 <CrossCLoseIcons

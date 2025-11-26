@@ -23,10 +23,12 @@ export const THEME_COLORS = {
 	LIGHT: {
 		background: 'bg-stone-800',
 		textColor: 'text-white',
+		container: 'bg-sky-300',
 	},
 	DARK: {
 		background: 'bg-slate-300',
 		textColor: 'text-black',
+		container: 'bg-indigo-800',
 	},
 };
 

@@ -2,9 +2,15 @@
 import dayjs from 'dayjs'
 import React, { useRef, useState } from 'react'
 import ModalWindow from './modalWindow'
+import { useGlobalStore } from '@/store/globalStore'
+import { THEME_COLORS } from '@/consts/template'
 
 export default function CurrentData() {
     const [isOpen, setIsOpen] = useState(false)
+
+    // stores
+    const currentThemeApp = useGlobalStore((state) => state.currentThemeApp)
+    // 
     const anchorRef = useRef<HTMLDivElement>(null);
     const currentData = dayjs().format(('DD/MM/YYYY'))
 
@@ -18,7 +24,7 @@ export default function CurrentData() {
 
     const dataModalModalTemplate = () => {
         return (
-            <div className={`text-black p-4`}>
+            <div className={`p-4  `}>
                 <h2>Current Data</h2>
                 <p>{currentData}</p>
                 <div>
@@ -29,7 +35,7 @@ export default function CurrentData() {
     }
 
     return (
-        <div role='button' className="flex flex-col items-center justify-center rounded-xl bg-sky-500 w-60 text-center m-1" ref={anchorRef} onClick={handleOpenModal}>
+        <div className={`flex flex-col items-center justify-center rounded-xl ${THEME_COLORS[currentThemeApp].textColor}  bg-sky-500  w-60 text-center m-1`} ref={anchorRef} onClick={handleOpenModal}>
             <h2>Current data</h2>
             <h2 >
                 {currentData}
@@ -39,7 +45,6 @@ export default function CurrentData() {
                 onClose={handleCloseModal}
                 anchorRef={anchorRef}>
                 {dataModalModalTemplate()}
-                {/* <p>test</p> */}
             </ModalWindow>
         </div>
 
