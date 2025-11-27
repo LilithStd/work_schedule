@@ -70,15 +70,25 @@ export default function WorkerCell({ cellId, id, day, time, worker, typeWorkerCe
 
         >
 
-            {workerData && workerData.name ? <button
+            {workerData ? <button
                 onClick={handleOpenModal}
                 ref={anchorRef}
 
             >
                 <Worker worker={workerData} />
-
+                {typeWorkerCell === TYPE_WORKER_CELL.CREATE && <button
+                    onClick={handleOpenModal}
+                    ref={anchorRef}
+                >
+                    <EditWorkerDataWheelIcon width={30} heigth={30} />
+                </button>}
             </button> : <AddWorkerIcon />}
-            {typeWorkerCell === TYPE_WORKER_CELL.CREATE && <EditWorkerDataWheelIcon width={30} heigth={30} />}
+            {/* {typeWorkerCell === TYPE_WORKER_CELL.CREATE && <button
+                onClick={handleOpenModal}
+                ref={anchorRef}
+            >
+                <EditWorkerDataWheelIcon width={30} heigth={30} />
+            </button>} */}
 
             <ModalWindow
                 isOpen={isOpen}
