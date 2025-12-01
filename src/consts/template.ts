@@ -1,5 +1,4 @@
 import {nanoid} from 'nanoid';
-import {text} from 'stream/consumers';
 
 export enum TIME {
 	FIRST = '10:00',
@@ -24,11 +23,15 @@ export const THEME_COLORS = {
 		background: 'bg-stone-800',
 		textColor: 'text-white',
 		container: 'bg-sky-300',
+		button: 'bg-sky-600',
+		hover: 'hover:bg-sky-700',
 	},
 	DARK: {
 		background: 'bg-slate-300',
 		textColor: 'text-black',
-		container: 'bg-indigo-800',
+		container: 'bg-sky-300',
+		button: 'bg-sky-500',
+		hover: 'hover:bg-sky-600',
 	},
 };
 

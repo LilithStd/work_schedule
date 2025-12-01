@@ -24,20 +24,20 @@ export default function CurrentData() {
 
     const dataModalModalTemplate = () => {
         return (
-            <div className={`p-4  `}>
+            <div className={`p-4`}>
                 <h2>Current Data</h2>
                 <p>{currentData}</p>
                 <div>
-                    <button onClick={handleCloseModal} className="mt-4 py-2 bg-blue-600  rounded hover:bg-blue-700 w-1/2">close</button>
+                    <button onClick={handleCloseModal} className={`mt-4 py-2 ${THEME_COLORS[currentThemeApp].button} rounded hover:bg-blue-700 w-1/2`}>close</button>
                 </div>
             </div>
         )
     }
 
     return (
-        <div className={`flex flex-col items-center justify-center rounded-xl ${THEME_COLORS[currentThemeApp].textColor}  bg-sky-500  w-60 text-center m-1`} ref={anchorRef} onClick={handleOpenModal}>
-            <h2>Current data</h2>
-            <h2 >
+        <div className={`flex flex-col items-center justify-center rounded-xl cursor-pointer ${THEME_COLORS[currentThemeApp].textColor}  bg-sky-500  w-60 text-center m-1`} ref={anchorRef} onClick={handleOpenModal}>
+            <h1>Current data</h1>
+            <h2>
                 {currentData}
             </h2>
             <ModalWindow
