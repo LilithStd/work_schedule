@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 import ModalWindow from './modalWindow';
 import WorkerDataModalTemplate from './workerDataModalTemplate';
 import { useGlobalStore } from '@/store/globalStore';
-import { TYPE_WORKER_CELL, TYPE_WORKER_MODAL } from '@/consts/template';
+import { THEME_COLORS, TYPE_WORKER_CELL, TYPE_WORKER_MODAL } from '@/consts/template';
 import { useWorkersStore } from '@/store/workersStore';
 
 interface WorkerCellTypes {
@@ -24,7 +24,8 @@ export default function WorkerCell({ cellId, id, day, time, worker, typeWorkerCe
     const [isOpen, setIsOpen] = useState(false)
     const [typeOfModalWindow, setTypeOfModalWindow] = useState<TYPE_WORKER_MODAL>(TYPE_WORKER_MODAL.EDIT);
     const [currrentWorkerData, setCurrentWorkerData] = useState<WorkerDataTypes | null>(null);
-
+    //stores
+    const currentThemeApp = useGlobalStore((state) => state.currentThemeApp);
     const getRegistrationData = useRegistationStore((state) => state.getRegistrationWorkerData);
     const getWorkerData = useWorkersStore((state) => state.getWorkerDataById);
     const setRegistrationData = useRegistationStore((state) => state.updateRegistrationData)
@@ -34,13 +35,15 @@ export default function WorkerCell({ cellId, id, day, time, worker, typeWorkerCe
     const setModalStatus = useGlobalStore((state) => state.setModalOpenStatus)
     const anchorRef = useRef<HTMLButtonElement>(null);
     const workerData = getWorkerData(worker ? worker : getRegistrationData(id || ''))
+    // 
 
+    // 
     const handleCloseModal = () => {
         setIsOpen(false)
         resetModalStatus()
 
     }
-    // console.log('workerData in workeCell:', workerData);
+
 
     const handleOpenModal = () => {
         if (modalStatus.status && workerData && workerData.name !== '' || typeWorkerCell !== TYPE_WORKER_CELL.CREATE) return
@@ -66,19 +69,23 @@ export default function WorkerCell({ cellId, id, day, time, worker, typeWorkerCe
 
             onDragOver={handleDragOver}
             onDrop={handleDrop}
-            className={`${workerData?.additionalProperties?.color} w-full justify-center flex min-h-10 rounded-xl items-center`}
+            className={`${workerData?.additionalProperties?.color ?? THEME_COLORS[currentThemeApp].subContainer} w-full justify-center flex min-h-10 rounded-xl items-center`}
 
         >
 
             {workerData ? <button
                 onClick={handleOpenModal}
                 ref={anchorRef}
-                className="w-full flex items-center justify-between px-2 py-1"
+                className={`"w-full flex items-center justify-between  px-2 py-1"`}
 
             >
                 <Worker worker={workerData} />
                 <EditWorkerDataWheelIcon width={30} heigth={30} />
-            </button> : <AddWorkerIcon />}
+            </button> :
+                <div >
+                    <AddWorkerIcon />
+                </div>
+            }
             <ModalWindow
                 isOpen={isOpen}
                 onClose={handleCloseModal}
