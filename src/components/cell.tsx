@@ -5,7 +5,7 @@ import ModalWindow from "./modalWindow"
 import { useMemo, useRef, useState } from "react"
 import Client from "./client"
 import ClientModalTemplate from "./clientModalTemplate"
-import { MODAL_TYPE, TYPE_WORKER_CELL, TYPE_WORKER_MODAL } from "@/consts/template"
+import { MODAL_TYPE, THEME_COLORS, TYPE_WORKER_CELL, TYPE_WORKER_MODAL } from "@/consts/template"
 import WorkerModalTemplate from "./workerModalTemplate"
 import { useRegistationStore } from "@/store/registrationStore"
 import WorkerCell from "./workerCell"
@@ -26,11 +26,13 @@ export default function Cell({ id, day, time }: CellProps) {
     const [currentCellId, setCurrentId] = useState('')
     const [typeModalWindow, setTypeModalWindow] = useState<MODAL_TYPE>(MODAL_TYPE.ADD_CLIENT)
     const [tempClientName, setTempClientName] = useState("")
+    //stores
+    const currentThemeApp = useGlobalStore((state) => state.currentThemeApp);
     const modalStatus = useGlobalStore((state) => state.modalOpenStatus)
     const setModalStatus = useGlobalStore((state) => state.setModalOpenStatus)
     const resetModalStatus = useGlobalStore((state) => state.resetSetOpenStatus)
     const registrationData = useRegistationStore(state => state.registartionData);
-
+    // 
     const cellData = useMemo(() => {
         const dayData = registrationData.find(d => d.day === day);
         const timeData = dayData?.registrationTime.find(t => t.time === time);
@@ -59,7 +61,7 @@ export default function Cell({ id, day, time }: CellProps) {
         <div className="m-2">
             <div className="flex flex-col xl:flex-row gap-2">
                 <button
-                    className={`xl:w-1/2 row-start-1 row-end-2  min-h-10 rounded-xl ${isOpen && typeModalWindow === MODAL_TYPE.ADD_CLIENT ? 'bg-fuchsia-600' : tempClientName.length > 0 ? 'bg-emerald-500 hover:bg-emerald-200' : 'bg-sky-500 hover:bg-sky-700'}`}
+                    className={`xl:w-1/2 row-start-1 row-end-2  min-h-10 rounded-xl ${isOpen && typeModalWindow === MODAL_TYPE.ADD_CLIENT ? 'bg-fuchsia-600' : tempClientName.length > 0 ? 'bg-emerald-500 hover:bg-emerald-200' : `${THEME_COLORS[currentThemeApp].container}`}  flex items-center justify-center`}
                     onClick={() => (
                         handleOpenModal(),
                         setTypeModalWindow(MODAL_TYPE.ADD_CLIENT),
