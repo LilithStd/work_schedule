@@ -21,14 +21,40 @@ export default function ClientModalTemplate({ onSaveClientName, clientName, onCl
         onClose();
         setTempClientName("");
     }
+    type clientPropsType = {
+        id: string;
+        name: string;
+        surname: string;
+        personalCode: string;
+        typeEkspertise: string;
+        status: string;
+        customer: string;
+    }
+
+    const statusClient = {
+        suspected: "Подозреваемый",
+        accused: "Обвиняемый",
+        witness: "Свидетель",
+        victim: "Потерпевший"
+    }
 
     return (
         <>
-            <input
-                type="text"
-                onChange={handleEditClientName}
-                value={tempClientName}
-                className="border border-gray-300 rounded-md p-2 w-full" placeholder="Введите текст..." />
+            <div>
+                <input
+                    type="text"
+                    onChange={handleEditClientName}
+                    value={tempClientName}
+                    className="border border-gray-300 rounded-md p-2 w-full" placeholder="Name"
+                />
+                <input
+                    type="text"
+                    onChange={handleEditClientName}
+                    value={tempClientName}
+                    className="border border-gray-300 rounded-md p-2 w-full" placeholder="Surname"
+                />
+            </div>
+
             <div className="gap-2 flex">
                 <button
                     onClick={handleClose}
