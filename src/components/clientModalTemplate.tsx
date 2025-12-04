@@ -21,22 +21,7 @@ export default function ClientModalTemplate({ onSaveClientName, clientName, onCl
         onClose();
         setTempClientName("");
     }
-    type clientPropsType = {
-        id: string;
-        name: string;
-        surname: string;
-        personalCode: string;
-        typeEkspertise: string;
-        status: string;
-        customer: string;
-    }
 
-    const statusClient = {
-        suspected: "Подозреваемый",
-        accused: "Обвиняемый",
-        witness: "Свидетель",
-        victim: "Потерпевший"
-    }
 
     return (
         <>
