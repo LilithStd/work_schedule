@@ -1,4 +1,7 @@
-import { useState } from "react";
+'use client'
+import { THEME_COLORS } from "@/consts/template";
+import { useGlobalStore } from "@/store/globalStore";
+import { use, useState } from "react";
 
 interface ClientModalTemplateProps {
     clientName?: string;
@@ -9,6 +12,11 @@ interface ClientModalTemplateProps {
 
 export default function ClientModalTemplate({ onSaveClientName, clientName, onClose, id }: ClientModalTemplateProps) {
     const [tempClientName, setTempClientName] = useState('');
+    const [tempSurname, setTempSurname] = useState('');
+    //stores
+    const currentThemeApp = useGlobalStore((state) => state.currentThemeApp);
+
+    //
     const handleEditClientName = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTempClientName(e.target.value)
     }
@@ -25,18 +33,18 @@ export default function ClientModalTemplate({ onSaveClientName, clientName, onCl
 
     return (
         <>
-            <div>
+            <div className={`flex flex-col gap-4 mt-4`}>
                 <input
                     type="text"
                     onChange={handleEditClientName}
                     value={tempClientName}
-                    className="border border-gray-300 rounded-md p-2 w-full" placeholder="Name"
+                    className={`border ${THEME_COLORS[currentThemeApp].inputContainer} border-gray-300 rounded-md p-2 w-full`} placeholder="Name"
                 />
                 <input
                     type="text"
                     onChange={handleEditClientName}
                     value={tempClientName}
-                    className="border border-gray-300 rounded-md p-2 w-full" placeholder="Surname"
+                    className={`border ${THEME_COLORS[currentThemeApp].inputContainer} border-gray-300 rounded-md p-2 w-full`} placeholder="Surname"
                 />
             </div>
 
