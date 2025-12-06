@@ -1,4 +1,5 @@
 import {nanoid} from 'nanoid';
+import { APP_ROUTES } from './globalConsts';
 
 export enum TIME {
 	FIRST = '10:00',
@@ -38,6 +39,33 @@ export const THEME_COLORS = {
 		hover: 'hover:bg-sky-600',
 	},
 };
+
+export const APP_ROUTES_LABEL = {
+	MAIN : {
+		LABEL:{
+			EN:'Main',
+			RU:'Главная',
+			LV:'Galvena'
+		},
+		PATH:APP_ROUTES.MAIN
+	} ,
+	SCHEDULE : {
+		LABEL:{
+			EN:'Schedule',
+			RU:'Расписание',
+			LV:'Grafiks'
+		},
+		PATH:APP_ROUTES.SCHEDULE
+	},
+	CLIENTS : {
+		LABEL:{
+			EN:'Clients',
+			RU:'Клиенты',
+			LV:'Klients'
+		},
+		PATH:APP_ROUTES.CLIENTS
+	}
+}
 
 export const DAYS_TRANSLATED = {
 	MONDAY: {

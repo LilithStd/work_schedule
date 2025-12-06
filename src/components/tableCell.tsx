@@ -4,8 +4,6 @@ import { useRegistationStore } from "@/store/registrationStore";
 import { THEME, THEME_COLORS, timer, week, weekTranslated } from "@/consts/template";
 import Cell from "./cell";
 import WorkersList from "./workersList";
-import LanguageSwitcher from "./languageSwitcher";
-import ThemeSwitcher from "./themeSwitcher";
 import { useGlobalStore } from "@/store/globalStore";
 import CurrentData from "./currentData";
 import { indents, shadow } from "@/consts/globalStyles";
@@ -28,10 +26,6 @@ export default function TableCell() {
                     Workers Table
                 </h2 >
                 <CurrentData />
-                <div className="flex justify-end">
-                    <ThemeSwitcher />
-                    <LanguageSwitcher />
-                </div>
             </div >)
     }, [])
 

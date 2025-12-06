@@ -1,19 +1,43 @@
+'use client'
 import LanguageSwitcher from '@/components/languageSwitcher'
 import ThemeSwitcher from '@/components/themeSwitcher'
-import React from 'react'
+import { APP_ROUTES } from '@/consts/globalConsts'
+import { indents } from '@/consts/globalStyles'
+import { THEME_COLORS } from '@/consts/template'
+import { useGlobalStore } from '@/store/globalStore'
+import Link from "next/link";
 
 export default function StartPage() {
+    //stores
+    const currentThemeApp = useGlobalStore((state) => state.currentThemeApp)
+    //
+
+    // const handleRouter = (router: string) => {
+
+    //  }
+
     return (
         <div className={`flex flex-col  min-h-screen m-4 p-4`}>
-            <div className={`flex justify-between bg-sky-600  rounded-xl m-2 p-2 w-full`}>
-                <div className="flex justify-end">
-                    <ThemeSwitcher />
-                    <LanguageSwitcher />
+
+            <div className={`flex flex-col`}>
+                <div className={`flex flex-col justify-center items-center`}>
+                    <h2>Start Page</h2>
+                    <p>Choose Path</p>
+
                 </div>
-            </div>
-            <div className={`flex flex-col justify-center items-center flex-1`}>
-                <h2>Start Page</h2>
-                <p>Choose Path</p>
+                <div className={`flex justify-center items-center`}>
+                    <button
+
+                        className={`w-2xs rounded-xl min-h-10  ${indents.container.margin} ${indents.container.padding} text-center ${THEME_COLORS[currentThemeApp].button}`}>
+                        <Link href={APP_ROUTES.SCHEDULE}>Schedule</Link>
+
+                    </button>
+                    <button
+                        className={`w-2xs rounded-xl min-h-10  ${indents.container.margin} ${indents.container.padding} text-center ${THEME_COLORS[currentThemeApp].button}`}>
+                        <Link href={APP_ROUTES.CLIENTS}>Clients</Link>
+
+                    </button>
+                </div>
             </div>
 
         </div>
