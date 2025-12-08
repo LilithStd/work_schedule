@@ -71,7 +71,7 @@ export default function TableCell() {
     }, [registrationData, timer]);
 
     return (
-        <div className={`p-6 `}>
+        <div className={``}>
             {additionalAppFunctional}
             <div className="grid grid-cols-8 m-1">
                 <div className="m-1 rounded-xl bg-sky-600 flex items-center justify-center">

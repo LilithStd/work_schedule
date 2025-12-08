@@ -17,9 +17,10 @@ export default function StartPage() {
     //  }
 
     return (
-        <div className={`flex flex-col  min-h-screen m-4 p-4`}>
+        <main className={`flex flex-col   min-h-screen`}>
 
-            <div className={`flex flex-col`}>
+            <div className={`flex flex-col rounded-xl ${THEME_COLORS[currentThemeApp].subContainer}  
+        ${indents.mainContainer.margin} ${indents.mainContainer.padding}`}>
                 <div className={`flex flex-col justify-center items-center`}>
                     <h2>Start Page</h2>
                     <p>Choose Path</p>
@@ -40,6 +41,6 @@ export default function StartPage() {
                 </div>
             </div>
 
-        </div>
+        </main>
     )
 }

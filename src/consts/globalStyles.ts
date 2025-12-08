@@ -14,6 +14,10 @@ export const indents = {
 		margin: 'm-2',
 		padding: 'p-2',
 	},
+	mainContainer:{
+		margin:'m-8',
+		padding:'p-8'
+	},
 	container: {
 		margin: 'm-1',
 		padding: 'p-1',

@@ -13,16 +13,16 @@ export default function Header() {
     const currentLanguageApp = useGlobalStore((state) => state.currentLanguageApp)
     //
     return (
-        <header className={`p-8 pb-0`}>
-            <div className="flex bg-sky-600 rounded-xl">
-                <button className={`flex justify-between bg-sky-600  rounded-xl ${indents.subContainer.margin} ${indents.subContainer.padding}`}>
-                    <Link href={APP_ROUTES_LABEL.MAIN.PATH} className="flex items-center justify-center rounded-xl bg-sky-500 p-2 w-60 text-center">{APP_ROUTES_LABEL.MAIN.LABEL[currentLanguageApp]}</Link>
-                </button>
-                <div className="flex justify-end w-full gap-2">
+        <header className={`flex`}>
+            <div className={`flex w-full rounded-xl bg-sky-600 ${indents.mainContainer.margin} justify-between `}>
+                <Link href={APP_ROUTES_LABEL.MAIN.PATH} className={`"flex ${indents.subContainer.margin} ${indents.subContainer.padding} bg-amber-700 items-center justify-center rounded-xl "`}>{APP_ROUTES_LABEL.MAIN.LABEL[currentLanguageApp]}</Link>
+                <div className="flex justify-end items-center  gap-2">
                     <ThemeSwitcher />
                     <LanguageSwitcher />
                 </div>
+
             </div>
+
         </header>
     )
 }
