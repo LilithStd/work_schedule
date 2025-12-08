@@ -44,7 +44,7 @@ export default function ModalWindow({ isOpen, onClose, children, anchorRef }: Mo
             <div
                 ref={refs.setFloating}
                 style={floatingStyles}
-                className={`${THEME_COLORS[currentThemeApp].container} rounded-2xl p-6 shadow-lg max-w-sm w-full flex flex-col `}
+                className={`${THEME_COLORS[currentThemeApp].container} ${THEME_COLORS[currentThemeApp].textColor} rounded-2xl p-6 shadow-lg max-w-sm w-full flex flex-col `}
                 onClick={(e) => e.stopPropagation()}
             >
                 <CrossCLoseIcons

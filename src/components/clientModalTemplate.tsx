@@ -1,7 +1,9 @@
 'use client'
 import { THEME_COLORS } from "@/consts/template";
+import { useRouter } from 'next/navigation';
 import { useGlobalStore } from "@/store/globalStore";
-import { use, useState } from "react";
+import { useState } from "react";
+import { APP_ROUTES } from "@/consts/globalConsts";
 
 interface ClientModalTemplateProps {
     clientName?: string;
@@ -11,6 +13,7 @@ interface ClientModalTemplateProps {
 }
 
 export default function ClientModalTemplate({ onSaveClientName, clientName, onClose, id }: ClientModalTemplateProps) {
+    const router = useRouter();
     const [tempClientName, setTempClientName] = useState('');
     const [tempSurname, setTempSurname] = useState('');
     //stores
@@ -21,19 +24,28 @@ export default function ClientModalTemplate({ onSaveClientName, clientName, onCl
         setTempClientName(e.target.value)
     }
 
+    const handleRedirectToNewClient = () => {
+        onClose();
+        router.push(APP_ROUTES.CLIENTS)
+    }
+    const handleRedirectToClientPage = () => {
+        onClose();
+        router.push(APP_ROUTES.CLIENTS)
+    }
+
     if (clientName && tempClientName === '') {
         setTempClientName(clientName);
     }
 
-    const handleClose = () => {
-        onClose();
-        setTempClientName("");
-    }
+    // const handleClose = () => {
+    //     onClose();
+    //     setTempClientName("");
+    // }
 
 
     return (
-        <>
-            <div className={`flex flex-col gap-4 mt-4`}>
+        <div className={``}>
+            {/* <div className={`flex flex-col gap-4 mt-4`}>
                 <input
                     type="text"
                     onChange={handleEditClientName}
@@ -46,23 +58,24 @@ export default function ClientModalTemplate({ onSaveClientName, clientName, onCl
                     value={tempClientName}
                     className={`border ${THEME_COLORS[currentThemeApp].inputContainer} border-gray-300 rounded-md p-2 w-full`} placeholder="Surname"
                 />
-            </div>
+            </div> */}
 
             <div className="gap-2 flex">
                 <button
-                    onClick={handleClose}
-                    className="mt-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 w-1/2"
+                    onClick={handleRedirectToNewClient}
+                    className={`${THEME_COLORS[currentThemeApp].button} mt-4 py-2 rounded-lg hover:bg-blue-700 w-1/2`}
                 >
-                    Закрыть
+                    Create New CLient
                 </button>
                 <button
-                    onClick={() => {
-                        handleClose();
-                        if (onSaveClientName) { onSaveClientName(tempClientName) };
-                    }}
-                    className="mt-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 w-1/2"
-                >Save</button>
+                    // onClick={() => {
+                    //     handleClose();
+                    //     if (onSaveClientName) { onSaveClientName(tempClientName) };
+                    // }}
+                    onClick={handleRedirectToClientPage}
+                    className={`${THEME_COLORS[currentThemeApp].button} mt-4 py-2 rounded-lg hover:bg-blue-700 w-1/2`}
+                >Go to Clients Page</button>
             </div>
-        </>
+        </div>
     )
 }
