@@ -3988,7 +3988,21 @@ export const MonthsData = {
 	},
 };
 
-export const MONTHS = []
+export const MONTHS = [
+	MonthsData.JANUARY,
+	MonthsData.FEBRUARY,
+	MonthsData.MARCH,
+	MonthsData.APRIL,
+	MonthsData.MAY,
+	MonthsData.JUNE,
+	MonthsData.JULY,
+	MonthsData.AUGUST,
+	MonthsData.SEPTEMBER,
+	MonthsData.OCTOBER,
+	MonthsData.NOVEMBER,
+	MonthsData.DECEMBER
+]
+const test = new Array(MonthsData)
 	
 
 
