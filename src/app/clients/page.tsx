@@ -19,37 +19,46 @@ export default function Clients() {
     const currentThemeApp = useGlobalStore((state) => state.currentThemeApp)
     // 
     //components
-    const listMonths =
-        <div className={`flex flex-col gap-2 justify-end`}>
-            {MONTHS.map((month) => <button key={month.LABEL} onClick={() => {
+    const [openMonth, setOpenMonth] = useState<string | null>(null);
+    const handleClick = (monthLabel: string) => {
+        setOpenMonth((prev) => (prev === monthLabel ? null : monthLabel));
+    };
+
+    const listMonths = (
+        <div className="flex flex-col gap-2">
+            {MONTHS.map((month) => {
+                const isOpen = openMonth === month.LABEL;
+
                 const year = dayjs().year();
-                const currentMonth = month.NUMBER_MONTH;
-                const daysInMonth = dayjs(`${year}-${currentMonth}-01`).daysInMonth();
+                const daysInMonth = dayjs(`${year}-${month.NUMBER_MONTH}`).daysInMonth();
                 const daysArray = Array.from({ length: daysInMonth }, (_, i) => i + 1);
 
-                if (isOpen && chooseMonthToOpen === month.LABEL) {
-                    // Повторный клик по тому же месяцу — закрываем
-                    setIsOpen(false);
-                    setDays([]);
-                    setChooseMonthToOpen('');
-                    return;
-                }
+                return (
+                    <div key={month.LABEL} className="flex flex-col gap-2">
+                        <button
+                            className="bg-blue-500 text-white rounded px-3 py-1"
+                            onClick={() => handleClick(month.LABEL)}
+                        >
+                            {month.LABEL}
+                        </button>
 
-                // Клик по другому месяцу или первое открытие
-                setChooseMonthToOpen(month.LABEL);
-                setIsOpen(true);
-                setDays(daysArray);
-            }}>{month.LABEL}</button>)}
-            {isOpen && days.length !== 0 && <div className="grid grid-cols-7 gap-2 mt-4">
-                {days.map((day) => (
-                    <div key={day} className="p-2 bg-gray-200 rounded text-center">
-                        {day}
+                        {isOpen && (
+                            <div className="grid grid-cols-7 gap-2">
+                                {daysArray.map((day) => (
+                                    <div
+                                        key={day}
+                                        className="p-2 bg-gray-200 rounded text-center"
+                                    >
+                                        {day}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
-                ))}
-            </div>}
-
+                );
+            })}
         </div>
-
+    );
 
     // 
     return (
