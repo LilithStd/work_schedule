@@ -17,7 +17,8 @@ export default function Clients() {
     const listMonths =
         <div className={`flex flex-col gap-2 justify-end`}>
             {MONTHS.map((month) => <button key={month.LABEL} onClick={() => {
-                console.log(daysOfMonth(month.LABEL))
+                const currentYear = dayjs().year().toString() + month.NUMBER_MONTH
+                console.log(daysOfMonth(currentYear))
             }}>{month.LABEL}</button>)}
         </div>
 

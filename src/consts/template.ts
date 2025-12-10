@@ -3892,6 +3892,7 @@ export enum TYPE_EDIT_WORKER_DATA {
 export const MonthsData = {
 	JANUARY: {
 		LABEL: 'January',
+		NUMBER_MONTH:'01',
 		TRANSLATE: {
 			EN: 'January',
 			LV: 'Janvāris',
@@ -3900,6 +3901,7 @@ export const MonthsData = {
 	},
 	FEBRUARY: {
 		LABEL: 'February',
+		NUMBER_MONTH:'02',
 		TRANSLATE: {
 			EN: 'February',
 			LV: 'Februāris',
@@ -3908,6 +3910,7 @@ export const MonthsData = {
 	},
 	MARCH: {
 		LABEL: 'March',
+		NUMBER_MONTH:'03',
 		TRANSLATE: {
 			EN: 'March',
 			LV: 'Marts',
@@ -3916,6 +3919,7 @@ export const MonthsData = {
 	},
 	APRIL: {
 		LABEL: 'April',
+		NUMBER_MONTH:'04',
 		TRANSLATE: {
 			EN: 'April',
 			LV: 'Aprīlis',
@@ -3924,6 +3928,7 @@ export const MonthsData = {
 	},
 	MAY: {
 		LABEL: 'May',
+		NUMBER_MONTH:'05',
 		TRANSLATE: {
 			EN: 'May',
 			LV: 'Maijs',
@@ -3932,6 +3937,7 @@ export const MonthsData = {
 	},
 	JUNE: {
 		LABEL: 'June',
+		NUMBER_MONTH:'06',
 		TRANSLATE: {
 			EN: 'June',
 			LV: 'Jūnijs',
@@ -3940,6 +3946,7 @@ export const MonthsData = {
 	},
 	JULY: {
 		LABEL: 'July',
+		NUMBER_MONTH:'07',
 		TRANSLATE: {
 			EN: 'July',
 			LV: 'Jūlijs',
@@ -3948,6 +3955,7 @@ export const MonthsData = {
 	},
 	AUGUST: {
 		LABEL: 'August',
+		NUMBER_MONTH:'08',
 		TRANSLATE: {
 			EN: 'August',
 			LV: 'Augusts',
@@ -3956,6 +3964,7 @@ export const MonthsData = {
 	},
 	SEPTEMBER: {
 		LABEL: 'September',
+		NUMBER_MONTH:'09',
 		TRANSLATE: {
 			EN: 'September',
 			LV: 'Septembris',
@@ -3964,6 +3973,7 @@ export const MonthsData = {
 	},
 	OCTOBER: {
 		LABEL: 'October',
+		NUMBER_MONTH:'10',
 		TRANSLATE: {
 			EN: 'October',
 			LV: 'Oktobris',
@@ -3972,6 +3982,7 @@ export const MonthsData = {
 	},
 	NOVEMBER: {
 		LABEL: 'November',
+		NUMBER_MONTH:'11',
 		TRANSLATE: {
 			EN: 'November',
 			LV: 'Novembris',
@@ -3980,6 +3991,7 @@ export const MonthsData = {
 	},
 	DECEMBER: {
 		LABEL: 'December',
+		NUMBER_MONTH:'12',
 		TRANSLATE: {
 			EN: 'December',
 			LV: 'Decembris',
