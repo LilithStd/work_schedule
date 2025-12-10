@@ -1,14 +1,19 @@
 'use client'
-import Calendar from '@/components/calendar'
 import { indents } from '@/consts/globalStyles'
 import { MONTHS, THEME_COLORS } from '@/consts/template'
 import { useGlobalStore } from '@/store/globalStore'
 import dayjs from 'dayjs'
+import { useState } from 'react'
 
 
 export default function Clients() {
+    // state
+    const [days, setDays] = useState<number[]>([]);
+    const [isOpen, setIsOpen] = useState(false)
+    const [chooseMonthToOpen, setChooseMonthToOpen] = useState('')
+    // 
     // consts
-    const daysOfMonth = (currentMonth: string) => dayjs(currentMonth).daysInMonth()
+
     // 
     // stores
     const currentThemeApp = useGlobalStore((state) => state.currentThemeApp)
@@ -17,9 +22,32 @@ export default function Clients() {
     const listMonths =
         <div className={`flex flex-col gap-2 justify-end`}>
             {MONTHS.map((month) => <button key={month.LABEL} onClick={() => {
-                const currentYear = dayjs().year().toString() + month.NUMBER_MONTH
-                console.log(daysOfMonth(currentYear))
+                const year = dayjs().year();
+                const currentMonth = month.NUMBER_MONTH;
+                const daysInMonth = dayjs(`${year}-${currentMonth}-01`).daysInMonth();
+                const daysArray = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+
+                if (isOpen && chooseMonthToOpen === month.LABEL) {
+                    // Повторный клик по тому же месяцу — закрываем
+                    setIsOpen(false);
+                    setDays([]);
+                    setChooseMonthToOpen('');
+                    return;
+                }
+
+                // Клик по другому месяцу или первое открытие
+                setChooseMonthToOpen(month.LABEL);
+                setIsOpen(true);
+                setDays(daysArray);
             }}>{month.LABEL}</button>)}
+            {isOpen && days.length !== 0 && <div className="grid grid-cols-7 gap-2 mt-4">
+                {days.map((day) => (
+                    <div key={day} className="p-2 bg-gray-200 rounded text-center">
+                        {day}
+                    </div>
+                ))}
+            </div>}
+
         </div>
 
 
