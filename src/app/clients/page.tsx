@@ -1,20 +1,34 @@
 'use client'
 import Calendar from '@/components/calendar'
 import { indents } from '@/consts/globalStyles'
-import { THEME_COLORS } from '@/consts/template'
+import { MONTHS, THEME_COLORS } from '@/consts/template'
 import { useGlobalStore } from '@/store/globalStore'
+import dayjs from 'dayjs'
 
 
 export default function Clients() {
+    // consts
+    const daysOfMonth = (currentMonth: string) => dayjs(currentMonth).daysInMonth()
+    // 
     // stores
     const currentThemeApp = useGlobalStore((state) => state.currentThemeApp)
+    // 
+    //components
+    const listMonths =
+        <div className={`flex flex-col gap-2 justify-end`}>
+            {MONTHS.map((month) => <button key={month.LABEL} onClick={() => {
+                console.log(daysOfMonth(month.LABEL))
+            }}>{month.LABEL}</button>)}
+        </div>
+
+
     // 
     return (
         <div className={`flex flex-col min-h-screen  
         `}>
-            <div className={`rounded-xl ${THEME_COLORS[currentThemeApp].button}  ${indents.mainContainer.margin} ${indents.mainContainer.padding}`}>
+            <div className={`flex flex-col rounded-xl ${THEME_COLORS[currentThemeApp].button}  ${indents.mainContainer.margin} ${indents.mainContainer.padding}`}>
                 <p>Clients</p>
-                <Calendar />
+                {listMonths}
             </div>
 
         </div>

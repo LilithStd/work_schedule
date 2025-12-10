@@ -4002,7 +4002,7 @@ export const MONTHS = [
 	MonthsData.NOVEMBER,
 	MonthsData.DECEMBER
 ]
-const test = new Array(MonthsData)
+
 	
 
 

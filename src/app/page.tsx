@@ -1,6 +1,4 @@
 'use client'
-import LanguageSwitcher from '@/components/languageSwitcher'
-import ThemeSwitcher from '@/components/themeSwitcher'
 import { APP_ROUTES } from '@/consts/globalConsts'
 import { indents } from '@/consts/globalStyles'
 import { THEME_COLORS } from '@/consts/template'
