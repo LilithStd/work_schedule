@@ -23,18 +23,22 @@ export const THEME_COLORS = {
 	LIGHT: {
 		background: 'bg-stone-800',
 		textColor: 'text-white',
-		container: 'bg-sky-300',
-		subContainer: 'bg-blue-500',
-		inputContainer: 'bg-indigo-800',
+		container:{
+			main:'bg-sky-300',
+			sub: 'bg-blue-500',
+			input:'bg-indigo-800'
+		},
 		button: 'bg-sky-600',
 		hover: 'hover:bg-sky-700',
 	},
 	DARK: {
 		background: 'bg-slate-300',
 		textColor: 'text-black',
-		container: 'bg-sky-300',
-		subContainer: 'bg-stone-300',
-		inputContainer: 'bg-blue-200',
+		container:{
+			main:'bg-sky-300',
+			sub:'bg-stone-300',
+			input:'bg-blue-200',
+		},
 		button: 'bg-sky-500',
 		hover: 'hover:bg-sky-600',
 	},
