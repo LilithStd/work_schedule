@@ -83,7 +83,7 @@ export default function WorkerCell({ cellId, id, day, time, worker, typeWorkerCe
                 <EditWorkerDataWheelIcon width={30} heigth={30} />
             </button> :
                 <div >
-                    <AddWorkerIcon />
+                    <AddWorkerIcon width={30} />
                 </div>
             }
             <ModalWindow

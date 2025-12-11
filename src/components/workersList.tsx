@@ -70,7 +70,7 @@ export default function WorkersList() {
                     ref={anchorRef}
                     onClick={handleOpenModal}
                 >
-                    <AddWorkerIcons />
+                    <AddWorkerIcons widht={30} height={30} />
                 </button>
 
 
