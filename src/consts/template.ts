@@ -28,6 +28,10 @@ export const THEME_COLORS = {
 			sub: 'bg-blue-500',
 			input:'bg-indigo-800'
 		},
+		element:{
+			active:'bg-indigo-500',
+			inactive:''
+		},
 		button: 'bg-sky-600',
 		hover: 'hover:bg-sky-700',
 	},
@@ -38,6 +42,9 @@ export const THEME_COLORS = {
 			main:'bg-sky-300',
 			sub:'bg-stone-300',
 			input:'bg-blue-200',
+		},	element:{
+			active:'bg-cyan-500',
+			inactive:''
 		},
 		button: 'bg-sky-500',
 		hover: 'hover:bg-sky-600',

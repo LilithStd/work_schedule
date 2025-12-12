@@ -10,7 +10,9 @@ import AddClientIcon from '../../../public/icons/user-plus.svg'
 export default function Clients() {
     // state
     const [openMonth, setOpenMonth] = useState<string | null>(null);
-    const [choosedNumberDay, setChoosedNumberDay] = useState<string>('')
+    const [choosedDay, setChoosedDay] = useState<string>('')
+    const [isHoverOnElement, setIsHoverOnElement] = useState(false)
+    // const []
     // 
     // consts
 
@@ -36,14 +38,22 @@ export default function Clients() {
 
     const createClientBlock = (
         <div className={`flex rounded-xl w-full ${THEME_COLORS[currentThemeApp].container.main} ${indents.container.padding} ${indents.container.margin}`}>
-            <div className={`flex`}>
-                <div className={`${THEME_COLORS[currentThemeApp].container}`}>
-                    {dataCell(choosedNumberDay)}
-                </div>
+            <div className={`flex m-2 w-full gap-2`}>
+                {choosedDay !== '' && <div className={`flex flex-col gap-2  h-fit w-full`}>
+                    <div className={`${THEME_COLORS[currentThemeApp].container.sub} w-2xs`}>
+                        {dataCell(choosedDay)}
+                    </div>
 
-                <div>
-                    {choosedNumberDay !== '' && <AddClientIcon className={`m-6`} width={50} height={50} />}
-                </div>
+                    <div
+                        className={`border-2 rounded-xl p-4 ${isHoverOnElement ? 'opacity-100' : 'opacity-30'} flex justify-center `}
+                        onMouseEnter={() => setIsHoverOnElement(true)}
+                        onMouseLeave={() => setIsHoverOnElement(false)}
+                    >
+                        {<AddClientIcon className={``} width={40} height={40} />}
+                    </div>
+                </div>}
+
+
 
             </div>
 
@@ -77,13 +87,19 @@ export default function Clients() {
                                     <button
                                         key={day}
                                         className={`
-                                            ${indents.button.padding} ${THEME_COLORS[currentThemeApp].container.input} ${THEME_COLORS[currentThemeApp].hover} 
+                                            ${indents.button.padding}  ${THEME_COLORS[currentThemeApp].hover}
+                                            ${choosedDay === fullDayData(day) ? THEME_COLORS[currentThemeApp].element.active : THEME_COLORS[currentThemeApp].container.input}
                                             rounded 
                                             text-center
                                             cursor-pointer
                                         `}
                                         onClick={() => {
-                                            setChoosedNumberDay(fullDayData(day))
+                                            if (choosedDay === fullDayData(day)) {
+                                                setChoosedDay('')
+                                            } else {
+                                                setChoosedDay(fullDayData(day))
+                                            }
+
                                         }}
                                     >
                                         {day}
@@ -99,8 +115,7 @@ export default function Clients() {
 
     // 
     return (
-        <div className={`flex flex-col min-h-screen  
-        `}>
+        <div className={`flex flex-col min-h-screen`}>
             <div className={`flex flex-col  rounded-xl ${THEME_COLORS[currentThemeApp].button}  ${indents.mainContainer.margin} ${indents.mainContainer.padding} `}>
                 <p className={`text-center`}>Clients</p>
                 <div className={`flex w-full gap-4`}>

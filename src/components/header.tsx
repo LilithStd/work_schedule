@@ -15,7 +15,7 @@ export default function Header() {
     //
     return (
         <header className={`flex`}>
-            <div className={`flex w-full rounded-xl ${THEME_COLORS[currentThemeApp].container} ${indents.mainContainer.margin} justify-between mb-0`}>
+            <div className={`flex w-full rounded-xl ${THEME_COLORS[currentThemeApp].container.main} ${indents.mainContainer.margin} justify-between mb-0`}>
                 <Link href={APP_ROUTES_LABEL.MAIN.PATH} className={`"flex ${indents.subContainer.margin} ${indents.subContainer.padding} bg-amber-700 items-center justify-center rounded-xl "`}>{APP_ROUTES_LABEL.MAIN.LABEL[currentLanguageApp]}</Link>
                 <div className="flex justify-end items-center  gap-2">
                     <ThemeSwitcher />
