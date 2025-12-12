@@ -12,6 +12,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
         <div className={`flex flex-col w-full`}>
             <h2 className={`text-center`}>createClientForm</h2>
             <form className={`flex flex-col `}>
+                { }
                 <label htmlFor="name">
                     <input id="name" type="text" placeholder="name" />
                 </label>

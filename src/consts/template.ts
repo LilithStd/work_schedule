@@ -100,32 +100,32 @@ export const CLIENT_FORM_TRANSLATED = {
 		LABEL:'personal_code',
 		TRANSLATE:{
 			EN:'Personal Code',
-			LV:'',
-			RU:'',
+			LV:'Personal Kods',
+			RU:'Персональный код',
 		}
 	},
 	TYPE_EXPERTISE:{
 		LABEL:'type_expertise',
 		TRANSLATE:{
 			EN:'Type expertise',
-			LV:'',
-			RU:'',
+			LV:'Tipa zināšanas',
+			RU:'Тип экспертизы',
 		}
 	},
 	STATUS:{
 		LABEL:'status',
 		TRANSLATE:{
-			EN:'Translate',
-			LV:'',
-			RU:'',
+			EN:'Status',
+			LV:'Statuss',
+			RU:'Статус',
 		}
 	},
 	CUSTOMER:{
 		LABEL:'customer',
 		TRANSLATE:{
 			EN:'Customer',
-			LV:'',
-			RU:''
+			LV:'Klients',
+			RU:'Заказчик'
 		}
 	}
 }
