@@ -78,6 +78,18 @@ export const APP_ROUTES_LABEL = {
 	}
 }
 
+
+export const CLIENT_FORM_TRANSLATED = {
+	NAME:{
+		LABEL:'name',
+		TRANSLATE: {
+			EN:'Name',
+			LV:'Vards',
+			RU:'Имя',
+		}
+	}
+}
+
 export const DAYS_TRANSLATED = {
 	MONDAY: {
 		label: DAYS.MONDAY,
@@ -184,7 +196,7 @@ export enum TYPE_EDIT_WORKER_DATA {
 }
 
 export enum CLIENT_DATA_STATUS {
-	NOTHING = 'NOTHING',
+	// NOTHING = 'NOTHING',
 	CREATE_NEW = 'CREATE_NEW',
 	EDIT_CURRENT = 'EDIT_CURRENT'
 }

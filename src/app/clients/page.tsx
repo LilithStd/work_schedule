@@ -5,6 +5,8 @@ import { useGlobalStore } from '@/store/globalStore'
 import dayjs from 'dayjs'
 import { ViewTransition, useState } from 'react'
 import AddClientIcon from '../../../public/icons/user-plus.svg'
+import CreateClientForm from '@/components/clientComponents/createClientForm'
+
 
 
 export default function Clients() {
@@ -12,7 +14,9 @@ export default function Clients() {
     const [openMonth, setOpenMonth] = useState<string | null>(null);
     const [choosedDay, setChoosedDay] = useState<string>('')
     const [isHoverOnElement, setIsHoverOnElement] = useState(false)
-    const [clientDataStatus, setClientDataStatus] = useState<CLIENT_DATA_STATUS>(CLIENT_DATA_STATUS.NOTHING)
+    const [clientDataStatus, setClientDataStatus] = useState(
+        { status: false, typeEditStatus: CLIENT_DATA_STATUS.CREATE_NEW }
+    )
     // const []
     // 
     // consts
@@ -26,6 +30,12 @@ export default function Clients() {
     const handleClick = (monthLabel: string) => {
         setOpenMonth((prev) => (prev === monthLabel ? null : monthLabel));
     };
+    const handleClientDataStatus = () => {
+        setClientDataStatus(prev => ({
+            ...prev,
+            status: true
+        }));
+    }
 
     const dataCell = (data: string) => {
         const dataToView = data;
@@ -46,11 +56,12 @@ export default function Clients() {
                     </div>
 
                     <div
-                        className={`border-2 rounded-xl p-4 ${isHoverOnElement ? 'opacity-100' : 'opacity-30'} flex justify-center `}
+                        className={`border-2 rounded-xl p-4 ${isHoverOnElement || clientDataStatus.status ? 'opacity-100' : 'opacity-30'} flex justify-center `}
                         onMouseEnter={() => setIsHoverOnElement(true)}
                         onMouseLeave={() => setIsHoverOnElement(false)}
                     >
-                        {<AddClientIcon className={``} width={40} height={40} />}
+                        {!clientDataStatus.status && <AddClientIcon className={``} width={40} height={40} onClick={handleClientDataStatus} />}
+                        {clientDataStatus.status && <CreateClientForm statusEditType={clientDataStatus.typeEditStatus} data={choosedDay} />}
                     </div>
                 </div>}
 
@@ -95,8 +106,10 @@ export default function Clients() {
                                             cursor-pointer
                                         `}
                                         onClick={() => {
+                                            setClientDataStatus(prev => ({ ...prev, status: false }))
                                             if (choosedDay === fullDayData(day)) {
                                                 setChoosedDay('')
+
                                             } else {
                                                 setChoosedDay(fullDayData(day))
                                             }
