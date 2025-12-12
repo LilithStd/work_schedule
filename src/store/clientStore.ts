@@ -10,6 +10,7 @@ type ClientPropsType = {
 	customer: string;
 };
 
+
 const statusClient = {
 	suspected: {
 		label: 'suspected',

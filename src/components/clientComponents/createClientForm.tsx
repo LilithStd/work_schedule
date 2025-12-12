@@ -30,7 +30,6 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                 <label htmlFor="customer">
                     <input id="customer" type="text" placeholder="customer" />
                 </label>
-
             </form>
         </div>
 

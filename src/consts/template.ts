@@ -87,6 +87,46 @@ export const CLIENT_FORM_TRANSLATED = {
 			LV:'Vards',
 			RU:'Имя',
 		}
+	},
+	SURNAME:{
+		LABEL:'surname',
+		TRANSLATE:{
+			EN:'Surname',
+			LV:'Uzvārds',
+			RU:'Фамилия'
+		}
+	},
+	PERSONAL_CODE:{
+		LABEL:'personal_code',
+		TRANSLATE:{
+			EN:'Personal Code',
+			LV:'',
+			RU:'',
+		}
+	},
+	TYPE_EXPERTISE:{
+		LABEL:'type_expertise',
+		TRANSLATE:{
+			EN:'Type expertise',
+			LV:'',
+			RU:'',
+		}
+	},
+	STATUS:{
+		LABEL:'status',
+		TRANSLATE:{
+			EN:'Translate',
+			LV:'',
+			RU:'',
+		}
+	},
+	CUSTOMER:{
+		LABEL:'customer',
+		TRANSLATE:{
+			EN:'Customer',
+			LV:'',
+			RU:''
+		}
 	}
 }
 
