@@ -183,6 +183,12 @@ export enum TYPE_EDIT_WORKER_DATA {
 	SURNAME = 'SURNAME',
 }
 
+export enum CLIENT_DATA_STATUS {
+	NOTHING = 'NOTHING',
+	CREATE_NEW = 'CREATE_NEW',
+	EDIT_CURRENT = 'EDIT_CURRENT'
+}
+
 // export const registartionDataTemplate = [
 // 	{
 // 		day: DAYS.MONDAY,

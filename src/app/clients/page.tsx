@@ -1,6 +1,6 @@
 'use client'
 import { indents } from '@/consts/globalStyles'
-import { MONTHS, THEME_COLORS } from '@/consts/template'
+import { CLIENT_DATA_STATUS, MONTHS, THEME_COLORS } from '@/consts/template'
 import { useGlobalStore } from '@/store/globalStore'
 import dayjs from 'dayjs'
 import { ViewTransition, useState } from 'react'
@@ -12,6 +12,7 @@ export default function Clients() {
     const [openMonth, setOpenMonth] = useState<string | null>(null);
     const [choosedDay, setChoosedDay] = useState<string>('')
     const [isHoverOnElement, setIsHoverOnElement] = useState(false)
+    const [clientDataStatus, setClientDataStatus] = useState<CLIENT_DATA_STATUS>(CLIENT_DATA_STATUS.NOTHING)
     // const []
     // 
     // consts
@@ -40,7 +41,7 @@ export default function Clients() {
         <div className={`flex rounded-xl w-full ${THEME_COLORS[currentThemeApp].container.main} ${indents.container.padding} ${indents.container.margin}`}>
             <div className={`flex m-2 w-full gap-2`}>
                 {choosedDay !== '' && <div className={`flex flex-col gap-2  h-fit w-full`}>
-                    <div className={`${THEME_COLORS[currentThemeApp].container.sub} w-2xs`}>
+                    <div className={`${THEME_COLORS[currentThemeApp].container.sub} w-2xs rounded-xl`}>
                         {dataCell(choosedDay)}
                     </div>
 
