@@ -170,12 +170,12 @@ export const CLIENT_FORM_TRANSLATED = {
 	
 	STATUS:{
 		LABEL:'client_status',
-				TRANSLATE_LABEL:{
+		TRANSLATE_LABEL:{
 					EN:'Client Status',
 					LV:'Klients Statuss',
 					RU:'Статус Клиента',
 				},
-				TRANSLATE_OPINION:{
+		TRANSLATE_OPINION:{
 					EN:['Suspected','Accused','Victim','Another (need to specify)'],
 					LV:['Aizdomās turētais','Apsūdzētais','Cietušais','Cits (jānorāda)'],
 					RU:['Подозреваемый','Обвиняемый','Потерпевший','Другой (нужно указать)']
@@ -184,6 +184,11 @@ export const CLIENT_FORM_TRANSLATED = {
 					EN:'Select client status',
 					LV:'Izvēlieties klienta statusu',
 					RU:'Выберите статус клиента',
+				},
+				PLACEHOLDER_ADDITIONAL:{
+					EN:'Write additional client status',
+					LV:'Uzrakstiet papildu klienta statusu',
+					RU:'Напишите дополнительный статус клиента',
 				}
 		
 		

@@ -21,10 +21,13 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
     // 
     // state
     const [typeExpertise, setTypeExpertise] = useState('');
+    const [additionalTypeExpertise, setAdditionalTypeExpertise] = useState('');
+    const [statusClient, setStatusClient] = useState('');
     // 
     //functions
     const handleResetForm = () => {
         setTypeExpertise('');
+        setStatusClient('');
         // reset form fields
     }
     // 
@@ -56,7 +59,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                                 </option>
                             ))}
                         </select>
-                    ) : <div className="flex items-center gap-2">
+                    ) : <div className={`flex items-center gap-2`}>
                         <input
                             id="type expertise"
                             type="text"
@@ -69,9 +72,37 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
 
 
                 </label>
-                <label htmlFor="status" className={`flex gap-2`}>
-                    {CLIENT_FORM_TRANSLATED.STATUS.TRANSLATE_LABEL[currentLanguageApp]}:
-                    <input id="status" type="text" placeholder={CLIENT_FORM_TRANSLATED.STATUS.PLACEHOLDER[currentLanguageApp]} />
+                <label className="flex gap-2">
+                    <span>{CLIENT_FORM_TRANSLATED.STATUS.TRANSLATE_LABEL[currentLanguageApp]}:</span>
+
+                    {statusClient !== 'Another (need to specify)' ? (
+                        <select
+                            id="status"
+                            onChange={(e) => setStatusClient(e.target.value)}
+                        >
+                            {CLIENT_FORM_TRANSLATED.STATUS.TRANSLATE_OPINION[currentLanguageApp].map(
+                                (option, index) => (
+                                    <option key={index} value={option}>
+                                        {option}
+                                    </option>
+                                )
+                            )}
+                        </select>
+                    ) : (
+                        <div className="flex items-center gap-2">
+                            <input
+                                id="status-custom"
+                                type="text"
+                                placeholder={
+                                    CLIENT_FORM_TRANSLATED.STATUS.PLACEHOLDER_ADDITIONAL[currentLanguageApp]
+                                }
+                            />
+                            <ResetChooseInputType
+                                className="w-6 h-6 cursor-pointer"
+                                onClick={() => setStatusClient('')}
+                            />
+                        </div>
+                    )}
                 </label>
                 <label htmlFor="customer" className={`flex gap-2`}>
                     {CLIENT_FORM_TRANSLATED.CUSTOMER.TRANSLATE[currentLanguageApp]}:
