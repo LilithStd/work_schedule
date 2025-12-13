@@ -86,6 +86,11 @@ export const CLIENT_FORM_TRANSLATED = {
 			EN:'Name',
 			LV:'Vards',
 			RU:'Имя',
+		},
+		PLACEHOLDER:{
+			EN:'Enter name',
+			LV:'Ievadiet vārdu',
+			RU:'Введите имя',
 		}
 	},
 	SURNAME:{
@@ -94,6 +99,11 @@ export const CLIENT_FORM_TRANSLATED = {
 			EN:'Surname',
 			LV:'Uzvārds',
 			RU:'Фамилия'
+		},
+		PLACEHOLDER:{
+			EN:'Enter surname',
+			LV:'Ievadiet uzvārdu',
+			RU:'Введите фамилию',
 		}
 	},
 	PERSONAL_CODE:{
@@ -102,23 +112,82 @@ export const CLIENT_FORM_TRANSLATED = {
 			EN:'Personal Code',
 			LV:'Personal Kods',
 			RU:'Персональный код',
+		},
+		PLACEHOLDER:{
+			EN:'Enter personal code',
+			LV:'Ievadiet personāla kodu',
+			RU:'Введите персональный код',
 		}
 	},
 	TYPE_EXPERTISE:{
 		LABEL:'type_expertise',
-		TRANSLATE:{
+		TRANSLATE_LABEL:{
 			EN:'Type expertise',
 			LV:'Tipa zināšanas',
 			RU:'Тип экспертизы',
+		},
+		TRANSLATE_OPINION:{
+					EN:['Ambulatory','Stationary with security','Stationary','Another (need to specify)'],
+					LV:['Ambulatorais','Stacionārs ar apsardzi','Stacionārs','Vēl viens (jānorāda)'],
+					RU:['Амблуторный','Стационарная с охраной','Стацонарная','Другой (нужно указать)'],
+
+		},
+		PLACEHOLDER:{
+			EN:'Select type expertise',
+			LV:'Izvēlieties veida ekspertīzi',
+			RU:'Выберите тип экспертизы',
+		},
+		PLACEHOLDER_ADDITIONAL:{
+			EN:'Write additional type expertise',
+			LV:'Uzrakstiet papildu veida ekspertīzi',
+			RU:'Напишите дополнительный тип экспертизы',
+		}
+
+	},
+	SUBTYPE_EXPERTISE:{
+		LABEL:'subtype_expertise',
+		TRANSLATE_LABEL:{
+			EN:'Subtype expertise',
+			LV:'Apakštips zināšanas',
+			RU:'Вид экспертизы',
+		},
+		TRANSLATE_OPINION:{
+			EN:['Psychiatric','Psychological','Comprehensive','Another (need to specify)'],
+			RU:['Психиатрическая','Психологическая','Комплексная','Другая (нужно указать)'],
+			LV:['Psihiatriskais','Psiholoģiskais','Kompleksa','Cits (jānorāda)'],
+		},
+		PLACEHOLDER_MAIN:{
+			EN:'Select subtype expertise',
+			LV:'Izvēlieties apakštipa ekspertīzi',
+			RU:'Выберите вид экспертизы',
+		},
+		PLACEHOLDER_ADDITIONAL:{
+			EN:'Write additional subtype expertise',
+			LV:'Uzrakstiet papildu apakštipa ekspertīzi',
+			RU:'Напишите дополнительный вид экспертизы',
 		}
 	},
+	
 	STATUS:{
-		LABEL:'status',
-		TRANSLATE:{
-			EN:'Status',
-			LV:'Statuss',
-			RU:'Статус',
-		}
+		LABEL:'client_status',
+				TRANSLATE_LABEL:{
+					EN:'Client Status',
+					LV:'Klients Statuss',
+					RU:'Статус Клиента',
+				},
+				TRANSLATE_OPINION:{
+					EN:['Suspected','Accused','Victim','Another (need to specify)'],
+					LV:['Aizdomās turētais','Apsūdzētais','Cietušais','Cits (jānorāda)'],
+					RU:['Подозреваемый','Обвиняемый','Потерпевший','Другой (нужно указать)']
+				},
+				PLACEHOLDER:{
+					EN:'Select client status',
+					LV:'Izvēlieties klienta statusu',
+					RU:'Выберите статус клиента',
+				}
+		
+		
+		
 	},
 	CUSTOMER:{
 		LABEL:'customer',
@@ -126,6 +195,27 @@ export const CLIENT_FORM_TRANSLATED = {
 			EN:'Customer',
 			LV:'Klients',
 			RU:'Заказчик'
+		},
+		PLACEHOLDER:{
+			EN:'Enter customer',
+			LV:'Ievadiet klientu',
+			RU:'Введите заказчика',
+		}
+	},
+	SUBMIT_BUTTON:{
+		LABEL:'submit_button',
+		TRANSLATE:{
+			EN:'Submit',
+			LV:'Iesniegt',
+			RU:'Отправить',
+		}
+	},
+	RESET_BUTTON:{
+		LABEL:'reset_button',
+		TRANSLATE:{
+			EN:'Reset',
+			LV:'Atiestatīt',
+			RU:'Сбросить',
 		}
 	}
 }
