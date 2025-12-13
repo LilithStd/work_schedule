@@ -21,13 +21,14 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
     // 
     // state
     const [typeExpertise, setTypeExpertise] = useState('');
-    const [additionalTypeExpertise, setAdditionalTypeExpertise] = useState('');
+    const [subTypeExpertise, setSubTypeExpertise] = useState('');
     const [statusClient, setStatusClient] = useState('');
     // 
     //functions
     const handleResetForm = () => {
         setTypeExpertise('');
         setStatusClient('');
+        setSubTypeExpertise('');
         // reset form fields
     }
     // 
@@ -72,6 +73,38 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
 
 
                 </label>
+                <label htmlFor="subtype expertise additional" className={`flex gap-2`}>
+                    {CLIENT_FORM_TRANSLATED.SUBTYPE_EXPERTISE.TRANSLATE_LABEL[currentLanguageApp]}:
+                    {subTypeExpertise !== 'Another (need to specify)' ? (
+                        <select
+                            id="subtype expertise additional"
+                            onChange={(e) => setSubTypeExpertise(e.target.value)}
+                        >
+                            {CLIENT_FORM_TRANSLATED.SUBTYPE_EXPERTISE.TRANSLATE_OPINION[currentLanguageApp].map(
+                                (option, index) => (
+                                    <option key={index} value={option}>
+                                        {option}
+                                    </option>
+                                )
+                            )}
+                        </select>
+                    ) : (
+                        <div className="flex items-center gap-2">
+                            <input
+                                id="subtype expertise additional"
+                                type="text"
+                                placeholder={
+                                    CLIENT_FORM_TRANSLATED.SUBTYPE_EXPERTISE.PLACEHOLDER_ADDITIONAL[currentLanguageApp]
+                                }
+                            />
+                            <ResetChooseInputType
+                                className="w-6 h-6 cursor-pointer"
+                                onClick={() => setSubTypeExpertise('')}
+                            />
+                        </div>
+                    )}
+
+                </label>
                 <label className="flex gap-2">
                     <span>{CLIENT_FORM_TRANSLATED.STATUS.TRANSLATE_LABEL[currentLanguageApp]}:</span>
 
@@ -104,6 +137,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                         </div>
                     )}
                 </label>
+
                 <label htmlFor="customer" className={`flex gap-2`}>
                     {CLIENT_FORM_TRANSLATED.CUSTOMER.TRANSLATE[currentLanguageApp]}:
                     <input id="customer" type="text" placeholder={CLIENT_FORM_TRANSLATED.CUSTOMER.PLACEHOLDER[currentLanguageApp]} />
