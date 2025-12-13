@@ -4,6 +4,7 @@ import { indents } from "@/consts/globalStyles";
 import { CLIENT_DATA_STATUS, CLIENT_FORM_TRANSLATED, THEME_COLORS } from "@/consts/template";
 import { useGlobalStore } from "@/store/globalStore";
 import { useState } from "react";
+import ResetChooseInputType from "../../../public/icons/ArrowPath.svg"
 
 interface CreateClientFormInterface {
     statusEditType: CLIENT_DATA_STATUS
@@ -55,7 +56,16 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                                 </option>
                             ))}
                         </select>
-                    ) : (<input id="type expertise" type="text" placeholder={CLIENT_FORM_TRANSLATED.TYPE_EXPERTISE.PLACEHOLDER_ADDITIONAL[currentLanguageApp]} />)}
+                    ) : <div className="flex items-center gap-2">
+                        <input
+                            id="type expertise"
+                            type="text"
+                            placeholder={CLIENT_FORM_TRANSLATED.TYPE_EXPERTISE.PLACEHOLDER_ADDITIONAL[currentLanguageApp]}
+                        />
+                        <ResetChooseInputType className="w-6 h-6 cursor-pointer" onClick={() => setTypeExpertise('')} />
+                    </div>
+
+                    }
 
 
                 </label>
