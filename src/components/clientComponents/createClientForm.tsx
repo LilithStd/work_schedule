@@ -1,10 +1,11 @@
 'use client'
-
+import * as Select from '@radix-ui/react-select'
 import { indents } from "@/consts/globalStyles";
 import { CLIENT_DATA_STATUS, CLIENT_FORM_TRANSLATED, THEME_COLORS } from "@/consts/template";
 import { useGlobalStore } from "@/store/globalStore";
 import { useState } from "react";
 import ResetChooseInputType from "../../../public/icons/ArrowPath.svg"
+import { Check, ChevronDown } from 'lucide-react';
 
 interface CreateClientFormInterface {
     statusEditType: CLIENT_DATA_STATUS
@@ -73,28 +74,64 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
 
 
                 </label>
-                <label htmlFor="subtype expertise additional" className={`flex gap-2`}>
-                    {CLIENT_FORM_TRANSLATED.SUBTYPE_EXPERTISE.TRANSLATE_LABEL[currentLanguageApp]}:
+                <label className="flex flex-col gap-2">
+                    <span>
+                        {CLIENT_FORM_TRANSLATED.SUBTYPE_EXPERTISE.TRANSLATE_LABEL[currentLanguageApp]}:
+                    </span>
+
                     {subTypeExpertise !== 'Another (need to specify)' ? (
-                        <select
-                            id="subtype expertise additional"
-                            onChange={(e) => setSubTypeExpertise(e.target.value)}
+                        <Select.Root
+                            value={subTypeExpertise}
+                            onValueChange={setSubTypeExpertise}
                         >
-                            {CLIENT_FORM_TRANSLATED.SUBTYPE_EXPERTISE.TRANSLATE_OPINION[currentLanguageApp].map(
-                                (option, index) => (
-                                    <option key={index} value={option}>
-                                        {option}
-                                    </option>
-                                )
-                            )}
-                        </select>
+                            <Select.Trigger
+                                className="flex items-center justify-between gap-2
+                   rounded-md border px-3 py-2
+                   bg-white text-black
+                   focus:outline-none focus:ring-2 focus:ring-sky-500"
+                            >
+                                <Select.Value placeholder="Select subtype" />
+                                <Select.Icon>
+                                    <ChevronDown size={16} />
+                                </Select.Icon>
+                            </Select.Trigger>
+
+                            <Select.Portal>
+                                <Select.Content
+                                    className="z-50 rounded-md border bg-white shadow-lg"
+                                    position="popper"
+                                >
+                                    <Select.Viewport className="p-1">
+                                        {CLIENT_FORM_TRANSLATED.SUBTYPE_EXPERTISE.TRANSLATE_OPINION[
+                                            currentLanguageApp
+                                        ].map((option) => (
+                                            <Select.Item
+                                                key={option}
+                                                value={option}
+                                                className="flex cursor-pointer items-center justify-between
+                                                rounded px-3 py-2
+                                                 text-black
+                                                 focus:bg-sky-100
+                                                     data-[state=checked]:bg-sky-200"
+                                            >
+                                                <Select.ItemText>{option}</Select.ItemText>
+                                                <Select.ItemIndicator>
+                                                    <Check size={14} />
+                                                </Select.ItemIndicator>
+                                            </Select.Item>
+                                        ))}
+                                    </Select.Viewport>
+                                </Select.Content>
+                            </Select.Portal>
+                        </Select.Root>
                     ) : (
                         <div className="flex items-center gap-2">
                             <input
-                                id="subtype expertise additional"
                                 type="text"
+                                className="rounded-md border px-3 py-2"
                                 placeholder={
-                                    CLIENT_FORM_TRANSLATED.SUBTYPE_EXPERTISE.PLACEHOLDER_ADDITIONAL[currentLanguageApp]
+                                    CLIENT_FORM_TRANSLATED.SUBTYPE_EXPERTISE
+                                        .PLACEHOLDER_ADDITIONAL[currentLanguageApp]
                                 }
                             />
                             <ResetChooseInputType
@@ -103,24 +140,26 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                             />
                         </div>
                     )}
-
                 </label>
                 <label className="flex gap-2">
                     <span>{CLIENT_FORM_TRANSLATED.STATUS.TRANSLATE_LABEL[currentLanguageApp]}:</span>
 
                     {statusClient !== 'Another (need to specify)' ? (
-                        <select
-                            id="status"
-                            onChange={(e) => setStatusClient(e.target.value)}
-                        >
-                            {CLIENT_FORM_TRANSLATED.STATUS.TRANSLATE_OPINION[currentLanguageApp].map(
-                                (option, index) => (
-                                    <option key={index} value={option}>
-                                        {option}
-                                    </option>
-                                )
-                            )}
-                        </select>
+                        <Select.Root value=''>
+
+                        </Select.Root>
+                        // <select
+                        //     id="status"
+                        //     onChange={(e) => setStatusClient(e.target.value)}
+                        // >
+                        //     {CLIENT_FORM_TRANSLATED.STATUS.TRANSLATE_OPINION[currentLanguageApp].map(
+                        //         (option, index) => (
+                        //             <option key={index} value={option}>
+                        //                 {option}
+                        //             </option>
+                        //         )
+                        //     )}
+                        // </select>
                     ) : (
                         <div className="flex items-center gap-2">
                             <input
