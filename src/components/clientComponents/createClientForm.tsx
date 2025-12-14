@@ -61,7 +61,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                             <Select.Trigger
                                 className={`flex items-center  justify-between gap-2
                                             rounded-md border px-3 py-2
-                                             bg-white text-black
+                                            ${THEME_COLORS[currentThemeApp].container.input}
                                             focus:outline-none focus:ring-2 focus:ring-sky-500`}
                             >
                                 <Select.Value placeholder="Select type" />
@@ -124,7 +124,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                             <Select.Trigger
                                 className={`flex items-center  justify-between gap-2
                                             rounded-md border px-3 py-2
-                                             bg-white text-black
+                                            ${THEME_COLORS[currentThemeApp].container.input}
                                             focus:outline-none focus:ring-2 focus:ring-sky-500`}
                             >
                                 <Select.Value placeholder="Select subtype" />
@@ -188,7 +188,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                             <Select.Trigger
                                 className={`flex items-center  justify-between gap-2
                                             rounded-md border px-3 py-2
-                                             bg-white text-black
+                                            ${THEME_COLORS[currentThemeApp].container.input}
                                             focus:outline-none focus:ring-2 focus:ring-sky-500`}
                             >
                                 <Select.Value placeholder="Select status" />
@@ -211,9 +211,9 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                                                 value={option}
                                                 className="flex cursor-pointer items-center justify-between
                                                 rounded px-3 py-2
-                                                 text-black
+                                                
                                                  focus:bg-sky-100
-                                                     data-[state=checked]:bg-sky-200"
+                                                data-[state=checked]:bg-sky-200"
                                             >
                                                 <Select.ItemText>{option}</Select.ItemText>
                                                 <Select.ItemIndicator>
