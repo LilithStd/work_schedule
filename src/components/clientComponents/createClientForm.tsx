@@ -38,18 +38,30 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
     return (
         <div className={`flex flex-col w-full`}>
             <h2 className={`text-center`}>createClientForm</h2>
-            <form className={`flex flex-col `}>
+            <form className={`flex flex-col`}>
                 <label htmlFor="name" className={`flex gap-2`}>
                     {CLIENT_FORM_TRANSLATED.NAME.TRANSLATE[currentLanguageApp]}:
-                    <input id="name" type="text" placeholder={CLIENT_FORM_TRANSLATED.NAME.TRANSLATE[currentLanguageApp]} />
+                    <input
+                        id="name"
+                        type="text"
+                        className={`rounded-md border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
+                        placeholder={CLIENT_FORM_TRANSLATED.NAME.TRANSLATE[currentLanguageApp]} />
                 </label>
-                <label htmlFor="surname" className={`flex gap-2`}>
+                <label htmlFor="surname" className={`flex items-center gap-2`}>
                     {CLIENT_FORM_TRANSLATED.SURNAME.TRANSLATE[currentLanguageApp]}:
-                    <input id="surname" type="text" placeholder={CLIENT_FORM_TRANSLATED.SURNAME.TRANSLATE[currentLanguageApp]} />
+                    <input
+                        id="surname"
+                        type="text"
+                        className={`rounded-md border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
+                        placeholder={CLIENT_FORM_TRANSLATED.SURNAME.TRANSLATE[currentLanguageApp]} />
                 </label>
-                <label htmlFor="personal code" className={`flex gap-2`}>
+                <label htmlFor="personal code" className={`flex items-center gap-2`}>
                     {CLIENT_FORM_TRANSLATED.PERSONAL_CODE.TRANSLATE[currentLanguageApp]}:
-                    <input id="personal code" type="text" placeholder={CLIENT_FORM_TRANSLATED.PERSONAL_CODE.TRANSLATE[currentLanguageApp]} />
+                    <input
+                        id="personal code"
+                        type="text"
+                        placeholder={CLIENT_FORM_TRANSLATED.PERSONAL_CODE.TRANSLATE[currentLanguageApp]}
+                        className={`rounded-md border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`} />
                 </label>
                 <label htmlFor="type expertise" className={`flex items-center gap-2`}>
                     <span>{CLIENT_FORM_TRANSLATED.TYPE_EXPERTISE.TRANSLATE_LABEL[currentLanguageApp]}:</span>
@@ -103,6 +115,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                             id="type expertise"
                             type="text"
                             placeholder={CLIENT_FORM_TRANSLATED.TYPE_EXPERTISE.PLACEHOLDER_ADDITIONAL[currentLanguageApp]}
+                            className={`rounded-md border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
                         />
                         <ResetChooseInputType className="w-6 h-6 cursor-pointer" onClick={() => setTypeExpertise('')} />
                     </div>
@@ -165,11 +178,12 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                         <div className="flex items-center gap-2">
                             <input
                                 type="text"
-                                className="rounded-md border px-3 py-2"
+                                className={`rounded-md border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
                                 placeholder={
                                     CLIENT_FORM_TRANSLATED.SUBTYPE_EXPERTISE
                                         .PLACEHOLDER_ADDITIONAL[currentLanguageApp]
                                 }
+
                             />
                             <ResetChooseInputType
                                 className="w-6 h-6 cursor-pointer"
@@ -230,6 +244,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                             <input
                                 id="status-custom"
                                 type="text"
+                                className={`rounded-md border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
                                 placeholder={
                                     CLIENT_FORM_TRANSLATED.STATUS.PLACEHOLDER_ADDITIONAL[currentLanguageApp]
                                 }
@@ -242,9 +257,13 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                     )}
                 </label>
 
-                <label htmlFor="customer" className={`flex gap-2`}>
+                <label htmlFor="customer" className={`flex items-center gap-2`}>
                     {CLIENT_FORM_TRANSLATED.CUSTOMER.TRANSLATE[currentLanguageApp]}:
-                    <input id="customer" type="text" placeholder={CLIENT_FORM_TRANSLATED.CUSTOMER.PLACEHOLDER[currentLanguageApp]} />
+                    <input
+                        id="customer"
+                        type="text"
+                        className={`rounded-md border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
+                        placeholder={CLIENT_FORM_TRANSLATED.CUSTOMER.PLACEHOLDER[currentLanguageApp]} />
                 </label>
                 <div className={`flex gap-4 mt-4 justify-center items-center`}>
                     <button type="submit" className={`${THEME_COLORS[currentThemeApp].button} ${indents.button.padding} rounded-xl flex`}>{CLIENT_FORM_TRANSLATED.SUBMIT_BUTTON.TRANSLATE[currentLanguageApp]}</button>
