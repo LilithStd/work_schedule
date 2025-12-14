@@ -51,16 +51,53 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                     {CLIENT_FORM_TRANSLATED.PERSONAL_CODE.TRANSLATE[currentLanguageApp]}:
                     <input id="personal code" type="text" placeholder={CLIENT_FORM_TRANSLATED.PERSONAL_CODE.TRANSLATE[currentLanguageApp]} />
                 </label>
-                <label htmlFor="type expertise" className={`flex gap-2`}>
+                <label htmlFor="type expertise" className={`flex items-center gap-2`}>
                     <span>{CLIENT_FORM_TRANSLATED.TYPE_EXPERTISE.TRANSLATE_LABEL[currentLanguageApp]}:</span>
                     {typeExpertise !== 'Another (need to specify)' ? (
-                        <select name="" id="type expertise" onChange={(e) => setTypeExpertise(e.target.value)}>
-                            {CLIENT_FORM_TRANSLATED.TYPE_EXPERTISE.TRANSLATE_OPINION[currentLanguageApp].map((option, index) => (
-                                <option key={index} value={option}>
-                                    {option}
-                                </option>
-                            ))}
-                        </select>
+                        <Select.Root
+                            value={typeExpertise}
+                            onValueChange={setTypeExpertise}
+                        >
+                            <Select.Trigger
+                                className={`flex items-center  justify-between gap-2
+                                            rounded-md border px-3 py-2
+                                             bg-white text-black
+                                            focus:outline-none focus:ring-2 focus:ring-sky-500`}
+                            >
+                                <Select.Value placeholder="Select type" />
+                                <Select.Icon>
+                                    <ChevronDown size={16} />
+                                </Select.Icon>
+                            </Select.Trigger>
+
+                            <Select.Portal>
+                                <Select.Content
+                                    className="z-50 rounded-md border bg-white shadow-lg"
+                                    position="popper"
+                                >
+                                    <Select.Viewport className="p-1">
+                                        {CLIENT_FORM_TRANSLATED.TYPE_EXPERTISE.TRANSLATE_OPINION[
+                                            currentLanguageApp
+                                        ].map((option) => (
+                                            <Select.Item
+                                                key={option}
+                                                value={option}
+                                                className="flex cursor-pointer items-center justify-between
+                                                rounded px-3 py-2
+                                                 text-black
+                                                 focus:bg-sky-100
+                                                     data-[state=checked]:bg-sky-200"
+                                            >
+                                                <Select.ItemText>{option}</Select.ItemText>
+                                                <Select.ItemIndicator>
+                                                    <Check size={14} />
+                                                </Select.ItemIndicator>
+                                            </Select.Item>
+                                        ))}
+                                    </Select.Viewport>
+                                </Select.Content>
+                            </Select.Portal>
+                        </Select.Root>
                     ) : <div className={`flex items-center gap-2`}>
                         <input
                             id="type expertise"
@@ -74,7 +111,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
 
 
                 </label>
-                <label className="flex flex-col gap-2">
+                <label className="flex items-center gap-2">
                     <span>
                         {CLIENT_FORM_TRANSLATED.SUBTYPE_EXPERTISE.TRANSLATE_LABEL[currentLanguageApp]}:
                     </span>
@@ -85,10 +122,10 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                             onValueChange={setSubTypeExpertise}
                         >
                             <Select.Trigger
-                                className="flex items-center justify-between gap-2
-                   rounded-md border px-3 py-2
-                   bg-white text-black
-                   focus:outline-none focus:ring-2 focus:ring-sky-500"
+                                className={`flex items-center  justify-between gap-2
+                                            rounded-md border px-3 py-2
+                                             bg-white text-black
+                                            focus:outline-none focus:ring-2 focus:ring-sky-500`}
                             >
                                 <Select.Value placeholder="Select subtype" />
                                 <Select.Icon>
@@ -141,25 +178,53 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                         </div>
                     )}
                 </label>
-                <label className="flex gap-2">
+                <label className="flex gap-2 items-center">
                     <span>{CLIENT_FORM_TRANSLATED.STATUS.TRANSLATE_LABEL[currentLanguageApp]}:</span>
 
                     {statusClient !== 'Another (need to specify)' ? (
-                        <Select.Root value=''>
+                        <Select.Root
+                            value={statusClient}
+                            onValueChange={setStatusClient}>
+                            <Select.Trigger
+                                className={`flex items-center  justify-between gap-2
+                                            rounded-md border px-3 py-2
+                                             bg-white text-black
+                                            focus:outline-none focus:ring-2 focus:ring-sky-500`}
+                            >
+                                <Select.Value placeholder="Select status" />
+                                <Select.Icon>
+                                    <ChevronDown size={16} />
+                                </Select.Icon>
+                            </Select.Trigger>
 
+                            <Select.Portal>
+                                <Select.Content
+                                    className="z-50 rounded-md border bg-white shadow-lg"
+                                    position="popper"
+                                >
+                                    <Select.Viewport className="p-1">
+                                        {CLIENT_FORM_TRANSLATED.STATUS.TRANSLATE_OPINION[
+                                            currentLanguageApp
+                                        ].map((option) => (
+                                            <Select.Item
+                                                key={option}
+                                                value={option}
+                                                className="flex cursor-pointer items-center justify-between
+                                                rounded px-3 py-2
+                                                 text-black
+                                                 focus:bg-sky-100
+                                                     data-[state=checked]:bg-sky-200"
+                                            >
+                                                <Select.ItemText>{option}</Select.ItemText>
+                                                <Select.ItemIndicator>
+                                                    <Check size={14} />
+                                                </Select.ItemIndicator>
+                                            </Select.Item>
+                                        ))}
+                                    </Select.Viewport>
+                                </Select.Content>
+                            </Select.Portal>
                         </Select.Root>
-                        // <select
-                        //     id="status"
-                        //     onChange={(e) => setStatusClient(e.target.value)}
-                        // >
-                        //     {CLIENT_FORM_TRANSLATED.STATUS.TRANSLATE_OPINION[currentLanguageApp].map(
-                        //         (option, index) => (
-                        //             <option key={index} value={option}>
-                        //                 {option}
-                        //             </option>
-                        //         )
-                        //     )}
-                        // </select>
                     ) : (
                         <div className="flex items-center gap-2">
                             <input
