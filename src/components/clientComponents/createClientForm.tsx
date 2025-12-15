@@ -36,34 +36,34 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
 
 
     return (
-        <div className={`flex flex-col w-full`}>
+        <div className={`flex flex-col w-full n`}>
             <h2 className={`text-center`}>createClientForm</h2>
-            <form className={`flex flex-col`}>
-                <label htmlFor="name" className={`flex gap-2`}>
+            <form className={`flex flex-col justify-between gap-4 mt-4 w-full`}>
+                <label htmlFor="name" className={`flex w-full gap-2 justify-between items-center`}>
                     {CLIENT_FORM_TRANSLATED.NAME.TRANSLATE[currentLanguageApp]}:
                     <input
                         id="name"
                         type="text"
-                        className={`rounded-md border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
+                        className={`rounded-md border px-3 py-2 w-1/2 ${THEME_COLORS[currentThemeApp].container.input}`}
                         placeholder={CLIENT_FORM_TRANSLATED.NAME.TRANSLATE[currentLanguageApp]} />
                 </label>
-                <label htmlFor="surname" className={`flex items-center gap-2`}>
+                <label htmlFor="surname" className={`flex w-full items-center justify-between gap-2`}>
                     {CLIENT_FORM_TRANSLATED.SURNAME.TRANSLATE[currentLanguageApp]}:
                     <input
                         id="surname"
                         type="text"
-                        className={`rounded-md border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
+                        className={`rounded-md border px-3 py-2 w-1/2 ${THEME_COLORS[currentThemeApp].container.input}`}
                         placeholder={CLIENT_FORM_TRANSLATED.SURNAME.TRANSLATE[currentLanguageApp]} />
                 </label>
-                <label htmlFor="personal code" className={`flex items-center gap-2`}>
+                <label htmlFor="personal code" className={`flex w-full items-center justify-between gap-2`}>
                     {CLIENT_FORM_TRANSLATED.PERSONAL_CODE.TRANSLATE[currentLanguageApp]}:
                     <input
                         id="personal code"
                         type="text"
                         placeholder={CLIENT_FORM_TRANSLATED.PERSONAL_CODE.TRANSLATE[currentLanguageApp]}
-                        className={`rounded-md border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`} />
+                        className={`rounded-md border px-3 py-2 w-1/2 ${THEME_COLORS[currentThemeApp].container.input}`} />
                 </label>
-                <label htmlFor="type expertise" className={`flex items-center gap-2`}>
+                <label htmlFor="type expertise" className={`flex w-full justify-between items-center gap-2`}>
                     <span>{CLIENT_FORM_TRANSLATED.TYPE_EXPERTISE.TRANSLATE_LABEL[currentLanguageApp]}:</span>
                     {typeExpertise !== 'Another (need to specify)' ? (
                         <Select.Root
@@ -71,7 +71,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                             onValueChange={setTypeExpertise}
                         >
                             <Select.Trigger
-                                className={`flex items-center  justify-between gap-2
+                                className={`flex items-center w-1/2 justify-between gap-2
                                             rounded-md border px-3 py-2
                                             ${THEME_COLORS[currentThemeApp].container.input}
                                             focus:outline-none focus:ring-2 focus:ring-sky-500`}
@@ -124,7 +124,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
 
 
                 </label>
-                <label className="flex items-center gap-2">
+                <label className="flex w-full items-center justify-between gap-2">
                     <span>
                         {CLIENT_FORM_TRANSLATED.SUBTYPE_EXPERTISE.TRANSLATE_LABEL[currentLanguageApp]}:
                     </span>
@@ -135,7 +135,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                             onValueChange={setSubTypeExpertise}
                         >
                             <Select.Trigger
-                                className={`flex items-center  justify-between gap-2
+                                className={`flex items-center w-1/2 justify-between gap-2
                                             rounded-md border px-3 py-2
                                             ${THEME_COLORS[currentThemeApp].container.input}
                                             focus:outline-none focus:ring-2 focus:ring-sky-500`}
@@ -175,7 +175,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                             </Select.Portal>
                         </Select.Root>
                     ) : (
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 justify-between">
                             <input
                                 type="text"
                                 className={`rounded-md border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
@@ -192,7 +192,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                         </div>
                     )}
                 </label>
-                <label className="flex gap-2 items-center">
+                <label className="flex w-full gap-2 items-center justify-between">
                     <span>{CLIENT_FORM_TRANSLATED.STATUS.TRANSLATE_LABEL[currentLanguageApp]}:</span>
 
                     {statusClient !== 'Another (need to specify)' ? (
@@ -200,8 +200,8 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                             value={statusClient}
                             onValueChange={setStatusClient}>
                             <Select.Trigger
-                                className={`flex items-center  justify-between gap-2
-                                            rounded-md border px-3 py-2
+                                className={`flex items-center w-1/2  justify-between gap-2
+                                            rounded-md border  px-3 py-2
                                             ${THEME_COLORS[currentThemeApp].container.input}
                                             focus:outline-none focus:ring-2 focus:ring-sky-500`}
                             >
@@ -240,7 +240,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                             </Select.Portal>
                         </Select.Root>
                     ) : (
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center w-1/2 gap-2 justify-between">
                             <input
                                 id="status-custom"
                                 type="text"
@@ -257,12 +257,12 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                     )}
                 </label>
 
-                <label htmlFor="customer" className={`flex items-center gap-2`}>
+                <label htmlFor="customer" className={`flex w-full items-center justify-between gap-2`}>
                     {CLIENT_FORM_TRANSLATED.CUSTOMER.TRANSLATE[currentLanguageApp]}:
                     <input
                         id="customer"
                         type="text"
-                        className={`rounded-md border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
+                        className={`w-1/2 rounded-md border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
                         placeholder={CLIENT_FORM_TRANSLATED.CUSTOMER.PLACEHOLDER[currentLanguageApp]} />
                 </label>
                 <div className={`flex gap-4 mt-4 justify-center items-center`}>

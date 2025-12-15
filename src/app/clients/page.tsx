@@ -48,15 +48,15 @@ export default function Clients() {
 
 
     const createClientBlock = (
-        <div className={`flex rounded-xl w-full ${THEME_COLORS[currentThemeApp].container.main} ${indents.container.padding} ${indents.container.margin}`}>
+        <div className={`flex rounded-xl w-full ${THEME_COLORS[currentThemeApp].container.main} ${indents.container.padding} ${indents.container.margin} `}>
             <div className={`flex m-2 w-full gap-2`}>
-                {choosedDay !== '' && <div className={`flex flex-col gap-2  h-fit w-full`}>
+                {choosedDay !== '' && <div className={`flex flex-col gap-2  h-fit w-full `}>
                     <div className={`${THEME_COLORS[currentThemeApp].container.sub} w-2xs rounded-xl`}>
                         {dataCell(choosedDay)}
                     </div>
 
                     <div
-                        className={`border-2 rounded-xl p-4 ${isHoverOnElement || clientDataStatus.status ? 'opacity-100' : 'opacity-30'} flex justify-center `}
+                        className={`border-2 rounded-xl p-4 ${isHoverOnElement || clientDataStatus.status ? 'opacity-100' : 'opacity-30'} flex justify-center  `}
                         onMouseEnter={() => setIsHoverOnElement(true)}
                         onMouseLeave={() => setIsHoverOnElement(false)}
                     >
@@ -94,7 +94,7 @@ export default function Clients() {
                         </button>
 
                         {isOpen && (
-                            <div className={`grid grid-cols-7 m-2 gap-2 ${THEME_COLORS[currentThemeApp].container.main}`}>
+                            <div className={`grid grid-cols-7  m-2 gap-2 ${THEME_COLORS[currentThemeApp].container.main}`}>
                                 {daysArray.map((day) => (
                                     <button
                                         key={day}
