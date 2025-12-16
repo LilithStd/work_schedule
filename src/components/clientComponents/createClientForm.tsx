@@ -84,7 +84,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
 
                             <Select.Portal>
                                 <Select.Content
-                                    className="z-50 rounded-md border bg-white shadow-lg"
+                                    className={` ${THEME_COLORS[currentThemeApp].container.input} z-50 rounded-md border shadow-lg`}
                                     position="popper"
                                 >
                                     <Select.Viewport className="p-1">
@@ -94,11 +94,11 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                                             <Select.Item
                                                 key={option}
                                                 value={option}
-                                                className="flex cursor-pointer items-center justify-between
+                                                className={`
+                                                    flex cursor-pointer items-center justify-between
                                                 rounded px-3 py-2
-                                                 text-black
                                                  focus:bg-sky-100
-                                                     data-[state=checked]:bg-sky-200"
+                                                     data-[state=checked]:bg-sky-200`}
                                             >
                                                 <Select.ItemText>{option}</Select.ItemText>
                                                 <Select.ItemIndicator>
@@ -148,7 +148,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
 
                             <Select.Portal>
                                 <Select.Content
-                                    className="z-50 rounded-md border bg-white shadow-lg"
+                                    className={`z-50 rounded-md border   shadow-lg ${THEME_COLORS[currentThemeApp].container.input}`}
                                     position="popper"
                                 >
                                     <Select.Viewport className="p-1">
@@ -158,11 +158,11 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                                             <Select.Item
                                                 key={option}
                                                 value={option}
-                                                className="flex cursor-pointer items-center justify-between
+                                                className={`"flex cursor-pointer items-center justify-between
                                                 rounded px-3 py-2
-                                                 text-black
+                                                ${THEME_COLORS[currentThemeApp].container.input}
                                                  focus:bg-sky-100
-                                                     data-[state=checked]:bg-sky-200"
+                                                     data-[state=checked]:bg-sky-200"`}
                                             >
                                                 <Select.ItemText>{option}</Select.ItemText>
                                                 <Select.ItemIndicator>
@@ -213,21 +213,23 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
 
                             <Select.Portal>
                                 <Select.Content
-                                    className="z-50 rounded-md border bg-white shadow-lg"
+                                    className={`${THEME_COLORS[currentThemeApp].container.input} z-50 rounded-md border  shadow-lg`}
                                     position="popper"
                                 >
                                     <Select.Viewport className="p-1">
                                         {CLIENT_FORM_TRANSLATED.STATUS.TRANSLATE_OPINION[
                                             currentLanguageApp
                                         ].map((option) => (
+
                                             <Select.Item
                                                 key={option}
                                                 value={option}
-                                                className="flex cursor-pointer items-center justify-between
+                                                className={`
+                                                flex cursor-pointer items-center justify-between
                                                 rounded px-3 py-2
-                                                
-                                                 focus:bg-sky-100
-                                                data-[state=checked]:bg-sky-200"
+                                                ${THEME_COLORS[currentThemeApp].element.selectedOption}
+                                                ${THEME_COLORS[currentThemeApp].element.checkedOption}
+                                                `}
                                             >
                                                 <Select.ItemText>{option}</Select.ItemText>
                                                 <Select.ItemIndicator>
