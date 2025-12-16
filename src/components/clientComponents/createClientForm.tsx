@@ -6,15 +6,28 @@ import { useGlobalStore } from "@/store/globalStore";
 import { useState } from "react";
 import ResetChooseInputType from "../../../public/icons/ArrowPath.svg"
 import { Check, ChevronDown } from 'lucide-react';
+import { ClientDataType } from '@/store/clientStore';
+import { nanoid } from 'nanoid';
+
+// type ClientDataFormType = {
+//     name: string;
+//     surname: string;
+//     personalCode: string;
+//     typeEkspertise: string;
+//     subTypeExpertise: string;
+//     status: string;
+//     customer: string;
+// };
 
 interface CreateClientFormInterface {
     statusEditType: CLIENT_DATA_STATUS
+    callBack: (status: boolean) => void
+    clientData: (data: ClientDataType[]) => void
     data: string;
 }
 
-export default function CreateClientForm({ statusEditType: statusEdit, data }: CreateClientFormInterface) {
+export default function CreateClientForm({ statusEditType: statusEdit, data, callBack, clientData }: CreateClientFormInterface) {
     // consts
-    const [currentClientData, setCurrentClientData] = useState(data);
     const [clientName, setClientName] = useState('');
     const [clientSurname, setClientSurname] = useState('');
     const [personalCode, setPersonalCode] = useState('');
@@ -34,10 +47,27 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
     const [statusClient, setStatusClient] = useState('');
     // 
     //functions
-    const handleSubmitClientForm = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmitClientForm = (
+        e: React.FormEvent<HTMLFormElement>
+    ) => {
         e.preventDefault();
+        const formData: ClientDataType = {
+            id: nanoid(),
+            name: clientName,
+            surname: clientSurname,
+            personalCode: personalCode,
+            typeEkspertise: typeExpertiseLabel,
+            subTypeEkspertise: subTypeExpertiseLabel,
+            status: statusClientLabel,
+            customer: customer,
+        }
+        // console.log('formData', formData);
+
+        clientData([formData]);
+        callBack(false);
         // handle form submission
     }
+
     const handleResetForm = () => {
         setTypeExpertise('');
         setStatusClient('');
@@ -50,12 +80,13 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
     return (
         <div className={`flex flex-col w-full n`}>
             <h2 className={`text-center`}>createClientForm</h2>
-            <form className={`flex flex-col justify-between gap-4 mt-4 w-full`}>
+            <form className={`flex flex-col justify-between gap-4 mt-4 w-full`} onSubmit={handleSubmitClientForm}>
                 <label htmlFor="name" className={`flex w-full gap-2 justify-between items-center`}>
                     {CLIENT_FORM_TRANSLATED.NAME.TRANSLATE[currentLanguageApp]}:
                     <input
                         id="name"
                         type="text"
+                        onChange={(e) => setClientName(e.target.value)}
                         className={`rounded-md border px-3 py-2 w-1/2 ${THEME_COLORS[currentThemeApp].container.input}`}
                         placeholder={CLIENT_FORM_TRANSLATED.NAME.TRANSLATE[currentLanguageApp]} />
                 </label>
@@ -64,6 +95,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                     <input
                         id="surname"
                         type="text"
+                        onChange={(e) => setClientSurname(e.target.value)}
                         className={`rounded-md border px-3 py-2 w-1/2 ${THEME_COLORS[currentThemeApp].container.input}`}
                         placeholder={CLIENT_FORM_TRANSLATED.SURNAME.TRANSLATE[currentLanguageApp]} />
                 </label>
@@ -72,6 +104,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                     <input
                         id="personal code"
                         type="text"
+                        onChange={(e) => setPersonalCode(e.target.value)}
                         placeholder={CLIENT_FORM_TRANSLATED.PERSONAL_CODE.TRANSLATE[currentLanguageApp]}
                         className={`rounded-md border px-3 py-2 w-1/2 ${THEME_COLORS[currentThemeApp].container.input}`} />
                 </label>
@@ -130,6 +163,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                         <input
                             id="type expertise"
                             type="text"
+                            onChange={(e) => setTypeExpertise(e.target.value)}
                             placeholder={CLIENT_FORM_TRANSLATED.TYPE_EXPERTISE.PLACEHOLDER_ADDITIONAL[currentLanguageApp]}
                             className={`rounded-md w-full border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
                         />
@@ -194,6 +228,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                         <div className="flex items-center w-1/2 gap-2 justify-between">
                             <input
                                 type="text"
+                                onChange={(e) => setSubTypeExpertise(e.target.value)}
                                 className={`rounded-md w-full border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
                                 placeholder={
                                     CLIENT_FORM_TRANSLATED.SUBTYPE_EXPERTISE
@@ -262,6 +297,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                             <input
                                 id="status-custom"
                                 type="text"
+                                onChange={(e) => setStatusClient(e.target.value)}
                                 className={`rounded-md w-full  border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
                                 placeholder={
                                     CLIENT_FORM_TRANSLATED.STATUS.PLACEHOLDER_ADDITIONAL[currentLanguageApp]
@@ -280,11 +316,18 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                     <input
                         id="customer"
                         type="text"
+                        onChange={(e) => setCustomer(e.target.value)}
                         className={`flex w-1/2 rounded-md border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
                         placeholder={CLIENT_FORM_TRANSLATED.CUSTOMER.PLACEHOLDER[currentLanguageApp]} />
                 </label>
                 <div className={`flex gap-4 mt-4 justify-center items-center`}>
-                    <button type="submit" className={`${THEME_COLORS[currentThemeApp].button} ${indents.button.padding} rounded-xl flex`}>{CLIENT_FORM_TRANSLATED.SUBMIT_BUTTON.TRANSLATE[currentLanguageApp]}</button>
+                    <button
+                        type="submit"
+                        className={`${THEME_COLORS[currentThemeApp].button} ${indents.button.padding} rounded-xl flex`}
+
+                    >
+                        {CLIENT_FORM_TRANSLATED.SUBMIT_BUTTON.TRANSLATE[currentLanguageApp]}
+                    </button>
                     <button
                         type="reset"
                         onClick={handleResetForm}

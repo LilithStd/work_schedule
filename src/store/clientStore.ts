@@ -1,11 +1,12 @@
 import {create} from 'zustand';
 
-type ClientPropsType = {
+export type ClientDataType = {
 	id: string;
 	name: string;
 	surname: string;
 	personalCode: string;
 	typeEkspertise: string;
+	subTypeEkspertise: string;
 	status: string;
 	customer: string;
 };
@@ -47,20 +48,20 @@ const statusClient = {
 };
 
 interface ClientStoreTypes {
-	clientsList: ClientPropsType[];
-	addClient: (client: ClientPropsType) => void;
-	updateClient: (id: string, updatedClient: ClientPropsType) => void;
+	clientsList: ClientDataType[];
+	addClient: (client: ClientDataType) => void;
+	updateClient: (id: string, updatedClient: ClientDataType) => void;
 	removeClient: (id: string) => void;
 }
 
 export const useClientStore = create<ClientStoreTypes>()((set, get) => ({
 	clientsList: [],
-	addClient: (client: ClientPropsType) => {
+	addClient: (client: ClientDataType) => {
 		set((state) => ({
 			clientsList: [...state.clientsList, client],
 		}));
 	},
-	updateClient: (id: string, updatedClient: ClientPropsType) => {
+	updateClient: (id: string, updatedClient: ClientDataType) => {
 		set((state) => ({
 			clientsList: state.clientsList.map((client) =>
 				client.id === id ? updatedClient : client,

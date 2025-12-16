@@ -6,12 +6,15 @@ import dayjs from 'dayjs'
 import { ViewTransition, useState } from 'react'
 import AddClientIcon from '../../../public/icons/user-plus.svg'
 import CreateClientForm from '@/components/clientComponents/createClientForm'
+import { ClientDataType } from '@/store/clientStore'
 
 
 
 export default function Clients() {
     // state
     const [openMonth, setOpenMonth] = useState<string | null>(null);
+    const [currentClientData, setCurrentClientData] = useState<ClientDataType[]>([]);
+    const [isOpenCreateClientForm, setIsOpenCreateClientForm] = useState(false)
     const [choosedDay, setChoosedDay] = useState<string>('')
     const [isHoverOnElement, setIsHoverOnElement] = useState(false)
     const [clientDataStatus, setClientDataStatus] = useState(
@@ -31,6 +34,7 @@ export default function Clients() {
         setOpenMonth((prev) => (prev === monthLabel ? null : monthLabel));
     };
     const handleClientDataStatus = () => {
+        setIsOpenCreateClientForm(true)
         setClientDataStatus(prev => ({
             ...prev,
             status: true
@@ -46,7 +50,7 @@ export default function Clients() {
         )
     }
 
-
+    console.log('currentClientData', currentClientData);
     const createClientBlock = (
         <div className={`flex rounded-xl w-full ${THEME_COLORS[currentThemeApp].container.main} ${indents.container.padding} ${indents.container.margin} `}>
             <div className={`flex m-2 w-full gap-2`}>
@@ -61,14 +65,32 @@ export default function Clients() {
                         onMouseLeave={() => setIsHoverOnElement(false)}
                     >
                         {!clientDataStatus.status && <AddClientIcon className={``} width={40} height={40} onClick={handleClientDataStatus} />}
-                        {clientDataStatus.status && <CreateClientForm statusEditType={clientDataStatus.typeEditStatus} data={choosedDay} />}
+                        {clientDataStatus.status && isOpenCreateClientForm &&
+                            <CreateClientForm
+                                statusEditType={clientDataStatus.typeEditStatus}
+                                data={choosedDay}
+                                callBack={setIsOpenCreateClientForm}
+                                clientData={setCurrentClientData}
+                            />
+                        }
+                        {currentClientData.length > 0 &&
+                            currentClientData.map((client) => (
+                                <div key={client.id}>
+                                    <p>{client.name}</p>
+                                    <p>{client.surname}</p>
+                                    <p>{client.personalCode}</p>
+                                    <p>{client.typeEkspertise}</p>
+                                    <p>{client.subTypeEkspertise}</p>
+                                    <p>{client.status}</p>
+                                    <p>{client.customer}</p>
+                                </div>
+                            ))
+                        }
+
                     </div>
                 </div>}
 
-
-
             </div>
-
         </div>
     )
 
