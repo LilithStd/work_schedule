@@ -14,6 +14,14 @@ interface CreateClientFormInterface {
 
 export default function CreateClientForm({ statusEditType: statusEdit, data }: CreateClientFormInterface) {
     // consts
+    const [currentClientData, setCurrentClientData] = useState(data);
+    const [clientName, setClientName] = useState('');
+    const [clientSurname, setClientSurname] = useState('');
+    const [personalCode, setPersonalCode] = useState('');
+    const [customer, setCustomer] = useState('');
+    const [statusClientLabel, setStatusClientLabel] = useState('');
+    const [typeExpertiseLabel, setTypeExpertiseLabel] = useState('');
+    const [subTypeExpertiseLabel, setSubTypeExpertiseLabel] = useState('');
 
     // 
     // stores
@@ -26,6 +34,10 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
     const [statusClient, setStatusClient] = useState('');
     // 
     //functions
+    const handleSubmitClientForm = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        // handle form submission
+    }
     const handleResetForm = () => {
         setTypeExpertise('');
         setStatusClient('');
@@ -162,11 +174,11 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                                             <Select.Item
                                                 key={option}
                                                 value={option}
-                                                className={`"flex cursor-pointer items-center justify-between
+                                                className={`flex cursor-pointer items-center justify-between
                                                 rounded px-3 py-2
                                                 ${THEME_COLORS[currentThemeApp].container.input}
                                                  focus:bg-sky-100
-                                                     data-[state=checked]:bg-sky-200"`}
+                                                data-[state=checked]:bg-sky-200`}
                                             >
                                                 <Select.ItemText>{option}</Select.ItemText>
                                                 <Select.ItemIndicator>
