@@ -110,12 +110,12 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                                 </Select.Content>
                             </Select.Portal>
                         </Select.Root>
-                    ) : <div className={`flex items-center gap-2`}>
+                    ) : <div className={`flex w-1/2 items-center gap-2`}>
                         <input
                             id="type expertise"
                             type="text"
                             placeholder={CLIENT_FORM_TRANSLATED.TYPE_EXPERTISE.PLACEHOLDER_ADDITIONAL[currentLanguageApp]}
-                            className={`rounded-md border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
+                            className={`rounded-md w-full border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
                         />
                         <ResetChooseInputType className="w-6 h-6 cursor-pointer" onClick={() => setTypeExpertise('')} />
                     </div>
@@ -175,10 +175,10 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                             </Select.Portal>
                         </Select.Root>
                     ) : (
-                        <div className="flex items-center gap-2 justify-between">
+                        <div className="flex items-center w-1/2 gap-2 justify-between">
                             <input
                                 type="text"
-                                className={`rounded-md border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
+                                className={`rounded-md w-full border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
                                 placeholder={
                                     CLIENT_FORM_TRANSLATED.SUBTYPE_EXPERTISE
                                         .PLACEHOLDER_ADDITIONAL[currentLanguageApp]
@@ -246,7 +246,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                             <input
                                 id="status-custom"
                                 type="text"
-                                className={`rounded-md border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
+                                className={`rounded-md w-full  border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
                                 placeholder={
                                     CLIENT_FORM_TRANSLATED.STATUS.PLACEHOLDER_ADDITIONAL[currentLanguageApp]
                                 }
@@ -264,7 +264,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                     <input
                         id="customer"
                         type="text"
-                        className={`w-1/2 rounded-md border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
+                        className={`flex w-1/2 rounded-md border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
                         placeholder={CLIENT_FORM_TRANSLATED.CUSTOMER.PLACEHOLDER[currentLanguageApp]} />
                 </label>
                 <div className={`flex gap-4 mt-4 justify-center items-center`}>
