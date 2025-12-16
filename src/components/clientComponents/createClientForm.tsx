@@ -84,10 +84,10 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
 
                             <Select.Portal>
                                 <Select.Content
-                                    className={` ${THEME_COLORS[currentThemeApp].container.input} z-50 rounded-md border shadow-lg`}
+                                    className={`min-w-[var(--radix-select-trigger-width)] ${THEME_COLORS[currentThemeApp].container.input} z-50 rounded-md border shadow-lg`}
                                     position="popper"
                                 >
-                                    <Select.Viewport className="p-1">
+                                    <Select.Viewport className="p-1 w-full">
                                         {CLIENT_FORM_TRANSLATED.TYPE_EXPERTISE.TRANSLATE_OPINION[
                                             currentLanguageApp
                                         ].map((option) => (
@@ -95,9 +95,13 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
                                                 key={option}
                                                 value={option}
                                                 className={`
-                                                    flex cursor-pointer items-center justify-between
-                                                rounded px-3 py-2
-                                                 focus:bg-sky-100
+                                                    flex 
+                                                    cursor-pointer 
+                                                    items-center
+                                                    w-full
+                                                    justify-between
+                                                    rounded px-3 py-2
+                                                    ${THEME_COLORS[currentThemeApp].element.selectedOption}
                                                      data-[state=checked]:bg-sky-200`}
                                             >
                                                 <Select.ItemText>{option}</Select.ItemText>
@@ -148,7 +152,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
 
                             <Select.Portal>
                                 <Select.Content
-                                    className={`z-50 rounded-md border   shadow-lg ${THEME_COLORS[currentThemeApp].container.input}`}
+                                    className={`z-50 rounded-md border min-w-[var(--radix-select-trigger-width)]   shadow-lg ${THEME_COLORS[currentThemeApp].container.input}`}
                                     position="popper"
                                 >
                                     <Select.Viewport className="p-1">
@@ -213,7 +217,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data }: C
 
                             <Select.Portal>
                                 <Select.Content
-                                    className={`${THEME_COLORS[currentThemeApp].container.input} z-50 rounded-md border  shadow-lg`}
+                                    className={`${THEME_COLORS[currentThemeApp].container.input} z-50 rounded-md border min-w-[var(--radix-select-trigger-width)]  shadow-lg`}
                                     position="popper"
                                 >
                                     <Select.Viewport className="p-1">
