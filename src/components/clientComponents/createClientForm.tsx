@@ -28,10 +28,6 @@ interface CreateClientFormInterface {
 
 export default function CreateClientForm({ statusEditType: statusEdit, data, callBack, clientData }: CreateClientFormInterface) {
     // consts
-    const [clientName, setClientName] = useState('');
-    const [clientSurname, setClientSurname] = useState('');
-    const [personalCode, setPersonalCode] = useState('');
-    const [customer, setCustomer] = useState('');
     const [statusClientLabel, setStatusClientLabel] = useState('');
     const [typeExpertiseLabel, setTypeExpertiseLabel] = useState('');
     const [subTypeExpertiseLabel, setSubTypeExpertiseLabel] = useState('');
@@ -51,17 +47,18 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, cal
         e: React.FormEvent<HTMLFormElement>
     ) => {
         e.preventDefault();
+        const currentFormData = new FormData(e.currentTarget);
         const formData: ClientDataType = {
             id: nanoid(),
-            name: clientName,
-            surname: clientSurname,
-            personalCode: personalCode,
+            name: currentFormData.get('name') as string,
+            surname: currentFormData.get('surname') as string,
+            personalCode: currentFormData.get('personal_code') as string,
             typeEkspertise: typeExpertiseLabel,
             subTypeEkspertise: subTypeExpertiseLabel,
             status: statusClientLabel,
-            customer: customer,
+            customer: currentFormData.get('customer') as string,
         }
-        // console.log('formData', formData);
+
 
         clientData([formData]);
         callBack(false);
@@ -86,7 +83,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, cal
                     <input
                         id="name"
                         type="text"
-                        onChange={(e) => setClientName(e.target.value)}
+
                         className={`rounded-md border px-3 py-2 w-1/2 ${THEME_COLORS[currentThemeApp].container.input}`}
                         placeholder={CLIENT_FORM_TRANSLATED.NAME.TRANSLATE[currentLanguageApp]} />
                 </label>
@@ -95,16 +92,16 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, cal
                     <input
                         id="surname"
                         type="text"
-                        onChange={(e) => setClientSurname(e.target.value)}
+
                         className={`rounded-md border px-3 py-2 w-1/2 ${THEME_COLORS[currentThemeApp].container.input}`}
                         placeholder={CLIENT_FORM_TRANSLATED.SURNAME.TRANSLATE[currentLanguageApp]} />
                 </label>
-                <label htmlFor="personal code" className={`flex w-full items-center justify-between gap-2`}>
+                <label htmlFor="personal_code" className={`flex w-full items-center justify-between gap-2`}>
                     {CLIENT_FORM_TRANSLATED.PERSONAL_CODE.TRANSLATE[currentLanguageApp]}:
                     <input
-                        id="personal code"
+                        id="personal_code"
                         type="text"
-                        onChange={(e) => setPersonalCode(e.target.value)}
+
                         placeholder={CLIENT_FORM_TRANSLATED.PERSONAL_CODE.TRANSLATE[currentLanguageApp]}
                         className={`rounded-md border px-3 py-2 w-1/2 ${THEME_COLORS[currentThemeApp].container.input}`} />
                 </label>
@@ -316,7 +313,6 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, cal
                     <input
                         id="customer"
                         type="text"
-                        onChange={(e) => setCustomer(e.target.value)}
                         className={`flex w-1/2 rounded-md border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
                         placeholder={CLIENT_FORM_TRANSLATED.CUSTOMER.PLACEHOLDER[currentLanguageApp]} />
                 </label>
