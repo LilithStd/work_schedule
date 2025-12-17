@@ -227,7 +227,7 @@ export const CLIENT_FORM_TRANSLATED = {
 	},
 	CUSTOMER:{
 		LABEL:'customer',
-		TRANSLATE:{
+		TRANSLATE_LABEL:{
 			EN:'Customer',
 			LV:'Klients',
 			RU:'Заказчик'

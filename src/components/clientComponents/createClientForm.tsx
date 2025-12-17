@@ -8,7 +8,7 @@ import ResetChooseInputType from "../../../public/icons/ArrowPath.svg"
 import { Check, ChevronDown } from 'lucide-react';
 import { ClientDataType } from '@/store/clientStore';
 import { nanoid } from 'nanoid';
-import { set } from 'react-datepicker/dist/dist/date_utils.js';
+
 
 // type ClientDataFormType = {
 //     name: string;
@@ -29,9 +29,6 @@ interface CreateClientFormInterface {
 
 export default function CreateClientForm({ statusEditType: statusEdit, data, callBack, clientData }: CreateClientFormInterface) {
     // consts
-    const [statusClientLabel, setStatusClientLabel] = useState('');
-    const [typeExpertiseLabel, setTypeExpertiseLabel] = useState('');
-    const [subTypeExpertiseLabel, setSubTypeExpertiseLabel] = useState('');
 
     // 
     // stores
@@ -386,7 +383,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, cal
                 </label>
 
                 <label htmlFor="customer" className={`flex w-full items-center justify-between gap-2`}>
-                    {CLIENT_FORM_TRANSLATED.CUSTOMER.TRANSLATE[currentLanguageApp]}:
+                    {CLIENT_FORM_TRANSLATED.CUSTOMER.TRANSLATE_LABEL[currentLanguageApp]}:
                     <input
                         id="customer"
                         type="text"

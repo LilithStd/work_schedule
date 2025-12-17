@@ -1,6 +1,6 @@
 'use client'
 import { indents } from '@/consts/globalStyles'
-import { CLIENT_DATA_STATUS, MONTHS, THEME_COLORS } from '@/consts/template'
+import { CLIENT_DATA_STATUS, CLIENT_FORM_TRANSLATED, MONTHS, THEME_COLORS } from '@/consts/template'
 import { useGlobalStore } from '@/store/globalStore'
 import dayjs from 'dayjs'
 import { ViewTransition, useState } from 'react'
@@ -27,6 +27,7 @@ export default function Clients() {
     // 
     // stores
     const currentThemeApp = useGlobalStore((state) => state.currentThemeApp)
+    const currentLanguageApp = useGlobalStore((state) => state.currentLanguageApp)
     // 
     //components
 
@@ -77,13 +78,39 @@ export default function Clients() {
                         {currentClientData.length > 0 &&
                             currentClientData.map((client) => (
                                 <div key={client.id}>
-                                    <p>{client.name}</p>
-                                    <p>{client.surname}</p>
-                                    <p>{client.personalCode}</p>
-                                    <p>{client.typeEkspertise}</p>
-                                    <p>{client.subTypeEkspertise}</p>
-                                    <p>{client.status}</p>
-                                    <p>{client.customer}</p>
+                                    <div className={`flex gap-2`}>
+                                        <h3>{CLIENT_FORM_TRANSLATED.NAME.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
+                                        <h3>{client.name}</h3>
+                                    </div>
+
+                                    <div className={`flex gap-2`}>
+                                        <h3>{CLIENT_FORM_TRANSLATED.SURNAME.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
+                                        <h3>{client.surname}</h3>
+                                    </div>
+                                    <div className={`flex gap-2`}>
+                                        <h3>{CLIENT_FORM_TRANSLATED.PERSONAL_CODE.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
+                                        <h3>{client.personalCode}</h3>
+                                    </div>
+                                    <div className={`flex gap-2`}>
+                                        <h3>{CLIENT_FORM_TRANSLATED.TIME.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
+                                        <h3>{client.time}</h3>
+                                    </div>
+                                    <div className={`flex gap-2`}>
+                                        <h3>{CLIENT_FORM_TRANSLATED.TYPE_EXPERTISE.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
+                                        <h3>{client.typeEkspertise}</h3>
+                                    </div>
+                                    <div className={`flex gap-2`}>
+                                        <h3>{CLIENT_FORM_TRANSLATED.SUBTYPE_EXPERTISE.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
+                                        <h3>{client.subTypeEkspertise}</h3>
+                                    </div>
+                                    <div className={`flex gap-2`}>
+                                        <h3>{CLIENT_FORM_TRANSLATED.STATUS.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
+                                        <h3>{client.status}</h3>
+                                    </div>
+                                    <div className={`flex gap-2`}>
+                                        <h3>{CLIENT_FORM_TRANSLATED.CUSTOMER.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
+                                        <h3>{client.customer}</h3>
+                                    </div>
                                 </div>
                             ))
                         }
