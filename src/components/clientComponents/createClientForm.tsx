@@ -8,6 +8,7 @@ import ResetChooseInputType from "../../../public/icons/ArrowPath.svg"
 import { Check, ChevronDown } from 'lucide-react';
 import { ClientDataType } from '@/store/clientStore';
 import { nanoid } from 'nanoid';
+import { set } from 'react-datepicker/dist/dist/date_utils.js';
 
 // type ClientDataFormType = {
 //     name: string;
@@ -39,6 +40,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, cal
     // 
     // state
     const [typeExpertise, setTypeExpertise] = useState('');
+    const [typeSelectedTime, setTypeSelectedTime] = useState('');
     const [subTypeExpertise, setSubTypeExpertise] = useState('');
     const [statusClient, setStatusClient] = useState('');
     // 
@@ -48,18 +50,21 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, cal
     ) => {
         e.preventDefault();
         const currentFormData = new FormData(e.currentTarget);
+        const getValue = (fd: FormData, name: string) =>
+            (fd.get(name)?.toString() ?? '');
+
         const formData: ClientDataType = {
             id: nanoid(),
-            name: currentFormData.get('name') as string,
-            surname: currentFormData.get('surname') as string,
-            personalCode: currentFormData.get('personal_code') as string,
-            typeEkspertise: typeExpertiseLabel,
-            subTypeEkspertise: subTypeExpertiseLabel,
-            status: statusClientLabel,
-            customer: currentFormData.get('customer') as string,
-        }
-
-
+            data: data,
+            name: getValue(currentFormData, 'name'),
+            surname: getValue(currentFormData, 'surname'),
+            time: typeSelectedTime,
+            personalCode: getValue(currentFormData, 'personalCode'),
+            customer: getValue(currentFormData, 'customer'),
+            typeEkspertise: typeExpertise,
+            subTypeEkspertise: subTypeExpertise,
+            status: statusClient,
+        };
         clientData([formData]);
         callBack(false);
         // handle form submission
@@ -69,6 +74,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, cal
         setTypeExpertise('');
         setStatusClient('');
         setSubTypeExpertise('');
+        setTypeSelectedTime('');
         // reset form fields
     }
     // 
@@ -79,31 +85,98 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, cal
             <h2 className={`text-center`}>createClientForm</h2>
             <form className={`flex flex-col justify-between gap-4 mt-4 w-full`} onSubmit={handleSubmitClientForm}>
                 <label htmlFor="name" className={`flex w-full gap-2 justify-between items-center`}>
-                    {CLIENT_FORM_TRANSLATED.NAME.TRANSLATE[currentLanguageApp]}:
+                    {CLIENT_FORM_TRANSLATED.NAME.TRANSLATE_LABEL[currentLanguageApp]}:
                     <input
                         id="name"
                         type="text"
-
+                        name="name"
                         className={`rounded-md border px-3 py-2 w-1/2 ${THEME_COLORS[currentThemeApp].container.input}`}
-                        placeholder={CLIENT_FORM_TRANSLATED.NAME.TRANSLATE[currentLanguageApp]} />
+                        placeholder={CLIENT_FORM_TRANSLATED.NAME.TRANSLATE_LABEL[currentLanguageApp]} />
                 </label>
                 <label htmlFor="surname" className={`flex w-full items-center justify-between gap-2`}>
-                    {CLIENT_FORM_TRANSLATED.SURNAME.TRANSLATE[currentLanguageApp]}:
+                    {CLIENT_FORM_TRANSLATED.SURNAME.TRANSLATE_LABEL[currentLanguageApp]}:
                     <input
                         id="surname"
                         type="text"
-
+                        name="surname"
                         className={`rounded-md border px-3 py-2 w-1/2 ${THEME_COLORS[currentThemeApp].container.input}`}
-                        placeholder={CLIENT_FORM_TRANSLATED.SURNAME.TRANSLATE[currentLanguageApp]} />
+                        placeholder={CLIENT_FORM_TRANSLATED.SURNAME.TRANSLATE_LABEL[currentLanguageApp]} />
                 </label>
                 <label htmlFor="personal_code" className={`flex w-full items-center justify-between gap-2`}>
-                    {CLIENT_FORM_TRANSLATED.PERSONAL_CODE.TRANSLATE[currentLanguageApp]}:
+                    {CLIENT_FORM_TRANSLATED.PERSONAL_CODE.TRANSLATE_LABEL[currentLanguageApp]}:
                     <input
                         id="personal_code"
                         type="text"
-
-                        placeholder={CLIENT_FORM_TRANSLATED.PERSONAL_CODE.TRANSLATE[currentLanguageApp]}
+                        name="personalCode"
+                        placeholder={CLIENT_FORM_TRANSLATED.PERSONAL_CODE.TRANSLATE_LABEL[currentLanguageApp]}
                         className={`rounded-md border px-3 py-2 w-1/2 ${THEME_COLORS[currentThemeApp].container.input}`} />
+                </label>
+                <label htmlFor="time" className={`flex w-full items-center justify-between gap-2`}>
+                    {CLIENT_FORM_TRANSLATED.TIME.TRANSLATE_LABEL[currentLanguageApp]}:
+                    {typeSelectedTime !== 'Another (need to specify)' ? (
+                        <Select.Root
+                            value={typeSelectedTime}
+                            onValueChange={(value) => setTypeSelectedTime(value)}
+                        >
+                            <Select.Trigger
+                                className={`flex items-center w-1/2 justify-between gap-2
+                                            rounded-md border px-3 py-2
+                                            ${THEME_COLORS[currentThemeApp].container.input}
+                                            focus:outline-none focus:ring-2 focus:ring-sky-500`}
+                            >
+                                <Select.Value placeholder="Select time" />
+                                <Select.Icon>
+                                    <ChevronDown size={16} />
+                                </Select.Icon>
+                            </Select.Trigger>
+
+                            <Select.Portal>
+                                <Select.Content
+                                    className={`min-w-[var(--radix-select-trigger-width)] ${THEME_COLORS[currentThemeApp].container.input} z-50 rounded-md border shadow-lg`}
+                                    position="popper"
+                                >
+                                    <Select.Viewport className="p-1 w-full">
+                                        {CLIENT_FORM_TRANSLATED.TIME.TRANSLATE_OPINION[
+                                            currentLanguageApp
+                                        ].map((option) => (
+                                            <Select.Item
+                                                key={option}
+                                                value={option}
+                                                className={`
+                                                    flex 
+                                                    cursor-pointer 
+                                                    items-center
+                                                    w-full
+                                                    justify-between
+                                                    rounded px-3 py-2
+                                                    ${THEME_COLORS[currentThemeApp].element.selectedOption}
+                                                     data-[state=checked]:bg-sky-200`}
+                                            >
+                                                <Select.ItemText>{option}</Select.ItemText>
+                                                <Select.ItemIndicator>
+                                                    <Check size={14} />
+                                                </Select.ItemIndicator>
+                                            </Select.Item>
+                                        ))}
+                                    </Select.Viewport>
+                                </Select.Content>
+                            </Select.Portal>
+                        </Select.Root>
+                    ) : (
+                        <div className={`flex w-1/2 items-center gap-2`}>
+                            <input
+                                id="time"
+                                type="text"
+                                name="time"
+                                placeholder={CLIENT_FORM_TRANSLATED.TIME.PLACEHOLDER[currentLanguageApp]}
+                                className={`rounded-md border px-3 py-2 w-full ${THEME_COLORS[currentThemeApp].container.input}`}
+                            />
+                            <ResetChooseInputType
+                                className="w-6 h-6 cursor-pointer"
+                                onClick={() => setTypeSelectedTime('')}
+                            />
+                        </div>
+                    )}
                 </label>
                 <label htmlFor="type expertise" className={`flex w-full justify-between items-center gap-2`}>
                     <span>{CLIENT_FORM_TRANSLATED.TYPE_EXPERTISE.TRANSLATE_LABEL[currentLanguageApp]}:</span>
@@ -158,7 +231,8 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, cal
                         </Select.Root>
                     ) : <div className={`flex w-1/2 items-center gap-2`}>
                         <input
-                            id="type expertise"
+                            id="type_expertise"
+                            name="type_expertise"
                             type="text"
                             onChange={(e) => setTypeExpertise(e.target.value)}
                             placeholder={CLIENT_FORM_TRANSLATED.TYPE_EXPERTISE.PLACEHOLDER_ADDITIONAL[currentLanguageApp]}
@@ -186,6 +260,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, cal
                                             rounded-md border px-3 py-2
                                             ${THEME_COLORS[currentThemeApp].container.input}
                                             focus:outline-none focus:ring-2 focus:ring-sky-500`}
+                                name="subtype_expertise"
                             >
                                 <Select.Value placeholder="Select subtype" />
                                 <Select.Icon>
@@ -225,6 +300,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, cal
                         <div className="flex items-center w-1/2 gap-2 justify-between">
                             <input
                                 type="text"
+                                id="subType_expertise"
                                 onChange={(e) => setSubTypeExpertise(e.target.value)}
                                 className={`rounded-md w-full border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
                                 placeholder={
@@ -292,13 +368,14 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, cal
                     ) : (
                         <div className="flex items-center w-1/2 gap-2 justify-between">
                             <input
-                                id="status-custom"
+                                id="status"
                                 type="text"
                                 onChange={(e) => setStatusClient(e.target.value)}
                                 className={`rounded-md w-full  border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
                                 placeholder={
                                     CLIENT_FORM_TRANSLATED.STATUS.PLACEHOLDER_ADDITIONAL[currentLanguageApp]
                                 }
+                                name="status"
                             />
                             <ResetChooseInputType
                                 className="w-6 h-6 cursor-pointer"
@@ -313,6 +390,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, cal
                     <input
                         id="customer"
                         type="text"
+                        name="customer"
                         className={`flex w-1/2 rounded-md border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
                         placeholder={CLIENT_FORM_TRANSLATED.CUSTOMER.PLACEHOLDER[currentLanguageApp]} />
                 </label>

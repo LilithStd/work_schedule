@@ -2,6 +2,8 @@ import {create} from 'zustand';
 
 export type ClientDataType = {
 	id: string;
+	data: string;
+	time: string;
 	name: string;
 	surname: string;
 	personalCode: string;

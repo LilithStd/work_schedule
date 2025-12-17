@@ -32,6 +32,7 @@ export default function Clients() {
 
     const handleClick = (monthLabel: string) => {
         setOpenMonth((prev) => (prev === monthLabel ? null : monthLabel));
+
     };
     const handleClientDataStatus = () => {
         setIsOpenCreateClientForm(true)
@@ -50,7 +51,7 @@ export default function Clients() {
         )
     }
 
-    console.log('currentClientData', currentClientData);
+    // console.log('currentClientData', currentClientData);
     const createClientBlock = (
         <div className={`flex rounded-xl w-full ${THEME_COLORS[currentThemeApp].container.main} ${indents.container.padding} ${indents.container.margin} `}>
             <div className={`flex m-2 w-full gap-2`}>
@@ -128,6 +129,7 @@ export default function Clients() {
                                             cursor-pointer
                                         `}
                                         onClick={() => {
+                                            setCurrentClientData([]);
                                             setClientDataStatus(prev => ({ ...prev, status: false }))
                                             if (choosedDay === fullDayData(day)) {
                                                 setChoosedDay('')

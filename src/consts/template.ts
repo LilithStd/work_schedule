@@ -88,7 +88,7 @@ export const APP_ROUTES_LABEL = {
 export const CLIENT_FORM_TRANSLATED = {
 	NAME:{
 		LABEL:'name',
-		TRANSLATE: {
+		TRANSLATE_LABEL: {
 			EN:'Name',
 			LV:'Vards',
 			RU:'Имя',
@@ -101,7 +101,7 @@ export const CLIENT_FORM_TRANSLATED = {
 	},
 	SURNAME:{
 		LABEL:'surname',
-		TRANSLATE:{
+		TRANSLATE_LABEL:{
 			EN:'Surname',
 			LV:'Uzvārds',
 			RU:'Фамилия'
@@ -112,9 +112,34 @@ export const CLIENT_FORM_TRANSLATED = {
 			RU:'Введите фамилию',
 		}
 	},
+	TIME:{
+		LABEL:'time',
+		TRANSLATE_LABEL:{
+			EN:'Time',
+			LV:'Laiks',
+			RU:'Время',
+		},
+		PLACEHOLDER:{
+			EN:'Select time',
+			LV:'Izvēlieties laiku',
+			RU:'Выберите время',
+		},
+		TRANSLATE_OPINION:{
+			EN:['10:00','11:00','12:00','14:00','Another (need to specify)'],
+			LV:['10:00','11:00','12:00','14:00','Vēl viens (jānorāda)'],
+			RU:	['10:00','11:00','12:00','14:00','Другой (нужно указать)'],
+		},
+			
+		PLACEHOLDER_ADDITIONAL:{
+			EN:'Write additional time',
+			LV:'Uzrakstiet papildu laiku',
+			RU:'Напишите дополнительное время',
+		}
+
+	},
 	PERSONAL_CODE:{
 		LABEL:'personal_code',
-		TRANSLATE:{
+		TRANSLATE_LABEL:{
 			EN:'Personal Code',
 			LV:'Personal Kods',
 			RU:'Персональный код',
