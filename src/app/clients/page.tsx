@@ -83,40 +83,48 @@ export default function Clients() {
                         }
                         {currentClientData.length > 0 &&
                             currentClientData.map((client) => (
-                                <div key={client.id} className={`flex flex-col gap-2 p-2 w-full rounded-xl border ${THEME_COLORS[currentThemeApp].container.input}`}>
-                                    <div className={`flex gap-2 justify-between`}>
-                                        <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.NAME.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
-                                        <h3 className={`w-1/2`}>{client.name}</h3>
+                                <div key={client.id} className={`flex flex-col gap-2 p-2 w-full rounded-xl justify-center border ${THEME_COLORS[currentThemeApp].container.input}`}>
+                                    <div>
+                                        <div className={`flex gap-2 justify-between`}>
+                                            <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.NAME.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
+                                            <h3 className={`w-1/2`}>{client.name}</h3>
+                                        </div>
+
+                                        <div className={`flex gap-2 justify-between`}>
+                                            <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.SURNAME.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
+                                            <h3 className={`w-1/2`}>{client.surname}</h3>
+                                        </div>
+                                        <div className={`flex gap-2 justify-between`}>
+                                            <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.PERSONAL_CODE.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
+                                            <h3 className={`w-1/2`}>{client.personalCode}</h3>
+                                        </div>
+                                        <div className={`flex gap-2 justify-between`}>
+                                            <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.CUSTOMER.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
+                                            <h3 className={`w-1/2`} >{client.customer}</h3>
+                                        </div>
+                                    </div>
+                                    <div className={`border-1 rounded-xl border-white-300`}></div>
+                                    <div>
+                                        <div className={`flex gap-2 justify-between`}>
+                                            <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.TIME.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
+                                            <h3 className={`w-1/2`}>{client.time}</h3>
+                                        </div>
+                                        <div className={`flex gap-2 justify-between`}>
+                                            <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.TYPE_EXPERTISE.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
+                                            <h3 className={`w-1/2`}>{client.typeEkspertise.length <= 0 ? 'empty' : client.typeEkspertise}</h3>
+                                        </div>
+                                        <div className={`flex gap-2 justify-between`}>
+                                            <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.SUBTYPE_EXPERTISE.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
+                                            <h3 className={`w-1/2`}>{client.subTypeEkspertise.length <= 0 ? 'empty' : client.subTypeEkspertise}</h3>
+                                        </div>
+                                        <div className={`flex gap-2 justify-between`}>
+                                            <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.STATUS.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
+                                            <h3 className={`w-1/2`}>{client.status.length <= 0 ? 'empty' : client.status}</h3>
+                                        </div>
                                     </div>
 
-                                    <div className={`flex gap-2 justify-between`}>
-                                        <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.SURNAME.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
-                                        <h3 className={`w-1/2`}>{client.surname}</h3>
-                                    </div>
-                                    <div className={`flex gap-2 justify-between`}>
-                                        <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.PERSONAL_CODE.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
-                                        <h3 className={`w-1/2`}>{client.personalCode}</h3>
-                                    </div>
-                                    <div className={`flex gap-2 justify-between`}>
-                                        <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.TIME.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
-                                        <h3 className={`w-1/2`}>{client.time}</h3>
-                                    </div>
-                                    <div className={`flex gap-2 justify-between`}>
-                                        <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.TYPE_EXPERTISE.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
-                                        <h3 className={`w-1/2`}>{client.typeEkspertise}</h3>
-                                    </div>
-                                    <div className={`flex gap-2 justify-between`}>
-                                        <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.SUBTYPE_EXPERTISE.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
-                                        <h3 className={`w-1/2`}>{client.subTypeEkspertise}</h3>
-                                    </div>
-                                    <div className={`flex gap-2 justify-between`}>
-                                        <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.STATUS.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
-                                        <h3 className={`w-1/2`}>{client.status}</h3>
-                                    </div>
-                                    <div className={`flex gap-2 justify-between`}>
-                                        <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.CUSTOMER.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
-                                        <h3 className={`w-1/2`} >{client.customer}</h3>
-                                    </div>
+
+                                    <button className={`${THEME_COLORS[currentThemeApp].button} flex rounded-xl m-auto items-center justify-center min-h-2 w-1/2 `}>Edit</button>
                                 </div>
                             ))
                         }

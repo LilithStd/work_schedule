@@ -26,7 +26,7 @@ export const THEME_COLORS = {
 		container:{
 			main:'bg-sky-300',
 			sub: 'bg-blue-500',
-			input:'bg-sky-600'
+			input:'bg-sky-700'
 		},
 		element:{
 			active:'bg-indigo-500',
