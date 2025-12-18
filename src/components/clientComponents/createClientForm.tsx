@@ -6,7 +6,7 @@ import { useGlobalStore } from "@/store/globalStore";
 import { useState } from "react";
 import ResetChooseInputType from "../../../public/icons/ArrowPath.svg"
 import { Check, ChevronDown } from 'lucide-react';
-import { ClientDataType } from '@/store/clientStore';
+import { ClientDataType, useClientStore } from '@/store/clientStore';
 import { nanoid } from 'nanoid';
 
 
@@ -34,6 +34,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, cal
     // stores
     const currentLanguageApp = useGlobalStore((state) => state.currentLanguageApp)
     const currentThemeApp = useGlobalStore((state) => state.currentThemeApp)
+    const addClient = useClientStore((state) => state.addClient)
     // 
     // state
     const [typeExpertise, setTypeExpertise] = useState('');
@@ -62,7 +63,8 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, cal
             subTypeEkspertise: subTypeExpertise,
             status: statusClient,
         };
-        clientData([formData]);
+        addClient(formData);
+        // clientData([formData]);
         callBack(false);
         // handle form submission
     }

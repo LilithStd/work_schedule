@@ -3,10 +3,10 @@ import { indents } from '@/consts/globalStyles'
 import { CLIENT_DATA_STATUS, CLIENT_FORM_TRANSLATED, MONTHS, THEME_COLORS } from '@/consts/template'
 import { useGlobalStore } from '@/store/globalStore'
 import dayjs from 'dayjs'
-import { ViewTransition, useState } from 'react'
+import { ViewTransition, useEffect, useState } from 'react'
 import AddClientIcon from '../../../public/icons/user-plus.svg'
 import CreateClientForm from '@/components/clientComponents/createClientForm'
-import { ClientDataType } from '@/store/clientStore'
+import { ClientDataType, useClientStore } from '@/store/clientStore'
 
 
 
@@ -28,6 +28,7 @@ export default function Clients() {
     // stores
     const currentThemeApp = useGlobalStore((state) => state.currentThemeApp)
     const currentLanguageApp = useGlobalStore((state) => state.currentLanguageApp)
+    const clientsList = useClientStore((state) => state.clientsList)
     // 
     //components
 
@@ -52,6 +53,12 @@ export default function Clients() {
         )
     }
 
+    useEffect(() => {
+        setCurrentClientData(clientsList.filter(client => client.data === choosedDay))
+        console.log('clientsList', clientsList, currentClientData);
+    }, [choosedDay, clientsList])
+
+    // console.log(clientsList)
     // console.log('currentClientData', currentClientData);
     const createClientBlock = (
         <div className={`flex rounded-xl w-full ${THEME_COLORS[currentThemeApp].container.main} ${indents.container.padding} ${indents.container.margin} `}>
@@ -62,11 +69,11 @@ export default function Clients() {
                     </div>
 
                     <div
-                        className={`border-2 rounded-xl p-4 ${isHoverOnElement || clientDataStatus.status ? 'opacity-100' : 'opacity-30'} flex justify-center  `}
+                        className={`border-2 rounded-xl p-4 ${isHoverOnElement || clientDataStatus.status || currentClientData.length > 0 ? 'opacity-100' : 'opacity-30'} flex justify-center  `}
                         onMouseEnter={() => setIsHoverOnElement(true)}
                         onMouseLeave={() => setIsHoverOnElement(false)}
                     >
-                        {!clientDataStatus.status && <AddClientIcon className={``} width={40} height={40} onClick={handleClientDataStatus} />}
+                        {!clientDataStatus.status || currentClientData.length > 0 && <AddClientIcon className={``} width={40} height={40} onClick={handleClientDataStatus} />}
                         {clientDataStatus.status && isOpenCreateClientForm &&
                             <CreateClientForm
                                 statusEditType={clientDataStatus.typeEditStatus}
