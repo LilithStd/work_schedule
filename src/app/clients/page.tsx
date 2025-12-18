@@ -72,7 +72,7 @@ export default function Clients() {
                         onMouseEnter={() => setIsHoverOnElement(true)}
                         onMouseLeave={() => setIsHoverOnElement(false)}
                     >
-                        {!clientDataStatus.status || currentClientData.length > 0 && <AddClientIcon className={``} width={40} height={40} onClick={handleClientDataStatus} />}
+                        {!clientDataStatus.status && currentClientData.length == 0 && <AddClientIcon className={``} width={40} height={40} onClick={handleClientDataStatus} />}
                         {clientDataStatus.status && isOpenCreateClientForm &&
                             <CreateClientForm
                                 statusEditType={clientDataStatus.typeEditStatus}
