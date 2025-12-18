@@ -55,7 +55,6 @@ export default function Clients() {
 
     useEffect(() => {
         setCurrentClientData(clientsList.filter(client => client.data === choosedDay))
-        console.log('clientsList', clientsList, currentClientData);
     }, [choosedDay, clientsList])
 
     // console.log(clientsList)
@@ -84,39 +83,39 @@ export default function Clients() {
                         }
                         {currentClientData.length > 0 &&
                             currentClientData.map((client) => (
-                                <div key={client.id}>
-                                    <div className={`flex gap-2`}>
-                                        <h3>{CLIENT_FORM_TRANSLATED.NAME.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
-                                        <h3>{client.name}</h3>
+                                <div key={client.id} className={`flex flex-col gap-2 p-2 w-full rounded-xl border ${THEME_COLORS[currentThemeApp].container.input}`}>
+                                    <div className={`flex gap-2 justify-between`}>
+                                        <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.NAME.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
+                                        <h3 className={`w-1/2`}>{client.name}</h3>
                                     </div>
 
-                                    <div className={`flex gap-2`}>
-                                        <h3>{CLIENT_FORM_TRANSLATED.SURNAME.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
-                                        <h3>{client.surname}</h3>
+                                    <div className={`flex gap-2 justify-between`}>
+                                        <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.SURNAME.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
+                                        <h3 className={`w-1/2`}>{client.surname}</h3>
                                     </div>
-                                    <div className={`flex gap-2`}>
-                                        <h3>{CLIENT_FORM_TRANSLATED.PERSONAL_CODE.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
-                                        <h3>{client.personalCode}</h3>
+                                    <div className={`flex gap-2 justify-between`}>
+                                        <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.PERSONAL_CODE.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
+                                        <h3 className={`w-1/2`}>{client.personalCode}</h3>
                                     </div>
-                                    <div className={`flex gap-2`}>
-                                        <h3>{CLIENT_FORM_TRANSLATED.TIME.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
-                                        <h3>{client.time}</h3>
+                                    <div className={`flex gap-2 justify-between`}>
+                                        <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.TIME.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
+                                        <h3 className={`w-1/2`}>{client.time}</h3>
                                     </div>
-                                    <div className={`flex gap-2`}>
-                                        <h3>{CLIENT_FORM_TRANSLATED.TYPE_EXPERTISE.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
-                                        <h3>{client.typeEkspertise}</h3>
+                                    <div className={`flex gap-2 justify-between`}>
+                                        <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.TYPE_EXPERTISE.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
+                                        <h3 className={`w-1/2`}>{client.typeEkspertise}</h3>
                                     </div>
-                                    <div className={`flex gap-2`}>
-                                        <h3>{CLIENT_FORM_TRANSLATED.SUBTYPE_EXPERTISE.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
-                                        <h3>{client.subTypeEkspertise}</h3>
+                                    <div className={`flex gap-2 justify-between`}>
+                                        <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.SUBTYPE_EXPERTISE.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
+                                        <h3 className={`w-1/2`}>{client.subTypeEkspertise}</h3>
                                     </div>
-                                    <div className={`flex gap-2`}>
-                                        <h3>{CLIENT_FORM_TRANSLATED.STATUS.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
-                                        <h3>{client.status}</h3>
+                                    <div className={`flex gap-2 justify-between`}>
+                                        <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.STATUS.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
+                                        <h3 className={`w-1/2`}>{client.status}</h3>
                                     </div>
-                                    <div className={`flex gap-2`}>
-                                        <h3>{CLIENT_FORM_TRANSLATED.CUSTOMER.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
-                                        <h3>{client.customer}</h3>
+                                    <div className={`flex gap-2 justify-between`}>
+                                        <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.CUSTOMER.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
+                                        <h3 className={`w-1/2`} >{client.customer}</h3>
                                     </div>
                                 </div>
                             ))
