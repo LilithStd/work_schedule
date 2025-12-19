@@ -71,9 +71,23 @@ export default function Clients() {
         <div className={`flex rounded-xl w-full ${THEME_COLORS[currentThemeApp].container.main} ${indents.container.padding} ${indents.container.margin} `}>
             <div className={`flex m-2 w-full gap-2`}>
                 {choosedDay !== '' && <div className={`flex flex-col gap-2  h-fit w-full `}>
-                    <div className={`${THEME_COLORS[currentThemeApp].container.sub} w-2xs rounded-xl`}>
-                        {dataCell(choosedDay)}
+                    <div className={`flex gap-2 justify-between `}>
+                        <div className={`${THEME_COLORS[currentThemeApp].container.sub} w-2xs rounded-xl`}>
+                            {dataCell(choosedDay)}
+                        </div>
+
+                        {
+                            (clientDataStatus.status && isOpenCreateClientForm) && <button className={`${THEME_COLORS[currentThemeApp].container.sub} w-2xs rounded-xl`}
+                                onClick={() => {
+                                    setIsOpenCreateClientForm(false)
+                                    setClientDataStatus({ status: false, typeEditStatus: CLIENT_DATA_STATUS.NOTHING })
+                                }}>
+                                <p>Return</p>
+                            </button>
+                        }
                     </div>
+
+
 
                     <div
                         className={`border-2 rounded-xl p-4 ${isHoverOnElement || clientDataStatus.status || currentClientData.length > 0 ? 'opacity-100' : 'opacity-30'} flex justify-center  `}
