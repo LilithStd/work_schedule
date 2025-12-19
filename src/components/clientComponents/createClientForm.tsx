@@ -25,10 +25,12 @@ interface CreateClientFormInterface {
     callBack: (status: boolean) => void
     clientData: (data: ClientDataType[]) => void
     data: string;
+    time?: string;
     clientEditData?: ClientDataType;
 }
 
-export default function CreateClientForm({ statusEditType: statusEdit, data, callBack, clientData, clientEditData }: CreateClientFormInterface) {
+export default function CreateClientForm({ statusEditType: statusEdit, data, time, callBack, clientData, clientEditData }: CreateClientFormInterface) {
+    console.log(time)
     // consts
 
     // 
@@ -36,10 +38,11 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, cal
     const currentLanguageApp = useGlobalStore((state) => state.currentLanguageApp)
     const currentThemeApp = useGlobalStore((state) => state.currentThemeApp)
     const addClient = useClientStore((state) => state.addClient)
+    const updateClient = useClientStore((state) => state.updateClient)
     // 
     // state
     const [typeExpertise, setTypeExpertise] = useState(statusEdit === CLIENT_DATA_STATUS.EDIT_CURRENT && clientEditData ? clientEditData.typeEkspertise : '');
-    const [typeSelectedTime, setTypeSelectedTime] = useState(statusEdit === CLIENT_DATA_STATUS.EDIT_CURRENT && clientEditData ? clientEditData.time : '');
+    const [typeSelectedTime, setTypeSelectedTime] = useState(statusEdit === CLIENT_DATA_STATUS.EDIT_CURRENT && clientEditData ? clientEditData.time : (time ? time : ''));
     const [subTypeExpertise, setSubTypeExpertise] = useState(statusEdit === CLIENT_DATA_STATUS.EDIT_CURRENT && clientEditData ? clientEditData.subTypeEkspertise : '');
     const [statusClient, setStatusClient] = useState(statusEdit === CLIENT_DATA_STATUS.EDIT_CURRENT && clientEditData ? clientEditData.status : '');
     // 
@@ -64,7 +67,15 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, cal
             subTypeEkspertise: subTypeExpertise,
             status: statusClient,
         };
-        addClient(formData);
+        if (statusEdit === CLIENT_DATA_STATUS.EDIT_CURRENT && clientEditData) {
+            formData.id = clientEditData.id;
+            updateClient(clientEditData.id, formData);
+            callBack(false);
+            return;
+        } else {
+            addClient(formData);
+        }
+
         // clientData([formData]);
         callBack(false);
         // handle form submission

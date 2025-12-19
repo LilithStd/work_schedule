@@ -1,12 +1,15 @@
 'use client'
 import { indents } from '@/consts/globalStyles'
-import { CLIENT_DATA_STATUS, CLIENT_FORM_TRANSLATED, MONTHS, THEME_COLORS } from '@/consts/template'
+import { CLIENT_DATA_STATUS, CLIENT_FORM_TRANSLATED, MONTHS, THEME_COLORS, timer } from '@/consts/template'
 import { useGlobalStore } from '@/store/globalStore'
 import dayjs from 'dayjs'
 import { ViewTransition, useEffect, useState } from 'react'
 import AddClientIcon from '../../../public/icons/user-plus.svg'
 import CreateClientForm from '@/components/clientComponents/createClientForm'
 import { ClientDataType, useClientStore } from '@/store/clientStore'
+import ClientDataContainer from '@/components/clientComponents/clientDataContainer'
+
+
 
 
 
@@ -14,13 +17,16 @@ export default function Clients() {
     // state
     const [openMonth, setOpenMonth] = useState<string | null>(null);
     const [currentClientData, setCurrentClientData] = useState<ClientDataType[]>([]);
+    const [clientEditData, setClientEditData] = useState<ClientDataType>()
     const [isOpenCreateClientForm, setIsOpenCreateClientForm] = useState(false)
     const [choosedDay, setChoosedDay] = useState<string>('')
+    const [timeToCreateClient, setTimeToCreateClient] = useState<string>('')
     const [isHoverOnElement, setIsHoverOnElement] = useState(false)
     const [clientDataStatus, setClientDataStatus] = useState(
         { status: false, typeEditStatus: CLIENT_DATA_STATUS.CREATE_NEW }
     )
     // const []
+    const TIME = [...timer]
     // 
     // consts
 
@@ -37,7 +43,7 @@ export default function Clients() {
             status: true,
             typeEditStatus: CLIENT_DATA_STATUS.EDIT_CURRENT
         })
-        setCurrentClientData([data])
+        setClientEditData(data)
     }
     // /
     //components
@@ -46,8 +52,9 @@ export default function Clients() {
         setOpenMonth((prev) => (prev === monthLabel ? null : monthLabel));
 
     };
-    const handleClientDataStatus = () => {
+    const handleClientDataStatus = (time: string) => {
         setIsOpenCreateClientForm(true)
+        setTimeToCreateClient(time)
         setClientDataStatus(prev => ({
             ...prev,
             status: true
@@ -90,67 +97,65 @@ export default function Clients() {
 
 
                     <div
-                        className={`border-2 rounded-xl p-4 ${isHoverOnElement || clientDataStatus.status || currentClientData.length > 0 ? 'opacity-100' : 'opacity-30'} flex justify-center  `}
-                        onMouseEnter={() => setIsHoverOnElement(true)}
-                        onMouseLeave={() => setIsHoverOnElement(false)}
+                        className={` p-4 
+                            '} flex justify-center  `}
+                    // onMouseEnter={() => setIsHoverOnElement(true)}
+                    // onMouseLeave={() => setIsHoverOnElement(false)}
                     >
                         {!clientDataStatus.status && currentClientData.length == 0 && <AddClientIcon className={``} width={40} height={40} onClick={handleClientDataStatus} />}
-                        {clientDataStatus.status && isOpenCreateClientForm &&
+                        {(clientDataStatus.status && isOpenCreateClientForm) &&
                             <CreateClientForm
                                 statusEditType={clientDataStatus.typeEditStatus}
                                 data={choosedDay}
+                                time={timeToCreateClient}
+                                clientEditData={clientEditData}
                                 callBack={setIsOpenCreateClientForm}
                                 clientData={setCurrentClientData}
                             />
                         }
+                        {!isOpenCreateClientForm &&
+                            <div className={`flex flex-col w-full items-center justify-center`}>
+                                {TIME.map((time) => {
+                                    return (
+                                        <div key={time} className={`flex items-center justify-between border-1 rounded-xl border-white-300 p-2 mb-2 w-full ${THEME_COLORS[currentThemeApp].container.sub}`}>
+                                            <div className={`w-full flex rounded-lg justify-between items-center`}>
+                                                <h2 className={``}>{time}:</h2>
+                                                <div
+                                                    // className={`border-1 w-full flex justify-center items-center rounded-lg border-white-300 m-2  min-h-10 ${THEME_COLORS[currentThemeApp].container.input} ${isHoverOnElement || clientDataStatus.status || currentClientData.length > 0 ? 'opacity-100' : 'opacity-30'}`}
+                                                    className={`border-1 w-full flex justify-center items-center rounded-lg border-white-300 m-2  min-h-10 ${THEME_COLORS[currentThemeApp].container.input}`}
+                                                    onMouseEnter={() => setIsHoverOnElement(true)}
+                                                    onMouseLeave={() => setIsHoverOnElement(false)}
+                                                >
+                                                    {clientDataStatus.status || currentClientData.length > 0
+                                                        ?
+                                                        (currentClientData.length > 0 && !isOpenCreateClientForm) && (
+                                                            currentClientData.map((client) => (
+                                                                client.time === time && (
+                                                                    <ClientDataContainer
+                                                                        key={client.id}
+                                                                        clientData={[client]}
+                                                                        time={time}
+                                                                        editCallBack={handleEditClientData}
+                                                                    />
+                                                                )
+                                                            ))
+                                                        )
 
-                        {currentClientData.length > 0 &&
-                            currentClientData.map((client) => (
-                                <div key={client.id} className={`flex flex-col gap-2 p-2 w-full rounded-xl justify-center border ${THEME_COLORS[currentThemeApp].container.input}`}>
-                                    <div>
-                                        <div className={`flex gap-2 justify-between`}>
-                                            <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.NAME.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
-                                            <h3 className={`w-1/2`}>{client.name.length <= 0 ? <p className={`opacity-20`}>empty</p> : client.name}</h3>
+                                                        :
+                                                        <div className={`flex justify-center items-center`}>
+                                                            <AddClientIcon className={`m-2 w-full`} width={40} height={40}
+                                                                onClick={() => handleClientDataStatus(time)} />
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
                                         </div>
-
-                                        <div className={`flex gap-2 justify-between`}>
-                                            <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.SURNAME.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
-                                            <h3 className={`w-1/2`}>{client.surname.length <= 0 ? <p className={`opacity-20`}>empty</p> : client.surname}</h3>
-                                        </div>
-                                        <div className={`flex gap-2 justify-between`}>
-                                            <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.PERSONAL_CODE.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
-                                            <h3 className={`w-1/2`}>{client.personalCode.length <= 0 ? <p className={`opacity-20`}>empty</p> : client.personalCode}</h3>
-                                        </div>
-                                        <div className={`flex gap-2 justify-between`}>
-                                            <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.CUSTOMER.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
-                                            <h3 className={`w-1/2`} >{client.customer.length <= 0 ? <p className={`opacity-20`}>empty</p> : client.customer}</h3>
-                                        </div>
-                                    </div>
-                                    <div className={`border-1 rounded-xl border-white-300`}></div>
-                                    <div>
-                                        <div className={`flex gap-2 justify-between`}>
-                                            <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.TIME.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
-                                            <h3 className={`w-1/2`}>{client.time.length <= 0 ? <p className={`opacity-20`}>empty</p> : client.time}</h3>
-                                        </div>
-                                        <div className={`flex gap-2 justify-between`}>
-                                            <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.TYPE_EXPERTISE.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
-                                            <h3 className={`w-1/2`}>{client.typeEkspertise.length <= 0 ? <p className={`opacity-20`}>empty</p> : client.typeEkspertise}</h3>
-                                        </div>
-                                        <div className={`flex gap-2 justify-between`}>
-                                            <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.SUBTYPE_EXPERTISE.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
-                                            <h3 className={`w-1/2`}>{client.subTypeEkspertise.length <= 0 ? <p className={`opacity-20`}>empty</p> : client.subTypeEkspertise}</h3>
-                                        </div>
-                                        <div className={`flex gap-2 justify-between`}>
-                                            <h3 className={`w-1/2`}>{CLIENT_FORM_TRANSLATED.STATUS.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
-                                            <h3 className={`w-1/2`}>{client.status.length <= 0 ? <p className={`opacity-20`}>empty</p> : client.status}</h3>
-                                        </div>
-                                    </div>
-
-
-                                    <button className={`${THEME_COLORS[currentThemeApp].button} flex rounded-xl m-auto items-center justify-center h-10 w-1/3 `} onClick={() => handleEditClientData(client)}>Edit</button>
-                                </div>
-                            ))
+                                    )
+                                })}
+                            </div>
                         }
+
+
 
                     </div>
                 </div>}
