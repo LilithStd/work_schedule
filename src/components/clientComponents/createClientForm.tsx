@@ -30,7 +30,7 @@ interface CreateClientFormInterface {
 }
 
 export default function CreateClientForm({ statusEditType: statusEdit, data, time, callBack, clientData, clientEditData }: CreateClientFormInterface) {
-    console.log(time)
+
     // consts
 
     // 

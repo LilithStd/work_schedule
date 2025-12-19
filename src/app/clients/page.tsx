@@ -30,6 +30,7 @@ export default function Clients() {
     // 
     // consts
 
+
     // 
     // stores
     const currentThemeApp = useGlobalStore((state) => state.currentThemeApp)
@@ -116,6 +117,9 @@ export default function Clients() {
                         {!isOpenCreateClientForm &&
                             <div className={`flex flex-col w-full items-center justify-center`}>
                                 {TIME.map((time) => {
+                                    const clientsForTime = currentClientData.filter(
+                                        (client) => client.time === time
+                                    );
                                     return (
                                         <div key={time} className={`flex items-center justify-between border-1 rounded-xl border-white-300 p-2 mb-2 w-full ${THEME_COLORS[currentThemeApp].container.sub}`}>
                                             <div className={`w-full flex rounded-lg justify-between items-center`}>
@@ -126,27 +130,25 @@ export default function Clients() {
                                                     onMouseEnter={() => setIsHoverOnElement(true)}
                                                     onMouseLeave={() => setIsHoverOnElement(false)}
                                                 >
-                                                    {clientDataStatus.status || currentClientData.length > 0
-                                                        ?
-                                                        (currentClientData.length > 0 && !isOpenCreateClientForm) && (
-                                                            currentClientData.map((client) => (
-                                                                client.time === time && (
-                                                                    <ClientDataContainer
-                                                                        key={client.id}
-                                                                        clientData={[client]}
-                                                                        time={time}
-                                                                        editCallBack={handleEditClientData}
-                                                                    />
-                                                                )
-                                                            ))
-                                                        )
-
-                                                        :
-                                                        <div className={`flex justify-center items-center`}>
-                                                            <AddClientIcon className={`m-2 w-full`} width={40} height={40}
-                                                                onClick={() => handleClientDataStatus(time)} />
+                                                    {clientsForTime.length > 0 ? (
+                                                        clientsForTime.map((client) => (
+                                                            <ClientDataContainer
+                                                                key={client.id}
+                                                                clientData={[client]}
+                                                                time={time}
+                                                                editCallBack={handleEditClientData}
+                                                            />
+                                                        ))
+                                                    ) : (
+                                                        <div className="flex justify-center items-center">
+                                                            <AddClientIcon
+                                                                className="m-2 w-full"
+                                                                width={40}
+                                                                height={40}
+                                                                onClick={() => handleClientDataStatus(time)}
+                                                            />
                                                         </div>
-                                                    }
+                                                    )}
                                                 </div>
                                             </div>
                                         </div>
