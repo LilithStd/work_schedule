@@ -25,9 +25,10 @@ interface CreateClientFormInterface {
     callBack: (status: boolean) => void
     clientData: (data: ClientDataType[]) => void
     data: string;
+    clientEditData?: ClientDataType;
 }
 
-export default function CreateClientForm({ statusEditType: statusEdit, data, callBack, clientData }: CreateClientFormInterface) {
+export default function CreateClientForm({ statusEditType: statusEdit, data, callBack, clientData, clientEditData }: CreateClientFormInterface) {
     // consts
 
     // 
@@ -37,10 +38,10 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, cal
     const addClient = useClientStore((state) => state.addClient)
     // 
     // state
-    const [typeExpertise, setTypeExpertise] = useState('');
-    const [typeSelectedTime, setTypeSelectedTime] = useState('');
-    const [subTypeExpertise, setSubTypeExpertise] = useState('');
-    const [statusClient, setStatusClient] = useState('');
+    const [typeExpertise, setTypeExpertise] = useState(statusEdit === CLIENT_DATA_STATUS.EDIT_CURRENT && clientEditData ? clientEditData.typeEkspertise : '');
+    const [typeSelectedTime, setTypeSelectedTime] = useState(statusEdit === CLIENT_DATA_STATUS.EDIT_CURRENT && clientEditData ? clientEditData.time : '');
+    const [subTypeExpertise, setSubTypeExpertise] = useState(statusEdit === CLIENT_DATA_STATUS.EDIT_CURRENT && clientEditData ? clientEditData.subTypeEkspertise : '');
+    const [statusClient, setStatusClient] = useState(statusEdit === CLIENT_DATA_STATUS.EDIT_CURRENT && clientEditData ? clientEditData.status : '');
     // 
     //functions
     const handleSubmitClientForm = (
@@ -89,6 +90,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, cal
                         id="name"
                         type="text"
                         name="name"
+                        defaultValue={statusEdit === CLIENT_DATA_STATUS.EDIT_CURRENT && clientEditData ? clientEditData.name : ''}
                         className={`rounded-md border px-3 py-2 w-1/2 ${THEME_COLORS[currentThemeApp].container.input}`}
                         placeholder={CLIENT_FORM_TRANSLATED.NAME.TRANSLATE_LABEL[currentLanguageApp]} />
                 </label>
@@ -98,6 +100,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, cal
                         id="surname"
                         type="text"
                         name="surname"
+                        defaultValue={statusEdit === CLIENT_DATA_STATUS.EDIT_CURRENT && clientEditData ? clientEditData.surname : ''}
                         className={`rounded-md border px-3 py-2 w-1/2 ${THEME_COLORS[currentThemeApp].container.input}`}
                         placeholder={CLIENT_FORM_TRANSLATED.SURNAME.TRANSLATE_LABEL[currentLanguageApp]} />
                 </label>
@@ -107,8 +110,19 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, cal
                         id="personal_code"
                         type="text"
                         name="personalCode"
+                        defaultValue={statusEdit === CLIENT_DATA_STATUS.EDIT_CURRENT && clientEditData ? clientEditData.personalCode : ''}
                         placeholder={CLIENT_FORM_TRANSLATED.PERSONAL_CODE.TRANSLATE_LABEL[currentLanguageApp]}
                         className={`rounded-md border px-3 py-2 w-1/2 ${THEME_COLORS[currentThemeApp].container.input}`} />
+                </label>
+                <label htmlFor="customer" className={`flex w-full items-center justify-between gap-2`}>
+                    {CLIENT_FORM_TRANSLATED.CUSTOMER.TRANSLATE_LABEL[currentLanguageApp]}:
+                    <input
+                        id="customer"
+                        type="text"
+                        name="customer"
+                        className={`flex w-1/2 rounded-md border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
+                        placeholder={CLIENT_FORM_TRANSLATED.CUSTOMER.PLACEHOLDER[currentLanguageApp]}
+                        defaultValue={statusEdit === CLIENT_DATA_STATUS.EDIT_CURRENT && clientEditData ? clientEditData.customer : ''} />
                 </label>
                 <label htmlFor="time" className={`flex w-full items-center justify-between gap-2`}>
                     {CLIENT_FORM_TRANSLATED.TIME.TRANSLATE_LABEL[currentLanguageApp]}:
@@ -302,6 +316,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, cal
                                 id="subType_expertise"
                                 onChange={(e) => setSubTypeExpertise(e.target.value)}
                                 className={`rounded-md w-full border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
+                                defaultValue={statusEdit === CLIENT_DATA_STATUS.EDIT_CURRENT && clientEditData ? clientEditData.subTypeEkspertise : ''}
                                 placeholder={
                                     CLIENT_FORM_TRANSLATED.SUBTYPE_EXPERTISE
                                         .PLACEHOLDER_ADDITIONAL[currentLanguageApp]
@@ -370,6 +385,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, cal
                                 id="status"
                                 type="text"
                                 onChange={(e) => setStatusClient(e.target.value)}
+                                defaultValue={statusEdit === CLIENT_DATA_STATUS.EDIT_CURRENT && clientEditData ? clientEditData.status : ''}
                                 className={`rounded-md w-full  border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
                                 placeholder={
                                     CLIENT_FORM_TRANSLATED.STATUS.PLACEHOLDER_ADDITIONAL[currentLanguageApp]
@@ -384,15 +400,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, cal
                     )}
                 </label>
 
-                <label htmlFor="customer" className={`flex w-full items-center justify-between gap-2`}>
-                    {CLIENT_FORM_TRANSLATED.CUSTOMER.TRANSLATE_LABEL[currentLanguageApp]}:
-                    <input
-                        id="customer"
-                        type="text"
-                        name="customer"
-                        className={`flex w-1/2 rounded-md border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
-                        placeholder={CLIENT_FORM_TRANSLATED.CUSTOMER.PLACEHOLDER[currentLanguageApp]} />
-                </label>
+
                 <div className={`flex gap-4 mt-4 justify-center items-center`}>
                     <button
                         type="submit"

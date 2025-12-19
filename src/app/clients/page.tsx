@@ -30,6 +30,16 @@ export default function Clients() {
     const currentLanguageApp = useGlobalStore((state) => state.currentLanguageApp)
     const clientsList = useClientStore((state) => state.clientsList)
     // 
+    // functions
+    const handleEditClientData = (data: ClientDataType) => {
+        setIsOpenCreateClientForm(true)
+        setClientDataStatus({
+            status: true,
+            typeEditStatus: CLIENT_DATA_STATUS.EDIT_CURRENT
+        })
+        setCurrentClientData([data])
+    }
+    // /
     //components
 
     const handleClick = (monthLabel: string) => {
@@ -57,8 +67,6 @@ export default function Clients() {
         setCurrentClientData(clientsList.filter(client => client.data === choosedDay))
     }, [choosedDay, clientsList])
 
-    // console.log(clientsList)
-    // console.log('currentClientData', currentClientData);
     const createClientBlock = (
         <div className={`flex rounded-xl w-full ${THEME_COLORS[currentThemeApp].container.main} ${indents.container.padding} ${indents.container.margin} `}>
             <div className={`flex m-2 w-full gap-2`}>
@@ -81,6 +89,7 @@ export default function Clients() {
                                 clientData={setCurrentClientData}
                             />
                         }
+
                         {currentClientData.length > 0 &&
                             currentClientData.map((client) => (
                                 <div key={client.id} className={`flex flex-col gap-2 p-2 w-full rounded-xl justify-center border ${THEME_COLORS[currentThemeApp].container.input}`}>
@@ -124,7 +133,7 @@ export default function Clients() {
                                     </div>
 
 
-                                    <button className={`${THEME_COLORS[currentThemeApp].button} flex rounded-xl m-auto items-center justify-center min-h-2 w-1/2 `}>Edit</button>
+                                    <button className={`${THEME_COLORS[currentThemeApp].button} flex rounded-xl m-auto items-center justify-center h-10 w-1/3 `} onClick={() => handleEditClientData(client)}>Edit</button>
                                 </div>
                             ))
                         }
