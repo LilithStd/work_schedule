@@ -126,29 +126,28 @@ export default function Clients() {
                                                 <h2 className={``}>{time}:</h2>
                                                 <div
                                                     // className={`border-1 w-full flex justify-center items-center rounded-lg border-white-300 m-2  min-h-10 ${THEME_COLORS[currentThemeApp].container.input} ${isHoverOnElement || clientDataStatus.status || currentClientData.length > 0 ? 'opacity-100' : 'opacity-30'}`}
-                                                    className={`border-1 w-full flex justify-center items-center rounded-lg border-white-300 m-2  min-h-10 ${THEME_COLORS[currentThemeApp].container.input}`}
+                                                    className={` border-1 w-full flex flex-col gap-2 justify-center items-center rounded-lg border-white-300 m-2  min-h-10 ${THEME_COLORS[currentThemeApp].container.input}`}
                                                     onMouseEnter={() => setIsHoverOnElement(true)}
                                                     onMouseLeave={() => setIsHoverOnElement(false)}
                                                 >
-                                                    {clientsForTime.length > 0 ? (
-                                                        clientsForTime.map((client) => (
-                                                            <ClientDataContainer
-                                                                key={client.id}
-                                                                clientData={[client]}
-                                                                time={time}
-                                                                editCallBack={handleEditClientData}
-                                                            />
-                                                        ))
-                                                    ) : (
-                                                        <div className="flex justify-center items-center">
-                                                            <AddClientIcon
-                                                                className="m-2 w-full"
-                                                                width={40}
-                                                                height={40}
-                                                                onClick={() => handleClientDataStatus(time)}
-                                                            />
-                                                        </div>
-                                                    )}
+                                                    <div className={`w-full gap-2 flex p-2 flex-col`}>
+                                                        {
+                                                            clientsForTime.map((client) => (
+                                                                <ClientDataContainer
+                                                                    key={client.id}
+                                                                    clientData={[client]}
+                                                                    time={time}
+                                                                    editCallBack={handleEditClientData}
+                                                                />
+                                                            ))
+                                                        }
+                                                    </div>
+                                                    <div
+                                                        className="flex w-1/2 mx-2 my-2 rounded-xl border justify-center items-center cursor-pointer border-dashed border-white-300 p-2"
+                                                        onClick={() => handleClientDataStatus(time)}
+                                                    >
+                                                        <AddClientIcon width={40} height={40} />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
