@@ -109,13 +109,13 @@ export default function Clients() {
                     // onMouseEnter={() => setIsHoverOnElement(true)}
                     // onMouseLeave={() => setIsHoverOnElement(false)}
                     >
-                        {!clientDataStatus.status && currentClientData.length == 0 &&
+                        {/* {!clientDataStatus.status && currentClientData.length == 0 &&
                             <AddClientIcon
                                 className={``}
                                 width={40}
                                 height={40}
                                 onClick={handleClientDataStatus}
-                            />}
+                            />} */}
                         {(clientDataStatus.status && isOpenCreateClientForm) &&
                             <CreateClientForm
                                 statusEditType={clientDataStatus.typeEditStatus}
@@ -137,25 +137,26 @@ export default function Clients() {
                                             <div className={`w-full flex rounded-lg justify-between items-center`}>
                                                 <h2 className={`flex font-bold justify-center text-center w-1/2 text-3xl`}>{time}</h2>
                                                 <div
-                                                    // className={`border-1 w-full flex justify-center items-center rounded-lg border-white-300 m-2  min-h-10 ${THEME_COLORS[currentThemeApp].container.input} ${isHoverOnElement || clientDataStatus.status || currentClientData.length > 0 ? 'opacity-100' : 'opacity-30'}`}
                                                     className={` border-1 w-full flex flex-col gap-2 justify-center items-center rounded-lg border-white-300 m-2  min-h-10 ${THEME_COLORS[currentThemeApp].container.input}`}
                                                     onMouseEnter={() => setIsHoverOnElement(true)}
                                                     onMouseLeave={() => setIsHoverOnElement(false)}
                                                 >
-                                                    <div className={`w-full gap-2 flex p-2 flex-col`}>
-                                                        {
-                                                            clientsForTime.map((client) => (
-                                                                <ClientDataContainer
-                                                                    key={client.id}
-                                                                    clientData={[client]}
-                                                                    time={time}
-                                                                    editCallBack={handleEditClientData}
-                                                                />
-                                                            ))
-                                                        }
-                                                    </div>
+                                                    {clientsForTime.length > 0 &&
+                                                        <div className={`w-full gap-2 flex p-2 flex-col`}>
+                                                            {
+                                                                clientsForTime.map((client) => (
+                                                                    <ClientDataContainer
+                                                                        key={client.id}
+                                                                        clientData={[client]}
+                                                                        time={time}
+                                                                        editCallBack={handleEditClientData}
+                                                                    />
+                                                                ))
+                                                            }
+                                                        </div>
+                                                    }
                                                     <div
-                                                        className="flex w-1/2 mx-2 my-2 rounded-xl border justify-center items-center cursor-pointer border-dashed border-white-300 p-2"
+                                                        className={`flex m-2 p-2 w-11/12 justify-center rounded-xl border  cursor-pointer `}
                                                         onClick={() => handleClientDataStatus(time)}
                                                     >
                                                         <AddClientIcon width={40} height={40} />

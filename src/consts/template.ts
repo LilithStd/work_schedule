@@ -57,6 +57,13 @@ export const THEME_COLORS = {
 	},
 };
 
+export const RegularExpression = {
+	PERSONAL_CODE: /^[0-9]{6}-[0-9]{5}$/,
+	NAME: /^[A-Za-zА-Яа-яЁёĒēĪīŪūĀāŠšŽžČčĢģĶķĻļŅņ\s'-]{1,}$/,
+	SURNAME: /^[A-Za-zА-Яа-яЁёĒēĪīŪūĀāŠšŽžČčĢģĶķĻļŅņ\s'-]{1,}$/,
+	CUSTOMER: /^[A-Za-zА-Яа-яЁёĒēĪīŪūĀāŠšŽžČčĢģĶķĻļŅņ\s'-]{1,}$/,	
+}
+
 export const APP_ROUTES_LABEL = {
 	MAIN : {
 		LABEL:{

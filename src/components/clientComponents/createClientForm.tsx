@@ -1,7 +1,7 @@
 'use client'
 import * as Select from '@radix-ui/react-select'
 import { indents } from "@/consts/globalStyles";
-import { CLIENT_DATA_STATUS, CLIENT_FORM_TRANSLATED, THEME_COLORS } from "@/consts/template";
+import { CLIENT_DATA_STATUS, CLIENT_FORM_TRANSLATED, RegularExpression, THEME_COLORS } from "@/consts/template";
 import { useGlobalStore } from "@/store/globalStore";
 import { useState } from "react";
 import ResetChooseInputType from "../../../public/icons/ArrowPath.svg"
@@ -58,11 +58,11 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
         const formData: ClientDataType = {
             id: nanoid(),
             data: data,
-            name: getValue(currentFormData, 'name'),
-            surname: getValue(currentFormData, 'surname'),
+            name: RegularExpression.NAME.test(getValue(currentFormData, 'name')) ? getValue(currentFormData, 'name') : '',
+            surname: RegularExpression.SURNAME.test(getValue(currentFormData, 'surname')) ? getValue(currentFormData, 'surname') : '',
             time: typeSelectedTime,
-            personalCode: getValue(currentFormData, 'personalCode'),
-            customer: getValue(currentFormData, 'customer'),
+            personalCode: RegularExpression.PERSONAL_CODE.test(getValue(currentFormData, 'personalCode')) ? getValue(currentFormData, 'personalCode') : '',
+            customer: RegularExpression.CUSTOMER.test(getValue(currentFormData, 'customer')) ? getValue(currentFormData, 'customer') : '',
             typeEkspertise: typeExpertise,
             subTypeEkspertise: subTypeExpertise,
             status: statusClient,
