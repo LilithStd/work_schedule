@@ -92,9 +92,9 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
 
 
     return (
-        <div className={`flex flex-col w-full n`}>
+        <div className={`flex flex-col w-full p-4 rounded-xl border ${THEME_COLORS[currentThemeApp].container.sub}`}>
             <h2 className={`text-center`}>createClientForm</h2>
-            <form className={`flex flex-col justify-between gap-4 mt-4 w-full`} onSubmit={handleSubmitClientForm}>
+            <form className={`flex flex-col justify-between gap-2 mt-4 w-full`} onSubmit={handleSubmitClientForm}>
                 <label htmlFor="name" className={`flex w-full gap-2 justify-between items-center`}>
                     {CLIENT_FORM_TRANSLATED.NAME.TRANSLATE_LABEL[currentLanguageApp]}:
                     <input

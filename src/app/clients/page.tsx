@@ -104,8 +104,7 @@ export default function Clients() {
 
 
                     <div
-                        className={` p-4 
-                            '} flex justify-center  `}
+                        className={` flex justify-center  `}
                     // onMouseEnter={() => setIsHoverOnElement(true)}
                     // onMouseLeave={() => setIsHoverOnElement(false)}
                     >

@@ -17,7 +17,7 @@ export default function StartPage() {
     return (
         <main className={`flex flex-col   min-h-screen`}>
 
-            <div className={`flex flex-col rounded-xl ${THEME_COLORS[currentThemeApp].subContainer}  
+            <div className={`flex flex-col rounded-xl ${THEME_COLORS[currentThemeApp].container.sub}  
         ${indents.mainContainer.margin} ${indents.mainContainer.padding}`}>
                 <div className={`flex flex-col justify-center items-center`}>
                     <h2>Start Page</h2>
