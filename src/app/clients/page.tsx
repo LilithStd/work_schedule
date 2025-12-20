@@ -135,7 +135,7 @@ export default function Clients() {
                                     return (
                                         <div key={time} className={`flex items-center justify-between border-1 rounded-xl border-white-300 p-2 mb-2 w-full ${THEME_COLORS[currentThemeApp].container.sub}`}>
                                             <div className={`w-full flex rounded-lg justify-between items-center`}>
-                                                <h2 className={``}>{time}:</h2>
+                                                <h2 className={`flex font-bold justify-center text-center w-1/2 text-3xl`}>{time}</h2>
                                                 <div
                                                     // className={`border-1 w-full flex justify-center items-center rounded-lg border-white-300 m-2  min-h-10 ${THEME_COLORS[currentThemeApp].container.input} ${isHoverOnElement || clientDataStatus.status || currentClientData.length > 0 ? 'opacity-100' : 'opacity-30'}`}
                                                     className={` border-1 w-full flex flex-col gap-2 justify-center items-center rounded-lg border-white-300 m-2  min-h-10 ${THEME_COLORS[currentThemeApp].container.input}`}
