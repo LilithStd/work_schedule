@@ -122,7 +122,8 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
                         type="text"
                         name="personalCode"
                         defaultValue={statusEdit === CLIENT_DATA_STATUS.EDIT_CURRENT && clientEditData ? clientEditData.personalCode : ''}
-                        placeholder={CLIENT_FORM_TRANSLATED.PERSONAL_CODE.TRANSLATE_LABEL[currentLanguageApp]}
+                        // placeholder={CLIENT_FORM_TRANSLATED.PERSONAL_CODE.TRANSLATE_LABEL[currentLanguageApp]}
+                        placeholder={CLIENT_FORM_TRANSLATED.PERSONAL_CODE.PLACEHOLDER_ADDITIONAL}
                         className={`rounded-md border px-3 py-2 w-1/2 ${THEME_COLORS[currentThemeApp].container.input}`} />
                 </label>
                 <label htmlFor="customer" className={`flex w-full items-center justify-between gap-2`}>

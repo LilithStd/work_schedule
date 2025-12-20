@@ -148,7 +148,8 @@ export const CLIENT_FORM_TRANSLATED = {
 			EN:'Enter personal code',
 			LV:'Ievadiet personāla kodu',
 			RU:'Введите персональный код',
-		}
+		},
+		PLACEHOLDER_ADDITIONAL:'123456-7890'
 	},
 	TYPE_EXPERTISE:{
 		LABEL:'type_expertise',
