@@ -53,7 +53,7 @@ export const THEME_COLORS = {
 			input:'bg-gray-400',
 		},	
 		element:{
-			active:'bg-amber-500',
+			active:'bg-amber-600',
 			listItem:'bg-cyan-600',
 			selectedItem:'bg-amber-700',
 			selectedOption:'focus:bg-stone-400',

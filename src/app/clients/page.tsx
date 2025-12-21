@@ -185,7 +185,7 @@ export default function Clients() {
                 return (
                     <div key={month.LABEL} className="flex flex-col">
                         <button
-                            className={`${month.LABEL === openMonth ? THEME_COLORS[currentThemeApp].accentColor : THEME_COLORS[currentThemeApp].container.sub} rounded-xl cursor-pointer h-10`}
+                            className={`${month.LABEL === openMonth ? THEME_COLORS[currentThemeApp].accentColor : THEME_COLORS[currentThemeApp].container.sub} ${THEME_COLORS[currentThemeApp].hover} rounded-xl cursor-pointer h-10`}
                             onClick={() => handleClick(month.LABEL)}
                         >
                             {month.LABEL}
