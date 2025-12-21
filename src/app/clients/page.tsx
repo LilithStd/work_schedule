@@ -82,7 +82,7 @@ export default function Clients() {
     }, [choosedDay, clientsList])
 
     const createClientBlock = (
-        <div className={`flex rounded-xl w-full ${THEME_COLORS[currentThemeApp].container.main} ${indents.container.padding} ${indents.container.margin} `}>
+        <div className={`flex rounded-xl w-full ${THEME_COLORS[currentThemeApp].container.sub} ${indents.container.padding} ${indents.container.margin} `}>
             <div className={`flex m-2 w-full gap-2`}>
                 {choosedDay !== '' && <div className={`flex flex-col gap-2  h-fit w-full `}>
                     <div className={`flex gap-2 justify-between `}>
@@ -185,7 +185,7 @@ export default function Clients() {
                 return (
                     <div key={month.LABEL} className="flex flex-col">
                         <button
-                            className={`${THEME_COLORS[currentThemeApp].container.sub} rounded-xl cursor-pointer h-10`}
+                            className={`${month.LABEL === openMonth ? THEME_COLORS[currentThemeApp].accentColor : THEME_COLORS[currentThemeApp].container.sub} rounded-xl cursor-pointer h-10`}
                             onClick={() => handleClick(month.LABEL)}
                         >
                             {month.LABEL}
@@ -229,7 +229,7 @@ export default function Clients() {
     // 
     return (
         <div className={`flex flex-col min-h-screen`}>
-            <div className={`flex flex-col  rounded-xl ${THEME_COLORS[currentThemeApp].button}  ${indents.mainContainer.margin} ${indents.mainContainer.padding} `}>
+            <div className={`flex flex-col  rounded-xl ${THEME_COLORS[currentThemeApp].container.main}  ${indents.mainContainer.margin} ${indents.mainContainer.padding} `}>
                 <p className={`text-center`}>Clients</p>
                 <div className={`flex w-full gap-4`}>
                     {createClientBlock}

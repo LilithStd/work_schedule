@@ -21,16 +21,19 @@ export const DAYS = {
 
 export const THEME_COLORS = {
 	LIGHT: {
-		background: 'bg-stone-800',
-		textColor: 'text-white',
+		background: 'bg-stone-700',
+		textColor: 'text-stone-900',
+		accentColor: 'bg-sky-400',
 		container:{
 			main:'bg-sky-300',
 			sub: 'bg-blue-500',
+			list:'bg-sky-200',
 			input:'bg-sky-700'
 		},
 		element:{
 			active:'bg-indigo-500',
 			listItem:'bg-indigo-800',
+			selectedItem:'bg-amber-700',
 			selectedOption:'focus:bg-indigo-400',
 			checkedOption:'data-[state=checked]:bg-sky-200',
 			inactive:''
@@ -40,22 +43,25 @@ export const THEME_COLORS = {
 		hover: 'hover:bg-sky-700',
 	},
 	DARK: {
-		background: 'bg-slate-300',
-		textColor: 'text-black',
+		background: 'bg-stone-900',
+		accentColor: 'bg-amber-600',
+		textColor: 'text-orange-100',
 		container:{
-			main:'bg-sky-300',
-			sub:'bg-stone-300',
-			input:'bg-blue-200',
+			main:'bg-gray-600',
+			sub:'bg-stone-500',
+			list:'bg-gray-500',
+			input:'bg-gray-400',
 		},	
 		element:{
-			active:'bg-cyan-500',
+			active:'bg-amber-500',
 			listItem:'bg-cyan-600',
-			selectedOption:'focus:bg-indigo-400',
-			checkedOption:'data-[state=checked]:bg-sky-200',
+			selectedItem:'bg-amber-700',
+			selectedOption:'focus:bg-stone-400',
+			checkedOption:'data-[state=checked]:bg-amber-200',
 			inactive:'bg-gray-400'
 		},
 		button: 'bg-sky-500',
-		hover: 'hover:bg-sky-600',
+		hover: 'hover:bg-amber-600',
 	},
 };
 
