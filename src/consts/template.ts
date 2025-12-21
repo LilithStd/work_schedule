@@ -30,6 +30,7 @@ export const THEME_COLORS = {
 		},
 		element:{
 			active:'bg-indigo-500',
+			listItem:'bg-indigo-800',
 			selectedOption:'focus:bg-indigo-400',
 			checkedOption:'data-[state=checked]:bg-sky-200',
 			inactive:''
@@ -48,9 +49,10 @@ export const THEME_COLORS = {
 		},	
 		element:{
 			active:'bg-cyan-500',
+			listItem:'bg-cyan-600',
 			selectedOption:'focus:bg-indigo-400',
 			checkedOption:'data-[state=checked]:bg-sky-200',
-			inactive:''
+			inactive:'bg-gray-400'
 		},
 		button: 'bg-sky-500',
 		hover: 'hover:bg-sky-600',

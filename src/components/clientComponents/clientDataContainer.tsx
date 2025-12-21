@@ -14,11 +14,11 @@ export default function ClientDataContainer({ clientData, time, editCallBack }: 
     const currentThemeApp = useGlobalStore((state) => state.currentThemeApp);
 
     return (
-        <div className={'flex flex-col w-full'}>
+        <div className={`flex flex-col w-full `}>
             {clientData.map((client) => (
-                <div key={client.id} className={`flex flex-col  gap-2 p-2 rounded-xl border ${THEME_COLORS[currentThemeApp].container.input}`}>
+                <div key={client.id} className={`flex flex-col  gap-2 p-2 rounded-xl border ${THEME_COLORS[currentThemeApp].element.listItem}`}>
                     <div className={`flex w-full justify-between gap-4`}>
-                        <div className={`flex flex-col gap-2 w-1/2`}>
+                        <div className={`flex flex-col w-1/2`}>
                             <div className={`flex flex-col xl:flex-row  justify-center items-center xl:justify-between`}>
                                 <h3 className={`w-full text-center xl:text-left xl:w-1/2`}>{CLIENT_FORM_TRANSLATED.NAME.TRANSLATE_LABEL[currentLanguageApp]}:</h3>
                                 <h3 className={`w-full text-center xl:text-left xl:w-1/2`}>{client.name.length <= 0 ? <p className={`opacity-20`}>empty</p> : client.name}</h3>
