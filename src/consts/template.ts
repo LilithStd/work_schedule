@@ -36,7 +36,8 @@ export const THEME_COLORS = {
 			selectedItem:'bg-amber-700',
 			selectedOption:'focus:bg-indigo-400',
 			checkedOption:'data-[state=checked]:bg-sky-200',
-			inactive:''
+			inactive:'',
+			borderColor:'border-amber-400'
 		},
 		
 		button: 'bg-sky-600',
@@ -57,8 +58,9 @@ export const THEME_COLORS = {
 			listItem:'bg-amber-600',
 			selectedItem:'bg-amber-700',
 			selectedOption:'focus:bg-amber-500',
-			checkedOption:'data-[state=checked]:bg-amber-200',
-			inactive:'bg-gray-400'
+			checkedOption:'data-[state=checked]:bg-amber-600',
+			inactive:'bg-gray-400',
+			borderColor:'border-amber-400'
 		},
 		button: 'bg-amber-700',
 		hover: 'hover:bg-amber-600',

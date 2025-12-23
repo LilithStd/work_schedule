@@ -102,7 +102,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
                         type="text"
                         name="name"
                         defaultValue={statusEdit === CLIENT_DATA_STATUS.EDIT_CURRENT && clientEditData ? clientEditData.name : ''}
-                        className={`rounded-md border px-3 py-2 w-1/2 ${THEME_COLORS[currentThemeApp].container.input}`}
+                        className={`rounded-md border ${THEME_COLORS[currentThemeApp].element.borderColor} px-3 py-2 w-1/2 ${THEME_COLORS[currentThemeApp].container.input}`}
                         placeholder={CLIENT_FORM_TRANSLATED.NAME.TRANSLATE_LABEL[currentLanguageApp]} />
                 </label>
                 <label htmlFor="surname" className={`flex w-full items-center justify-between gap-2`}>
@@ -112,7 +112,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
                         type="text"
                         name="surname"
                         defaultValue={statusEdit === CLIENT_DATA_STATUS.EDIT_CURRENT && clientEditData ? clientEditData.surname : ''}
-                        className={`rounded-md border px-3 py-2 w-1/2 ${THEME_COLORS[currentThemeApp].container.input}`}
+                        className={`rounded-md border ${THEME_COLORS[currentThemeApp].element.borderColor} px-3 py-2 w-1/2 ${THEME_COLORS[currentThemeApp].container.input}`}
                         placeholder={CLIENT_FORM_TRANSLATED.SURNAME.TRANSLATE_LABEL[currentLanguageApp]} />
                 </label>
                 <label htmlFor="personal_code" className={`flex w-full items-center justify-between gap-2`}>
@@ -124,7 +124,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
                         defaultValue={statusEdit === CLIENT_DATA_STATUS.EDIT_CURRENT && clientEditData ? clientEditData.personalCode : ''}
                         // placeholder={CLIENT_FORM_TRANSLATED.PERSONAL_CODE.TRANSLATE_LABEL[currentLanguageApp]}
                         placeholder={CLIENT_FORM_TRANSLATED.PERSONAL_CODE.PLACEHOLDER_ADDITIONAL}
-                        className={`rounded-md border px-3 py-2 w-1/2 ${THEME_COLORS[currentThemeApp].container.input}`} />
+                        className={`rounded-md border ${THEME_COLORS[currentThemeApp].element.borderColor} px-3 py-2 w-1/2 ${THEME_COLORS[currentThemeApp].container.input}`} />
                 </label>
                 <label htmlFor="customer" className={`flex w-full items-center justify-between gap-2`}>
                     {CLIENT_FORM_TRANSLATED.CUSTOMER.TRANSLATE_LABEL[currentLanguageApp]}:
@@ -132,7 +132,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
                         id="customer"
                         type="text"
                         name="customer"
-                        className={`flex w-1/2 rounded-md border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
+                        className={`flex w-1/2 rounded-md border ${THEME_COLORS[currentThemeApp].element.borderColor} px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
                         placeholder={CLIENT_FORM_TRANSLATED.CUSTOMER.PLACEHOLDER[currentLanguageApp]}
                         defaultValue={statusEdit === CLIENT_DATA_STATUS.EDIT_CURRENT && clientEditData ? clientEditData.customer : ''} />
                 </label>
@@ -145,9 +145,9 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
                         >
                             <Select.Trigger
                                 className={`flex items-center w-1/2 justify-between gap-2
-                                            rounded-md border px-3 py-2
+                                            rounded-md border ${THEME_COLORS[currentThemeApp].element.borderColor} px-3 py-2
                                             ${THEME_COLORS[currentThemeApp].container.input}
-                                            focus:outline-none focus:ring-2 focus:ring-sky-500`}
+                                            focus:outline-none focus:ring-2 focus:ring-amber-600`}
                             >
                                 <Select.Value placeholder="Select time" />
                                 <Select.Icon>
@@ -157,7 +157,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
 
                             <Select.Portal>
                                 <Select.Content
-                                    className={`min-w-[var(--radix-select-trigger-width)] ${THEME_COLORS[currentThemeApp].container.input} z-50 rounded-md border shadow-lg`}
+                                    className={`min-w-[var(--radix-select-trigger-width)] ${THEME_COLORS[currentThemeApp].container.input} ${THEME_COLORS[currentThemeApp].element.borderColor} z-50 rounded-md border shadow-lg`}
                                     position="popper"
                                 >
                                     <Select.Viewport className="p-1 w-full">
@@ -194,7 +194,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
                                 type="text"
                                 name="time"
                                 placeholder={CLIENT_FORM_TRANSLATED.TIME.PLACEHOLDER[currentLanguageApp]}
-                                className={`rounded-md border px-3 py-2 w-full ${THEME_COLORS[currentThemeApp].container.input}`}
+                                className={`rounded-md ${THEME_COLORS[currentThemeApp].element.borderColor} border px-3 py-2 w-full ${THEME_COLORS[currentThemeApp].container.input}`}
                             />
                             <ResetChooseInputType
                                 className="w-6 h-6 cursor-pointer"
@@ -212,7 +212,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
                         >
                             <Select.Trigger
                                 className={`flex items-center w-1/2 justify-between gap-2
-                                            rounded-md border px-3 py-2
+                                            rounded-md border ${THEME_COLORS[currentThemeApp].element.borderColor} px-3 py-2
                                             ${THEME_COLORS[currentThemeApp].container.input}
                                             focus:outline-none focus:ring-2 focus:ring-sky-500`}
                             >
@@ -224,7 +224,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
 
                             <Select.Portal>
                                 <Select.Content
-                                    className={`min-w-[var(--radix-select-trigger-width)] ${THEME_COLORS[currentThemeApp].container.input} z-50 rounded-md border shadow-lg`}
+                                    className={`min-w-[var(--radix-select-trigger-width)] ${THEME_COLORS[currentThemeApp].container.input} ${THEME_COLORS[currentThemeApp].element.borderColor} z-50 rounded-md border shadow-lg`}
                                     position="popper"
                                 >
                                     <Select.Viewport className="p-1 w-full">
@@ -241,8 +241,9 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
                                                     w-full
                                                     justify-between
                                                     rounded px-3 py-2
+                                                    ${THEME_COLORS[currentThemeApp].element.borderColor}
                                                     ${THEME_COLORS[currentThemeApp].element.selectedOption}
-                                                     data-[state=checked]:bg-sky-200`}
+                                                     data-[state=checked]:bg-amber-600`}
                                             >
                                                 <Select.ItemText>{option}</Select.ItemText>
                                                 <Select.ItemIndicator>
@@ -261,7 +262,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
                             type="text"
                             onChange={(e) => setTypeExpertise(e.target.value)}
                             placeholder={CLIENT_FORM_TRANSLATED.TYPE_EXPERTISE.PLACEHOLDER_ADDITIONAL[currentLanguageApp]}
-                            className={`rounded-md w-full border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
+                            className={`rounded-md w-full ${THEME_COLORS[currentThemeApp].element.borderColor} border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
                         />
                         <ResetChooseInputType className="w-6 h-6 cursor-pointer" onClick={() => setTypeExpertise('')} />
                     </div>
@@ -282,7 +283,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
                         >
                             <Select.Trigger
                                 className={`flex items-center w-1/2 justify-between gap-2
-                                            rounded-md border px-3 py-2
+                                            rounded-md border ${THEME_COLORS[currentThemeApp].element.borderColor} px-3 py-2
                                             ${THEME_COLORS[currentThemeApp].container.input}
                                             focus:outline-none focus:ring-2 focus:ring-sky-500`}
                                 name="subtype_expertise"
@@ -295,7 +296,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
 
                             <Select.Portal>
                                 <Select.Content
-                                    className={`z-50 rounded-md border min-w-[var(--radix-select-trigger-width)]   shadow-lg ${THEME_COLORS[currentThemeApp].container.input}`}
+                                    className={`z-50 rounded-md border min-w-[var(--radix-select-trigger-width)] ${THEME_COLORS[currentThemeApp].element.borderColor}   shadow-lg ${THEME_COLORS[currentThemeApp].container.input}`}
                                     position="popper"
                                 >
                                     <Select.Viewport className="p-1">
@@ -327,7 +328,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
                                 type="text"
                                 id="subType_expertise"
                                 onChange={(e) => setSubTypeExpertise(e.target.value)}
-                                className={`rounded-md w-full border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
+                                className={`rounded-md ${THEME_COLORS[currentThemeApp].element.borderColor} w-full border px-3 py-2 ${THEME_COLORS[currentThemeApp].container.input}`}
                                 defaultValue={statusEdit === CLIENT_DATA_STATUS.EDIT_CURRENT && clientEditData ? clientEditData.subTypeEkspertise : ''}
                                 placeholder={
                                     CLIENT_FORM_TRANSLATED.SUBTYPE_EXPERTISE
@@ -352,6 +353,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
                             <Select.Trigger
                                 className={`flex items-center w-1/2  justify-between gap-2
                                             rounded-md border  px-3 py-2
+                                            ${THEME_COLORS[currentThemeApp].element.borderColor}
                                             ${THEME_COLORS[currentThemeApp].container.input}
                                             focus:outline-none focus:ring-2 focus:ring-sky-500`}
                             >
