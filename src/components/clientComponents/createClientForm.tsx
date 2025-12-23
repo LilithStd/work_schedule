@@ -309,8 +309,8 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
                                                 className={`flex cursor-pointer items-center justify-between
                                                 rounded px-3 py-2
                                                 ${THEME_COLORS[currentThemeApp].container.input}
-                                                 focus:bg-sky-100
-                                                data-[state=checked]:bg-sky-200`}
+                                                ${THEME_COLORS[currentThemeApp].element.selectedOption}
+                                                ${THEME_COLORS[currentThemeApp].element.checkedOption}`}
                                             >
                                                 <Select.ItemText>{option}</Select.ItemText>
                                                 <Select.ItemIndicator>
