@@ -175,7 +175,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
                                                     justify-between
                                                     rounded px-3 py-2
                                                     ${THEME_COLORS[currentThemeApp].element.selectedOption}
-                                                     data-[state=checked]:bg-sky-200`}
+                                                     data-[state=checked]:bg-amber-600`}
                                             >
                                                 <Select.ItemText>{option}</Select.ItemText>
                                                 <Select.ItemIndicator>

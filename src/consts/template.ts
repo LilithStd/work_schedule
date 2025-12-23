@@ -50,17 +50,17 @@ export const THEME_COLORS = {
 			main:'bg-gray-600',
 			sub:'bg-stone-500',
 			list:'bg-gray-500',
-			input:'bg-gray-400',
+			input:'bg-gray-500',
 		},	
 		element:{
 			active:'bg-amber-600',
-			listItem:'bg-cyan-600',
+			listItem:'bg-amber-600',
 			selectedItem:'bg-amber-700',
-			selectedOption:'focus:bg-stone-400',
+			selectedOption:'focus:bg-amber-500',
 			checkedOption:'data-[state=checked]:bg-amber-200',
 			inactive:'bg-gray-400'
 		},
-		button: 'bg-sky-500',
+		button: 'bg-amber-700',
 		hover: 'hover:bg-amber-600',
 	},
 };
@@ -383,7 +383,6 @@ export enum CLIENT_DATA_STATUS {
 	EDIT_CURRENT = 'EDIT_CURRENT'
 }
 
-// export const registartionDataTemplate = [
 // 	{
 // 		day: DAYS.MONDAY,
 // 		registrationTime: [
