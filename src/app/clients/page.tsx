@@ -52,6 +52,7 @@ export default function Clients() {
     const handleClick = (monthLabel: string) => {
         setOpenMonth((prev) => (prev === monthLabel ? null : monthLabel));
 
+
     };
     const handleClientDataStatus = (time: string) => {
         if (clientDataStatus.typeEditStatus !== CLIENT_DATA_STATUS.CREATE_NEW) {
@@ -206,11 +207,15 @@ export default function Clients() {
                                         onClick={() => {
                                             setCurrentClientData([]);
                                             setClientDataStatus(prev => ({ ...prev, status: false }))
+
                                             if (choosedDay === fullDayData(day)) {
                                                 setChoosedDay('')
 
                                             } else {
                                                 setChoosedDay(fullDayData(day))
+                                                setIsOpenCreateClientForm(false)
+                                                setClientDataStatus({ status: false, typeEditStatus: CLIENT_DATA_STATUS.NOTHING })
+
                                             }
 
                                         }}
