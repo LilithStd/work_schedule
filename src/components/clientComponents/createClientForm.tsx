@@ -176,7 +176,8 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
                                                     justify-between
                                                     rounded px-3 py-2
                                                     ${THEME_COLORS[currentThemeApp].element.selectedOption}
-                                                     data-[state=checked]:bg-amber-600`}
+                                                     data-[state=checked]:bg-amber-600
+                                                    `}
                                             >
                                                 <Select.ItemText>{option}</Select.ItemText>
                                                 <Select.ItemIndicator>
@@ -237,14 +238,13 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
                                                 key={option}
                                                 value={option}
                                                 className={`
-                                                    flex 
-                                                    cursor-pointer 
+                                                    flex
+                                                    cursor-pointer
                                                     items-center
                                                     w-full
                                                     justify-between
                                                     rounded px-3 py-2
-                                                    ${THEME_COLORS[currentThemeApp].element.borderColor}
-                                                    focus:ring-amber-600
+                                                    ${THEME_COLORS[currentThemeApp].element.selectedOption}
                                                      data-[state=checked]:bg-amber-600`}
                                             >
                                                 <Select.ItemText>{option}</Select.ItemText>

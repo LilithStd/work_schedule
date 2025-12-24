@@ -71,7 +71,7 @@ export default function Clients() {
     const dataCell = (data: string) => {
         const dataToView = data;
         return (
-            <div className={`${THEME_COLORS[currentThemeApp].container.sub} ${dataToView === '' ? '' : 'p-4'} rounded-xl flex min-w-50 items-center justify-center`}>
+            <div className={`${THEME_COLORS[currentThemeApp].button} ${dataToView === '' ? '' : 'p-4'} rounded-xl flex min-w-50 items-center justify-center`}>
                 {dataToView}
             </div>
         )
@@ -86,12 +86,12 @@ export default function Clients() {
             <div className={`flex m-2 w-full gap-2`}>
                 {choosedDay !== '' && <div className={`flex flex-col gap-2  h-fit w-full `}>
                     <div className={`flex gap-2 justify-between `}>
-                        <div className={`${THEME_COLORS[currentThemeApp].container.sub} w-2xs rounded-xl`}>
+                        <button className={`${THEME_COLORS[currentThemeApp].button} w-2xs rounded-xl`}>
                             {dataCell(choosedDay)}
-                        </div>
+                        </button>
 
                         {
-                            (clientDataStatus.status && isOpenCreateClientForm) && <button className={`${THEME_COLORS[currentThemeApp].container.sub} w-2xs rounded-xl`}
+                            (clientDataStatus.status && isOpenCreateClientForm) && <button className={`${THEME_COLORS[currentThemeApp].button} w-2xs rounded-xl`}
                                 onClick={() => {
                                     setIsOpenCreateClientForm(false)
                                     setClientDataStatus({ status: false, typeEditStatus: CLIENT_DATA_STATUS.NOTHING })
@@ -134,7 +134,7 @@ export default function Clients() {
                                                     onMouseLeave={() => setIsHoverOnElement(false)}
                                                 >
                                                     {clientsForTime.length > 0 &&
-                                                        <div className={`w-full gap-2 flex p-2 flex-col`}>
+                                                        <div className={`w-full  gap-2 flex p-2 flex-col`}>
                                                             {
                                                                 clientsForTime.map((client) => (
                                                                     <ClientDataContainer
@@ -148,7 +148,7 @@ export default function Clients() {
                                                         </div>
                                                     }
                                                     <div
-                                                        className={`flex m-2 p-2 w-11/12 justify-center rounded-xl border  cursor-pointer `}
+                                                        className={`flex m-2 ${THEME_COLORS[currentThemeApp].hover} p-2 w-11/12 justify-center rounded-xl border  cursor-pointer `}
                                                         onClick={() => handleClientDataStatus(time)}
                                                     >
                                                         <AddClientIcon width={40} height={40} />
