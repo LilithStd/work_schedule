@@ -57,7 +57,7 @@ export const THEME_COLORS = {
 			active:'bg-amber-600',
 			listItem:'bg-amber-600',
 			selectedItem:'bg-amber-700',
-			selectedOption:'focus:bg-amber-500',
+			selectedOption:'focus:bg-amber-600',
 			checkedOption:'data-[state=checked]:bg-amber-600',
 			inactive:'bg-gray-400',
 			borderColor:'border-amber-400'

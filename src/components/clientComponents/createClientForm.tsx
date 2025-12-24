@@ -144,7 +144,8 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
                             onValueChange={(value) => setTypeSelectedTime(value)}
                         >
                             <Select.Trigger
-                                className={`flex items-center w-1/2 justify-between gap-2
+                                className={`
+                                            flex items-center w-1/2 justify-between gap-2
                                             rounded-md border ${THEME_COLORS[currentThemeApp].element.borderColor} px-3 py-2
                                             ${THEME_COLORS[currentThemeApp].container.input}
                                             focus:outline-none focus:ring-2 focus:ring-amber-600`}
@@ -211,10 +212,11 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
                             onValueChange={setTypeExpertise}
                         >
                             <Select.Trigger
-                                className={`flex items-center w-1/2 justify-between gap-2
+                                className={`
+                                            flex items-center w-1/2 justify-between gap-2
                                             rounded-md border ${THEME_COLORS[currentThemeApp].element.borderColor} px-3 py-2
                                             ${THEME_COLORS[currentThemeApp].container.input}
-                                            focus:outline-none focus:ring-2 focus:ring-sky-500`}
+                                            focus:outline-none focus:ring-2 focus:ring-amber-600`}
                             >
                                 <Select.Value placeholder="Select type" />
                                 <Select.Icon>
@@ -242,7 +244,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
                                                     justify-between
                                                     rounded px-3 py-2
                                                     ${THEME_COLORS[currentThemeApp].element.borderColor}
-                                                    ${THEME_COLORS[currentThemeApp].element.selectedOption}
+                                                    focus:ring-amber-600
                                                      data-[state=checked]:bg-amber-600`}
                                             >
                                                 <Select.ItemText>{option}</Select.ItemText>
@@ -282,10 +284,11 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
                             onValueChange={setSubTypeExpertise}
                         >
                             <Select.Trigger
-                                className={`flex items-center w-1/2 justify-between gap-2
+                                className={`
+                                    flex items-center w-1/2 justify-between gap-2
                                             rounded-md border ${THEME_COLORS[currentThemeApp].element.borderColor} px-3 py-2
                                             ${THEME_COLORS[currentThemeApp].container.input}
-                                            focus:outline-none focus:ring-2 focus:ring-sky-500`}
+                                            focus:outline-none focus:ring-2 focus:ring-amber-600`}
                                 name="subtype_expertise"
                             >
                                 <Select.Value placeholder="Select subtype" />
@@ -355,7 +358,7 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
                                             rounded-md border  px-3 py-2
                                             ${THEME_COLORS[currentThemeApp].element.borderColor}
                                             ${THEME_COLORS[currentThemeApp].container.input}
-                                            focus:outline-none focus:ring-2 focus:ring-sky-500`}
+                                            focus:outline-none focus:ring-2 focus:ring-amber-600`}
                             >
                                 <Select.Value placeholder="Select status" />
                                 <Select.Icon>
