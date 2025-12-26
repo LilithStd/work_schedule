@@ -75,8 +75,6 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
         } else {
             addClient(formData);
         }
-
-        // clientData([formData]);
         callBack(false);
         // handle form submission
     }
@@ -422,7 +420,6 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
                     <button
                         type="submit"
                         className={`${THEME_COLORS[currentThemeApp].button} ${indents.button.padding} rounded-xl flex`}
-
                     >
                         {statusEdit === CLIENT_DATA_STATUS.EDIT_CURRENT && clientEditData ?
                             CLIENT_FORM_TRANSLATED.SAVE_CHANGES_BUTTON.TRANSLATE[currentLanguageApp]

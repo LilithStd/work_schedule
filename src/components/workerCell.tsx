@@ -69,7 +69,7 @@ export default function WorkerCell({ cellId, id, day, time, worker, typeWorkerCe
 
             onDragOver={handleDragOver}
             onDrop={handleDrop}
-            className={`${workerData?.additionalProperties?.color ?? THEME_COLORS[currentThemeApp].subContainer} w-full justify-center flex min-h-10 rounded-xl items-center`}
+            className={`${workerData?.additionalProperties?.color ?? THEME_COLORS[currentThemeApp].container.main} w-full justify-center flex min-h-10 rounded-xl items-center`}
 
         >
 

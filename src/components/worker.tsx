@@ -31,7 +31,7 @@ export default function Worker({ worker, callBack }: WorkerProps) {
 
     return (
         <div
-            className={`cursor-pointer sm:flex-col xl:flex-row ${worker.additionalProperties?.color ?? 'bg-violet-600'}   rounded-xl  justify-center items-center flex p-2 text-black gap-2 `}
+            className={`cursor-pointer sm:flex-col xl:flex-row ${worker.additionalProperties?.color ?? 'bg-violet-600'}   rounded-xl  justify-center items-center flex p-2 gap-2 `}
             draggable="true"
 
             onDragStart={(e) => {
