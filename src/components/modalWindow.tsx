@@ -38,13 +38,13 @@ export default function ModalWindow({ isOpen, onClose, children, anchorRef }: Mo
 
     return (
         <div
-            className={`fixed inset-0 z-[999] bg-black/20  flex items-center justify-center p-4`}
+            className={`fixed inset-0 z-[999] bg-black/20 cursor-pointer flex items-center justify-center p-4`}
             onClick={onClose}
         >
             <div
                 ref={refs.setFloating}
                 style={floatingStyles}
-                className={`${THEME_COLORS[currentThemeApp].container} ${THEME_COLORS[currentThemeApp].textColor} rounded-2xl p-6 shadow-lg max-w-sm w-full flex flex-col `}
+                className={`${THEME_COLORS[currentThemeApp].container.main} ${THEME_COLORS[currentThemeApp].textColor} rounded-2xl p-6 shadow-lg max-w-sm w-full flex flex-col `}
                 onClick={(e) => e.stopPropagation()}
             >
                 <CrossCLoseIcons

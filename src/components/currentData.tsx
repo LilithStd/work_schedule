@@ -35,7 +35,7 @@ export default function CurrentData() {
     }
 
     return (
-        <div className={`flex flex-col items-center justify-center rounded-xl cursor-pointer ${THEME_COLORS[currentThemeApp].textColor} ${THEME_COLORS[currentThemeApp].button} bg-sky-500  w-60 text-center m-1`} ref={anchorRef} onClick={handleOpenModal}>
+        <div className={`flex flex-col items-center justify-center rounded-xl cursor-pointer ${THEME_COLORS[currentThemeApp].textColor} ${THEME_COLORS[currentThemeApp].button}  w-60 text-center m-1`} ref={anchorRef} onClick={handleOpenModal}>
             <h1>Current data</h1>
             <h2>
                 {currentData}

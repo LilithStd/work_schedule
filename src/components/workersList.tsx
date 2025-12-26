@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react'
-import { TYPE_WORKER_CELL, TYPE_WORKER_MODAL, week, workerListByDayTemplate, workersTest, WorkerTypes } from '@/consts/template';
+import { THEME_COLORS, TYPE_WORKER_CELL, TYPE_WORKER_MODAL, week, workerListByDayTemplate, workersTest, WorkerTypes } from '@/consts/template';
 import { useWorkersStore } from '@/store/workersStore';
 import AddWorkerIcons from '../../public/icons/user-plus.svg'
 import ModalWindow from './modalWindow';
@@ -31,7 +31,7 @@ export default function WorkersList() {
     const currentLanguageApp = useGlobalStore((state) => state.currentLanguageApp)
     const workerListByDayStore = useWorkersStore((state) => state.workerListByDay);
     const getWorkerListByDay = useWorkersStore((state) => state.getWorkerListByDay);
-
+    const currentThemeApp = useGlobalStore((state) => state.currentThemeApp);
 
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
@@ -57,7 +57,7 @@ export default function WorkersList() {
 
     return (
         <React.Fragment>
-            <div className=" bg-sky-600 text-center flex flex-col min-h-50  m-1 rounded-xl">
+            <div className={` ${THEME_COLORS[currentThemeApp].container.main} text-center flex flex-col min-h-50  m-1 rounded-xl`}>
                 <h2 className="text-center">workers</h2>
                 <div className="m-2 flex flex-col gap-2">
                     {workerData.map((workerData) =>
@@ -66,7 +66,7 @@ export default function WorkersList() {
                 </div>
 
                 <button
-                    className="m-2 rounded-xl bg-blue-400 p-2 flex items-center justify-center shadow-lg"
+                    className={`m-2 rounded-xl ${THEME_COLORS[currentThemeApp].button} p-2 flex items-center justify-center shadow-lg`}
                     ref={anchorRef}
                     onClick={handleOpenModal}
                 >
@@ -80,7 +80,7 @@ export default function WorkersList() {
                     key={day}
                     onDrop={(e) => handleDrop(e, day)}
                     onDragOver={handleDragOver}
-                    className="bg-sky-600 rounded-xl m-1 p-2 flex flex-col gap-2"
+                    className={` rounded-xl m-1 p-2 flex flex-col gap-2 ${THEME_COLORS[currentThemeApp].container.main}`}
                 >
                     {getWorkerListByDay(day).map((worker) => (
                         <WorkerCell key={worker.id} worker={worker.id} typeWorkerCell={TYPE_WORKER_CELL.LIST} />
@@ -90,7 +90,7 @@ export default function WorkersList() {
             <ModalWindow
                 isOpen={isOpen}
                 onClose={handleCloseModal}
-                anchorRef={anchorRef}   // ✅ вот здесь
+                anchorRef={anchorRef}
             >
                 <WorkerDataModalTemplate
                     onClose={handleCloseModal}
