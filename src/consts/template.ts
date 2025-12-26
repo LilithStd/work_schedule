@@ -264,6 +264,14 @@ export const CLIENT_FORM_TRANSLATED = {
 			RU:'Отправить',
 		}
 	},
+	SAVE_CHANGES_BUTTON:{
+		LABEL:'save_changes_button',
+		TRANSLATE:{
+			EN:'Save Changes',
+			LV:'Saglabāt izmaiņas',
+			RU:'Сохранить изменения',
+		}
+	},
 	RESET_BUTTON:{
 		LABEL:'reset_button',
 		TRANSLATE:{

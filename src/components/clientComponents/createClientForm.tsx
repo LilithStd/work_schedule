@@ -424,7 +424,9 @@ export default function CreateClientForm({ statusEditType: statusEdit, data, tim
                         className={`${THEME_COLORS[currentThemeApp].button} ${indents.button.padding} rounded-xl flex`}
 
                     >
-                        {CLIENT_FORM_TRANSLATED.SUBMIT_BUTTON.TRANSLATE[currentLanguageApp]}
+                        {statusEdit === CLIENT_DATA_STATUS.EDIT_CURRENT && clientEditData ?
+                            CLIENT_FORM_TRANSLATED.SAVE_CHANGES_BUTTON.TRANSLATE[currentLanguageApp]
+                            : CLIENT_FORM_TRANSLATED.SUBMIT_BUTTON.TRANSLATE[currentLanguageApp]}
                     </button>
                     <button
                         type="reset"
