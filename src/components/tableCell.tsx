@@ -22,12 +22,12 @@ export default function TableCell() {
         return (
             <div className={`flex justify-between ${THEME_COLORS[currentThemeApp].container.main}  rounded-xl ${indents.subContainer.margin} ${indents.subContainer.padding}`}>
 
-                <h2 className={`flex items-center justify-center rounded-xl ${THEME_COLORS[currentThemeApp].button} p-2 w-60 text-center`}>
+                <h2 className={`flex items-center justify-center ${THEME_COLORS[currentThemeApp].button} rounded-xl  p-2 w-60 text-center`}>
                     Workers Table
                 </h2 >
                 <CurrentData />
             </div >)
-    }, [])
+    }, [currentThemeApp])
 
     const tableContent = useMemo(() => {
         return timer.map((time) => (
@@ -68,7 +68,7 @@ export default function TableCell() {
 
             </React.Fragment>
         ));
-    }, [registrationData, timer]);
+    }, [registrationData, timer, currentThemeApp]);
 
     return (
         <div className={``}>
