@@ -56,7 +56,7 @@ export default function TableCell() {
                             ) : (
                                 <span className=" italic text-sm">empty</span>
                             )}
-                            <button className={`p-2 m-2 rounded-xl ${THEME_COLORS[currentThemeApp].button} w-fit ${THEME_COLORS[currentThemeApp].hover}`} onClick={() => addRegistrationData({ day: day.day, time })}>
+                            <button className={`p-2 m-2 rounded-xl ${THEME_COLORS[currentThemeApp].button} w-fit ${THEME_COLORS[currentThemeApp].hover.changeColor}`} onClick={() => addRegistrationData({ day: day.day, time })}>
 
                                 <AddCellIcon width={30} height={30} />
                             </button>

@@ -151,11 +151,11 @@ export default function WorkerDataModalTemplate({ onClose, typeWorkerModal, work
                 {changeColorElement()}
                 <div className="flex gap-2">
                     <button
-                        className={`mt-4 py-2 ${THEME_COLORS[currentThemeApp].button} rounded hover:bg-blue-700 w-1/2`}
+                        className={`mt-4 py-2 ${THEME_COLORS[currentThemeApp].button} rounded ${THEME_COLORS[currentThemeApp].hover.changeColor} w-1/2`}
                         onClick={handleResetState}
                     >Reset</button>
                     <button
-                        className={`mt-4 py-2 ${THEME_COLORS[currentThemeApp].button} rounded hover:bg-blue-700 w-1/2`}
+                        className={`mt-4 py-2 ${THEME_COLORS[currentThemeApp].button} rounded ${THEME_COLORS[currentThemeApp].hover.changeColor} w-1/2`}
                         onClick={handleCreateWorker}
                     >Save</button>
                 </div>
@@ -170,11 +170,11 @@ export default function WorkerDataModalTemplate({ onClose, typeWorkerModal, work
                                         {inputElement(ListTitle.name)}
                                         <div className="flex gap-2">
                                             <button
-                                                className={`mt-4 py-2 rounded-xl ${THEME_COLORS[currentThemeApp].button} ${THEME_COLORS[currentThemeApp].hover} w-1/2`}
+                                                className={`mt-4 py-2 rounded-xl ${THEME_COLORS[currentThemeApp].button} ${THEME_COLORS[currentThemeApp].hover.changeColor} w-1/2`}
                                                 onClick={handleResetState}
                                             >Reset2</button>
                                             <button
-                                                className="mt-4 py-2š text-white rounded hover:bg-blue-700 w-1/2"
+                                                className={`mt-4 py-2 rounded-xl ${THEME_COLORS[currentThemeApp].button} ${THEME_COLORS[currentThemeApp].hover.changeColor} w-1/2`}
                                                 onClick={() => handleEndChangeWorkerData()}
                                             >Save</button>
                                         </div>
@@ -194,11 +194,11 @@ export default function WorkerDataModalTemplate({ onClose, typeWorkerModal, work
                                     {inputElement(ListTitle.surname)}
                                     <div className="flex gap-2">
                                         <button
-                                            className="mt-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 w-1/2"
+                                            className={`mt-4 py-2 rounded-xl ${THEME_COLORS[currentThemeApp].button} ${THEME_COLORS[currentThemeApp].hover.changeColor} w-1/2`}
                                             onClick={handleResetState}
                                         >Reset</button>
                                         <button
-                                            className="mt-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 w-1/2"
+                                            className={`mt-4 py-2 rounded-xl ${THEME_COLORS[currentThemeApp].button} ${THEME_COLORS[currentThemeApp].hover.changeColor} w-1/2`}
                                             onClick={() => handleEndChangeWorkerData()}
                                         >Save</button>
                                     </div>
@@ -217,11 +217,11 @@ export default function WorkerDataModalTemplate({ onClose, typeWorkerModal, work
                                 </div>
                                 <div className="flex gap-2">
                                     <button
-                                        className={`mt-4 py-2 rounded-xl ${THEME_COLORS[currentThemeApp].button} ${THEME_COLORS[currentThemeApp].hover} w-1/2`}
+                                        className={`mt-4 py-2 rounded-xl ${THEME_COLORS[currentThemeApp].button} ${THEME_COLORS[currentThemeApp].hover.changeColor} w-1/2`}
                                         onClick={handleResetState}
                                     >Reset</button>
                                     <button
-                                        className={`mt-4 py-2 rounded-xl ${THEME_COLORS[currentThemeApp].button} ${THEME_COLORS[currentThemeApp].hover} w-1/2`}
+                                        className={`mt-4 py-2 rounded-xl ${THEME_COLORS[currentThemeApp].button} ${THEME_COLORS[currentThemeApp].hover.changeColor} w-1/2`}
                                         onClick={() => handleEndChangeWorkerData()}
                                     >Save</button>
                                 </div>

@@ -19,7 +19,7 @@ export type WorkersListProps = {
 
 export default function WorkersList() {
     const [isOpen, setIsOpen] = useState(false)
-
+    const [dragOverDay, setDragOverDay] = useState<string | null>(null);
     const anchorRef = useRef<HTMLButtonElement>(null);
     const setWorkersListbyDay = useWorkersStore((state) => state.setWorkerListByDay);
     const workerData = useWorkersStore((state) => state.workersData)
@@ -35,12 +35,14 @@ export default function WorkersList() {
 
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
+
     }
     const handleDrop = (e: React.DragEvent<HTMLDivElement>, day: string) => {
         e.preventDefault();
         const data = e.dataTransfer.getData("application/workerId");
         const worker = data;
         setWorkersListbyDay(day, worker);
+        setDragOverDay(null);
     }
     const handleCloseModal = () => {
         setIsOpen(false)
@@ -77,10 +79,12 @@ export default function WorkersList() {
             </div>
             {week.map((day, index) => (
                 <div
+                    onDragEnter={() => setDragOverDay(day)}
+                    onDragLeave={() => setDragOverDay(null)}
                     key={day}
                     onDrop={(e) => handleDrop(e, day)}
                     onDragOver={handleDragOver}
-                    className={` rounded-xl m-1 p-2 flex flex-col gap-2 ${THEME_COLORS[currentThemeApp].container.main}`}
+                    className={` rounded-xl m-1 p-2 flex flex-col gap-2 ${THEME_COLORS[currentThemeApp].container.main} ${THEME_COLORS[currentThemeApp].hover.changeScale} ${dragOverDay === day ? THEME_COLORS[currentThemeApp].element.onDragEnter : ''}`}
                 >
                     {getWorkerListByDay(day).map((worker) => (
                         <WorkerCell key={worker.id} worker={worker.id} typeWorkerCell={TYPE_WORKER_CELL.LIST} />

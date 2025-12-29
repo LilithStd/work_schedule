@@ -37,11 +37,12 @@ export const THEME_COLORS = {
 			selectedOption:'focus:bg-indigo-400',
 			checkedOption:'data-[state=checked]:bg-sky-200',
 			inactive:'',
-			borderColor:'border-amber-400'
+			borderColor:'border-amber-400',
+			onDragEnter: 'scale-105'
 		},
 		
 		button: 'bg-sky-600',
-		hover: 'hover:bg-sky-700',
+		hover: { changeColor:'hover:bg-sky-700', changeScale:'hover:scale-105', },
 	},
 	DARK: {
 		background: 'bg-stone-900',
@@ -60,10 +61,15 @@ export const THEME_COLORS = {
 			selectedOption:'focus:bg-amber-600',
 			checkedOption:'data-[state=checked]:bg-amber-600',
 			inactive:'bg-gray-400',
-			borderColor:'border-amber-400'
+			borderColor:'border-amber-400',
+			onDragEnter: 'scale-105'
 		},
 		button: 'bg-amber-700',
-		hover: 'hover:bg-amber-600',
+		hover: {
+			changeColor:'hover:bg-amber-600',
+			changeScale:'hover:scale-105',
+		} 
+
 	},
 };
 

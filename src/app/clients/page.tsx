@@ -149,7 +149,7 @@ export default function Clients() {
                                                         </div>
                                                     }
                                                     <div
-                                                        className={`flex m-2 ${THEME_COLORS[currentThemeApp].hover} p-2 w-11/12 justify-center rounded-xl border  cursor-pointer `}
+                                                        className={`flex m-2 ${THEME_COLORS[currentThemeApp].hover.changeColor} ${THEME_COLORS[currentThemeApp].hover.changeScale} p-2 w-11/12 justify-center rounded-xl border  cursor-pointer `}
                                                         onClick={() => handleClientDataStatus(time)}
                                                     >
                                                         <AddClientIcon width={40} height={40} />
@@ -186,7 +186,7 @@ export default function Clients() {
                 return (
                     <div key={month.LABEL} className="flex flex-col">
                         <button
-                            className={`${month.LABEL === openMonth ? THEME_COLORS[currentThemeApp].accentColor : THEME_COLORS[currentThemeApp].container.sub} ${THEME_COLORS[currentThemeApp].hover} rounded-xl cursor-pointer h-10`}
+                            className={`${month.LABEL === openMonth ? THEME_COLORS[currentThemeApp].accentColor : THEME_COLORS[currentThemeApp].container.sub} ${THEME_COLORS[currentThemeApp].hover.changeColor} rounded-xl cursor-pointer h-10`}
                             onClick={() => handleClick(month.LABEL)}
                         >
                             {month.LABEL}
@@ -198,7 +198,7 @@ export default function Clients() {
                                     <button
                                         key={day}
                                         className={`
-                                            ${indents.button.padding}  ${THEME_COLORS[currentThemeApp].hover}
+                                            ${indents.button.padding}  ${THEME_COLORS[currentThemeApp].hover.changeColor}
                                             ${choosedDay === fullDayData(day) ? THEME_COLORS[currentThemeApp].element.active : THEME_COLORS[currentThemeApp].container.input}
                                             rounded 
                                             text-center

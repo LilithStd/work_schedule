@@ -48,7 +48,7 @@ export default function ModalWindow({ isOpen, onClose, children, anchorRef }: Mo
                 onClick={(e) => e.stopPropagation()}
             >
                 <CrossCLoseIcons
-                    className={`flex ml-auto ${THEME_COLORS[currentThemeApp].hover} cursor-pointer ${THEME_COLORS[currentThemeApp].textColor} ${THEME_COLORS[currentThemeApp].button} rounded-lg  `}
+                    className={`flex ml-auto ${THEME_COLORS[currentThemeApp].hover.changeColor} cursor-pointer ${THEME_COLORS[currentThemeApp].textColor} ${THEME_COLORS[currentThemeApp].button} rounded-lg  `}
                     onClick={onClose}
                 />
 

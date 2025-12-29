@@ -28,7 +28,7 @@ export default function CurrentData() {
                 <h2>Current Data</h2>
                 <p>{currentData}</p>
                 <div>
-                    <button onClick={handleCloseModal} className={`mt-4 py-2 ${THEME_COLORS[currentThemeApp].button} rounded hover:bg-blue-700 w-1/2`}>close</button>
+                    <button onClick={handleCloseModal} className={`mt-4 py-2 ${THEME_COLORS[currentThemeApp].button} rounded ${THEME_COLORS[currentThemeApp].hover.changeColor} w-1/2`}>close</button>
                 </div>
             </div>
         )
