@@ -73,7 +73,7 @@ export default function ClientModalTemplate({ onSaveClientName, clientName, onCl
                     //     if (onSaveClientName) { onSaveClientName(tempClientName) };
                     // }}
                     onClick={handleRedirectToClientPage}
-                    className={`${THEME_COLORS[currentThemeApp].button} mt-4 py-2 rounded-lg hover:bg-blue-700 w-1/2`}
+                    className={`${THEME_COLORS[currentThemeApp].button} mt-4 py-2 rounded-lg ${THEME_COLORS[currentThemeApp].hover} w-1/2`}
                 >Go to Clients Page</button>
             </div>
         </div>
