@@ -61,7 +61,7 @@ export default function Cell({ id, day, time }: CellProps) {
         <div className="m-2">
             <div className="flex flex-col xl:flex-row gap-2">
                 <button
-                    className={`xl:w-1/2 row-start-1 row-end-2  min-h-10 rounded-xl ${isOpen && typeModalWindow === MODAL_TYPE.ADD_CLIENT ? `${THEME_COLORS[currentThemeApp].accentColor}` : tempClientName.length > 0 ? `bg-color-white` : `${THEME_COLORS[currentThemeApp].container.main}`}  flex items-center justify-center ${THEME_COLORS[currentThemeApp].hover.changeColor} `}
+                    className={`xl:w-1/2 row-start-1 row-end-2  min-h-10 rounded-xl ${isOpen && typeModalWindow === MODAL_TYPE.ADD_CLIENT ? `${THEME_COLORS[currentThemeApp].accentColor}` : tempClientName.length > 0 ? `bg-color-white` : `${THEME_COLORS[currentThemeApp].container.main}`}  flex items-center justify-center ${THEME_COLORS[currentThemeApp].hover.changeColor} ${THEME_COLORS[currentThemeApp].hover.changeScale} `}
                     onClick={() => (
                         handleOpenModal(),
                         setTypeModalWindow(MODAL_TYPE.ADD_CLIENT),
