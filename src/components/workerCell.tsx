@@ -81,7 +81,7 @@ export default function WorkerCell({ cellId, id, day, time, worker, typeWorkerCe
                 className={`w-full flex items-center justify-between  px-2 py-1`}
 
             >
-                <Worker worker={workerData} currentTheme={currentThemeApp} />
+                <Worker worker={workerData} />
                 <EditWorkerDataWheelIcon width={30} heigth={30} />
             </button> :
                 <div >
