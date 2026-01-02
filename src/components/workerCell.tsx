@@ -69,17 +69,19 @@ export default function WorkerCell({ cellId, id, day, time, worker, typeWorkerCe
 
             onDragOver={handleDragOver}
             onDrop={handleDrop}
-            className={`${workerData?.additionalProperties?.color ?? THEME_COLORS[currentThemeApp].container.main} w-full justify-center flex min-h-10 rounded-xl items-center`}
+            className={`${workerData?.additionalProperties?.color ?? THEME_COLORS[currentThemeApp].container.main} w-full justify-center flex min-h-10 rounded-xl items-center
+            ${THEME_COLORS[currentThemeApp].hover.changeColor}
+            `}
 
         >
 
             {workerData ? <button
                 onClick={handleOpenModal}
                 ref={anchorRef}
-                className={`"w-full flex items-center justify-between  px-2 py-1"`}
+                className={`w-full flex items-center justify-between  px-2 py-1`}
 
             >
-                <Worker worker={workerData} />
+                <Worker worker={workerData} currentTheme={currentThemeApp} />
                 <EditWorkerDataWheelIcon width={30} heigth={30} />
             </button> :
                 <div >

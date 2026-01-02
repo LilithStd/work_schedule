@@ -61,7 +61,7 @@ export default function Cell({ id, day, time }: CellProps) {
         <div className="m-2">
             <div className="flex flex-col xl:flex-row gap-2">
                 <button
-                    className={`xl:w-1/2 row-start-1 row-end-2  min-h-10 rounded-xl ${isOpen && typeModalWindow === MODAL_TYPE.ADD_CLIENT ? `${THEME_COLORS[currentThemeApp].accentColor}` : tempClientName.length > 0 ? `${THEME_COLORS[currentThemeApp].hover.changeColor}` : `${THEME_COLORS[currentThemeApp].container.main}`}  flex items-center justify-center`}
+                    className={`xl:w-1/2 row-start-1 row-end-2  min-h-10 rounded-xl ${isOpen && typeModalWindow === MODAL_TYPE.ADD_CLIENT ? `${THEME_COLORS[currentThemeApp].accentColor}` : tempClientName.length > 0 ? `bg-color-white` : `${THEME_COLORS[currentThemeApp].container.main}`}  flex items-center justify-center ${THEME_COLORS[currentThemeApp].hover.changeColor} `}
                     onClick={() => (
                         handleOpenModal(),
                         setTypeModalWindow(MODAL_TYPE.ADD_CLIENT),
@@ -73,7 +73,8 @@ export default function Cell({ id, day, time }: CellProps) {
                 </button>
                 <div className="xl:w-1/2 flex flex-col gap-2 shadow-lg">
                     {cellData?.cells.map((item) => (
-                        <div role="button" key={item.cell} className={`rounded-xl shadow-lg flex items-center justify-center ${isOpen && item.cell === currentCellId && typeModalWindow === MODAL_TYPE.ADD_WORKER ? `${THEME_COLORS[currentThemeApp].accentColor}` : `${THEME_COLORS[currentThemeApp].container.sub} ${THEME_COLORS[currentThemeApp].hover.changeColor}`} `}
+                        <div role="button" key={item.cell}
+                            className={`xl:w-1/2 row-start-1 row-end-2  min-h-10 rounded-xl ${isOpen && typeModalWindow === MODAL_TYPE.ADD_CLIENT ? `${THEME_COLORS[currentThemeApp].accentColor}` : tempClientName.length > 0 ? `bg-color-white` : `${THEME_COLORS[currentThemeApp].container.main}`}  flex items-center justify-center  `}
                             onClick={() => (
                                 onClickCallBack(item.cell),
                                 setActiveAnchor(anchorRefWorker)
