@@ -8,6 +8,7 @@ import { useGlobalStore } from "@/store/globalStore";
 import CurrentData from "./currentData";
 import { indents, shadow } from "@/consts/globalStyles";
 import AddCellIcon from '../../public/icons/SquaresPlus.svg'
+import DateDaysWeek from "./dateDaysWeek";
 
 
 export default function TableCell() {
@@ -28,6 +29,8 @@ export default function TableCell() {
                 <CurrentData />
             </div >)
     }, [currentThemeApp])
+
+
 
     const tableContent = useMemo(() => {
         return timer.map((time) => (
@@ -80,7 +83,7 @@ export default function TableCell() {
                 {weekTranslated.map((day) => (
                     <div
                         key={day.label}
-                        className={`rounded-xl min-h-10 justify-center flex items-center ${indents.container.margin} text-center ${THEME_COLORS[currentThemeApp].container.main}`}
+                        className={`rounded-xl min-h-10 justify-center flex-col flex items-center ${indents.container.margin} text-center ${THEME_COLORS[currentThemeApp].container.main}`}
                     >
                         <p className={``}>
                             {day.translate[currentLanguageApp]}
@@ -89,6 +92,7 @@ export default function TableCell() {
                     </div>
                 ))}
 
+                {/* <DateDaysWeek /> */}
                 <WorkersList />
                 {tableContent}
             </div>
