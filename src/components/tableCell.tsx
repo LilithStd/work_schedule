@@ -19,6 +19,21 @@ export default function TableCell() {
     //state
     const [currentWeekDate, setCurrentWeekDate] = useState(dayjs())
     // 
+
+
+    const nextWeek = () => {
+        setCurrentWeekDate(prev => prev.add(1, 'week'))
+    }
+
+    const prevWeek = () => {
+        setCurrentWeekDate(prev => prev.subtract(1, 'week'))
+    }
+
+    const goToToday = () => {
+        setCurrentWeekDate(dayjs())
+    }
+
+
     //store
     const registrationData = useRegistationStore(
         (state) => state.registartionData
@@ -44,7 +59,18 @@ export default function TableCell() {
                 <h2 className={`flex items-center justify-center ${THEME_COLORS[currentThemeApp].button} rounded-xl  p-2 w-60 text-center`}>
                     Workers Table
                 </h2 >
-                <CurrentData />
+                <div className="flex items-center justify-center gap-4">
+                    <button
+                        className={`${THEME_COLORS[currentThemeApp].button} p-2 rounded-lg`}
+                        onClick={prevWeek}
+                    >{'<'}</button>
+                    <CurrentData />
+                    <button
+                        className={`${THEME_COLORS[currentThemeApp].button} p-2 rounded-lg`}
+                        onClick={nextWeek}
+                    >{'>'}</button>
+                </div>
+
             </div >)
     }, [currentThemeApp])
 
@@ -111,7 +137,9 @@ export default function TableCell() {
                 ))}
 
                 <>
+
                     <p className={`rounded-xl min-h-10 justify-center flex items-center ${indents.container.margin} text-center ${THEME_COLORS[currentThemeApp].container.main}`}>Workers</p>
+
                     {weekDays.map((day) => (
 
                         <div
@@ -126,6 +154,7 @@ export default function TableCell() {
 
 
                     ))}
+
                 </>
 
                 {/* <DateDaysWeek /> */}
