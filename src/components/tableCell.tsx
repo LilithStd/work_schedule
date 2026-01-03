@@ -16,6 +16,8 @@ export default function TableCell() {
     const registrationData = useRegistationStore(
         (state) => state.registartionData
     );
+
+    const newWeek = new Array(7).fill(1);
     const addRegistrationData = useRegistationStore((state) => state.createRegistrationDataCell)
     const currentLanguageApp = useGlobalStore((state) => state.currentLanguageApp)
     const currentThemeApp = useGlobalStore((state) => state.currentThemeApp)
@@ -91,6 +93,20 @@ export default function TableCell() {
 
                     </div>
                 ))}
+
+                <>
+                    <p className={`rounded-xl min-h-10 justify-center flex items-center ${indents.container.margin} text-center ${THEME_COLORS[currentThemeApp].container.main}`}>Workers</p>
+                    {newWeek.map((_, index) => (
+
+                        <div
+                            key={index}
+                            className={`rounded-xl min-h-10 justify-center flex items-center ${indents.container.margin} text-center ${THEME_COLORS[currentThemeApp].container.main}`} >
+                            {index + 1}
+                        </div>
+
+
+                    ))}
+                </>
 
                 {/* <DateDaysWeek /> */}
                 <WorkersList />

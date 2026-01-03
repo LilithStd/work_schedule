@@ -60,7 +60,6 @@ export default function WorkersList() {
     return (
         <React.Fragment>
             <div className={` ${THEME_COLORS[currentThemeApp].container.main} text-center flex flex-col min-h-50  m-1 rounded-xl`}>
-                <h2 className="text-center">workers</h2>
                 <div className="m-2 flex flex-col gap-2">
                     {workerData.map((workerData) =>
                         <WorkerCell key={workerData.id} worker={workerData.id} typeWorkerCell={TYPE_WORKER_CELL.CREATE} />
