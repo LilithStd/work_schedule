@@ -1,5 +1,5 @@
 'use client'
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { useRegistationStore } from "@/store/registrationStore";
 import { THEME_COLORS, timer, weekTranslated } from "@/consts/template";
 import Cell from "./cell";
@@ -9,15 +9,31 @@ import CurrentData from "./currentData";
 import { indents, shadow } from "@/consts/globalStyles";
 import AddCellIcon from '../../public/icons/SquaresPlus.svg'
 import DateDaysWeek from "./dateDaysWeek";
+import dayjs from 'dayjs'
+import isoWeek from 'dayjs/plugin/isoWeek'
+
+dayjs.extend(isoWeek)
 
 
 export default function TableCell() {
+    //state
+    const [currentWeekDate, setCurrentWeekDate] = useState(dayjs())
+    // 
     //store
     const registrationData = useRegistationStore(
         (state) => state.registartionData
     );
 
     const newWeek = new Array(7).fill(1);
+    const getWeekDays = (date: dayjs.Dayjs) => {
+        const start = date.startOf('isoWeek') // понедельник
+
+        return Array.from({ length: 7 }).map((_, i) =>
+            start.add(i, 'day')
+        )
+    }
+    const weekDays = getWeekDays(currentWeekDate)
+
     const addRegistrationData = useRegistationStore((state) => state.createRegistrationDataCell)
     const currentLanguageApp = useGlobalStore((state) => state.currentLanguageApp)
     const currentThemeApp = useGlobalStore((state) => state.currentThemeApp)
@@ -96,12 +112,16 @@ export default function TableCell() {
 
                 <>
                     <p className={`rounded-xl min-h-10 justify-center flex items-center ${indents.container.margin} text-center ${THEME_COLORS[currentThemeApp].container.main}`}>Workers</p>
-                    {newWeek.map((_, index) => (
+                    {weekDays.map((day) => (
 
                         <div
-                            key={index}
-                            className={`rounded-xl min-h-10 justify-center flex items-center ${indents.container.margin} text-center ${THEME_COLORS[currentThemeApp].container.main}`} >
-                            {index + 1}
+                            key={day.format('YYYY-MM-DD')}
+                            className={`
+                                rounded-xl min-h-10 justify-center flex items-center ${indents.container.margin} text-center 
+                                
+                                ${day.isSame(dayjs(), 'day') ? `${THEME_COLORS[currentThemeApp].accentColor}` : `${THEME_COLORS[currentThemeApp].container.main}`}
+                            `} >
+                            {day.format('DD')}
                         </div>
 
 
