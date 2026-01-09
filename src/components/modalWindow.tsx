@@ -25,7 +25,7 @@ export default function ModalWindow({ isOpen, onClose, children, anchorRef }: Mo
         ],
     });
 
-    // Когда попап открыт — следим за scroll/resize
+
     useEffect(() => {
         if (!isOpen || !anchorRef?.current) return;
 

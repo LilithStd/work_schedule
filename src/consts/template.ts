@@ -1,4 +1,3 @@
-import {nanoid} from 'nanoid';
 import { APP_ROUTES } from './globalConsts';
 
 export enum TIME {

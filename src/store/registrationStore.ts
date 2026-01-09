@@ -1,12 +1,8 @@
 import {
-	DAYS,
-	LANGUAGE,
-	registartionDataTemplate,
 	timer,
 	week,
 } from '@/consts/template';
 import {createRegistrationDataTemplate} from '@/utils/helpersFunctions';
-import {WorkerDataTypes} from '@/utils/types';
 import {nanoid} from 'nanoid';
 import {create} from 'zustand';
 

@@ -4,7 +4,6 @@ const  clients = [
   { id: 1, name: 'John' },
   { id: 2, name: 'Anna' }
 ]
-
 // GET — получить клиентов
 export async function GET() {
   return NextResponse.json(clients)
